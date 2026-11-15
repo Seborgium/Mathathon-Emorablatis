@@ -1,0 +1,162 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{U}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Frob}{\mathrm{F}}
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}
+
+\title{\bfseries Step 3 on one example\\[4pt]
+\large\normalfont one point of $\U(2)$, one grid, and the two Taylor bounds measured}
+\author{}\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+Step 2 delivers, per seed ball, a point $V\in\U(2)$ within $p\lesssim0.09$ of the compressed block.
+Step 3 has to cover all of $\U(2)$ by finitely many cells, and then decide, cell by cell, whether it
+can contain a completion. Two things make that possible: a four-angle chart of the group, and two
+bounds that turn a test at a cell's \emph{centre} into a statement about the whole \emph{cell}.
+
+\smallskip
+\noindent
+The example input is the point $V$ that Step~2 actually produced from the matrix of
+\texttt{mub-step1-example.pdf}, namely $V=Y/\sqrt6$. It satisfies $V^*V=I$ to $4.6\times10^{-16}$ and
+$\abs{\det V}=1$. What follows is the chart, the two bounds measured against the constants the paper
+quotes, and the resulting grid sizes.
+
+\key{1.\ The chart, and where our point sits in it}
+Every $V\in\U(2)$ is written, with angles in radians,
+\begin{equation}\label{eq:chart}
+V=e^{iA}\begin{pmatrix} e^{iB}\cos T & e^{iC}\sin T\\ -e^{-iC}\sin T & e^{-iB}\cos T\end{pmatrix},
+\qquad 0\le A\le\pi,\quad 0\le B,C\le2\pi,\quad 0\le T\le\tfrac\pi2 .
+\end{equation}
+Reading the four angles off our $V$ and reconstructing from them gives a max entrywise error of
+$7.0\times10^{-16}$, so this is a genuine chart, not a numerical accident:
+\begin{center}\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+& $A$ & $B$ & $C$ & $T$\\
+\midrule
+radians & $0$ & $11\pi/6$ & $\pi/2$ & $\pi/4$\\
+cycles & $0$ & $11/12$ & $1/4$ & $1/8$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The four numbers are exact fractions of a turn --- unsurprising for a Fourier-type matrix, useful
+because it means the test point sits exactly on the boundary structure of every grid we try, so the
+displacements below are as large as a cell allows rather than accidentally small.
+
+\emph{One caveat about $V$ itself.} $Y=K_C^*D'K_B$ depends on the two frames, and changing
+$K_B\mapsto K_BW_B$, $K_C\mapsto K_CW_C$ replaces $V$ by $W_C^*VW_B$. Every quantity Step~2 bounds is
+invariant under that replacement --- $Y^*Y$ and all Frobenius norms of differences are --- but the four
+\emph{chart coordinates} are not. A second implementation of this example, using sympy's nullspace
+instead of ours, obtains the diagonal point $V=\operatorname{diag}(i,\omega^{-1})$, which is the same
+$V$ up to frames and sits at $t=0$: on the boundary of the chart, with $\gamma$ undefined. The angles
+tabulated here are the ones produced by the frames fixed in \texttt{step3\_example.py}; a reader who
+recomputes with another kernel basis should expect different angles and the same bounds.
+
+\key{2.\ Cutting the group into cells}
+Cut each of the four coordinates into $N_u$ equal cells; that is $N_u^4$ cells, each with angular
+half-width at most $h=\pi/N_u$ (the half-widths of $A$ and $T$ are $\pi/2N_u$ and $\pi/4N_u$, so
+$\abs{\theta_j}\le h$ is a uniform and slightly wasteful statement). A cell has a centre $U$, obtained
+by evaluating \eqref{eq:chart} at the cell's midpoint, and a displacement $\theta$ of the point from
+that centre. The two bounds are
+\begin{equation}\label{eq:taylor}
+\norm{V-U}_{\Frob}\le\sqrt6\,h,
+\qquad
+\norm{V-U-\mathrm dU[\theta]}_{\Frob}\le\frac{\sqrt{42}}{2}\,h^2 ,
+\end{equation}
+with $\mathrm dU[\theta]=\sum_j\theta_j\,\partial_jV$ the derivative of the chart at the centre. The
+second is the one that matters: it says the group is within $O(h^2)$ of a \emph{linear} model, so a
+test that is linear in the displacement can be checked at the centre and then inflated.
+
+\key{3.\ The two bounds, measured}
+The table gives, for each grid, our point's own displacement and remainder, the bound from
+\eqref{eq:taylor}, and the worst values over 4{,}000 random points of the same cell.
+\begin{center}\small
+\begin{tabular}{@{}r r r rr rr rr@{}}
+\toprule
+$N_u$ & $h$ & $\max_j\abs{\theta_j}$ & $\norm{V-U}$ & $\sqrt6h$ & ratio
+& $\norm{V-U-\mathrm dU}$ & $\frac{\sqrt{42}}2h^2$ & ratio\\
+\midrule
+8   & 0.3927  & 0.3927  & 0.5235  & 0.9619  & 0.544 & $1.177\times10^{-1}$ & $4.997\times10^{-1}$ & 0.236\\
+16  & 0.1963  & 0.1963  & 0.2611  & 0.4810  & 0.543 & $2.900\times10^{-2}$ & $1.249\times10^{-1}$ & 0.232\\
+32  & 0.0982  & 0.0982  & 0.1300  & 0.2405  & 0.541 & $7.19\times10^{-3}$  & $3.123\times10^{-2}$ & 0.230\\
+64  & 0.0491  & 0.0491  & 0.0649  & 0.1202  & 0.539 & $1.79\times10^{-3}$  & $7.808\times10^{-3}$ & 0.229\\
+128 & 0.0245  & 0.0245  & 0.0324  & 0.0601  & 0.539 & $4.46\times10^{-4}$  & $1.952\times10^{-3}$ & 0.228\\
+256 & 0.0123  & 0.0123  & 0.0162  & 0.0301  & 0.538 & $1.11\times10^{-4}$  & $4.880\times10^{-4}$ & 0.228\\
+\bottomrule
+\end{tabular}
+\end{center}
+Both bounds hold at every grid, and the ratios are \emph{constant} in $N_u$ --- $0.54$ for the linear
+bound, $0.23$ for the quadratic one. That is what a correct pair of bounds should look like: the
+actual displacement scales like $h$ and the actual remainder like $h^2$, so the constants are
+properties of the chart, not of the grid. Measured over random cells at every scale they are
+\[
+c_1=\sup\frac{\norm{V-U}_{\Frob}}{h}=1.581\ \ (\text{quoted }\sqrt6=2.449),
+\qquad
+c_2=\sup\frac{\norm{V-U-\mathrm dU[\theta]}_{\Frob}}{h^2}=1.161\ \ (\text{quoted }\tfrac{\sqrt{42}}{2}=3.240).
+\]
+So on this chart both quoted constants are true, with $65\%$ of the linear budget and $36\%$ of the
+quadratic budget used. The remainder is the useful half: at $N_u=256$ it is $1.1\times10^{-4}$, two
+orders of magnitude below the $h$-term, which is what allows a linear test at the centre to be trusted
+across the cell.
+
+\key{4.\ Test: how fine must the grid be?}
+The later stages need each cell's Frobenius radius to be at most $0.03$. The linear bound
+$\sqrt6h\le r$ gives
+\[
+N_u\ \ge\ \frac{\pi\sqrt6}{r}=256.5\quad\Longrightarrow\quad N_u\ge 257 ,
+\]
+while the quadratic bound alone would allow $N_u\ge33$. The asymmetry is the point of Step~3: the
+linear statement is nearly useless at fine scales (reaching a remainder of $10^{-6}$ through it would
+need $N_u=7{,}695{,}299$ and $N_u^4\approx3.5\times10^{27}$ cells), whereas the quadratic statement
+reaches the same accuracy at $N_u=5{,}656$. This is why the proof carries the linear model and its
+remainder rather than just the containment bound.
+
+\key{5.\ The pattern this step runs on: certify, then inflate}
+A test is designed for a point and is run on a model. Suppose a test at the centre of a cell clears its
+threshold by $\mu>0$, and the quantity it tests moves by at most $c_2h^2$ across the cell. Then the
+test holds on the whole cell as soon as $c_2h^2<\mu$, i.e.
+\[
+N_u>\pi\sqrt{c_2/\mu}.
+\]
+With the measured $c_2=1.161$ this is $N_u\ge34$ for $\mu=10^{-2}$, $108$ for $\mu=10^{-3}$ and $339$
+for $\mu=10^{-4}$; with the paper's quoted $3.240$ the same three requirements become $57$, $179$ and
+$566$. The rule, not the constant, is what to remember: \emph{a margin buys a cell size, and a cell
+size buys a certificate}. A cell that fails to clear its threshold is not excluded --- it is split, and
+its pieces are retried, which is the fallback of Step~5.
+
+\key{6.\ What these numbers do not say}
+The chart of \eqref{eq:chart} is Step~3's, but the numbers $c_1,c_2$ are measured for \emph{this}
+parametrisation and this definition of the cell, and the paper's quoted constants belong to its own
+normalisation, which the attached excerpt does not contain (\texttt{mub-step3.pdf} says as much). That
+the measured constants come out below the quoted ones is evidence that the two conventions agree to
+within a factor, not a proof that they coincide. The point $V$ is a single point of $\U(2)$, chosen by
+Step~2 from a maximally symmetric seed; a generic completion would land elsewhere in the group, and
+though the constants are uniform, the individual displacements would differ. And nothing here tests
+whether a cell contains a completion --- that is Step~4's question; this step only certifies the
+\emph{region} in which the question is asked.
+
+\medskip
+\noindent\footnotesize\textit{Provenance.} The chart, the two bounds and the certify-then-inflate
+pattern are Step~3's, in \texttt{mub-step3.pdf} and preprint \S3.3--3.4 and \S4--5; the constants
+$\sqrt6$ and $\sqrt{42}/2$ are quoted there from the paper. Every number above was printed by
+\texttt{examples/step3\_example.py}, which builds $V$ from the exact blocks of
+\texttt{examples/mubexact.py}.
+
+\end{document}

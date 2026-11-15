@@ -1,0 +1,156 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Frob}{\mathrm{F}}
+\newcommand{\U}{U}
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}
+
+\title{\bfseries Step 2 on one example\\[4pt]
+\large\normalfont the two frames, the constant $q$, and the defect bound, at a seed we can write down}
+\author{}\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.8em}
+
+\noindent
+Step 1 hands Step 2 a \emph{seed ball}: nine phases, known to lie within
+$R_s=2\pi(0.032)=0.201$ radians of a centre, and nothing at all about the sixteen entries of the
+$4\times4$ block $D'$. Step 2 must turn that into four real numbers --- a point of $\U(2)$ --- with a
+stated distance. Its tests are four inequalities, and each of them can fail; a failure leaves the seed
+\emph{unresolved}, never excluded.
+
+\smallskip
+\noindent
+This note runs those four tests on one example input. The input is the exact seed of the matrix of
+\texttt{mub-step1-example.pdf}: the dephased gauged Fourier matrix, in Step~1's canonical order, called
+$H'$ below. It is the right kind of input --- it is a point the cover of Step~1 \emph{must} contain ---
+and it is the only kind we can write down in closed form. In the real run the input is a rational
+centre near such a point, which is why \S5 perturbs the centre as well.
+
+\key{1.\ The input, and the two exact identities everything rests on}
+With $\omega=e^{2\pi i/6}$ and the row order $(0,1,2,4,3,5)$, column order $(0,3,1,2,4,5)$, the
+$2+4$ blocks of $H'$ are
+\[
+E'=\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad
+B'=\begin{pmatrix}1&1&1&1\\ \omega&\omega^2&\omega^4&\omega^5\end{pmatrix},\qquad
+C'=\begin{pmatrix}1&1\\1&1\\1&-1\\1&-1\end{pmatrix},\qquad
+D'=\begin{pmatrix}\omega^2&\omega^4&\omega^2&\omega^4\\ \omega^4&\omega^2&\omega^4&\omega^2\\
+\omega^3&1&1&\omega^3\\ \omega^5&\omega^4&\omega^2&\omega\end{pmatrix}.
+\]
+The nine seed phases are $a=-1$, $(b_0,\dots,b_3)=(\tfrac16,\tfrac13,\tfrac23,\tfrac56)$ and
+$(c_0,\dots,c_3)=(0,0,\tfrac12,\tfrac12)$, in cycles. Multiplying out $H'^*H'=6I_6$ in blocks gives
+\begin{equation}\label{eq:id}
+B'^*B'+D'^*D'=6I_4,\qquad E'^*B'+C'^*D'=0 ,
+\end{equation}
+\emph{exactly} --- both were checked in $\mathbb{Q}(\omega)$ with rational arithmetic and the
+residuals are the integer $0$, not $10^{-16}$. Every estimate in Step~2 is an application of
+\eqref{eq:id}.
+
+\key{2.\ Test 1: do the two frames exist?}
+$B'$ is $2\times4$, so $\ker B'$ is two-dimensional exactly when the two rows of $B'$ are not
+proportional; the same for $\ker C'^*$. \emph{At our input} both kernels are two-dimensional and the
+computed orthonormal frames satisfy
+\[
+\norm{K_B^*K_B-I_2}_{\max}=4.5\times10^{-16},\qquad
+\norm{K_C^*K_C-I_2}_{\max}=2.2\times10^{-16}.
+\]
+\emph{How much room there is.} $B'B'^*=\begin{pmatrix}4&\bar S\\ S&4\end{pmatrix}$ with
+$S=\sum_j b_j$, so the two stretching factors of $B'$ are $\sqrt{4\pm\abs S}$. At our seed
+$S=\omega+\omega^2+\omega^4+\omega^5=0$ exactly, so both factors equal $2$: the rows are as far from
+proportional as unit-modulus entries allow, and the frame is defined with the largest possible margin.
+\emph{What kills it.} Put $b_0=\dots=b_3=\tfrac14$ (all four equal); the two rows are then
+proportional, the singular values of $B'$ are $\sqrt8$ and $0$, the kernel is three-dimensional, and no
+$4\times2$ frame exists. Step~2 then returns \emph{unresolved} --- the centre is refined, never
+excluded. Note that this is not a statement about Hadamard matrices: a centre need not be one.
+
+\key{3.\ Test 2: the two stretching constants and the budget}
+The paper's inequality has the shape $p=q/(\sqrt6+\sqrt{6-q})$ with
+\[
+q=R_s^2\Bigl(1+\frac{A_*^2+6}{m_C^2}\Bigr),\qquad A_*=\min(2,\,A_0+R_s),
+\]
+where $m_C$ is the least amount by which $C_0^*$ stretches a vector orthogonal to $\ker C_0^*$, and
+$A_0$ is the largest amount by which the centre's $E_0$ stretches a vector. At our input
+\[
+m_B=m_C=2,\qquad A_0=\norm{E'}=\sqrt2,\qquad A_*=\min(2,\ \sqrt2+0.2011)=1.6153,
+\]
+so that
+\[
+q=0.2011^2\Bigl(1+\frac{1.6153^2+6}{4}\Bigr)=\mathbf{0.12743},
+\qquad p=\frac{0.12743}{\sqrt6+\sqrt{6-0.12743}}=\mathbf{0.026152}.
+\]
+Both numbers are far inside the range the rest of the proof is built for: the paper quotes $q<0.32$,
+and $p<0.067$ is what Step~3's grid needs. The margin is worth stating as a radius, because that is
+what a reader can act on: with these frames, $q$ reaches $0.32$ only when the seed radius is
+$\mathbf{0.3139}$ radians $=0.0500$ cycles, i.e.\ $1.56$ times the $0.032$ the cover actually
+promises; $q$ reaches $6$ (where $p$ stops meaning anything) only at $R_s=1.309$. So on this example
+the budget is not tight, and Step~2 could tolerate a seed ball half again as large.
+
+\key{4.\ Test 3: the defect identity, and what it says at the seed}
+With $Y=K_C^*D'K_B$ and $P_C=I_4-K_CK_C^*$ the identity is
+\begin{equation}\label{eq:defect}
+6I_2-Y^*Y=K_B^*B'^*B'K_B+K_B^*D'^*P_CD'K_B=M_1^*M_1+M_2^*M_2 .
+\end{equation}
+\emph{At our input} both sides vanish: $Y^*Y=6I_2$ to $2.7\times10^{-15}$ (and exactly, as a
+consequence of \eqref{eq:id}: for $v\in\ker B'$, $D'v\in\ker C'^*$ and $\norm{D'v}=\sqrt6\norm v$),
+and the residual of \eqref{eq:defect} is $2.7\times10^{-15}$, the same number, since both sides are
+zero up to rounding. This is the exact case of Step~3: sixteen unknown phases have collapsed to a
+point $V=Y/\sqrt6$ of $\U(2)$, and here $V$ is exactly unitary.
+
+\key{5.\ Test 4: the bound at a centre that is merely near the seed}
+The interesting case is the one the run is in: $H'$ exact, but the centre --- and therefore the frames
+--- displaced. The paper's chain of estimates gives
+\[
+\operatorname{tr}(6I_2-Y^*Y)\le b_1'^2+\Bigl(\frac{A_*b_1'+\sqrt6\,c_1'}{m_C}\Bigr)^2\le q,
+\qquad b_1'=\norm{\Delta B}_{\Frob},\quad c_1'=\norm{\Delta C}_{\Frob},
+\]
+under the chord bound $\norm{\Delta E}^2+\norm{\Delta B}^2+\norm{\Delta C}^2\le R_s^2$ inherited from
+Step~1. We tested this the only way it can be tested: $40{,}000$ random centres at distance exactly
+$R_s$ from the seed, frames recomputed at each, and the trace evaluated.
+\begin{center}\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+centres tried at distance $R_s$ & $40{,}000$\\
+centres violating $\operatorname{tr}(6I-Y^*Y)\le q$ & $\mathbf{0}$\\
+largest trace observed & $0.070375$ \quad($0.552\,q$)\\
+share of that trace from the four $y$-phases & $78.5\%$\\
+largest $\norm{\Delta B}_{\Frob}$ seen, against the chord bound $R_s=0.2011$ & $0.20022$\\
+the paper's own estimate, maximised over the chord ball & $0.10382$ \quad($0.815\,q$)\\
+\bottomrule
+\end{tabular}
+\end{center}
+Read the last two lines together. The chord bound is attained ($0.2002$ against $0.2011$), so these
+centres are genuinely at the edge of the ball, and still no trace comes near $q$. Even the paper's own
+estimate, maximised over the whole ball, reaches only $0.815\,q$: on this example $q$ is a $23\%$
+overestimate of the quantity it bounds, and that quantity is itself a $30\%$ overestimate of the
+largest trace we can find.
+
+\key{6.\ What these numbers do not say}
+They are one seed, the most symmetric one in the problem (half its phases are $0$ or $\tfrac12$, six
+row pairs tie for the minimum gap). A generic seed has $S\neq0$, so $m_B=\sqrt{4-\abs S}<2$, a
+slightly smaller constant and a slightly larger $q$; the qualitative picture does not change, but no
+number above should be quoted as typical. The perturbation experiment checks the \emph{bound}, not the
+theorem: it says that on $40{,}000$ samples the inequality held, which is evidence and not a proof ---
+the proof is the paper's Lemma~3.2. And the two failure modes were exhibited by construction, not
+observed in a run: no real pass of the pipeline has a seed with four equal $b$-phases.
+
+\medskip
+\noindent\footnotesize\textit{Provenance.} The notation, \eqref{eq:id}, \eqref{eq:defect}, the
+definitions of $q$, $p$, $A_*$ and $m_C$, and the failure modes are Step~2's, in
+\texttt{mub-step2.pdf} and preprint \S3.1--3.3. Every number above was printed by
+\texttt{examples/step2\_example.py}; the exact residuals are computed in $\mathbb{Q}(\omega)$ by
+\texttt{examples/mubexact.py}. Run the scripts to reproduce the table.
+
+\end{document}

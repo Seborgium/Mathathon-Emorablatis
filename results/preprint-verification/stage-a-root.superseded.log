@@ -1,0 +1,147 @@
+== Stage-A real tree
+== build ok: 5a51d3dd1b984b446ff3a4b552db88957e0d494fbdfbb8bbb63466b01dbc3c2c
+{"nodes":31744,"pending":0,"PASS":1472,"PRUNE_NORM":25680,"PRUNE_DUAL":3112,"COVERED":1480,"UNRESOLVED_NCAP":0,"RES_CAP":0,"GIVEUP":0,"SPLIT_FINAL":0,"patches":33,"unresolved":0,"extraNodes":0}
+{"nodes":31776,"pending":0,"PASS":1474,"PRUNE_NORM":25888,"PRUNE_DUAL":2868,"COVERED":1546,"UNRESOLVED_NCAP":0,"RES_CAP":0,"GIVEUP":0,"SPLIT_FINAL":0,"patches":35,"unresolved":0,"extraNodes":0}
+{"level0_cells":8192,"level0_pass":752}
+{"nodes":113,"pending":0,"PASS":7,"PRUNE_NORM":72,"PRUNE_DUAL":20,"COVERED":14,"UNRESOLVED_NCAP":0,"RES_CAP":0,"GIVEUP":0,"SPLIT_FINAL":0,"patches":1,"unresolved":0,"extraNodes":0}
+{"nodes":145,"pending":0,"PASS":9,"PRUNE_NORM":89,"PRUNE_DUAL":25,"COVERED":22,"UNRESOLVED_NCAP":0,"RES_CAP":0,"GIVEUP":0,"SPLIT_FINAL":0,"patches":2,"unresolved":0,"extraNodes":0}
+{"nodes":1,"pending":0,"PASS":0,"PRUNE_NORM":1,"PRUNE_DUAL":0,"COVERED":0,"UNRESOLVED_NCAP":0,"RES_CAP":0,"GIVEUP":0,"SPLIT_FINAL":0,"patches":0,"unresolved":0,"extraNodes":0}
+== independent recheck (exact rational cover + outward Root chain)
+{"prefix": "runs/seed0_c7-2-11-11", "pass": true, "n_checks": 26, "failed": []}
+{"prefix": "runs/seed5_c4-1-8-15", "pass": true, "n_checks": 26, "failed": []}
+{"prefix": "runs/seed0_c0-0-0-0", "pass": true, "n_checks": 26, "failed": []}
+== mutation controls
+runs/controls-seed0.json base_ok True controls 9 uncaught []
+runs/controls-seed5.json base_ok True controls 9 uncaught []
+== fidelity: restricted tree == corresponding subtree of the unrestricted run
+{'restricted_nodes': 113, 'full_subtree_nodes': 113, 'same_keys': True, 'verdict_differences': 0, 'covered_leaves_with_different_covering_radius': 14, 'fidelity_of_structure_and_verdicts': True}
+{'restricted_nodes': 145, 'full_subtree_nodes': 145, 'same_keys': True, 'verdict_differences': 0, 'covered_leaves_with_different_covering_radius': 22, 'fidelity_of_structure_and_verdicts': True}
+== done
+== Stage-A dual certificate
+== 0. input digests ==
+a78a1ab171d8c7f11490f83f4fc6896f0b135a1648563c970c584210b192095a  src/patchx.cpp
+bb031282340012e6fea15eadc073cf79a9e5a75fa0d558ccc5e1ef541e2b1e77  src/ub.cpp
+3c6c7a7092230de231fdb23b6d1782de0dd9ef6689095763b875d90ce5ddeb44  src/seed.cpp
+c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789  ../../../certdata/runs/h1-seed-emission/centers.txt
+fa9c31628c606e6c0a699980327c1166b63fddd0ae7505949fec4611339a8a42  runs/ref-m5-nodes.csv
+== 1. build replay (pristine upstream + this driver only) ==
+79ec41ea499d2781bd507796412eb33fa7c9329b6c0c2721c915d0a9c40c3f8d  runs/replay
+== 2. replay the 113 recorded nodes, dump certificate payloads ==
+{"nodes":113,"dual_dumps":20,"mismatch":14}
+{"seed_index":0,"nodes":113,"dual_nodes":20,"mismatch":14,"r":0x1.062512deffd53p-5}
+== 3. exact/outward certificate on the emitted data (all 20 PRUNE_DUAL nodes) ==
+replay.dual100.dump    node=100  N=64  PASS       margin=[0.110575790690,0.110575790690] (pad 1e-4) ratio=1105.8 dev=2.11e-16
+replay.dual104.dump    node=104  N=64  PASS       margin=[0.145142026229,0.145142026229] (pad 1e-4) ratio=1451.4 dev=1.81e-16
+replay.dual108.dump    node=108  N=64  PASS       margin=[0.051402799968,0.051402799968] (pad 1e-4) ratio=514.0 dev=1.11e-16
+replay.dual111.dump    node=111  N=64  PASS       margin=[0.140363685033,0.140363685033] (pad 1e-4) ratio=1403.6 dev=1.11e-16
+replay.dual112.dump    node=112  N=64  PASS       margin=[0.068066691965,0.068066691965] (pad 1e-4) ratio=680.7 dev=1.98e-16
+replay.dual29.dump     node=29   N=64  PASS       margin=[0.126866214869,0.126866214869] (pad 1e-4) ratio=1268.7 dev=2.00e-16
+replay.dual30.dump     node=30   N=64  PASS       margin=[0.138087997410,0.138087997410] (pad 1e-4) ratio=1380.9 dev=2.00e-16
+replay.dual34.dump     node=34   N=64  PASS       margin=[0.293710234755,0.293710234755] (pad 1e-4) ratio=2937.1 dev=4.30e-16
+replay.dual37.dump     node=37   N=64  PASS       margin=[0.240980440130,0.240980440130] (pad 1e-4) ratio=2409.8 dev=0.00e+00
+replay.dual38.dump     node=38   N=64  PASS       margin=[0.211156209219,0.211156209219] (pad 1e-4) ratio=2111.6 dev=1.99e-16
+replay.dual41.dump     node=41   N=64  PASS       margin=[0.047337885580,0.047337885580] (pad 1e-4) ratio=473.4 dev=1.96e-16
+replay.dual45.dump     node=45   N=64  PASS       margin=[0.024080277295,0.024080277295] (pad 1e-4) ratio=240.8 dev=1.11e-16
+replay.dual5.dump      node=5    N=32  PASS       margin=[0.051896308344,0.051896308344] (pad 1e-4) ratio=519.0 dev=1.46e-16
+replay.dual66.dump     node=66   N=64  PASS       margin=[0.106978317254,0.106978317254] (pad 1e-4) ratio=1069.8 dev=1.11e-16
+replay.dual73.dump     node=73   N=64  PASS       margin=[0.029621362481,0.029621362481] (pad 1e-4) ratio=296.2 dev=1.11e-16
+replay.dual74.dump     node=74   N=64  PASS       margin=[0.038987867946,0.038987867946] (pad 1e-4) ratio=389.9 dev=0.00e+00
+replay.dual82.dump     node=82   N=64  PASS       margin=[0.111527644963,0.111527644963] (pad 1e-4) ratio=1115.3 dev=1.11e-16
+replay.dual86.dump     node=86   N=64  PASS       margin=[0.170007052792,0.170007052792] (pad 1e-4) ratio=1700.1 dev=2.02e-16
+replay.dual90.dump     node=90   N=64  PASS       margin=[0.020637412556,0.020637412556] (pad 1e-4) ratio=206.4 dev=1.11e-16
+replay.dual94.dump     node=94   N=64  PASS       margin=[0.063381364337,0.063381364337] (pad 1e-4) ratio=633.8 dev=0.00e+00
+
+PASS=20 FAIL=0 UNRESOLVED=0
+min margin_lo = 0.020637412556  (pad 1e-4)  worst producer deviation 4.30e-16
+== 4. exact/outward chain from bins+seed -> block -> dataU -> bound -> certificate ==
+node   N   emitted    chain       chainmargin    ratio   devmax      nfar  1side    ulp
+90     64  PASS       PASS        0.020637413    206.4  7.2e-16         0   True    1.8
+45     64  PASS       PASS        0.024080277    240.8  8.1e-16         0   True    1.8
+73     64  PASS       PASS        0.029621362    296.2  7.9e-16         0   True    1.8
+74     64  PASS       PASS        0.038987868    389.9  7.2e-16         0   True    1.8
+41     64  PASS       PASS        0.047337886    473.4  8.1e-16         0   True    1.8
+108    64  PASS       PASS        0.051402800    514.0  4.1e-16         0   True    1.8
+5      32  PASS       PASS        0.051896308    519.0  6.1e-16         0   True    2.1
+94     64  PASS       PASS        0.063381364    633.8  7.9e-16         0   True    1.8
+112    64  PASS       PASS        0.068066692    680.7  4.1e-16         0   True    1.8
+66     64  PASS       PASS        0.106978317   1069.8  7.2e-16         0   True    1.8
+100    64  PASS       PASS        0.110575791   1105.8  3.1e-16         0   True    1.8
+82     64  PASS       PASS        0.111527645   1115.3  8.1e-16         0   True    1.8
+29     64  PASS       PASS        0.126866215   1268.7  8.1e-16         0   True    1.8
+30     64  PASS       PASS        0.138087997   1380.9  7.9e-16         0   True    1.8
+111    64  PASS       PASS        0.140363685   1403.6  3.1e-16         0   True    1.8
+104    64  PASS       PASS        0.145142026   1451.4  3.1e-16         0   True    1.8
+86     64  PASS       PASS        0.170007053   1700.1  8.1e-16         0   True    1.8
+38     64  PASS       PASS        0.211156209   2111.6  8.1e-16         0   True    1.8
+37     64  PASS       PASS        0.240980440   2409.8  7.2e-16         0   True    1.8
+34     64  PASS       PASS        0.293710235   2937.1  8.1e-16         0   True    1.8
+
+chain PASS 20/20 ; min ratio 206.4 (node 90) ; max ratio 2937.1 (node 34)
+max dev_max 8.10e-16 ; max bound rounding 2.06 ulp ; min pad slack 1.00e-10
+== 5. controls ==
+controls: 360, unexpected: 0
+== 6. output digests ==
+a78a1ab171d8c7f11490f83f4fc6896f0b135a1648563c970c584210b192095a  src/patchx.cpp
+542ec1c7ce1e9371ce5aa2b7be36c1e4f489927f24e297384101ea29fc80f69d  src/replay.cpp
+3c6c7a7092230de231fdb23b6d1782de0dd9ef6689095763b875d90ce5ddeb44  src/seed.cpp
+bb031282340012e6fea15eadc073cf79a9e5a75fa0d558ccc5e1ef541e2b1e77  src/ub.cpp
+d83b9226e25fb65af3c873f07b597f6515dc3fcc18fc445a8374acf29bc902fa  src/cert.py
+727c99559d687f606fc6d4640d0dfab4e2992a2090fe1fd0fe2287c6aa9bfa25  src/chain.py
+5c6627e0fbd7114ef45b1c0a097ebc4761a19e4b1378b492353ff74bc3c1a53c  src/controls.py
+de361107c7ae3a4fc602a79969d57660d40a0ee63d90636a85971efecf553d33  src/iv.py
+6c9c4f0767980cce458411626b3cf9b948d88288df8eaefa4eeec2207ee62cc2  src/run_all.py
+053732bf9e1c917f52f1257f29d64620e91cd10d6a74f68ed5e9b4c4ed91ba3c  runs/s0c7/replay.csv
+cff732c22877276bbf1b59232c7cd586ebe445628e2cf1ae6625a302ba21f4d4  runs/summary.csv
+a803e16acaf06ffd3cb9bbfd370936aedfec6068edc7d6e2e57d8905df103d25  runs/controls.json
+4e8a426e67b5ddd276fcf36dd280cc2c8dd024a1e6776b5236d24c3aa2ee93c4  runs/cert-all.json
+== Root 43 witnesses
+coarse0-109.json                         coarse0.bin idx=109   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.308016727
+coarse0-11.json                          coarse0.bin idx=11    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.390490923
+coarse0-121.json                         coarse0.bin idx=121   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.328247104
+coarse0-179.json                         coarse0.bin idx=179   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.314343412
+coarse0-19.json                          coarse0.bin idx=19    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.380039742
+coarse0-23.json                          coarse0.bin idx=23    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.368247605
+coarse0-24.json                          coarse0.bin idx=24    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.393512913
+coarse0-271.json                         coarse0.bin idx=271   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.327726228
+coarse0-276.json                         coarse0.bin idx=276   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.290490947
+coarse0-319.json                         coarse0.bin idx=319   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.322006286
+coarse0-35.json                          coarse0.bin idx=35    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.367472575
+coarse0-47.json                          coarse0.bin idx=47    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.356104146
+coarse0-471.json                         coarse0.bin idx=471   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.285713234
+coarse0-678.json                         coarse0.bin idx=678   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.367668548
+coarse0-7.json                           coarse0.bin idx=7     R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.372706706
+coarse0-77.json                          coarse0.bin idx=77    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.346015991
+coarse0-8.json                           coarse0.bin idx=8     R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.384696625
+coarse0-9.json                           coarse0.bin idx=9     R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.371213619
+coarse0-94.json                          coarse0.bin idx=94    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.386505290
+mid-10.json                              mid.bin     idx=10    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.379865113
+mid-13.json                              mid.bin     idx=13    R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.383677045
+mid-14.json                              mid.bin     idx=14    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.370589840
+mid-163.json                             mid.bin     idx=163   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.360659470
+mid-18.json                              mid.bin     idx=18    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.366927258
+mid-225.json                             mid.bin     idx=225   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.298881635
+mid-24.json                              mid.bin     idx=24    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.376432230
+mid-254.json                             mid.bin     idx=254   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.317108111
+mid-28.json                              mid.bin     idx=28    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.367640101
+mid-298.json                             mid.bin     idx=298   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.363410549
+mid-32.json                              mid.bin     idx=32    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.365237376
+mid-329.json                             mid.bin     idx=329   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.301339706
+mid-330.json                             mid.bin     idx=330   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.302733297
+mid-362.json                             mid.bin     idx=362   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.297142941
+mid-398.json                             mid.bin     idx=398   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.374835195
+mid-4.json                               mid.bin     idx=4     R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.389623375
+mid-421.json                             mid.bin     idx=421   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.294199322
+mid-494.json                             mid.bin     idx=494   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.339807542
+mid-500.json                             mid.bin     idx=500   R5=PASS      R6=PASS      R7=FAIL      => FAIL       lam=0.376618027
+mid-512.json                             mid.bin     idx=512   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.294921094
+mid-588.json                             mid.bin     idx=588   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.357611209
+mid-596.json                             mid.bin     idx=596   R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.310278232
+mid-60.json                              mid.bin     idx=60    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.371677792
+mid-68.json                              mid.bin     idx=68    R5=PASS      R6=PASS      R7=PASS      => PASS       lam=0.358643168
+Traceback (most recent call last):
+  File "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.ultramath/smwh7pmn0/m1/src/verify_all.py", line 44, in <module>
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+  File "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.ultramath/smwh7pmn0/m1/src/verify_all.py", line 36, in main
+    with open(out, "w") as f:
+         ^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'results/preprint-verification/root43.json'

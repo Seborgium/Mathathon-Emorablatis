@@ -1,0 +1,237 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage[hidelinks]{hyperref}
+\newcommand{\fl}{\operatorname{fl}}
+\title{A dyadic choice of constants for the seed cover of\\ \emph{The maximum number of
+mutually unbiased bases in dimension six}}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent
+The preprint fixes $N=112$, $w=1/112$, $R=.032$, $r_s=.0320001$ and
+$\mathrm{RN2}=(\fl(.032\cdot112))^2-10^{-4}$ for its seed cover, and then spends most of
+Appendix~A.3 justifying that these numbers survive binary64. This note replaces them by
+\[
+  N=128=2^7,\qquad w=2^{-7},\qquad R=2^{-5}=\tfrac1{32},\qquad r_s=R,\qquad
+  \mathrm{RN2}=(NR)^2=16,
+\]
+for which every quantity the seed stage compares is an exact binary64 number. The symbolic
+lemmas of \S2 are unchanged; what disappears is the floating-point analysis, the $+10^{-7}$
+enlargement of the seed ball, and the code-generation premise about \texttt{pow}.
+
+\section{The choice is forced}
+
+Three of the paper's own premises bound the pair $(N,R)$:
+\begin{enumerate}
+\item[(P1)] bin differences are stored in \texttt{int8\_t} and \S7.3 asserts they lie in
+  $[-111,111]$; in general they lie in $[-(N-1),N-1]$, so $N-1\le 127$, i.e. $N\le 128$;
+\item[(P2)] the field bound $\mathrm{Rs}=2\pi R<.203$ of \S A.13 gives $R<.032309$;
+\item[(P3)] the \emph{cheap} reuse test (2.18) can fire only if the ball of radius $R$ about one
+  midpoint contains the whole box of another, i.e.\ only if
+  $R\ge\max_{|h|\le\frac12}\|k+h\|/N$ for some $k\in\mathbb Z^9\setminus\{0\}$. The minimum is at
+  $k=e_1$ and equals $\sqrt{(3/2)^2+8\cdot(1/2)^2}/N=\sqrt{17}/(2N)=2.0616/N$; the
+  triangle-inequality form $1/N+3/(2N)=2.5/N$ is a strict overestimate. The \emph{dual} test (2.19)
+  needs to cover only the feasible portion of a bin, a 5-dimensional slice of the box, so it can
+  merge below this floor: (P3) bounds the cheap path and does not prove that reuse dies.
+\end{enumerate}
+Now impose exactness. A bin midpoint is $(b+\tfrac12)/N=(2b+1)/(2N)$, exactly representable in
+binary64 if and only if $2N$ is a power of two, i.e.\ if and only if $N$ is. By (P1) the only powers
+of two at most $128$ are $64$ and $128$, and $N=64$ is excluded by cost rather than by an
+inequality: with $R\le.03231$ its effective separation $R-3/(2N)\le.0087$ is half the bin spacing
+$1/64$, so no bin's own midpoint lies within the cheap test's reach and the entire merging load
+falls on the dual test. $N=128$ works: $NR=4$, hence $(\mathrm{RN})^2=16$ exactly, and
+$\delta=5/256$, i.e.\ $2.5$ bin spacings. For $R$ it suffices that $R$ be dyadic; in the window
+$[2.0616/128,\,.032309]$ the dyadic values are $m/256$, $m=5,6,7,8$. The largest, $R=1/32=8/256$,
+retains fewest centres and is the only one giving $NR=4$, a power of two. $112$ is not selectable at
+all (midpoint denominator $224$), $96$ neither ($192$).
+
+One caveat: $R=1/32$ is not the largest \emph{dyadic} admissible. $R=33/1024=.032227$ is dyadic,
+keeps $NR=4.125$ and $(NR)^2=17.015625$ exact, and would (on a packing model) retain some $16\%$
+fewer centres --- at the price of leaving $\mathrm{Rs}=2\pi R=.202485$ only $0.25\%$ below $.203$
+instead of $3.3\%$, which is exactly the near-tight constant the exercise is removing.
+
+\section{The constants and the inequalities they must satisfy}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+quantity & paper & dyadic & note\\
+\midrule
+$N$ & $112$ & $128$ & largest allowed by (P1)\\
+$w$ & $1/112$ (stored $\approx$) & $2^{-7}$ & exact\\
+$R$ & $.032$ & $2^{-5}$ & $NR=4$ exact\\
+$r_s$ & $.0320001$ & $1/32$ & no enlargement\\
+$\mathrm{RN2}$ & $(\fl(.032\cdot112))^2-10^{-4}$ & $16$ & exact, no slack\\
+$3/(2N)$ & $3/224=.013393$ & $3/256=.011719$ & bin circumradius\\
+$\delta=R-3/(2N)$ & $.018607$ & $5/256=.019531$ & effective separation\\
+$\mathrm{Rs}=2\pi R$ & $.201062$ & $\pi/16=.196350$ & field bound\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+inequality & paper & slack & dyadic & slack\\
+\midrule
+$3/(2N)\le R$ & $.013393\le.032$ & $2.39\times$ & $.011719\le.03125$ & $2.67\times$\\
+$R<.203/(2\pi)$ & $.032<.032309$ & $0.96\%$ & $.03125<.032309$ & $3.3\%$\\
+$R\ge\sqrt{17}/(2N)$ & $.032\ge.018407$ & $1.74\times$ & $.03125\ge.016106$ & $1.94\times$\\
+$N-1\le127$ & $111$ & $16$ & $127$ & $0$\\
+$\binom{N+4}{5}<2^{31}$ & $1.604\cdot10^8$ & $13.4\times$ & $3.093\cdot10^8$ & $6.9\times$\\
+$NR$ exact & $448/125$, no & --- & $4$, yes & ---\\
+$(NR)^2$ exact & $12.844956$, no & --- & $16$, yes & ---\\
+slack below $(NR)^2$ & $10^{-4}$ & --- & $0$ & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Two slacks get worse, and both are integer type bounds rather than numerical ones: the
+\texttt{int8\_t} range is now exactly full, and the 32-bit tuple count halves its margin. The first
+is a \emph{soundness} margin, not a cost margin: \texttt{covout} stores $A.b_j-p.b_j$ in an
+\texttt{int8\_t}, and a wrapped difference would understate the squared distance and could certify a
+coverage that does not hold. So $N\le128$ must be stated as an invariant with that reason, and
+$N=128$ is the last admissible value; any finer cover has to widen the type first.
+
+\section{What leaves the proof}
+
+\begin{enumerate}
+\item The enlargement $r_s=.0320001$ (five occurrences, and \texttt{atlas.cpp}) becomes $1/32$. The
+  closing paragraph of A.3 --- the nine division-rounded seed phases differ from their rational
+  midpoints by less than $10^{-14}$, absorbed by the enlarged radius --- is deleted: the division
+  is exact.
+\item A.3's comparison radius $\mathrm{RN2}=\fl((\fl(.032\cdot112))^2)-.0001$ becomes
+  $\mathrm{RN2}=(NR)^2=16$: with $R\cdot N=4$ exactly, $\texttt{pow}(4,2)=16$ both under a
+  correctly rounded \texttt{pow} and under the multiply lowering. The paragraph of \S7.1 that
+  inspects the saved disassembly and has to be repeated for every new build is replaced by one
+  sentence. This is not cosmetic: a rebuild of \texttt{covout.cpp} with this machine's g++~16.2 and
+  the paper's own flags emits two \texttt{call pow@plt}, so the recorded gcc~13.3 binary satisfies
+  \S7.1 and a rebuild here does not; at $(128,1/32)$ the condition is vacuous. (The second
+  \texttt{pow}, inside $T=(\sqrt{\mathrm{RN2}}+3/2)^2$, has a non-exact argument, but $T$ only
+  selects which centres are \emph{tried}.)
+
+  The $-10^{-4}$ is deleted rather than replaced, and this is the one place where dropping a margin
+  is safe. It covered the \emph{threshold's} own computation error ($<10^{-12}$ at $N=112$); at
+  $N=128$ that error is zero. Both tests stay conservative against the exact threshold: the cheap
+  test evaluates $s+a+9/4$, exactly the supremum of $\|k+h\|^2$ over the box, and the dual test
+  evaluates $s+9/4+\texttt{supdual}$, where the returned value already carries $+.01$ over a bound
+  accurate to $10^{-4}$, so it exceeds $2k\cdot h$ by about $0.009$ --- three orders above the single
+  binary64 rounding of the sum ($\le1.8\cdot10^{-15}$). Hence ``computed $<16$'' implies
+  $\|k+h\|^2<16$ on both branches.
+
+  With the threshold exact, the seed arithmetic collapses to one integer comparison. The cheap test
+  reads $s+a+9/4<16$ with $s=\|k_X\|^2$ and $a=\|k_Y\|_1$ non-negative integers, i.e.\
+  \[
+    s+a\le 13,
+  \]
+  with no floating point in the decision at all. That single line is where the whole of A.3's seed
+  arithmetic now lives, and it is why the choice among $16$, $16-10^{-4}$ and $16-2^{-14}$ is
+  cosmetic: the left side is quantised to integers plus $9/4$, so all three give the same cut.
+\item A.3's opening ``$n=112$ and the stored $w$ approximates $1/n$'' becomes ``$n=128$ and
+  $w=1/128$ exactly''. The gap comparisons are then exact except for the one-sided $10^{-8}$
+  inflation that keeps extra tuples; the $10^{-14}$ error bound becomes zero.
+\end{enumerate}
+
+\noindent
+What does not leave: the $2\cdot10^{-14}$ evaluation error of \texttt{expair} (\S A.2) and the
+\texttt{sumok}/\texttt{extend}/\texttt{supdual} margins. Those concern the polynomial evaluation
+of $e(x)$ and are independent of $N$; they keep their form with $N=128$ substituted.
+
+\section{The re-derivation, in the paper's notation}
+
+The statements of Lemmas 2.4--2.9 are uniform in $N$ with $w=1/N$ and are used verbatim. The
+three numeric steps become:
+\begin{itemize}
+\item \S2.2: $N=128$, $w=1/N=2^{-7}$; the gap thresholds $1-(l-1)/N$ and $1-(l+2)/N$ are exact
+  multiples of $2^{-7}$.
+\item \S2.4: a retained midpoint covers its bin with radius
+  $\sqrt{9}/(2N)=3/256<1/32$; a newly inserted midpoint needs radius
+  $1.5/128=.0117<.03125$; the reuse test succeeds only when the bound of Lemma 2.9 is below
+  $\mathrm{RN2}=(NR)^2=16$, with no slack needed (see \S3). The integer and phase parts of that
+  bound are exact; the dual term keeps the outward margin it already has in A.3.
+\item Prop.\ 2.10: the written centres are exact binary64 numbers, so the radius is $1/32$ with no
+  enlargement.
+\end{itemize}
+
+\noindent
+\emph{The seed that must never be rejected.} The exact Fourier matrix $e(ij/6)$ has $X$ bins
+$(21,42,64,85,106)$ with $s=2$ and $Y$ bins $(64,21,42,85,106)$ at $N=128$. It passes the
+orientation filter ($21\le106-85+1=22$), both gap filters ($g=.171875$ against $.179688$ and
+$.156250$), the shared-interval test, and \texttt{sumok} in all six directions, with thinnest
+margin $3.10\cdot10^{-5}$ (against $4.19\cdot10^{-5}$ at $N=112$: the test tightens as $w$ shrinks,
+and still sits six orders above the $10^{-8}$ additions). Its shared displacement is exactly
+$h_s=-\tfrac12$ at every $N$, so the critical seed lies on the closed boundary of the box
+$[-\tfrac12,\tfrac12]^9$: every inequality that uses that box --- (2.12), (2.17), (2.18) and the
+initial interval of \texttt{extend} --- must stay inclusive.
+
+\section{The measured cost}
+
+The authors' \texttt{covout.cpp} and \texttt{seed.cpp} (Apache-2.0, the versions used for the
+recorded run) were rebuilt with the three constants changed and run to completion on the same
+machine.
+
+\begin{center}
+\begin{tabular}{lrrr}
+\toprule
+ & $(112,.032)$ & $(128,1/32)$ & ratio\\
+\midrule
+X tuples surviving the filters & $22{,}829$ & $32{,}018$ & $1.40$\\
+pairs tested & $151{,}744{,}086$ & $267{,}628{,}436$ & $1.76$\\
+retained centres & $249{,}878$ & $229{,}979$ & $0.92$\\
+cover CPU time & $402$\,s & $517$\,s & $1.29$\\
+$\binom{N+4}{5}$ & $160{,}389{,}488$ & $309{,}319{,}296$ & $1.93$\\
+$N\binom{N+3}{4}$ & $774{,}294{,}080$ & $1{,}499{,}729{,}920$ & $1.94$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The pair count cannot be extrapolated linearly from the progress lines. Pairs added per $X$ tuple,
+from the checkpoints: at $N=128$, $3{,}845$ over the first $10{,}000$, $7{,}903$ over the second,
+$11{,}975$ over the third and $15{,}062$ over the last $2{,}018$; at $N=112$, $3{,}749$ / $8{,}238$ /
+$11{,}266$. The density grows roughly in proportion to the $X$ index, because the walk is
+lexicographic and a larger largest bin admits more $Y$ tails, so the total scales like $T^2/2$ in the
+index and a two-checkpoint extrapolation undershoots by about $1.3\times$; a linear-density fit on
+the first two blocks reproduces both totals to better than $0.6\%$. The pair growth is accounted for
+rather than fitted: an exact count of every filter but the shared-interval test and the $Y$-side
+\texttt{sumok} gives $2.3706\times$, the residual acceptance rate falls to $0.744$, and
+$2.3706\times0.744=1.7637$.
+
+The change makes the computation exact but not cheaper. The cover costs $29\%$ more CPU; the centre
+count falls $8\%$; at Stage A's recorded $8.08$\,ms per centre that saves about $160$\,s against the
+cover's extra $115$\,s, i.e.\ a wash on the $4{,}470$\,s run. A packing model calibrated at 112
+predicted $0.65$--$0.78\times$ the centres and $0.92\times$ was measured: the seed set is a lattice,
+not a continuum, so do not price the change on the model. The output file is well formed
+(\texttt{128 229979}, every bin in $[0,127]$, i.e.\ the \texttt{int8} range used to its last unit).
+
+\section{Three more things worth fixing in the same pass}
+
+\paragraph{Stage B, $k\le10$.} The base grid is $n=2L+1$ with $L=\lceil E/w+.500001\rceil$ and
+$E\approx R_{\text{parent}}$, so the box cap $n^k\le5\cdot10^7$ gives $k\le5$ in the first two
+passes ($n=23$ at $(.07,.013)$ and $n=31$ at $(.016,.005)$) and $k\le7$ in the third ($n=11$ at
+$(.011,.0038)$). The paper's error budgets assume $k\le10$, which is the safe direction, but the
+stated limit should read $k\le5,5,7$.
+
+\paragraph{Stage C, the cluster cutoff.} \texttt{cluster()} runs once, after the four bin layers, so
+the $M$ in $(.042-1.11/M)^2$ is always the deepest grid $96$; the paper never says which $M$.
+$.042$ is the clustering's \emph{output} ball radius, and the threshold should be $(R-X_M)^2$ with
+$X_M=\sqrt{29/6}/(2M)=.01145$ (the code's own \texttt{xnorm}), not $1.11/M$ --- $1.11$ exceeds
+$\sqrt{29/6}/2=1.09924$ by $1\%$. The defect is only the squaring, which loses the sign: the base is
+negative for $M\le26$, the merge radius is non-monotone, and on a one-layer invocation the implied
+radius bound is $.1421>.1$, at which every record fails. The fix is one line, $\tau=\max(0,R-X_M)$,
+and it yields the clean invariant $s\le R+1.001\cdot10^{-9}$ instead of $s\le R-1.12\cdot10^{-4}$.
+Keep $.042$: measured on the pipeline's own records, $.03$ multiplies the ball count by $5.7\times$
+($306\to1755$) and the stage's CPU by $4\times$ and still leaves $12/12$ hardest records over the
+graph cap, while $.06/.075/.09$ shrink the balls but cost the $U$-test its discriminating power.
+
+\paragraph{Stage C, the graph cap.} The real defect in \S6 is the $5\cdot10^6$ step cap: all $163$
+records that exhausted it terminate \emph{negative} at $5\cdot10^7$ (median $9.9\cdot10^6$ steps,
+maximum $39{,}038{,}705$, zero candidates). Raising the cap to $10^8$ costs about $1.9\cdot10^9$
+steps, some $48$\,s of CPU, and deletes the fallback round --- five rows of Table~1, the bad-file
+list, and 5 of the 100 recorded invocations.
+
+\end{document}

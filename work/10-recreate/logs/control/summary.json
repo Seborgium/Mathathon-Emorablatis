@@ -1,0 +1,172 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "control",
+ "utc": "20261114T200828Z",
+ "verdict": "PASS",
+ "mutations": [
+  {
+   "id": "M01_manifest_catches_data_byte_flip",
+   "mutation": "one byte flipped in mid.bin",
+   "manifest_repinned": false,
+   "expected_caught_by": [
+    "C1_manifest_matches_published_bytes"
+   ],
+   "caught_by": [
+    "C1_manifest_matches_published_bytes",
+    "C4_record_structure"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M02_manifest_catches_appended_byte",
+   "mutation": "one byte appended to batches/f10.bin",
+   "manifest_repinned": false,
+   "expected_caught_by": [
+    "C1_manifest_matches_published_bytes"
+   ],
+   "caught_by": [
+    "C1_manifest_matches_published_bytes",
+    "C4_record_structure",
+    "C8_fine_to_batch_partition",
+    "C9_cross_command_counts"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M03_manifest_catches_truncation",
+   "mutation": "fb1cbad0.bin truncated to 0 bytes",
+   "manifest_repinned": false,
+   "expected_caught_by": [
+    "C1_manifest_matches_published_bytes"
+   ],
+   "caught_by": [
+    "C1_manifest_matches_published_bytes",
+    "C4_record_structure",
+    "C6_final_bad_files_count_zero"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M04_manifest_catches_swapped_double",
+   "mutation": "record 0 p[0] and p[1] swapped in coarse0.bin",
+   "manifest_repinned": false,
+   "expected_caught_by": [
+    "C1_manifest_matches_published_bytes"
+   ],
+   "caught_by": [
+    "C1_manifest_matches_published_bytes"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M05_rc_field_one",
+   "mutation": "commands.json returncode of C.batch3 set 1 -> 0, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C2_command_facts",
+    "C5b_15_unresolved_are_the_fallback_inputs"
+   ],
+   "caught_by": [
+    "C2_command_facts",
+    "C5a_rc_polarity_c_bad_files",
+    "C5b_15_unresolved_are_the_fallback_inputs",
+    "C5c_fallback_input_order"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M06_batch_dropped_record",
+   "mutation": "batches/f5.bin loses its last record (count and bytes), manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C8_fine_to_batch_partition",
+    "C9_cross_command_counts"
+   ],
+   "caught_by": [
+    "C8_fine_to_batch_partition",
+    "C9_cross_command_counts"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M07_count_field_wrong",
+   "mutation": "batches/bad3.bin count set 2 -> 3, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C4_record_structure",
+    "C9_cross_command_counts"
+   ],
+   "caught_by": [
+    "C4_record_structure",
+    "C5a_rc_polarity_c_bad_files",
+    "C5d_fallback_inputs_nonempty",
+    "C9_cross_command_counts"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M08_radius_out_of_range",
+   "mutation": "record 0 of fine.bin given radius 1e9, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C4_record_structure"
+   ],
+   "caught_by": [
+    "C4_record_structure"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M09_done_txt_wrong",
+   "mutation": "batches/fdone.txt record total 22379 -> 22378, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C8_fine_to_batch_partition"
+   ],
+   "caught_by": [
+    "C8_fine_to_batch_partition"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M10_arun_bad_nonempty",
+   "mutation": "bad0.txt appended a centre index, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C7_arun_bad_txt_zero_length"
+   ],
+   "caught_by": [
+    "C7_arun_bad_txt_zero_length"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M11_fallback_order_swapped",
+   "mutation": "C.Bfallback swaps its first two inputs, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C10_argv_matches_declared"
+   ],
+   "caught_by": [
+    "C10_argv_matches_declared"
+   ],
+   "verdict": "PASS"
+  },
+  {
+   "id": "M12_final_bad_count_one",
+   "mutation": "fb1cbad1.bin count 0 -> 1 with no record, manifest repinned",
+   "manifest_repinned": true,
+   "expected_caught_by": [
+    "C4_record_structure",
+    "C6_final_bad_files_count_zero"
+   ],
+   "caught_by": [
+    "C4_record_structure",
+    "C6_final_bad_files_count_zero"
+   ],
+   "verdict": "PASS"
+  }
+ ],
+ "note": "Each mutation is a seeded corruption of a copy of the recorded artefact set. A PASS means the named checks failed, i.e. the harness bit; a FAIL means the corruption went undetected.",
+ "elapsed_ms": 1012.8
+}

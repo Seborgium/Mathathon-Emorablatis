@@ -1,0 +1,118 @@
+{
+ "test": "T9_final_partition_probe",
+ "ok": true,
+ "order": [
+  916,
+  761,
+  978,
+  763,
+  739
+ ],
+ "stdout": "result done5 bad0 (graph0 cap0 over0 cluster0) time 1.04",
+ "n_rec": 5,
+ "checks": [
+  {
+   "global": 916,
+   "part": 0,
+   "predicted_local": 230,
+   "rerun_fingerprint": [
+    1535,
+    52,
+    122,
+    384,
+    76
+   ],
+   "probe_fingerprint": [
+    1535,
+    52,
+    122,
+    384,
+    76
+   ],
+   "match": true
+  },
+  {
+   "global": 761,
+   "part": 1,
+   "predicted_local": 191,
+   "rerun_fingerprint": [
+    4654,
+    85,
+    526,
+    1309,
+    1046
+   ],
+   "probe_fingerprint": [
+    4654,
+    85,
+    526,
+    1309,
+    1046
+   ],
+   "match": true
+  },
+  {
+   "global": 978,
+   "part": 2,
+   "predicted_local": 245,
+   "rerun_fingerprint": [
+    2028,
+    63,
+    199,
+    628,
+    226
+   ],
+   "probe_fingerprint": [
+    2028,
+    63,
+    199,
+    628,
+    226
+   ],
+   "match": true
+  },
+  {
+   "global": 763,
+   "part": 3,
+   "predicted_local": 191,
+   "rerun_fingerprint": [
+    1542,
+    51,
+    135,
+    404,
+    115
+   ],
+   "probe_fingerprint": [
+    1542,
+    51,
+    135,
+    404,
+    115
+   ],
+   "match": true
+  },
+  {
+   "global": 739,
+   "part": 3,
+   "predicted_local": 185,
+   "rerun_fingerprint": [
+    13901,
+    185,
+    5407,
+    6287,
+    3200276
+   ],
+   "probe_fingerprint": [
+    13901,
+    185,
+    5407,
+    6287,
+    3200276
+   ],
+   "match": true
+  }
+ ],
+ "binary": ".scratch/h0/instr/crun-probe",
+ "binary_sha256": "2500d0ac7f38d137b9c6095560c277eebda02dbb58aebdecbf98814e897be9ef",
+ "note": "fingerprints unique in the 23506-record census; chosen by cost, not by outcome"
+}

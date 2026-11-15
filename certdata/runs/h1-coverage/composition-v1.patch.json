@@ -1,0 +1,12 @@
+{
+ "what": "recorded identifier repair for locally generated Stage-C composition evidence",
+ "old_file_sha256": "699bbc409ca8e2d4591c6335603b750ad14f7c9520b0d0bc5735ee6acfd083fb",
+ "new_file_sha256": "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819",
+ "old_identifier": "256*batch + bad-file ordinal (incorrect for 149/163 entries)",
+ "new_identifier": "original batch/fine position through (batch, bad-file ordinal) join",
+ "repair_file": "work/02-checker/src/make_composition_fixed.py",
+ "reason": "identifier-only repair; counter multiset, children and ordered incidence list unchanged; old emission is retained separately and is not identified byte-for-byte with the repaired archive",
+ "verification": "163/163 parent identities match capped manifest; link ordering and counter invariants checked",
+ "map_source": "certdata/runs/h1-coverage/composition-cover-map.json",
+ "cap_manifest": "certdata/runs/h1-coverage/coverage-manifest.json"
+}

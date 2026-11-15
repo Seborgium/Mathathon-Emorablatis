@@ -1,0 +1,164 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\ip}[2]{\langle #1|#2\rangle}
+\newcommand{\dev}[1]{\bigl(\abs{#1}^{2}-\tfrac16\bigr)^{2}}
+\setlength{\parskip}{1.5pt}
+\setlength{\parindent}{0pt}
+
+\title{\bfseries No vector completes three mutually unbiased bases in $\C^6$\\[4pt]
+\large\normalfont Why the largest partial fourth basis has size zero\\[2pt]
+\normalsize\itshape Statement, mechanism, and what is theorem as opposed to computed}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2em}
+
+Let $B_1,B_2,B_3$ be mutually unbiased bases (MUBs) of $\C^6$: each orthonormal, and
+$\abs{\ip{b}{b'}}^2=\tfrac16$ for $b\in B_i$, $b'\in B_j$, $i\neq j$. A unit vector $v$ is
+\emph{admissible} if $\abs{\ip{b}{v}}^2=\tfrac16$ for every $b\in B_1\cup B_2\cup B_3$; these are exactly
+the vectors that could be one column of a fourth basis. Let $k$ be the largest size of a set of pairwise
+orthogonal admissible vectors --- the largest partial fourth basis.
+
+\begin{tcolorbox}[colback=blue!4,colframe=blue!45!black,boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=3pt,bottom=3pt]
+\textbf{Answer.} $k=0$. For every triple in $\C^6$ that has been decided, no vector whatsoever is
+unbiased with respect to all three bases: the triple is \emph{strongly unextendible}, and the MU
+constellation $\{5,5,5,1\}_6$ is empty.
+\end{tcolorbox}
+
+This is strictly stronger than $N(6)=3$, and not equivalent to it: a fourth basis would supply six
+mutually orthogonal admissible vectors, whereas the truth is that not one exists. The gap is not
+academic --- in $\C^4$, where five MUBs exist, the $Z_4$-Weyl triple $(Z,X,XZ)$ likewise has no
+admissible vector (its defect is $\tfrac{3}{16}$ exactly), while a triple drawn from the five MUBs of
+$\C^4$ has $k=4$. ``No fourth basis'' does not forbid a single extra vector.
+
+\section*{1.\ Why it is forced: the count}
+
+Dephase the triple so that $B_1$ is the standard basis and the first vector of $B_2$ is
+$6^{-1/2}(1,\dots,1)^{T}$. The $s=2(d-1)=10$ vectors lying in the last two groups then carry
+$p=(d-1)(s-1)=45$ free phases, while mutual unbiasedness imposes $c=\binom{s}{2}=45$ conditions: the
+triple is \emph{critical}, its solutions isolated points of a 45-torus, with nothing left to tune.
+Adjoining one candidate vector adds $d-1=5$ phases but $10$ conditions (unbiasedness to the ten vectors
+of $B_2\cup B_3$), so $\{5,5,5,1\}_6$ is overdetermined by five, and every further vector costs five
+more. The obstruction is structural, not a near miss.
+
+\section*{2.\ The mechanism: 48 rays, 16 bases, none extendible}
+
+Fix two of the bases, the standard one and the Fourier one $F_6$. Exactly \textbf{48} rays are unbiased
+to both, with a rigid combinatorics: each is unbiased to exactly $4$ or $12$ of the
+other $47$ ($36$ and $12$ rays respectively, hence $300$ unbiased pairs); they contain exactly
+\textbf{16} orthonormal sextuples, each ray lying in exactly two of them; and \textbf{no} ray is
+unbiased to all six vectors of any one sextuple --- the closest any of the 48 comes to a third basis
+still deviates by $\tfrac16$. This is Grassl's Theorem~2 \cite{Grassl04}, whose count of 48 rays (a
+Gr\"obner computation) and 16 bases we reproduced independently. Two facts explain the number 48: if
+$z$ is unbiased to the Fourier pair then so is $z\cdot\omega^{bj}$, $\omega=e^{2\pi i/6}$, and the six
+modulations are mutually orthogonal --- so \emph{one} common ray generates a whole third basis; eight of
+the sixteen sextuples are such orbits.
+
+\section*{3.\ What is proved, and for which triples}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.46\textwidth}p{0.26\textwidth}p{0.22\textwidth}@{}}
+\toprule
+class of triples & claim & status \\
+\midrule
+MU \emph{product} triples (both classes $T_0,T_1$) & no admissible vector & theorem, analytic \cite{MW12}\\
+Weyl/Heisenberg triples & no admissible vector & theorem \cite{Grassl04}\\
+triples on $\{I,D_0\}$, $\{I,F(\theta)\}$, $\{I,D(\theta)\}$ & no admissible vector & theorem$^{\dagger}$ \cite{BW09}\\
+all triples & no admissible vector & claimed theorem \cite{CWT26,Sun26}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\needspace{7\baselineskip}
+$^{\dagger}$Modulo the Gr\"obner counts of \cite{BW09} --- $48$ rays forming $16$ bases for $F_6$,
+$120/10$ for the Dit\u{a} matrix $D_0$, $56/4$ circulant, $90/0$ spectral, $48/72/120$ with $4$ triples
+along the Dit\u{a} family --- plus a finite check on each ray set: an admissible vector for a triple
+$\{I,H,B\}$ must be one of the finitely many rays unbiased to $\{I,H\}$, so such a pair is decided once
+and uniformly for every third basis it admits.
+
+The analytic proof for product triples \cite{MW12} shows where rigidity enters: unbiasedness to three
+product bases forces the state to be maximally entangled across $\C^2\otimes\C^3$; the Schmidt vectors
+are then pinned to two rays of one basis of $\C^3$, leaving twelve candidates, each contradicting a
+condition not yet used. That product triple is in fact a Weyl triple ($Z_2\otimes Z_3$ and
+$X_2\otimes X_3$ commute up to $e^{i\pi/3}$ and have the six sixth roots as simple spectra), so
+\cite{Grassl04} gives a second, independent proof for it. For \emph{all} triples the argument of
+\cite{CWT26} is different in kind: every triple in $\C^6$ is equivalent to a member of a continuous
+two-parameter family or to the isolated Fourier triple, and both types are strongly unextendible --- the
+family by \cite[Cor.~9.1]{Sun26}, the Fourier triple (a product triple) by \cite{MW12}. That is the step
+from a class-by-class statement to a uniform one.
+
+\section*{4.\ What the computation says}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+quantity & value & \\
+\midrule
+$F=\sum_{b}\dev{\ip{b}{v}}$ at its minimum, standard product triple & $0.052710168379$ & four codes agree to 12 digits\\
+$F$ over all triples, best found (joint descent) & $0.01243$ & single source\\
+$D$, the same for a whole fourth basis, product triple & $0.3163$ & single source\\
+$D$ in $\C^2$, where a fourth basis provably cannot exist & $1.0$ & $=4\cdot(\tfrac12)^2$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Even the most favourable triple of the family misses admitting a vector by an RMS of $0.03$ per overlap:
+comfortable, but not a perturbative margin. One caution about the 2008 numerical evidence:
+$\{5,5,4,1\}_6$ has flat critical points of $F$ near $10^{-8}$, below the threshold $10^{-7}$ of
+\cite{BW08}, whose true overlap deviation is nevertheless $\sim10^{-5}$ and whose Jacobian is rank
+deficient ($\sigma_{\min}\sim10^{-10}$), while genuine zeros sit below $10^{-25}$. A threshold on $F$
+alone was not a solvability test, and that row of the 2008 table should not be quoted as decisive. The
+verdict on $\{5,5,5,1\}_6$ is untouched: best value $3.3\times10^{-5}$ over some $1500$ starts, against
+a zero scale of $10^{-27}$.
+
+\section*{5.\ The boundary: what is possible instead}
+
+Three complete bases (18 states) admit no extension. If a fourth group is wanted the frontier lies at
+$15$ states: $\{5,5,3,1\}_6$ and $\{5,4,4,1\}_6$ (numerical, \cite{BW08}), $\{5,5,2,2\}_6$ and
+$\{5,3,3,3\}_6$ (exact algebraic examples, \cite{CWT26}), with $\{5,4,3,1\}_6$ at 14. In words: two
+complete bases plus three vectors of a third can carry \emph{one} more vector, while a complete third
+basis carries none. The vanishing of $k$ in dimension six is an arithmetic phenomenon of $6=2\cdot3$
+and not a general feature of MUBs: for prime $d\ge3$ every triple is equivalent to the standard one and
+extends, so $k=d$; in $d=2$ the triple is already complete and $k=0$; and $d=4$ exhibits both values,
+$k=0$ and $k=d$, among inequivalent triples.
+
+\vspace{2pt}
+{\footnotesize\noindent All numerical claims were checked here: the $48/16$ structure and its
+non-extendibility, the minimum $F$ of the product triple, the $\C^4$ values $\tfrac{3}{16}$ and $k=4$,
+and the counts of \cite{BW09} (scripts in \texttt{.scratch/mub6/}).}
+
+\begingroup\footnotesize
+\begin{thebibliography}{9}\setlength{\itemsep}{0pt}
+\bibitem{Grassl04} M.~Grassl, \emph{On SIC-POVMs and MUBs in dimension 6}, Proc.\ ERATO Conf.\ on
+Quantum Information Science (EQUIS 2004), arXiv:quant-ph/0406175.
+\bibitem{BW08} S.~Brierley, S.~Weigert, \emph{Maximal sets of mutually unbiased quantum states in
+dimension six}, Phys.\ Rev.\ A \textbf{78}, 042312 (2008), arXiv:0808.1614.
+\bibitem{BW09} S.~Brierley, S.~Weigert, \emph{Constructing mutually unbiased bases in dimension six},
+Phys.\ Rev.\ A \textbf{79}, 052316 (2009), arXiv:0901.4051.
+\bibitem{MW12} D.~McNulty, S.~Weigert, \emph{On the impossibility to extend triples of mutually unbiased
+product bases in dimension six}, Int.\ J.\ Quant.\ Inf.\ \textbf{10}, 1250056 (2012), arXiv:1203.6887.
+\bibitem{Sun26} H.-Y.~Sun, \emph{Mutually unbiased bases: common states, completion, and extension
+obstructions}, arXiv:2610.12180 (2026).
+\bibitem{CWT26} M.~C\'ardenes Wuttig, J.~Tindall, \emph{Using topology to reveal all mutually unbiased
+bases in dimension six}, arXiv:2611.06917 (2026).
+\end{thebibliography}
+\endgroup
+
+\end{document}

@@ -1,0 +1,11 @@
+link,input,amplification,slack,tolerance,verdict
+uniform error inflation,all established errors,1.0,1.2499999999999998,1.25x,first failure at Candidate external tangent [tangent]
+f0 -> K,f0 (Hadamard residual),0.9068906132109767,11.03x,1.103e-05,K is not where the chain is tight
+q_d -> arc bound,q_d,9.999999999999993,5.2632%,q_d < 4 (3.8 chosen),most elastic constant in the paper: 1% in q_d -> 9.5% in the arc bound
+beta -> tangent covariance,beta,1.45,1.8x worst,any beta>0,bounded penalty
+C -> bootstrap improvement,C (normal polynomial),0.0,C<20 admitted vs C<1/s needed,s < 0.05 for C = 20,range and radii are mutually inconsistent above s=.05
+R -> coverage / validate,R,-1.0,"58.1% down, 74.6% up","R in [0.013393, 0.126]",spans a factor 9.4; the value 0.032 is a choice inside it
+w -> gap filter (2.8),w = 1/N,1.0,exactly 1 (zero analytic reserve),w + dw > w,the tightest ANALYTIC link: any unrecognised perturbation breaks it
+w -> box count,w,-5.0,57% of the cap at pass 2,w >= .005 at pass 2 (k=5),elasticity -k: the costliest amplification
+M -> clustering cutoff,M,-1.0,"reserve .042/X_M = .46 (M=12), .92 (M=24), 3.67 (M=96)",M >= 27 for a positive base,sign hidden by the square (F2)
+precision,binary32 vs binary64,0.0,12/23 margins < eps32,binary64 only,12 comparisons rule out binary32

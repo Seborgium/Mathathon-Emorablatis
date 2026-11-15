@@ -1,0 +1,29 @@
+== Stage-B source-directed bridge
+{
+ "schema": "stage-b-source-parent-transport-v1",
+ "normalized_edges": 902,
+ "edges_referenced_by_boxes": 303,
+ "distinct_parent_maps": 12,
+ "accounting": {
+  "outside": 11480,
+  "covered": 3161,
+  "open": 0,
+  "grid": 14641
+ },
+ "smallest_selected_closure_margin": "139324447153519186597224764556346559344309082738262094460891583271152227/132513529858378824718747312555718888687061292265671421859120465096946483200000000",
+ "float_smallest_selected_closure_margin": 1.0513979010476847e-09,
+ "output": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/certdata/runs/h2-stageb/parent-bad10-0-source-transport.json"
+}
+== exact uncapped (6.24) checks
+v1 record: n=212 omega(O)=3 omega(U)=7 O6cliques=0 worst=(0 partners, partner-clique 0) exists(6.24)=False asym=0
+m1 g0: n=212 omega(O)=3 omega(U)=7 O6cliques=0 worst=(0 partners, partner-clique 0) exists(6.24)=False asym=0
+m1 g30: n=250 omega(O)=6 omega(U)=7 O6cliques=1997 worst=(1 partners, partner-clique 0) exists(6.24)=False asym=0
+m1 g37: n=260 omega(O)=6 omega(U)=7 O6cliques=326 worst=(0 partners, partner-clique 0) exists(6.24)=False asym=0
+m1 g38: n=272 omega(O)=6 omega(U)=7 O6cliques=1344 worst=(0 partners, partner-clique 0) exists(6.24)=False asym=0
+== graph selftests
+planted_full {'ok': True, 'exists': True, 'witness': {'A': [0, 1, 2, 3, 4, 5], 'B': [6, 7, 8, 9, 10, 11]}, 'note': 'witness need not equal the plant: any (6.24) pair is a valid answer, so the check is existence, not identity'}
+near_miss {'ok': True, 'exists': False, 'max_partners': 5}
+five_wide {'ok': True, 'exists': False, 'omega_O': 6, 'n_O_6cliques': 1, 'max_partner_omega': 0}
+empty {'ok': True, 'omega_O': 1, 'n_O_6cliques': 0}
+all_ok True
+COMPLETE

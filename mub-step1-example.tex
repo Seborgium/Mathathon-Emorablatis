@@ -1,0 +1,153 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}
+
+\title{\bfseries Step 1 on one matrix\\[4pt]
+\large\normalfont where $x_1,\dots,x_5$ and $y_2,\dots,y_5$ come from, and which bins result}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.8em}
+
+\noindent
+The notation is not invented for the proof: $x_1,\dots,x_5$ are the five \emph{varying} phases of a
+canonically chosen pair of rows, and $y_2,\dots,y_5$ are the four \emph{varying} entries of a canonically
+chosen column after one of the six entries has been identified with an entry of the $x$ list. Below is
+one matrix carried through Step~1 of the outline (preprint Lemma~2.4 and (2.3)--(2.7)), with every number
+computed in exact arithmetic.
+
+\key{1.\ The matrix}
+Take $H_{jk}=\exp\bigl(2\pi i\,(2jk+j+k^{2})/12\bigr)$, $0\le j,k\le 5$: a complex Hadamard matrix,
+deliberately written in a non-trivial gauge. Its twelvefold phases are
+\begin{center}\small
+\begin{tabular}{ccccccc}
+\toprule
+& $k{=}0$&$1$&$2$&$3$&$4$&$5$\\
+\midrule
+$j{=}0$&0&1&4&9&4&1\\
+$1$&1&4&9&4&1&0\\
+$2$&2&7&2&11&10&11\\
+$3$&3&10&7&6&7&10\\
+$4$&4&1&0&1&4&9\\
+$5$&5&4&5&8&1&8\\
+\bottomrule
+\end{tabular}
+
+\end{center}
+
+\key{2.\ Dephasing: $36$ phases become $25$}
+Subtract the phase of column $0$ from each row, then the phase of row $0$ from each column. The result
+is $\omega^{jk}$ with $\omega=e^{2\pi i/6}$, i.e.\ phases $2jk \bmod 12$ twelfths:
+\begin{center}\small
+\begin{tabular}{ccccccc}
+\toprule
+& $k{=}0$&$1$&$2$&$3$&$4$&$5$\\
+\midrule
+$j{=}0$&0&0&0&0&0&0\\
+$1$&0&2&4&6&8&10\\
+$2$&0&4&8&0&4&8\\
+$3$&0&6&0&6&0&6\\
+$4$&0&8&4&0&8&4\\
+$5$&0&10&8&6&4&2\\
+\bottomrule
+\end{tabular}
+
+\end{center}
+Eleven of the $36$ phases were pure gauge (six row and six column rephasings, minus the diagonal
+$uI,u^{-1}I$ that acts trivially); the $25$ remaining live in the $5\times5$ block, and the search
+happens there.
+
+\key{3.\ The chosen pair of rows, and $x$}
+Lemma~2.4 asks for a pair of rows or columns whose six phase \emph{differences} have the smallest gap
+$g$ (the largest circular arc containing none of them). Here the differences of rows $j,j'$ are
+$\{(j-j')k/6\}$, with gap $1/6$ when $j-j'$ is coprime to $6$ and $1/3$ or $1/2$ otherwise, so the
+minimum $1/6$ is attained by $(j,j')=(0,1),(0,5),(1,2),(2,3),(3,4),(4,5)$, and by the same six column
+pairs. Take the first, $(0,1)$, and order the columns from the start of a largest gap; the six phases of
+that pair, one of whose gaps becomes the cut, are written with a leading $0$:
+\[
+x=(x_0,x_1,x_2,x_3,x_4,x_5)=\bigl(0,\tfrac16,\tfrac13,\tfrac12,\tfrac23,\tfrac56\bigr),
+\qquad g_x=1-x_5=\tfrac16 .
+\]
+So $x_1,\dots,x_5$ are simply the five non-leading entries, ascending; $x_0=0$ is the column chosen as
+the cut, which dephasing makes zero.
+
+\key{4.\ The selected column, and $y$}
+Each of the six entries of the second chosen row sits in one column, so picking one selects a column.
+The preprint fixes the choice by the index $s\in\{0,\dots,4\}$ minimising $\abs{2b^X_s+1-N}$ with
+$N=112$, i.e.\ the entry whose phase lies nearest $\tfrac12$; then $\xi=x_{s+1}$ and the column
+containing it is moved to second place, the other four columns keeping their order. Here the bins of
+$x_1,\dots,x_5$ are $18,37,56,74,93$, so $\abs{2b+1-112}$ is $75,37,1,37,75$: the minimiser is $s=2$,
+$\xi=x_3=\tfrac12$, and the selected column is column $3$. Its six entries are
+$(0,\tfrac12,0,\tfrac12,0,\tfrac12)$; permuting the last four rows sorts the tail, giving
+\[
+y=(y_0,\xi,y_2,y_3,y_4,y_5)=\bigl(0,\tfrac12,0,0,\tfrac12,\tfrac12\bigr).
+\]
+
+\begin{center}\small
+\fbox{\parbox{0.93\textwidth}{\textbf{Why four $y$'s and not five.} The column has six entries: the
+leading $0$, the entry $\xi$ shared with the $x$ list, and four others. The preprint names the
+\emph{exact phases} $y_2,\dots,y_5$ (the index $1$ is skipped because that slot holds $\xi$), but names
+the \emph{bins} $b^Y_1,\dots,b^Y_4$. So ``$y_1..y_4$'' is the bin indexing of four unknowns, not a
+fifth exact phase: $b^Y=(b^X_s,\,b^Y_1,b^Y_2,b^Y_3,b^Y_4)$, and the shared entry's bin is written
+$b^X_s$ precisely to record that it is the same integer on both sides. Unknowns: $5$ in $x$ and $5$ in
+$y$, overlapping in $\xi$ --- hence $9=1+4+4$ seed numbers.}}\end{center}
+
+\key{5.\ The bins and the two tuples}
+With $N=112$, $w=1/112$ and $I_b=[b/N,(b+1)/N]$ (closed, so no phase escapes), the phase $t\in[0,1)$ has bin
+$b=\lfloor Nt\rfloor$. Here
+\[
+b^X=(a,b,c,d,l)=(18,37,56,74,93),\qquad
+b^Y=(b^X_s,b^Y_1,b^Y_2,b^Y_3,b^Y_4)=(56,0,0,56,56),
+\]
+and the orientation condition (2.7) holds with room to spare:
+$\tfrac{18}{112}=0.161\le x_1=\tfrac16=0.167$, then $x_1\le x_5-x_4=\tfrac16\le\tfrac{20}{112}=0.179$,
+and $a=18\le l-d+1=20$.
+
+\key{6.\ The checks that make it a certified seed}
+\begin{itemize}\itemsep1pt
+\item Vanishing sums (2.5): $\sum_{j=0}^{5}e(x_j)=1+\sum_{k=1}^{5}\omega^{k}=0$ and
+$1+e(\xi)+e(y_2)+\dots+e(y_5)=1-1+1+1-1-1=0$, both exactly --- these are orthogonality of the two rows
+and of the two columns.
+\item Gaps: $g_x=\tfrac16$ and $g_y=\tfrac12$ (the $y$ multiset has only the values $0,\tfrac12$), so
+$g_y\ge g_x$ as (2.5) requires.
+\item Nine seed numbers, in the preprint's block order:
+\[
+a=\tfrac12,\qquad (b_0,b_1,b_2,b_3)=\bigl(\tfrac16,\tfrac13,\tfrac23,\tfrac56\bigr),\qquad
+(c_0,c_1,c_2,c_3)=\bigl(0,0,\tfrac12,\tfrac12\bigr),
+\]
+with $\{a,b_0,\dots,b_3\}=\{x_1,\dots,x_5\}$ and $(c_0,\dots,c_3)=(y_2,\dots,y_5)$: the block
+$C'$ carries the column tail and $B'$ the row remainder.
+\item The box: nine intervals of width $w$, so circumradius $\tfrac32w=0.0134\le R_s=0.032$, which is
+exactly why Proposition~2.10 can report the covering by balls of radius $0.032$: every box produced by
+this binning fits inside one.
+\end{itemize}
+
+\noindent
+\emph{On the degeneracy.} Half the phases here are $0$ or $\tfrac12$, six pairs tie for the minimum gap,
+and all six of that pair's gaps are equal; the preprint's proof of Lemma~2.4 says in as many words that
+the construction ``is unchanged in validity by ties or repeated points''. A matrix with generic phases
+gives the same arithmetic with distinct values throughout: the gap minimiser is then typically unique,
+the $y$ entries are distinct, and the bins are not round numbers. Nothing in the logic depends on which
+case occurs, only on (2.3)--(2.7) and on the vanishing sums, which hold for both.
+
+\medskip
+\noindent\footnotesize\textit{Provenance.} (2.3)--(2.7) and Lemma~2.4 are quoted from \S2 of the attached
+excerpt (printed pp.~7--9); Proposition~2.10 is quoted from its summary in \S1.2, the excerpt ending
+before \S2.4. The matrix, all phases, bins, tuples and checks above were computed here in exact rational
+arithmetic; the Hadamard property was verified numerically to $10^{-12}$.
+
+\end{document}

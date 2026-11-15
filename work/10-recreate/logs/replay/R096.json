@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "replay",
+ "index": 96,
+ "command": "C.final0",
+ "stage": "C.final",
+ "run_order": 2,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "4",
+  "fb1cbad0.bin",
+  "fb1.bin"
+ ],
+ "inputs": [
+  "fb1.bin"
+ ],
+ "outputs": [
+  "fb1cbad0.bin"
+ ],
+ "declared_outputs": [
+  "fb1cbad0.bin"
+ ],
+ "input_sources": {
+  "fb1.bin": "recorded"
+ },
+ "rc_expected": 0,
+ "rc_got": 0,
+ "artefacts": [
+  {
+   "path": "fb1cbad0.bin",
+   "declared": true,
+   "bytes_expected": 8,
+   "sha256_expected": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "bytes_got": 8,
+   "sha256_got": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 8 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 0, got 0"
+  },
+  "stderr_empty": {
+   "status": "PASS",
+   "detail": "stderr empty"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.final0.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 21473.0,
+ "stdout_sha256": "a53634f3f1b3341322b07a5f64ba6a0e96d710203a001a14f6f2c9b382ebcfde",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

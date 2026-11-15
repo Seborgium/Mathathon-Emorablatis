@@ -1,0 +1,1758 @@
+{
+ "what": "claims-to-evidence matrix for the H2/H3 Stage-A/Stage-C programme",
+ "written_by": ".ultramath/smwh5efk8/m4 (swarm smwh5efk8, direction d5)",
+ "argv": [
+  "audit/run_audit.py",
+  "--out",
+  "results-verified"
+ ],
+ "status_legend": {
+  "CERTIFIED": "recomputed by this code at the declared full population, claim holds",
+  "CONTRADICTED": "recomputed at the declared full population, claim fails (counterexamples recorded)",
+  "UNSUPPORTED": "this code cannot recompute the claim at its declared population: the evidence is absent, partial, or not an identity claim"
+ },
+ "artifacts": {
+  "cap_policy": {
+   "path": "certdata/runs/h1-coverage/cap-policy.json",
+   "sha256": "c89665538cc35295091d48cdf1dd4a6768e4a79b3bcb5536cab5d3d5dee770b8"
+  },
+  "census": {
+   "path": "certdata/runs/h1-coverage/census-check.json",
+   "sha256": "b1276d3230f7ebd71c6e1d773b505a190ef389fd92ae3afac796d73c10bae15b"
+  },
+  "comp": {
+   "path": "certdata/runs/h1-coverage/composition-v1.bin",
+   "sha256": "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819"
+  },
+  "comp_patch": {
+   "path": "certdata/runs/h1-coverage/composition-v1.patch.json",
+   "sha256": "01d5c8363c0fe997efc7ca70b8461ed46860b508802549b6359401d76943a030"
+  },
+  "comp_prod": {
+   "path": ".ultramath/smwgx104w/m4/runs/composition.bin",
+   "sha256": "699bbc409ca8e2d4591c6335603b750ad14f7c9520b0d0bc5735ee6acfd083fb"
+  },
+  "cover_map": {
+   "path": "certdata/runs/h1-coverage/composition-cover-map.json",
+   "sha256": "83516ece860722cad3307181b91a22ac26bbf3cc65630ccef807c15467bc0150"
+  },
+  "demo_json": {
+   "path": ".ultramath/smwgx104w/m4/runs/demo/demo.json",
+   "sha256": "dc842b51f4ec5550db9bad6264ae9f45f55a5fa4f27a9ab1c772b6d400efbd31"
+  },
+  "demo_scv": {
+   "path": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "sha256": "5455b2a6fa6f72723083493b0c8a88bf1638317c46a93804787c00fcbefdc98f"
+  },
+  "fine_bin": {
+   "path": ".ultramath/smwgt1mg2/m3/probe/chk/data/fine.bin",
+   "sha256": "9b5b743b61907277fa6687a0ad45677bbcd0e4c9bd44a0d93d258253fb52923d"
+  },
+  "m1_g0": {
+   "path": ".ultramath/smwguhf32/m1/runs/g0.txt",
+   "sha256": "d9decb8ee99463c04b5e3bcc5b6e1b7b9a7f8b798730c4b9cc243ef2841d8408"
+  },
+  "manifest": {
+   "path": "certdata/runs/h1-coverage/coverage-manifest.json",
+   "sha256": "a59f338cb7b4e26f5117aaaed633e353862ee9dfff2630bbbf9bfb8a113ff562"
+  },
+  "pcov": {
+   "path": "certdata/runs/h1-coverage/pcov-summary.json",
+   "sha256": "1fd1ec599eaf836f75418fc295764b802605af6bbb25209fda7c0c82ce975571"
+  },
+  "probe": {
+   "path": "certdata/runs/h0-stagec-probe.json",
+   "sha256": "5863561e74f84cc4450a01fc1c241513786bea149b26403a4bb9194ad8280138"
+  },
+  "probe_hard": {
+   "path": ".ultramath/smwguhf32/m1/runs/probe_hard.txt",
+   "sha256": "cb97f29c4f4a825cdc1c6a4f2d468f259b97da0660544218d1f4925006819e88"
+  },
+  "probe_hard2": {
+   "path": ".ultramath/smwguhf32/m1/runs/probe_hard2.txt",
+   "sha256": "4e5fe5138c04101229e3e1f96fb7ed6cfe3eefd7811eb091b2732cc2242fd3e7"
+  },
+  "probe_summary": {
+   "path": "certdata/runs/h0-stagec-probe-summary.json",
+   "sha256": "a3fe38690eb7092142c19f2158f7f5ec1383c2bb9f1f800818ec31d00af92f47"
+  },
+  "root_sample": {
+   "path": "certdata/runs/h1-root-interval/root_sample.json",
+   "sha256": "96d43c822957eed7df3600c044bc1e27fee0bb3ed16f02dd16a1122f2bc55da8"
+  },
+  "seed_dual": {
+   "path": "certdata/runs/h1-seed-emission/dual-full.json",
+   "sha256": "cfd3775f9657bb0f69285ba6cf82be8a1bf708773a0422871aacfae968f6265a"
+  },
+  "seed_filter": {
+   "path": "certdata/runs/h1-seed-emission/filter-full.json",
+   "sha256": "6abca54890c942e0adb8a770c5b9e44f9dfdeb885900107f0c8ac6f8c510d141"
+  },
+  "seed_struct": {
+   "path": "certdata/runs/h1-seed-emission/structural-audit.json",
+   "sha256": "a2e6ef5bd90c8a13e0e79c33843792e986c1508283f163dd24c3d67834090093"
+  },
+  "slack": {
+   "path": "certdata/runs/h1-root-interval/stageb_slack.json",
+   "sha256": "acc7c473f247ac09935cff8b1ea95e20e44bc25dfb2845fd6a6bf86f178fb68d"
+  },
+  "spec": {
+   "path": "work/02-checker/spec/cert-format-stageC.md",
+   "sha256": "f95f6f2cb8f68313ef4b5726659cdc286c900ab7cefbd8878a0f80637a44206c"
+  },
+  "stageb": {
+   "path": "certdata/runs/h1-root-interval/stageb_parent0.json",
+   "sha256": "773b4c2fd17e45bbef637eac3ef2b2d4ace14c029aeca1abc15ce98ff9f71c4f"
+  }
+ },
+ "claims": [
+  {
+   "id": "seed.pairs",
+   "tier": "H1",
+   "claim": "151,742,926 covered pairs + 1,160 rigorously disjoint = 151,744,086 pairs processed, and 45,648,766 + 105,845,442 + 249,878 = 151,744,086",
+   "sources": "certdata/runs/h1-seed-emission/{filter,structural-audit,dual}-full.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "6/6",
+   "claimed": "151,742,926 + 1,160 = 151,744,086 = C+D+R",
+   "population": 6,
+   "expected": 6,
+   "witnesses": 6,
+   "reason": "",
+   "detail": {
+    "mandatory": 151742926,
+    "disjoint": 1160,
+    "pairs": 151744086,
+    "C": 45648766,
+    "D": 105845442,
+    "R": 249878
+   }
+  },
+  {
+   "id": "seed.duals",
+   "tier": "H1",
+   "claim": "105,845,442 duals, all proved, failed = undecided = 0, stream complete, largest upper excess < 0",
+   "sources": "certdata/runs/h1-seed-emission/dual-full.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "6/6",
+   "claimed": "all 105,845,442 duals proved, stream complete",
+   "population": 6,
+   "expected": 6,
+   "witnesses": 6,
+   "reason": "",
+   "detail": {
+    "largest_upper_excess": -1.1131595859164135e-08
+   }
+  },
+  {
+   "id": "seed.semantic",
+   "tier": "H1",
+   "claim": "all 151,742,926 mandatory pairs are covered by a proof object",
+   "sources": "certdata/runs/h1-seed-emission/",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "all 151,742,926 mandatory pairs are covered by a proof object",
+   "population": 0,
+   "expected": 151742926,
+   "witnesses": 0,
+   "reason": "OUT_OF_SCOPE",
+   "detail": {
+    "note": "this audit reads the emission summaries, not the 5.7 GiB seed.wit stream or the external MPFR per-pair checker. The full stream check is reported separately; this row is OUT_OF_SCOPE here, not a claim that the object is absent"
+   }
+  },
+  {
+   "id": "stageb.grid",
+   "tier": "B",
+   "claim": "11^4 = 14,641 cells per parent; 163 x 3,161 = 515,243 inside cells",
+   "sources": "certdata/runs/h1-root-interval/stageb_parent0.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "grid arithmetic",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 5,
+   "reason": "",
+   "detail": {
+    "L": 5,
+    "n": 11,
+    "boxes": 14641,
+    "inside_per_parent": 3161,
+    "run_inside": 515243,
+    "predicted_total": 515243
+   }
+  },
+  {
+   "id": "stageb.ledger",
+   "tier": "B",
+   "claim": "11,480 outside + 1,709 relation-covered + 1,452 unresolved = 14,641",
+   "sources": "certdata/runs/h1-root-interval/stageb_parent0.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "11480 + 1709 + 1452 = 14641",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 5,
+   "reason": "",
+   "detail": {
+    "total": 14641,
+    "outside": 11480,
+    "covered": 1709,
+    "unresolved": 1452,
+    "t_rel": 9.6213960647583,
+    "t_box": 13.122091054916382
+   }
+  },
+  {
+   "id": "stageb.witnesses",
+   "tier": "B",
+   "claim": "66 (sigma, ell) clearance witnesses are archived, children 0..65, all finite and positive",
+   "sources": "certdata/runs/h1-root-interval/stageb_slack.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "66 archived (sigma, ell) witnesses are well formed",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 5,
+   "reason": "",
+   "detail": {
+    "n": 66,
+    "sigma_min": 0.011907755164496044,
+    "sigma_max": 0.07635689932594823,
+    "ell_min": 0.010839483369636582,
+    "ell_max": 0.0109685337774863
+   }
+  },
+  {
+   "id": "stageb.clearance_1709",
+   "tier": "B",
+   "claim": "all 1,709 relation-covered boxes have positive measured clearance",
+   "sources": "certdata/runs/h1-root-interval/stageb_slack.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "all 1709 relation-covered boxes have positive measured clearance",
+   "population": 0,
+   "expected": 1709,
+   "witnesses": 66,
+   "reason": "PARTIAL_SAMPLE",
+   "detail": {
+    "covered": 1709,
+    "archived_witnesses": 66,
+    "note": "the 66 archived children are the prefix 0..65, i.e. a prefix sample, not the minimum-clearance sample; a prefix min cannot bound the other 1643 boxes"
+   }
+  },
+  {
+   "id": "stageb.slack_stats",
+   "tier": "B",
+   "claim": "slack_min/median/max describe the 1,709 covered boxes",
+   "sources": "certdata/runs/h1-root-interval/stageb_slack.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "slack_min/slack_median/slack_max describe the 1709 covered boxes",
+   "population": 0,
+   "expected": 1709,
+   "witnesses": 0,
+   "reason": "NO_FUNCTIONAL",
+   "detail": {
+    "stored": [
+     "sigma",
+     "ell",
+     "child"
+    ],
+    "not_stored": [
+     "slack values"
+    ],
+    "claimed_stats": [
+     8.505329843625553e-08,
+     0.001249220122502835,
+     0.007150321072523883
+    ],
+    "note": "no per-box slack is stored and the artifact does not state the functional slack(sigma, ell); the three statistics cannot be recomputed, let alone at population 1709"
+   }
+  },
+  {
+   "id": "comp.length",
+   "tier": "C",
+   "claim": "the composition block is 57,104 B = 28 + 32*163 + 4*1,127 + 4*11,838",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": 57104,
+   "claimed": 57104,
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "parents": 163,
+    "children": 1127,
+    "links": 11838,
+    "layout": "bytes"
+   }
+  },
+  {
+   "id": "comp.spec_layout_old",
+   "tier": "C",
+   "claim": "the block follows the retired alternate header order (counts at 12/16/20, reserved word at 24); the corrected spec uses pass_id at 12 and counts at 16/20/24, without a reserved word",
+   "sources": "work/02-checker/spec/cert-format-stageC.md 3.6",
+   "baseline": "CONTRADICTED",
+   "status": "CONTRADICTED",
+   "value": true,
+   "claimed": false,
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "obsolete_order_implies": 5188,
+    "file_bytes": 57104,
+    "encoded": {
+     "pass_id": 0,
+     "parents": 163,
+     "children": 1127,
+     "links": 11838
+    },
+    "note": "historical reading only: the corrected spec and parser have pass_id at 12 and the counts at 16/20/24 with no reserved word. The retired counts-first reading implies 5,188 B and remains explicit historical evidence, not the current format claim"
+   }
+  },
+  {
+   "id": "comp.header_fields",
+   "tier": "C",
+   "claim": "the header is pass_id then the three counts, with no reserved word after them",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "header fields: pass_id then counts, no reserved word",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 4,
+   "reason": "",
+   "detail": {
+    "name": "bytes",
+    "pass_id": 0,
+    "spec_order_length_ok": false,
+    "spec_order_implied_bytes": 5188,
+    "file_bytes": 57104,
+    "spec_sha256": "f95f6f2cb8f68313ef4b5726659cdc286c900ab7cefbd8878a0f80637a44206c"
+   }
+  },
+  {
+   "id": "comp.counts",
+   "tier": "C",
+   "claim": "163 parents, 1,127 children, 11,838 incidences",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "163 / 1127 / 11838",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 3,
+   "reason": "",
+   "detail": {
+    "name": "bytes",
+    "pass_id": 0,
+    "spec_order_length_ok": false,
+    "spec_order_implied_bytes": 5188
+   }
+  },
+  {
+   "id": "comp.inside",
+   "tier": "C",
+   "claim": "515,236 relation marks + 7 snap-closed cells = 515,243 inside cells, per-parent identity inside = marks + snap",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "167/167",
+   "claimed": "inside = marks + snap; 515,236 + 7 = 515,243",
+   "population": 167,
+   "expected": 167,
+   "witnesses": 515243,
+   "reason": "",
+   "detail": {
+    "inside": 515243,
+    "relation_marks": 515236,
+    "snap_closed_cells": 7,
+    "created": 1127,
+    "inherited": 10711,
+    "degree": 11838,
+    "fail": 0,
+    "base": 2386483,
+    "parents_with_snap": 7,
+    "parents_all_inside_3161": 163
+   }
+  },
+  {
+   "id": "comp.degree",
+   "tier": "C",
+   "claim": "created + inherited = degree; sum created = 1,127 children; sum inherited = 11,838 - 1,127 = 10,711",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "167/167",
+   "claimed": "created+inherited = degree; 10711 inherited",
+   "population": 167,
+   "expected": 167,
+   "witnesses": 11838,
+   "reason": "",
+   "detail": {
+    "inside": 515243,
+    "relation_marks": 515236,
+    "snap_closed_cells": 7,
+    "created": 1127,
+    "inherited": 10711,
+    "degree": 11838,
+    "fail": 0,
+    "base": 2386483,
+    "parents_with_snap": 7,
+    "parents_all_inside_3161": 163
+   }
+  },
+  {
+   "id": "comp.bounds",
+   "tier": "C",
+   "claim": "every parent's inside count is at most 14,641 and equals 3,161; base = 14,641",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "489/489",
+   "claimed": "inside <= 14641 and == 3161 per parent",
+   "population": 489,
+   "expected": 489,
+   "witnesses": 489,
+   "reason": "",
+   "detail": {
+    "parents_all_inside_3161": 163,
+    "parents_with_snap": 7
+   }
+  },
+  {
+   "id": "comp.invariants",
+   "tier": "C",
+   "claim": "sortedness, duplicate-freedom, degree, created+inherited, inside counter and fail = 0 all hold",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "2/2",
+   "claimed": "order, duplicate-free, degree, fail=0, reserved=0",
+   "population": 2,
+   "expected": 2,
+   "witnesses": 12001,
+   "reason": "",
+   "detail": {
+    "n_violations": 0,
+    "violations": [],
+    "nonzero_parent_reserved_fields": []
+   }
+  },
+  {
+   "id": "comp.children",
+   "tier": "C",
+   "claim": "the 1,127 children are exactly the fallback stream indices 0..1,126",
+   "sources": "certdata/runs/h1-coverage/{composition-v1.bin,coverage-manifest.json}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "the 1,127 children are the fallback stream indices",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 1127,
+   "reason": "",
+   "detail": {
+    "n_children": 1127,
+    "n_fallback": 1127,
+    "first5": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "last": 1126
+   }
+  },
+  {
+   "id": "comp.idmap",
+   "tier": "C",
+   "claim": "the independent (batch, ordinal) -> fine.bin index mapping is well defined on all 163 cover-map rows and its image is the manifest's unresolved set",
+   "sources": "pinned stream + probe per-batch bad files + composition-cover-map.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "the independent (batch, ordinal) -> fine.bin index mapping",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "n": 163,
+    "image": 163,
+    "manifest": 163,
+    "sample": {
+     "batch 3 ord 0": 1012,
+     "batch 3 ord 1": 1023,
+     "batch 4 ord 0": 1249,
+     "batch 4 ord 1": 1259,
+     "batch 4 ord 2": 1260,
+     "batch 4 ord 3": 1265
+    },
+    "example": "batch 3 ordinals 0,1 -> fine.bin 1012,1023; 256*batch+batch_index would give 768,769"
+   }
+  },
+  {
+   "id": "comp.parents",
+   "tier": "C",
+   "claim": "the 163 parents are exactly the 163 unresolved records of the parent pass",
+   "sources": "certdata/runs/h1-coverage/{composition-v1.bin,coverage-manifest.json}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": 0,
+   "claimed": 0,
+   "population": 163,
+   "expected": 163,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "audited_sha256": "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819",
+    "agree": 163,
+    "disagree": 0,
+    "parents_first8": [
+     1012,
+     1023,
+     1249,
+     1259,
+     1260,
+     1265,
+     1490,
+     1491
+    ],
+    "manifest_first8": [
+     1012,
+     1023,
+     1249,
+     1259,
+     1260,
+     1265,
+     1490,
+     1491
+    ],
+    "parents_only": [],
+    "manifest_only": [],
+    "note": "at digest 699bbc40... (the producer's own composition.bin) 149 of the 163 addresses were not capped records; the archived copy was rewritten at 2026-11-15 01:55:45Z to the manifest's addresses, which is what this row now sees. The repair is a change to an archived artifact and must be recorded, not silent"
+   }
+  },
+  {
+   "id": "comp.stream_bridge",
+   "tier": "C",
+   "claim": "the probe's per-batch f{b}.bin is the pinned fine.bin with the trailer radius overwritten, in numeric batch order (22,379 records, 88 batches)",
+   "sources": ".ultramath/smwgt1mg2/m3/probe/chk/data/{fine.bin,batches/f*.bin}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "the derived per-batch stream is the pinned stream with the trailer radius overwritten",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 22379,
+   "reason": "",
+   "detail": {
+    "f_records": 22379,
+    "matched": 22379,
+    "batches": 88,
+    "fine_records": 22379
+   }
+  },
+  {
+   "id": "comp.capped_set",
+   "tier": "C",
+   "claim": "the 163 capped records are identified from the pinned stream and the per-batch bad files, and are the manifest's unresolved set",
+   "sources": ".ultramath/smwgt1mg2/m3/probe/chk/data/{fine.bin,batches/}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "the 163 capped records are identified by bytes",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "capped": 163,
+    "unmatched": 0,
+    "manifest": 163,
+    "agree": 163,
+    "digests_ok": 163,
+    "fine_records": 22379,
+    "unique_modulo_radius": 22379
+   }
+  },
+  {
+   "id": "comp.parents_bytes",
+   "tier": "C",
+   "claim": "the block's parent addresses are capped records (checked against the byte-derived capped set)",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin + pinned stream",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": 0,
+   "claimed": 0,
+   "population": 163,
+   "expected": 163,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "resolve": 163,
+    "resolve_to_non_capped": 0,
+    "examples_bad": [],
+    "examples_good": [
+     1012,
+     1023,
+     1249,
+     1259,
+     1260,
+     1265,
+     1490,
+     1491
+    ],
+    "note": "the capped set is derived from the pinned stream plus the probe's per-batch bad files, not from any JSON index list"
+   }
+  },
+  {
+   "id": "comp.covermap_indices",
+   "tier": "C",
+   "claim": "the map's fine_index fields equal the independently byte-derived global indices; batch_index remains the bad-file ordinal",
+   "sources": "certdata/runs/h1-coverage/composition-cover-map.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "cover-map fine_index agrees with the independent record mapping",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "covermap_fine_index_first8": [
+     2602,
+     1012,
+     1023,
+     1249,
+     1259,
+     1260,
+     1265,
+     1490
+    ],
+    "index_scheme": "fine_index is the actual original batch/fine offset of each capped record, joined through (batch, ordinal within bad*.bin); batch_index remains the bad-file ordinal, not a full-batch position",
+    "batch_index_remains_bad_file_ordinal": true,
+    "digest_in_comp_block": false,
+    "note": "the address is pinned by the separately verified manifest and byte-derived capped set, not by a digest in the block"
+   }
+  },
+  {
+   "id": "comp.covermap_ordinals",
+   "tier": "C",
+   "claim": "within each batch the cover-map's parent indices are the ordinals 0..m_b-1",
+   "sources": "certdata/runs/h1-coverage/composition-cover-map.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "15/15",
+   "claimed": "per batch the indices are the ordinals 0..m_b-1",
+   "population": 15,
+   "expected": 15,
+   "witnesses": 15,
+   "reason": "",
+   "detail": {
+    "batches": {
+     "3": 2,
+     "4": 4,
+     "5": 5,
+     "6": 8,
+     "7": 6,
+     "8": 4,
+     "10": 1,
+     "52": 29,
+     "53": 32,
+     "55": 23,
+     "56": 16,
+     "78": 2,
+     "79": 14,
+     "80": 13,
+     "84": 4
+    }
+   }
+  },
+  {
+   "id": "comp.covermap_block",
+   "tier": "C",
+   "claim": "each block parent carries the counters of the record it addresses, checked through the independent ID mapping",
+   "sources": "certdata/runs/h1-coverage/{composition-v1.bin,composition-cover-map.json}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "164/164",
+   "claimed": "block parents carry the counters of the record they address",
+   "population": 164,
+   "expected": 164,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "rows": 163,
+    "unmatched": 0,
+    "counter_mismatch": 0,
+    "covermap_fine_index_first3": [
+     2602,
+     1012,
+     1023
+    ],
+    "idmap_address_first3": [
+     2602,
+     1012,
+     1023
+    ],
+    "note": "the repaired map's fine_index equals the independent byte-derived address, while batch_index remains a bad-file ordinal (e.g. batch 3 ordinal 0 maps to fine.bin 1012)"
+   }
+  },
+  {
+   "id": "comp.percell",
+   "tier": "C",
+   "claim": "each of the 515,243 inside cells is closed by a relation or a snap",
+   "sources": "certdata/runs/h1-coverage/composition-v1.bin",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "each of the 515,243 inside cells is closed by a relation or a snap",
+   "population": 0,
+   "expected": 515243,
+   "witnesses": 0,
+   "reason": "COUNTER_ONLY",
+   "detail": {
+    "inside": 515243,
+    "marks": 515236,
+    "snap": 7,
+    "note": "the block stores per-parent counters only: there is no per-cell record, so the counters are consistent without being evidence for any individual cell"
+   }
+  },
+  {
+   "id": "comp.remaining_arith",
+   "tier": "C",
+   "claim": "321,519,798 - 515,243 = 321,004,555",
+   "sources": "certdata/runs/h1-coverage/{cap-policy.json,composition-v1.bin}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "2/2",
+   "claimed": "321,519,798 - 515,243 = 321,004,555",
+   "population": 2,
+   "expected": 2,
+   "witnesses": 515243,
+   "reason": "",
+   "detail": {
+    "minuend": 321519798,
+    "subtrahend": 515243,
+    "stated_in_cap_policy": [
+     321004555,
+     321004555
+    ],
+    "note": "the subtrahend is audited from the block; the minuend is the report's own label 'm2's whole-layer estimate'"
+   }
+  },
+  {
+   "id": "comp.remaining_measured",
+   "tier": "C",
+   "claim": "the 321,004,555 remaining inside-cell obligations are a measured count",
+   "sources": "certdata/runs/h1-coverage/cap-policy.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "321,004,555 remaining inside-cell obligations are a measured count",
+   "population": 0,
+   "expected": 321004555,
+   "witnesses": 0,
+   "reason": "ESTIMATE_INPUT",
+   "detail": {
+    "minuend": 321004555,
+    "source": "H1-stageC-cap-policy.md calls 321,519,798 \"m2's whole-layer estimate\"; no per-record artifact in certdata/ carries the per-parent mid/fine inside counts that would make it measured"
+   }
+  },
+  {
+   "id": "census.records",
+   "tier": "K",
+   "claim": "23,506 records = 23,343 completed negatives + 163 capped",
+   "sources": "certdata/runs/h0-stagec-probe.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "23,506 = 23,343 + 163",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 4,
+   "reason": "",
+   "detail": {
+    "records": 23506,
+    "done": 23343,
+    "capped": 163
+   }
+  },
+  {
+   "id": "census.capped_steps",
+   "tier": "K",
+   "claim": "each capped record used exactly 5,000,001 steps; 163 x 5,000,001 = 815,000,163",
+   "sources": "certdata/runs/h0-stagec-probe.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "capped steps are uniform 5,000,001",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 3,
+   "reason": "",
+   "detail": {
+    "n": 163,
+    "distinct": [
+     5000001
+    ],
+    "total": 815000163
+   }
+  },
+  {
+   "id": "census.aggregates",
+   "tier": "K",
+   "claim": "completed negatives: 622,704,036 pairs, 357,191,053 O+U, 350,022,800 adjacency bytes, 2,932,018,956 steps",
+   "sources": "certdata/runs/h0-stagec-probe.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "completed-negative aggregates recomputed from 23,343 rows",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 23343,
+   "reason": "",
+   "detail": {
+    "n": 23343,
+    "pairs": 622704036,
+    "O_plus_U": 357191053,
+    "adjacency_bytes": 350022800,
+    "steps": 2932018956
+   }
+  },
+  {
+   "id": "census.entries",
+   "tier": "K",
+   "claim": "non-edge reason slots 265,512,983 = pairs - O - U; the certificate needs 2*pairs - O - U = 888,217,019 entries",
+   "sources": "certdata/runs/h0-stagec-probe.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "the certificate needs 2*pairs-O-U = 888,217,019 entries",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 23343,
+   "reason": "",
+   "detail": {
+    "pairs": 622704036,
+    "O_plus_U": 357191053,
+    "reason_slots": 265512983,
+    "entries": 888217019,
+    "ratio": 3.3453
+   }
+  },
+  {
+   "id": "census.bins",
+   "tier": "K",
+   "claim": "every record retained at least one bin (the bin layer was exercised)",
+   "sources": "certdata/runs/h0-stagec-probe.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "1/1",
+   "claimed": "every record retained >= 1 bin",
+   "population": 1,
+   "expected": 1,
+   "witnesses": 23506,
+   "reason": "",
+   "detail": {
+    "n": 23506,
+    "zero_bins": 0
+   }
+  },
+  {
+   "id": "cap.hard_probe",
+   "tier": "K",
+   "claim": "the 163 records re-run at cap 2e8 need 1,925,134,199 steps, max 39,968,282, with gaveup = ans = 0",
+   "sources": ".ultramath/smwguhf32/m1/runs/probe_hard*.txt",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "raised-cap rerun: 163 records, 1,925,134,199 steps, max 39,968,282",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "records": 163,
+    "total_steps": 1925134199,
+    "max_steps": 39968282,
+    "gaveup": 0,
+    "ans": 0
+   }
+  },
+  {
+   "id": "cap.arithmetic",
+   "tier": "K",
+   "claim": "per_record_max_over_cap = 7.9936564 = 39,968,282 / 5,000,000 and the three headroom figures",
+   "sources": "certdata/runs/h1-coverage/cap-policy.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "cap headroom arithmetic",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 5,
+   "reason": "",
+   "detail": {
+    "max": 39968282,
+    "cap": 5000000,
+    "ratio": 7.9936564
+   }
+  },
+  {
+   "id": "cap.delta_naive",
+   "tier": "K",
+   "claim": "delta_bytes = raised bytes - today bytes",
+   "sources": "certdata/runs/h1-coverage/cap-policy.json",
+   "baseline": "CONTRADICTED",
+   "status": "CONTRADICTED",
+   "value": -14056421,
+   "claimed": -13999317,
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "raised": 912658246,
+    "today": 926657563,
+    "stated": -14056421,
+    "note": "the two stated byte fields differ by the value above; the stated delta is a different functional"
+   }
+  },
+  {
+   "id": "cap.delta_defn",
+   "tier": "K",
+   "claim": "delta_bytes = raised - today - composition",
+   "sources": "certdata/runs/h1-coverage/cap-policy.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": -14056421,
+   "claimed": -14056421,
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "definition": "raised - today - composition",
+    "composition": 57104
+   }
+  },
+  {
+   "id": "cap.capped_covered",
+   "tier": "K",
+   "claim": "the 163 capped records are covered by the fallback layer, not silently dropped",
+   "sources": "certdata/runs/h1-coverage/{cap-policy,coverage-manifest,composition-cover-map}.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "the 163 capped records are covered, not silently dropped",
+   "population": 0,
+   "expected": 163,
+   "witnesses": 0,
+   "reason": "COUNTER_ONLY",
+   "detail": {
+    "capped": 163,
+    "fallback_children": 1127,
+    "incidences": 11838,
+    "note": "all 163 parent identities now match the capped set. The per-cell geometric cover witnesses are still absent; counters and addresses alone do not prove this claim"
+   }
+  },
+  {
+   "id": "root.six",
+   "tier": "R",
+   "claim": "the six basic Root checks pass on all 48 sampled records",
+   "sources": "certdata/runs/h1-root-interval/root_sample.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": 48,
+   "claimed": 48,
+   "population": 48,
+   "expected": 48,
+   "witnesses": 48,
+   "reason": "",
+   "detail": {
+    "n_sampled": 48,
+    "failing": []
+   }
+  },
+  {
+   "id": "root.recon",
+   "tier": "R",
+   "claim": "complete Root reconstruction accepts 46 records and leaves 2 stored-tensor-C cases unresolved",
+   "sources": "certdata/runs/h1-root-interval/root_sample.json",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "reconstruction accepts 46, leaves 2",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 48,
+   "reason": "",
+   "detail": {
+    "sampled": 48,
+    "accepted": 46,
+    "unresolved": 2,
+    "unresolved_ids": [
+     [
+      "coarse0.bin",
+      678
+     ],
+     [
+      "coarse3.bin",
+      33
+     ]
+    ],
+    "unresolved_verdicts": [
+     {
+      "ort": true,
+      "hor": true,
+      "froot": true,
+      "n0": true,
+      "mnorm": true,
+      "id": true,
+      "C_base": false,
+      "C_tensor": false
+     },
+     {
+      "ort": true,
+      "hor": true,
+      "froot": true,
+      "n0": true,
+      "mnorm": true,
+      "id": true,
+      "C_base": false,
+      "C_tensor": false
+     }
+    ],
+    "accepted_without_ctensor": [
+     [
+      "coarse0.bin",
+      547
+     ],
+     [
+      "coarse0.bin",
+      595
+     ],
+     [
+      "coarse1.bin",
+      542
+     ],
+     [
+      "coarse1.bin",
+      298
+     ],
+     [
+      "coarse2.bin",
+      576
+     ],
+     [
+      "coarse2.bin",
+      682
+     ],
+     [
+      "coarse2.bin",
+      749
+     ],
+     [
+      "coarse3.bin",
+      590
+     ],
+     [
+      "mid.bin",
+      599
+     ],
+     [
+      "fine.bin",
+      22378
+     ]
+    ]
+   }
+  },
+  {
+   "id": "root.slack_typing",
+   "tier": "R",
+   "claim": "the stored mnorm slack bounds the stored mnorm relative error",
+   "sources": "certdata/runs/h1-root-interval/root_sample.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "slack[mnorm] bounds |mnorm_rel|",
+   "population": 0,
+   "expected": 48,
+   "witnesses": 0,
+   "reason": "ILL_POSED",
+   "detail": {
+    "note": "the two stored fields are different types. An independent reconstruction of coarse0#547 gives mnorm = sqrt((ah+1e-8)(al+1e-8)) + 1e-8 = 0.4714045437560736 against the stored 0.471404543756096 (2.2e-17), i.e. slack[mnorm] is the inward propagation radius of the 1e-8 factor radii, and the R5 margin is valid. Rewriting the earlier row: this is a naming/documentation defect (a field called mnorm_rel that is not the relative error bounded by slack[mnorm]), not a Root counterexample. ah and al are not in this archive, so the margin itself is not re-derived here"
+   }
+  },
+  {
+   "id": "root.mnorm_abs_rel",
+   "tier": "R",
+   "claim": "slack[mnorm] is the absolute form of mnorm_rel: |mnorm_rel| * mnorm(record) = slack[mnorm] on all 48",
+   "sources": "certdata/runs/h1-root-interval/root_sample.json + coarse*.bin",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "48/48",
+   "claimed": "slack[mnorm] = |mnorm_rel| * mnorm(record) on all 48",
+   "population": 48,
+   "expected": 48,
+   "witnesses": 48,
+   "reason": "",
+   "detail": {
+    "n": 48,
+    "max_relative_gap": 3.0524260302253396e-09,
+    "tolerance": 1e-07,
+    "note": "confirms the two fields are the absolute and relative forms of the same deviation"
+   }
+  },
+  {
+   "id": "root.semantic",
+   "tier": "R",
+   "claim": "the 48 sampled Root verifications hold",
+   "sources": "certdata/runs/h1-root-interval/root_sample.json",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "the 48 sampled Root verifications hold (matrices reproduced)",
+   "population": 0,
+   "expected": 48,
+   "witnesses": 0,
+   "reason": "BASIS_NOT_ARCHIVED",
+   "detail": {
+    "n": 48,
+    "note": "root_sample.json stores verdict booleans and slacks, not the Root matrices, the P/T tensors or the interval endpoints; and the slack fields do not bound the one stored numeric error (see root.slack_bounds)"
+   }
+  },
+  {
+   "id": "rec.size",
+   "tier": "V",
+   "claim": "the real v1 record is 49,113 B = 80 + 64 + 1,508 + 212*56 + 5,592 + 16,429 + 13,568",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": 49113,
+   "claimed": 49113,
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "record_bytes": 49033,
+    "balls": 212,
+    "excl": 32857,
+    "P": 22366,
+    "bitmap": 5592,
+    "codes": 16429,
+    "adjacency": 13568,
+    "payload_used": 48969,
+    "payload_len": 48969
+   }
+  },
+  {
+   "id": "rec.hash",
+   "tier": "V",
+   "claim": "the shard body hash matches the header",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "1/1",
+   "claimed": "body sha256",
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "stored": "cef732db6d3d894dae61906829060b78f041851e836ebd2cd471efc39edc7543"
+   }
+  },
+  {
+   "id": "rec.exclusions",
+   "tier": "V",
+   "claim": "32,857 exclusion entries: popcount = n_excl, every code maps to its slot's relation, strictly increasing",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "3/3",
+   "claimed": "exclusion block invariants",
+   "population": 3,
+   "expected": 3,
+   "witnesses": 32857,
+   "reason": "",
+   "detail": {
+    "n_bits": 32857,
+    "n_excl": 32857,
+    "n_codes": 32857,
+    "bitmap_bytes": 5592,
+    "code_bytes": 16429
+   }
+  },
+  {
+   "id": "rec.byrule",
+   "tier": "V",
+   "claim": "the stored codes reproduce demo.json's per-rule census (18,606 / 9,254 / 1,032 / 1,619 / 784 / 1,562)",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/{stagec-initial-0000.scv,demo.json}",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "7/7",
+   "claimed": "per-rule census of the stored codes",
+   "population": 7,
+   "expected": 7,
+   "witnesses": 32857,
+   "reason": "",
+   "detail": {
+    "claimed": {
+     "6.16/O": 18606,
+     "6.16/U": 9254,
+     "6.20/O": 1032,
+     "6.21/U": 1619,
+     "6.23/O": 784,
+     "6.23/U": 1562
+    },
+    "computed": {
+     "6.16/O": 18606,
+     "6.16/U": 9254,
+     "6.23/U": 1562,
+     "6.21/U": 1619,
+     "6.20/O": 1032,
+     "6.23/O": 784
+    }
+   }
+  },
+  {
+   "id": "rec.header",
+   "tier": "V",
+   "claim": "atlas_radius <= pass_radius, header k = inline k, 1 <= steps <= cap, NEG with balls, empty_at_layer = 0",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "5/5",
+   "claimed": "record header constraints",
+   "population": 5,
+   "expected": 5,
+   "witnesses": 5,
+   "reason": "",
+   "detail": {
+    "atlas_radius": 0.015991855587698802,
+    "pass_radius": 0.016,
+    "k_header": 4,
+    "k_inline": 4,
+    "steps": 19762,
+    "cap": 5000000,
+    "verdict": "NEG"
+   }
+  },
+  {
+   "id": "rec.adjacency",
+   "tier": "V",
+   "claim": "O edge iff the pair carries no O-exclusion, likewise U (22,366 pairs)",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "1/1",
+   "claimed": "O edge iff no O-exclusion, likewise U",
+   "population": 1,
+   "expected": 1,
+   "witnesses": 44732,
+   "reason": "",
+   "detail": {
+    "pairs": 22366,
+    "violations": 0,
+    "examples": []
+   }
+  },
+  {
+   "id": "rec.g0_bytes",
+   "tier": "V",
+   "claim": "the record's stored adjacency is byte-identical to m1's independent dump g0.txt (same bytes, same order)",
+   "sources": ".ultramath/smwguhf32/m1/runs/g0.txt",
+   "baseline": "CONTRADICTED",
+   "status": "CONTRADICTED",
+   "value": "0/1",
+   "claimed": "g0.txt is byte-identical to the record's stored adjacency",
+   "population": 1,
+   "expected": 1,
+   "witnesses": 13568,
+   "reason": "",
+   "detail": {
+    "differing_bytes": 8885,
+    "total_bytes": 13568,
+    "note": "this compares encoding and ball order, not content: the dump prints each u64 big-endian and orders balls by the schema's canonical order. Fidelity is checked separately by rec.g0_permutation",
+    "counterexamples": [
+     "same bytes in the same order"
+    ],
+    "n_counterexamples": 1
+   }
+  },
+  {
+   "id": "rec.g0_symmetric",
+   "tier": "V",
+   "claim": "decoded as printed (each 8-byte group big-endian), g0's O and U relations are symmetric and carry the record's arc totals",
+   "sources": ".ultramath/smwguhf32/m1/runs/g0.txt",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "decoded big-endian, the dump is a symmetric relation with the record's arc totals",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 44732,
+   "reason": "",
+   "detail": {
+    "asym_O": 0,
+    "asym_U": 0,
+    "pairs": 22366
+   }
+  },
+  {
+   "id": "rec.g0_permutation",
+   "tier": "V",
+   "claim": "g0 is equivalent to the record's O/U relation under each of eight explicitly recovered ball permutations; the permutation is NOT unique",
+   "sources": ".ultramath/smwguhf32/m1/runs/g0.txt",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "4/4",
+   "claimed": "g0 is equivalent to the record's O/U relation under each of eight explicitly recovered ball permutations (not a unique one)",
+   "population": 4,
+   "expected": 4,
+   "witnesses": 357856,
+   "reason": "",
+   "detail": {
+    "n": 212,
+    "candidate_solutions": 8,
+    "valid_solutions": 8,
+    "search_exhaustive": true,
+    "pairs_verified_per_candidate": 44732,
+    "total_ordered_pair_checks": 357856,
+    "partial_classes": 0,
+    "fixed_points": 8,
+    "class_histogram": {
+     "1": 206,
+     "2": 3
+    },
+    "permutation_order": "pi sends each record ball's index to its corresponding g0 index",
+    "permutation_hex": "08060e07100201000f11090504030a0b0c0d1e1d1c1914181516171a1b1213263231201f332b2521242c222d2327342e2928352a362f304a41404c394d3f493d3a4e443e4245464b383b47483c37434f51525354555657585c595b5a5d5068666567696a5e5f60626461636d6f6e706b6c757473767c7871727d79777a7e7b857f80838482819c9b89928a9d938b8c948d8e9596878f908698979988919e9aa6bcb5bbaea7a0afb6a9b1a8b0b7a4a2b8a1a5abacb9aabaadb2b3a39fb4bfbec0c1c2c3c4bdc6c7c5cccdced1d2cfd3cacbc9c8d0",
+    "permutation_sha256": "6571b3aed4dd610259549471a41f33c337e089fd59b679a0de80e0d6b321949c",
+    "all_permutation_sha256": [
+     "6571b3aed4dd610259549471a41f33c337e089fd59b679a0de80e0d6b321949c",
+     "3277e17d6a92c162257fbc530ca33355ca4fe15f108be21ecbfab1c15464f992",
+     "12c8231bb2dcd76715666456d572a3ba85c256b49b0e981df4d225deffd7c10c",
+     "6e6a758b2d6ca773c925f4e93a0f8980a7d9730014e36ba33b82605c99b0dd22",
+     "c6cc51d52a263b00fab3a0ea2df207378eeb69f631ff99e0f42457049911d890",
+     "8a1a1707f66acde9fb51728ab4b25aeadaad429471c3308e50ab270cf8d978e1",
+     "c61532126c3579c70e1c409fd0dfafd1768418d88934f704a0c07bab31c5a2e2",
+     "f550d7c77cfc67496e6503bcc492480e24d555a5da5d9b313e2b504ca3f96b1b"
+    ],
+    "correction": "the earlier first-solution search did NOT prove uniqueness: each of three interchangeable ball pairs gives a binary ambiguity, so this record has eight relation-preserving maps"
+   }
+  },
+  {
+   "id": "comp.prod_identity",
+   "tier": "C",
+   "claim": "the archived composition block is byte-identical to the producer's original, misaddressed composition.bin; it intentionally differs under the separately checked identifier-only patch",
+   "sources": ".ultramath/smwgx104w/m4/runs/composition.bin",
+   "baseline": "CONTRADICTED",
+   "status": "CONTRADICTED",
+   "value": "0/1",
+   "claimed": "the archive equals the producer's original, misaddressed emission",
+   "population": 1,
+   "expected": 1,
+   "witnesses": 1,
+   "reason": "",
+   "detail": {
+    "archived": "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819",
+    "producer": "699bbc409ca8e2d4591c6335603b750ad14f7c9520b0d0bc5735ee6acfd083fb",
+    "note": "this is the intended historical non-identity, not a corruption verdict on the repaired block. The patch is checked independently by comp.patch_recorded",
+    "counterexamples": [
+     [
+      "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819",
+      "699bbc409ca8e2d4591c6335603b750ad14f7c9520b0d0bc5735ee6acfd083fb"
+     ]
+    ],
+    "n_counterexamples": 1
+   }
+  },
+  {
+   "id": "comp.patch_recorded",
+   "tier": "C",
+   "claim": "the composition patch record pins both emissions, the identifier-only reason, the repaired builder and unchanged counter/child/link content",
+   "sources": "certdata/runs/h1-coverage/{composition-v1.bin,composition-v1.patch.json} + original",
+   "baseline": "CERTIFIED",
+   "status": "CERTIFIED",
+   "value": "9/9",
+   "claimed": "the deliberate identifier patch pins both input and output bytes",
+   "population": 9,
+   "expected": 9,
+   "witnesses": 163,
+   "reason": "",
+   "detail": {
+    "old": "699bbc409ca8e2d4591c6335603b750ad14f7c9520b0d0bc5735ee6acfd083fb",
+    "new": "fd61d25749c9ba55cd3082af7023b1b52b09c4715b64fdc2dbcac54616e0f819",
+    "preserved_fields": "base, inside, relation_marks, snap_closed_cells, fail, created, inherited, degree, pad; child table and ordered link list are unchanged"
+   }
+  },
+  {
+   "id": "rec.soundness",
+   "tier": "V",
+   "claim": "the 32,857 stored exclusions are sound",
+   "sources": ".ultramath/smwgx104w/m4/runs/demo/stagec-initial-0000.scv",
+   "baseline": "UNSUPPORTED",
+   "status": "UNSUPPORTED",
+   "value": null,
+   "claimed": "the 32,857 stored exclusions are sound (each really excludes)",
+   "population": 0,
+   "expected": 32857,
+   "witnesses": 0,
+   "reason": "PREDICATE_NOT_REEVALUATED",
+   "detail": {
+    "n_excl": 32857,
+    "by_rule": {
+     "6.16/O": 18606,
+     "6.16/U": 9254,
+     "6.23/U": 1562,
+     "6.21/U": 1619,
+     "6.20/O": 1032,
+     "6.23/O": 784
+    },
+    "note": "rules 4/5 (6.23) are stored without y by design and rules 0-3 (6.16/6.20/6.21) are re-evaluated from the stored centres and radii by another direction; this audit checks structure, not the inequality"
+   }
+  }
+ ],
+ "controls": [
+  {
+   "id": "ctl.comp.covermap_old_indices",
+   "target": "comp.covermap_indices",
+   "artifact": "cover_map",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 168724,
+   "path": "ctl/ctl.comp.covermap_old_indices/composition-cover-map.json"
+  },
+  {
+   "id": "ctl.comp.patch_wrong_digest",
+   "target": "comp.patch_recorded",
+   "artifact": "comp_patch",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 949,
+   "path": "ctl/ctl.comp.patch_wrong_digest/composition-v1.patch.json"
+  },
+  {
+   "id": "ctl.comp.parent_reserved",
+   "target": "comp.invariants",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.parent_reserved/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.inside_plus1",
+   "target": "comp.inside",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.inside_plus1/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.marks_minus1",
+   "target": "comp.inside",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.marks_minus1/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.parents_old_indices",
+   "target": "comp.parents",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.parents_old_indices/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.unsort",
+   "target": "comp.invariants",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.unsort/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.truncate",
+   "target": "comp.length",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": "E_LEN",
+   "got": "CONTRADICTED",
+   "got_reason": "E_LEN",
+   "ok": true,
+   "bytes": 57100,
+   "path": "ctl/ctl.comp.truncate/composition-v1.bin"
+  },
+  {
+   "id": "ctl.comp.dup_link",
+   "target": "comp.invariants",
+   "artifact": "comp",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 57104,
+   "path": "ctl/ctl.comp.dup_link/composition-v1.bin"
+  },
+  {
+   "id": "ctl.probe.cap_step",
+   "target": "census.capped_steps",
+   "artifact": "probe",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 3070604,
+   "path": "ctl/ctl.probe.cap_step/h0-stagec-probe.json"
+  },
+  {
+   "id": "ctl.probe.empty_bins",
+   "target": "census.bins",
+   "artifact": "probe",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 2977076,
+   "path": "ctl/ctl.probe.empty_bins/h0-stagec-probe.json"
+  },
+  {
+   "id": "ctl.probe.aggregate",
+   "target": "census.aggregates",
+   "artifact": "probe",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 3070604,
+   "path": "ctl/ctl.probe.aggregate/h0-stagec-probe.json"
+  },
+  {
+   "id": "ctl.hard.drop_line",
+   "target": "cap.hard_probe",
+   "artifact": "probe_hard",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 19852,
+   "path": "ctl/ctl.hard.drop_line/probe_hard.txt"
+  },
+  {
+   "id": "ctl.hard.shrink_max",
+   "target": "cap.hard_probe",
+   "artifact": "probe_hard",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 19897,
+   "path": "ctl/ctl.hard.shrink_max/probe_hard.txt"
+  },
+  {
+   "id": "ctl.root.drop_ctensor",
+   "target": "root.recon",
+   "artifact": "root_sample",
+   "expected": "UNSUPPORTED",
+   "expected_reason": "MISSING_FIELD",
+   "got": "UNSUPPORTED",
+   "got_reason": "MISSING_FIELD",
+   "ok": true,
+   "bytes": 32141,
+   "path": "ctl/ctl.root.drop_ctensor/root_sample.json"
+  },
+  {
+   "id": "ctl.root.all_ctensor",
+   "target": "root.recon",
+   "artifact": "root_sample",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 33005,
+   "path": "ctl/ctl.root.all_ctensor/root_sample.json"
+  },
+  {
+   "id": "ctl.root.mnorm_rel",
+   "target": "root.mnorm_abs_rel",
+   "artifact": "root_sample",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 33001,
+   "path": "ctl/ctl.root.mnorm_rel/root_sample.json"
+  },
+  {
+   "id": "ctl.g0.one_byte",
+   "target": "rec.g0_permutation",
+   "artifact": "m1_g0",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 28418,
+   "path": "ctl/ctl.g0.one_byte/g0.txt"
+  },
+  {
+   "id": "ctl.slack.no_witnesses",
+   "target": "stageb.witnesses",
+   "artifact": "slack",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 149,
+   "path": "ctl/ctl.slack.no_witnesses/stageb_slack.json"
+  },
+  {
+   "id": "ctl.slack.mediator_missing",
+   "target": "stageb.clearance_1709",
+   "artifact": "slack",
+   "expected": "UNSUPPORTED",
+   "expected_reason": "PARTIAL_SAMPLE",
+   "got": "UNSUPPORTED",
+   "got_reason": "PARTIAL_SAMPLE",
+   "ok": true,
+   "bytes": 149,
+   "path": "ctl/ctl.slack.mediator_missing/stageb_slack.json"
+  },
+  {
+   "id": "ctl.slack.covered0",
+   "target": "stageb.ledger",
+   "artifact": "stageb",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 2572,
+   "path": "ctl/ctl.slack.covered0/stageb_parent0.json"
+  },
+  {
+   "id": "ctl.cap.max_under",
+   "target": "cap.arithmetic",
+   "artifact": "cap_policy",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 1011,
+   "path": "ctl/ctl.cap.max_under/cap-policy.json"
+  },
+  {
+   "id": "ctl.seed.pairs_off",
+   "target": "seed.pairs",
+   "artifact": "seed_filter",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 240,
+   "path": "ctl/ctl.seed.pairs_off/filter-full.json"
+  },
+  {
+   "id": "ctl.rec.bitmap_bit",
+   "target": "rec.exclusions",
+   "artifact": "demo_scv",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 49113,
+   "path": "ctl/ctl.rec.bitmap_bit/stagec-initial-0000.scv"
+  },
+  {
+   "id": "ctl.rec.code_swap",
+   "target": "rec.exclusions",
+   "artifact": "demo_scv",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 49113,
+   "path": "ctl/ctl.rec.code_swap/stagec-initial-0000.scv"
+  },
+  {
+   "id": "ctl.rec.radius",
+   "target": "rec.header",
+   "artifact": "demo_scv",
+   "expected": "CONTRADICTED",
+   "expected_reason": null,
+   "got": "CONTRADICTED",
+   "got_reason": "",
+   "ok": true,
+   "bytes": 49113,
+   "path": "ctl/ctl.rec.radius/stagec-initial-0000.scv"
+  }
+ ],
+ "summary": {
+  "n_claims": 55,
+  "n_certified": 42,
+  "n_contradicted": 4,
+  "n_unsupported": 9,
+  "baseline_mismatch": [],
+  "n_controls": 26,
+  "controls_failed": []
+ }
+}

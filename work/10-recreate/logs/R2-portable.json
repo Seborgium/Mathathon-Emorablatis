@@ -1,0 +1,108 @@
+{
+  "build": {
+    "covrun": {
+      "bytes": 35352,
+      "path": "work/10-recreate/harness/out/portable-g__-20261114T200140Z/covrun",
+      "sha256": "ab0bc4116e8afe651f4b23c5eed0cd18be523ebb30210958a30258750339103e"
+    },
+    "out_dir": "work/10-recreate/harness/out/portable-g__-20261114T200140Z"
+  },
+  "checks": {
+    "build": {
+      "covrun_present": "pass"
+    },
+    "counters": {
+      "centers": "fail",
+      "cheap": "fail",
+      "checked": "fail",
+      "lp": "fail",
+      "near": "fail",
+      "visit": "fail",
+      "vs_recorded_stdout": "fail",
+      "xs_line": "fail"
+    },
+    "failures": 10,
+    "fresh": {
+      "present": "fail"
+    },
+    "recorded": {
+      "bytes": "pass",
+      "sha256": "pass"
+    },
+    "run": {
+      "exit": "fail"
+    },
+    "total": 13
+  },
+  "counters": {
+    "centers": 0,
+    "cheap": 0,
+    "checked": 0,
+    "fresh_stdout": "",
+    "line": "",
+    "lp": 0,
+    "near": 0,
+    "recorded_stdout": "xs22829 \n t0/22829 cells42 centers5\n t10000/22829 cells37490183 centers72679\n t20000/22829 cells119874659 centers205716\nN112 r0.0320 dual2 checked151744086 centers249878 visit29769262282 near3341641851 cheap45648766 lp3134060273",
+    "visit": 0,
+    "xs_line": 0
+  },
+  "duration_ms": 85,
+  "expected": {
+    "bytes": 7339546,
+    "count": 249878,
+    "header": "112 249878",
+    "sha256": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789"
+  },
+  "failures": {
+    "counters": {
+      "centers": "stdout has centers=<absent>, recorded run has 249878",
+      "cheap": "stdout has cheap=<absent>, recorded run has 45648766",
+      "checked": "stdout has checked=<absent>, recorded run has 151744086",
+      "lp": "stdout has lp=<absent>, recorded run has 3134060273",
+      "near": "stdout has near=<absent>, recorded run has 3341641851",
+      "visit": "stdout has visit=<absent>, recorded run has 29769262282",
+      "vs_recorded_stdout": "deterministic stdout lines differ from /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/covrun.log",
+      "xs_line": "stdout seed count is <absent>, recorded run has 22829"
+    },
+    "fresh": {
+      "present": "no output file at /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/repro-20261114T200404Z/centers.txt"
+    },
+    "run": {
+      "exit": "covrun exited 127 after 1 ms (timeout 3600s)"
+    }
+  },
+  "finished_utc": "2026-11-14T20:04:04Z",
+  "log": {
+    "path": "work/10-recreate/logs/R2-portable.json"
+  },
+  "pass": false,
+  "recorded": {
+    "bytes": 7339546,
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/data/centers.txt",
+    "sha256": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789"
+  },
+  "recorded_log": {
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/covrun.log"
+  },
+  "run": {
+    "exit": 127,
+    "ms": 1,
+    "stderr": "timeout: failed to execute process: No such file or directory (os error 2)",
+    "stdout": ""
+  },
+  "script": "./work/10-recreate/harness/reproduce.sh",
+  "stamp": "20261114T200404Z",
+  "started_utc": "2026-11-14T20:04:04Z",
+  "timeout_s": 3600,
+  "toolchain": {
+    "cpu": {
+      "model": "AMD EPYC Processor",
+      "online": 4
+    },
+    "glibc": "ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43"
+  },
+  "unit": "R2",
+  "work": {
+    "dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/repro-20261114T200404Z"
+  }
+}

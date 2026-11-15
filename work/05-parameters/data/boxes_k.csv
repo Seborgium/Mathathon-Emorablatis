@@ -1,0 +1,4 @@
+pass_name,w,input_radius,L,boxes_per_axis,max_k,grid_at_kmax,grid_at_kmax_plus_1,cap_utilisation,radius_source
+B mid,0.013,0.125,11,23,5,6436343,148035889,0.12872686,atlas radius cap .125 (first input)
+B fine,0.005,0.07,15,31,5,28629151,887503681,0.57258302,B mid target radius .07
+B fall,0.0038,0.016,5,11,7,19487171,214358881,0.38974342,B fine target radius .016

@@ -1,0 +1,115 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\title{Why there is no elegant proof that $N(6)=3$\\[2pt]
+\large a structural diagnosis, and what it implies}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\emergencystretch=1.5em
+\vspace{-1.4em}
+
+\noindent
+$N(d)$ is the largest number of pairwise mutually unbiased orthonormal bases of $\mathbb{C}^d$. Two
+independent computer-assisted proofs that $N(6)=3$ now exist: the preprint of 24 September 2026 and the
+topological classification of Wuttig and Tindall of 4 November 2026. Neither can be read and understood.
+Why not, and what does that say about the result?
+
+\section*{1. The answer}
+
+At a prime power $d$ the problem is \emph{discrete}: a finite field supplies a spread of
+$\mathrm{PG}(2k-1,p)$, the $d+1$ bases are written down, and the upper bound is linear algebra. At $d=6$
+there is no field, and with it no discrete scaffolding---no spread, no design, no roots of unity, no
+extremal principle, no usable symmetry, no arithmetic. What remains is a compact real-analytic
+\emph{moduli problem}: a two-dimensional surface of triples inside a four-dimensional space of pairs.
+Each mechanism available in the prime-power case is provably unavailable at $6$. That is a diagnosis,
+not a metatheorem---one cannot prove that no elegant proof exists---but the five closures below are
+theorems, not failures of effort.
+
+\section*{2. The five closures}
+
+\begin{itemize}\setlength{\itemsep}{1pt}\setlength{\parskip}{0pt}
+\item \textbf{Arithmetic.} Real Hadamards of order $n>2$ need $4\mid n$; the complex case has no such
+obstruction ($F(a,b)$ is Hadamard for all real $a,b$, with transcendental entries). No Galois,
+root-of-unity or mod-$p$ argument is available unless a quartet is first proved to force algebraicity---
+unknown, and insufficient anyway, since algebraic unit-modulus numbers need not be roots of unity.
+\item \textbf{Design.} ``Four MUBs $\Rightarrow$ a $4$-net of order $6$'' fails: triples already form a
+two-parameter family with transcendental phases, so no discreteness is forced even at three bases.
+Sharper: no $(6,k,1)$-difference matrix exists for any $k\ge3$, over either group of order $6$---the
+translation-net mechanism is empty at order $6$.
+\item \textbf{Variational.} No potential works. Welch is attained \emph{identically} by any union of
+orthonormal bases; the modulus-level relaxation is positive semidefinite for every $m$; the Gram-level
+problem has \emph{no relaxation gap} (positivity forces rank exactly $d$, all nonzero eigenvalues equal
+to $m$); and the energy barrier at $(6,4)$ is $\le0.05$, against $2/3$ and $4/3$ at $(2,4)$ and $(3,5)$,
+which are impossible. The obstruction is not energetic.
+\item \textbf{Symmetry.} There is exactly one index-one error basis in dimension six, and its own cap is
+$\min(N(2),N(3))=3$: the Weyl mechanism is saturated. The cap is the \emph{qubit} cap ($\mathbb{F}_2^2$
+has three lines), not the usual ``$6$ is not a prime power''. Product-type bases cap at $3$ as well,
+and the Fourier family is already excluded.
+\item \textbf{Lie theory.} ``$m$ MUBs $=$ $m$ pairwise Killing-orthogonal Cartan subalgebras of
+$\mathfrak{sl}_6$'' is \textbf{false} without adjoint-closedness: four such subalgebras exist, orthogonal
+to $10^{-16}$, whose bases are $0.19$--$0.31$ from unbiased. The bracket and the Killing form alone
+cannot prove the theorem.
+\end{itemize}
+
+\section*{3. The object, and the asymmetry}
+
+Two numbers fix the residue. \emph{Four, not twenty-five}: every order-six Hadamard except Tao's is
+reconstructed from a dephased $3\times3$ corner with four free phases, an invariant
+$R=4g^2\eta-\chi^2\ge0$ deciding when the corner is a strict seed (maximum $3^{13}/2^{12}$, at
+$\cos\theta=(17/32,-7/8,-7/8,1/4)$). That is a genuine conceptual reduction. And \emph{two}: linearising
+the $96$ unbiasedness conditions at an explicit triple gives a $19$-dimensional variety, $17$ dimensions
+of which are rephasing, so triples form a two-dimensional family. The object a proof must kill is a
+real-analytic surface, not a finite list; with no inequality to separate it and no arithmetic to pin it
+down, the only known route is to classify it---connectedness, then finitely many certified balls
+($2{,}775$ in the four-phase chart).
+
+The two halves of the theorem then differ in kind. The lower bound is \emph{explained}: tensor the
+complete qubit triple with three of the four qutrit bases, and the construction is capped by $N(2)=3$.
+One understands why three exist. The upper bound is \emph{certified}: the same integer appears, but
+forensically. The answer is over-determined---$N(2)=3$, three lines in $\mathbb{F}_2^2$, and the truth
+are the same three---while the proof of the upper bound has no content beyond the exclusion. ``Why
+three?'' has an answer. ``Why not four?'' does not.
+
+\section*{4. What this implies}
+
+\textbf{(a) The statement changes kind at the first non-prime-power.} At $d=2,3,4,5,7$ the analogous
+statement is witnessed by an explicit construction and bounded by linear algebra; at $d=6$ it is true but
+its truth is a property of a continuous moduli space. Prime power versus not is not a technical boundary:
+it separates two \emph{kinds of mathematical fact}. Statements do not carry their proof-theoretic
+character on their face.
+
+\textbf{(b) Proof and explanation come apart, and here the gap is forced.} For the four-colour theorem or
+Kepler the long computation looks like an artefact of the method. Here five independent natural routes
+are closed by theorem, so the absence of a conceptual argument is evidence about the object, not only
+about us. We know $N(6)=3$ forensically: with certainty, conditionally on an auditable computation, and
+without knowing why.
+
+\textbf{(c) Without algebraic scaffolding there is no general theory, only obstructions and cases.} The
+closest analogy is finite projective planes: the prime-power conjecture is open, composite order has no
+structure theory, and the decisive results are Bruck--Ryser--Chowla plus isolated computations (order
+$10$ excluded by Lam's computation, not by a theorem). MUBs at composite $d$ have that shape: $N(d)$ is
+open for $d=10,12,15$, nothing at $6$ is expected to generalise, and the known general facts are upper
+bounds and obstructions. The conjecture this run suggests is that there is \emph{no} conceptual theory of
+MUBs in non-prime-power dimensions---only a classification in the first case where one can be carried
+out.
+
+\textbf{(d) A certificate does not deform.} A conceptual proof transfers to neighbouring cases; a
+certificate is rigid. Nothing in the dimension-six cover can be perturbed to $d=10$. This is not a
+limitation of the authors but a consequence of the moduli being genuinely transcendental. Certification
+buys certainty at the price of reach.
+
+\section*{5. The limit of the diagnosis}
+
+This note does not prove that no elegant proof exists. It identifies five closed families and shows the
+residue has no arithmetic, no extremal principle and no symmetry; a sixth kind of argument may exist. The
+target is precise: describe exactly the locus $\Sigma$ of pairs $(\text{standard},H/\sqrt6)$ admitting a
+third basis---closed, semialgebraic, real dimension two, containing the known family---without covering
+it. The natural candidate is monodromy: the projection from the triple variety to the pair space is
+proper and the pair space is connected, so the completion count is locally constant off an explicit
+discriminant; describe that discriminant and evaluate one fibre, and the theorem follows with no cover at
+all. Nothing suggests this is within reach---but that is the shape the elegance would have to take.
+
+\end{document}

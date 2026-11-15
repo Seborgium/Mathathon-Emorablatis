@@ -1,0 +1,11 @@
+cap,stage,limit,max_reached,ratio_limit_over_max,note
+Stage A extra nodes,A,1000000,not reported (F6),,"32-level list 131,072 = 13.1%; grid-64 exhaustive 2,097,152 = 2.10x cap"
+Stage B boxes / parent,B,50000000,not reported,1.746,"31^5 (pass 2, k=5); 23^5 = 6,436,343; 11^7 = 19,487,171"
+atlas Roots,A,2000000,788,2538.071,largest shard A3; total 3083
+C phase bins,C,2000000,no overflow (<= 2e6),0.251,"12^5 = 248,832 at M=12; 32x that = 3.98x cap if layer 2 kept everything"
+clusters per record,C,2048,no failure (<= 2048),0.008,"= retained bins at M=12,24 because nothing merges (F2)"
+graph steps,C,5000000,5000000,1.0,BINDING: all 163 unresolved records
+records per file,B/C,2000000,22379,89.369,fine.bin
+concatenated inputs,B/C,8000000,22379,357.478,initial C inputs
+subdivision depth,B,6,0 unresolved,,no record exhausted the tree
+records per batch,B,256,256,1.0,88 batches = 87*256+107: full batches are AT the cap

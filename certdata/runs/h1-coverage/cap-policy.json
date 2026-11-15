@@ -1,0 +1,45 @@
+{
+ "cap": 5000000,
+ "certificate_raised": {
+  "bytes": 912658246,
+  "composition": 0,
+  "fallback_cover": "none (no fallback layer)",
+  "passes": 1,
+  "records": 22379,
+  "upstream_cover_cells": 321004555
+ },
+ "certificate_today": {
+  "bytes": 926657563,
+  "composition": 57104,
+  "fallback_cover": "11,838 incidences over 515,243 inside cells; 5.49 CPU-s to re-derive (m2)",
+  "passes": 2,
+  "records": 23343,
+  "upstream_cover_cells": 321004555
+ },
+ "checker": {
+  "entries_raised": 880354276,
+  "entries_today": 888217019,
+  "pairs_raised": 617899097,
+  "pairs_today": 622704036,
+  "records_raised": 22379,
+  "records_today": 23343
+ },
+ "delta_bytes": -14056421,
+ "delta_records": -964,
+ "headroom": {
+  "40000000": 31718,
+  "100000000": 60031718,
+  "200000000": 160031718
+ },
+ "max_measured_steps": 39968282,
+ "per_record_max_over_cap": 7.9936564,
+ "producer": {
+  "extra_seconds": 39.3,
+  "extra_steps": 1110134036,
+  "fallback_pass_seconds": 126.2,
+  "net_seconds_saved": 91.8,
+  "stageb_refine_seconds": 4.93,
+  "step_rate_ns": 35.42610174159604
+ },
+ "total_measured_steps": 1925134199
+}

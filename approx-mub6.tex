@@ -1,0 +1,594 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=1.4em}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\HS}{\mathrm{HS}}
+\newcommand{\dev}{\operatorname{dev}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\id}{\mathrm{id}}
+\DeclareMathOperator{\tr}{tr}
+
+\title{\bf How close can four orthonormal bases of $\C^6$\\ be to mutually unbiased?}
+\author{}
+\date{Draft of \today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+The maximum number of pairwise mutually unbiased bases (MUBs) in $\C^6$ is three, so any
+four orthonormal bases must fail to be mutually unbiased by some positive amount.  We attack
+the quantitative version of that statement: determine
+\[
+\eps_6^*=\min_{U_1,\dots,U_4\in U(6)}\ \max_{1\le a<b\le4}\ \max_{i,j}
+\Bigl|\,\bigl|(U_a^\dagger U_b)_{ij}\bigr|^2-\tfrac16\,\Bigr| .
+\]
+Our results are the following.
+(i) \emph{Certified upper bound:} $\eps_6^*\le 0.030224240773$.  The certificate is a
+quadruple of exactly unitary, exactly rational matrices obtained as Cayley transforms of
+rational Hermitian matrices, so every overlap modulus and every deviation is an exact
+rational number; no floating point and no error budget enters.
+(ii) \emph{An exact construction:} $\eps_6^*\le\tfrac1{18}$, from the four tetrahedral bases
+of $\C^2$ tensored with the four MUBs of $\C^3$; all $216$ overlap moduli squared are exactly
+$\tfrac19$ or $\tfrac29$.  $\tfrac1{18}$ is optimal for product bases
+(Theorem~\ref{thm:product}), and the value $\tfrac1{18}$ is also forced whenever all
+coefficients of the bases are sixth roots of unity (Theorem~\ref{thm:butson}).
+(iii) \emph{A no-go theorem:} no inequality that is a function of two-body data --- no Welch
+bound, no frame potential, no level-$1$ semidefinite relaxation --- can give a positive lower
+bound, because the normalised two-body data of an exact MUB quadruple is literally the same
+array in every dimension.  The obstruction is genuinely four-body.
+(iv) \emph{Real bases:} over $\R$ every pair already satisfies $\dev\ge2/d^2$; in $d=6$ this
+is $\tfrac1{18}$, the pair optimum is $\tfrac1{12}$ and is attained, and a real quadruple
+does no better than $0.1391$.
+(v) Exact values of $\eps$ for several natural restricted classes (cyclic, diagonal-phase
+orbits, root-of-unity classes) are recorded, together with a quantum-information reading of
+the bounds: outcome bias $\le(1+6\eps)/(1-6\eps)$, total variation $\le 3\eps$ for sequential
+measurements, and an entropic uncertainty relation with constant $-\log_2(\tfrac16+\eps)$.
+The value of $\eps_6^*$ itself remains open between $0$ and $0.030224240773$.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+Two orthonormal bases $\{|u_i\rangle\}$, $\{|v_j\rangle\}$ of $\C^d$ are \emph{mutually
+unbiased} if $|\langle u_i,v_j\rangle|^2=1/d$ for all $i,j$.  A collection of bases is
+pairwise unbiased if every pair is.  It is classical that a prime-power dimension has a
+complete family of $d+1$ MUBs, that $\C^2$ has three (the Pauli eigenbases), that $\C^3$ has
+four, and that $\C^6$ has at most seven and at least three.  The recent preprint of
+\cite{preprint} proves that \emph{no} four bases of $\C^6$ are pairwise unbiased, i.e.\ that
+the maximum number is three.
+
+That statement is qualitative, and compactness turns it into a quantitative one: the minimum
+\[
+\eps_6^*=\min_{U_1,\dots,U_4\in U(6)}\ \max_{1\le a<b\le4}\dev(a,b),
+\qquad
+\dev(a,b)=\max_{i,j}\Bigl|P^{ab}_{ij}-\tfrac16\Bigr|,
+\qquad
+P^{ab}_{ij}=\bigl|(U_a^\dagger U_b)_{ij}\bigr|^2 ,
+\]
+is attained by some quadruple and is strictly positive.  The preprint gives no value for it.
+The purpose of this note is to bracket $\eps_6^*$, to explain why the standard tools cannot
+produce a lower bound, and to solve the problem exactly for several natural classes of
+quadruples.
+
+\subsection{Results}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+what & value & status\\
+\midrule
+upper bound, exact rational certificate & $\eps_6^*\le 0.030224240773$ & Theorem~\ref{thm:cert}\\
+best value found numerically & $0.0302242407724$ & \S\ref{sec:num}\\
+exact construction & $\eps_6^*\le \tfrac1{18}=0.055555\ldots$ & Theorem~\ref{thm:tetra}\\
+product bases $A_a\otimes B_a$ & optimum exactly $\tfrac1{18}$ & Theorem~\ref{thm:product}\\
+real bases & pair optimum $\tfrac1{12}$ (attained); $4$ real bases $\ge\tfrac1{18}$, best $0.1391$ & Theorem~\ref{thm:real}\\
+$\mu_6$-Butson bases & every pair $\ge\tfrac1{18}$; sharp at $\tfrac1{12}$ & Theorem~\ref{thm:butson}\\
+cyclic slice $U_a=S^{a-1}$ & $\le 0.053981857$ & \S\ref{sec:num}\\
+MUB triple fixed, fourth free & $\sqrt3/18=0.096225$ (product fourth basis), $0.080933$ in general & \S\ref{sec:num}\\
+$\ell^2$ objective $E_2$ & min $0.0512492190$, a \emph{different} minimiser & \S\ref{sec:num}\\
+general lower bound & none beyond $0$ & open\\
+\bottomrule
+\end{tabular}
+\caption{The state of $\eps_6^*$ after this note.  ``Certified'' means re-runnable exact or
+interval arithmetic; nothing in this note proves global optimality of any upper bound.}
+\end{table}
+
+\section{Notation and elementary structure}
+\label{sec:notation}
+
+Fix $d=6$ unless stated otherwise.  A basis is the column set of a unitary $U\in U(6)$; we
+write $u^a_i$ for the $i$-th column of $U_a$.  Two bases are related by
+$P^{ab}_{ij}=|\langle u^a_i,u^b_j\rangle|^2$.
+
+\begin{proposition}\label{prop:ds}
+$P^{ab}$ is doubly stochastic: every row and column sum equals $1$, and every entry lies in
+$[0,1]$.  Hence $P^{ab}=\tfrac16 J+E^{ab}$ with $J$ the all-ones matrix and $E^{ab}$ having
+zero row and column sums, and $\dev(a,b)\le\tfrac16$, with equality if and only if some entry
+of $P^{ab}$ vanishes.
+\end{proposition}
+\begin{proof}
+$\sum_j P^{ab}_{ij}=\sum_j|\langle u^a_i,u^b_j\rangle|^2=\|u^a_i\|^2=1$ since $\{u^b_j\}$ is
+an orthonormal basis, and similarly for the columns.
+\end{proof}
+
+Two gauge freedoms leave all $P^{ab}$ unchanged: multiplying $U_a$ on the right by a diagonal
+unitary, and multiplying all four bases on the left by a common unitary.  Fixing $U_1=I$ and
+using the diagonal freedom leaves $3\cdot 36-18=90$ real parameters.
+
+\begin{remark}
+$\C^2$ has \emph{three} MUBs (the eigenbases of the Pauli matrices), not two, and no fourth,
+because four points of $S^2$ cannot be pairwise orthogonal.  Consequently four bases of
+$\C^2$ satisfy $\max_{a<b}\dev(a,b)\ge\tfrac16$, with equality for the four bases whose Bloch
+vectors are the vertices of a regular tetrahedron; this is the $d=2$ analogue of the problem,
+solved exactly.
+\end{remark}
+
+\section{Two-body data cannot see the obstruction}
+\label{sec:nogo}
+
+It is natural to look for a lower bound in pairwise quantities: Welch bounds, frame
+potentials, or a semidefinite relaxation whose variables are the Gram matrix of the $4d=24$
+vectors.  The following two theorems say that this programme cannot work, and they answer
+precisely the question of whether such an inequality could distinguish $d=6$ from dimensions
+in which four MUBs exist.
+
+\begin{theorem}[Welch saturation]\label{thm:welch}
+For \emph{every} quadruple of orthonormal bases of $\C^d$,
+\[
+\sum_{a=1}^{4}\sum_{i=1}^{d}|u^a_i\rangle\langle u^a_i|=4I_d,
+\qquad\text{hence}\qquad
+\sum_{x,y\in S}|\langle x,y\rangle|^2=\|4I_d\|_F^2=16d=\frac{N^2}{d},
+\]
+where $S$ is the set of $N=4d$ vectors.  Thus the frame potential of $S$ equals the absolute
+Welch lower bound for all quadruples simultaneously.
+\end{theorem}
+\begin{proof}
+$\sum_i u^a_i u^{a*}_i=I_d$ for each basis; sum over $a$.  Then
+$\sum_{x,y}|\langle x,y\rangle|^2=\|\sum_x xx^*\|_F^2=\|4I_d\|_F^2=16d$, and $(4d)^2/d=16d$.
+\end{proof}
+
+\begin{theorem}[two-body data is dimension-blind]\label{thm:blind}
+Let $U_1,\dots,U_4$ be pairwise unbiased bases of $\C^d$ and put
+$w^a_i=u^a_iu^{a*}_i-\tfrac1d I_d$, a traceless Hermitian matrix.  Then
+\[
+\langle w^a_i,w^b_j\rangle_{\HS}=P^{ab}_{ij}-\tfrac1d
+=\delta_{ab}\Bigl(\delta_{ij}-\tfrac1d\Bigr),
+\]
+so the Gram matrix of the $4d$ matrices $w^a_i$ equals
+$G_d=\operatorname{diag}_{a=1..4}\bigl(I_d-\tfrac1dJ_d\bigr)$.  $G_d$ is positive semidefinite
+of rank $4(d-1)$, its non-zero spectrum is $1$ with multiplicity $4(d-1)$, and
+$G_d/(1-\tfrac1d)$ is the same matrix in every dimension.
+\end{theorem}
+\begin{proof}
+$\langle u_iu_i^*,v_jv_j^*\rangle_{\HS}=\tr(u_iu_i^*v_jv_j^*)=|\langle u_i,v_j\rangle|^2=P_{ij}$,
+while $\langle u_iu_i^*,I/d\rangle=1/d$ and $\langle I/d,I/d\rangle=1/d$; hence
+$\langle w,w\rangle=P_{ij}-1/d$, which is $0$ for $a\ne b$ and $\delta_{ij}-1/d$ for $a=b$.
+The spectrum of $I_d-J_d/d$ is $1$ ($d-1$ times) and $0$.
+\end{proof}
+
+\begin{corollary}\label{cor:nogo}
+No inequality that is a function of the normalised two-body data --- the matrices $P^{ab}$,
+the Gram matrix of the $24$ vectors, the $24$ projectors, or any moment of order $\le2$ ---
+can give a positive lower bound for $\eps_6^*$.  In particular no semidefinite relaxation
+whose constraints are two-body constraints can separate $d=6$ from $d=4$.
+\end{corollary}
+
+The no-go can be made constructive: the two-body modulus relaxation
+$G\succeq0$, $G_{ii}=1$, $G_{ia,jb}=\delta_{ab}\delta_{ij}-\tfrac1d$ on the diagonal blocks,
+$|G_{ia,jb}|\le\tfrac16+\eta$ across blocks, is feasible at $\eta=0$; an explicit witness has
+spectrum $4,1^{(20)},0^{(3)}$.  Any proof that $\eps_6^*>0$ must therefore use three- or
+four-body structure --- in the language of \cite{preprint}, the Stage-C condition that the two
+six-cliques $O$ and $U$ of the associated graph carry all $36$ cross edges.
+
+\section{An exact construction: $\eps_6^*\le\tfrac1{18}$}
+\label{sec:tetra}
+
+\subsection{The qubit dictionary}
+For orthonormal bases $A=\{a_1,a_2\}$, $C=\{c_1,c_2\}$ of $\C^2$ with Bloch vectors
+$n_A,n_C\in S^2$ of $|a_1\rangle\langle a_1|$, $|c_1\rangle\langle c_1|$,
+\begin{equation}\label{eq:bloch}
+|(A^\dagger C)_{ij}|^2=\frac{1+(-1)^{i+j}n_A\cdot n_C}{2},
+\qquad\text{so}\qquad \dev(A,C)=\tfrac12|n_A\cdot n_C| .
+\end{equation}
+
+\subsection{The construction}
+Write $\C^6=\C^2\otimes\C^3$.  Let $B_1,\dots,B_4$ be the four MUBs of $\C^3$,
+\[
+B_a=F_3\,\operatorname{diag}(1,\omega^a,\omega^a)\quad(a=0,1,2),\qquad B_4=I_3,
+\qquad \omega=e^{2\pi i/3},
+\]
+and let $A_1,\dots,A_4$ be the four bases of $\C^2$ whose Bloch vectors are
+$n_a\in\{(\pm1,\pm1,\pm1)/\sqrt3\}$ with an even number of minus signs.  Set
+$U_a=A_a\otimes B_a$.
+
+\begin{theorem}\label{thm:tetra}
+The $U_a$ are orthonormal bases and $\dev(a,b)=\tfrac1{18}$ for all six pairs.  Hence
+$\eps_6^*\le\tfrac1{18}$.
+\end{theorem}
+\begin{proof}
+The $\C^3$ factors are pairwise unbiased: $|\langle B_a\rangle_{kl}|^2=\tfrac13$ for $a\ne b$,
+by the quadratic Gauss sum $|\sum_{k}\omega^{k^2+mk}|^2=3$.  The $\C^2$ Bloch vectors satisfy
+$n_a\cdot n_b=-\tfrac13$ for $a\ne b$, so by \eqref{eq:bloch} the $\C^2$ overlap moduli
+squared are $\tfrac13$ or $\tfrac23$.  Since
+$|(U_a^\dagger U_b)_{(i,k),(j,l)}|^2=|(A_a^\dagger A_b)_{ij}|^2\,|(B_a^\dagger B_b)_{kl}|^2$,
+every entry of every $P^{ab}$ lies in $\{\tfrac19,\tfrac29\}$, and
+$\max\{|\tfrac19-\tfrac16|,|\tfrac29-\tfrac16|\}=\tfrac1{18}$.
+\end{proof}
+
+The construction is exact algebraic: the entries of the $A_a$ lie in
+$\mathbb Q\bigl(\sqrt{(1\pm1/\sqrt3)/2},\,(1+i)/\sqrt2\bigr)$.  A symbolic computation
+confirms that the set of values of $|(U_a^\dagger U_b)_{ij}|^2$ over all $6\cdot36$ entries is
+exactly $\{\tfrac19,\tfrac29\}$, and independent 50-digit arithmetic confirms
+$\dev=\tfrac1{18}$ to $10^{-16}$ (Appendix~\ref{app:verify}, checks 4--7).
+
+\section{The product-base class is exactly $\tfrac1{18}$}
+\label{sec:product}
+
+\begin{lemma}\label{lem:grid}
+Every orthonormal basis of $\C^2\otimes\C^3$ that consists of product vectors is, up to
+permutation, a grid $\{a_i\otimes b_j\}_{i=1,2;\ j=1,2,3}$.
+\end{lemma}
+\begin{proof}[Sketch]
+Group the six vectors $|a_i\rangle\otimes|b_i\rangle$ by the ray of their $\C^2$ factor.
+Vectors in one group have pairwise orthogonal $\C^3$ factors, so a group has at most $3$
+elements; and if two groups have non-orthogonal $\C^2$ factors, every $\C^3$ factor of one is
+orthogonal to every $\C^3$ factor of the other.  Checking the multiplicity patterns of $6$
+with parts $\le3$: a $3$-group already supplies three mutually orthogonal vectors of $\C^3$, a
+basis, so every other vector would need a vanishing $\C^3$ factor; a $2+2+2$ or $2+2+1+1$
+pattern forces four mutually orthogonal vectors in $\C^3$; and six distinct rays admit at most
+one orthogonal pair among the rays, forcing one $\C^3$ factor into
+$(\mathrm{span}\{b_1,b_2,b_3\})^\perp=\{0\}$.  Only $3+3$ survives.
+\end{proof}
+
+\begin{theorem}\label{thm:product}
+Let $U_a=A_a\otimes B_a$, $a=1,2,3,4$, be product bases of $\C^2\otimes\C^3$.  Then
+$\max_{a<b}\dev(a,b)\ge\tfrac1{18}$, with equality for the construction of
+Theorem~\ref{thm:tetra}.  Hence the optimum of the problem over product bases is exactly
+$\tfrac1{18}$.
+\end{theorem}
+\begin{proof}
+Fix a pair and let $r=n_{A_a}\cdot n_{A_b}$.  By \eqref{eq:bloch} the entries of
+$\alpha=|A_a^\dagger A_b|^2$ are $\tfrac{1\pm r}{2}$, so $\max\alpha=\tfrac{1+|r|}{2}$.  Let
+$\beta=|B_a^\dagger B_b|^2$, doubly stochastic $3\times3$, so $\max\beta\ge\tfrac13$.  The
+entry of $P^{ab}=\alpha\otimes\beta$ at the argmax of $\alpha$ and that of $\beta$ is at least
+$\tfrac{1+|r|}{6}$, whence $\dev(a,b)\ge\tfrac{|r|}{6}$.
+
+Now let $G=(n_a\cdot n_b)$ be the $4\times4$ Gram matrix of the four Bloch vectors:
+$\operatorname{diag}G=1$ and $\operatorname{rank}G\le3$, so
+\[
+\sum_{a<b}r_{ab}^2=\frac{\|G\|_F^2-4}{2}\ \ge\ \frac{(\tr G)^2/3-4}{2}=\frac{16/3-4}{2}=\frac23,
+\]
+hence $\max_{a<b}|r_{ab}|\ge\sqrt{(2/3)/6}=\tfrac13$, and the pair attaining it has
+$\dev\ge\tfrac16\cdot\tfrac13=\tfrac1{18}$.
+\end{proof}
+
+\begin{remark}
+The inequality $\sum_{a<b}r_{ab}^2\ge\tfrac23$ is the rank-$3$ Welch bound for four points of
+$S^2$; equality forces all $|r_{ab}|=\tfrac13$, i.e.\ the regular tetrahedron, so the extremal
+quadruple is unique up to rotation and relabelling.  By Lemma~\ref{lem:grid} the theorem
+covers \emph{all} product bases.
+\end{remark}
+
+\section{Real bases}
+\label{sec:real}
+
+A real MUB pair in $\R^6$ would be a real Hadamard matrix of order $6$; those exist only for
+orders $1,2$ and multiples of $4$.  The following quantitative version uses only that parity.
+
+\begin{theorem}\label{thm:real}
+Let $d\equiv2\pmod4$, $d\ge6$, and let $U,V$ be real orthogonal of order $d$.  Then
+\[
+\max_{i,j}\Bigl||(U^TV)_{ij}|^2-\tfrac1d\Bigr|\ \ge\ \frac{2}{d^2}.
+\]
+In particular every pair of real orthonormal bases of $\R^6$ has $\dev\ge\tfrac1{18}$, so
+every real quadruple has $\max_{a<b}\dev\ge\tfrac1{18}$.
+\end{theorem}
+\begin{proof}
+Write $W=U^TV$, $W_{ij}=s_{ij}m_{ij}$ with $s_{ij}=\pm1$ and $m_{ij}\ge0$, let
+$\eps=\max|m_{ij}^2-\tfrac1d|$ and assume $\eps<\tfrac1d$ (otherwise we are done, since
+$\tfrac1d>\tfrac2{d^2}$).  Then $m_{ij}=(1+\delta_{ij})/\sqrt d$ with
+$|\delta_{ij}|\le D:=\sqrt{1+d\eps}-1$, and $2D+D^2=d\eps$.  Row orthogonality
+$\sum_kW_{ik}W_{jk}=0$ for $i\ne j$ gives
+\[
+0=\sum_ks_{ik}s_{jk}(1+\delta_{ik})(1+\delta_{jk})
+\quad\Longrightarrow\quad
+\Bigl|\sum_ks_{ik}s_{jk}\Bigr|\le\sum_k(2D+D^2)=d\cdot d\eps=d^2\eps .
+\]
+The left side is an integer.  If the sign matrix $S=(s_{ij})$ satisfied $SS^T=dI$ then
+$S/\sqrt d$ would be a real Hadamard matrix of order $d\equiv2\pmod4$, $d\ge6$, which does not
+exist.  So some off-diagonal sum is a non-zero even integer, hence has modulus $\ge2$, and
+$2\le d^2\eps$.
+\end{proof}
+
+The bound $\tfrac1{18}$ is not attained.  Two real bases with $P$ taking only the values
+$\{\tfrac1{12},\tfrac14\}$ exist (entries $\pm\tfrac12,\pm\tfrac{\sqrt3}{6}$), so the real
+pair optimum is at most $\tfrac1{12}$, and three real bases with all three pairwise deviations
+equal to $\tfrac1{12}$ also exist; numerically the pair optimum is exactly $\tfrac1{12}$.
+Four real bases do considerably worse: the best quadruple found has
+$\max\dev=0.1390615033$ (certified $\le0.1390616$).  So the real problem is a factor
+$\tfrac1{12}/0.0302\approx4.6$ worse than the complex one, and the parity of
+Theorem~\ref{thm:real} is off by $\tfrac32$ already for a single pair.
+
+\section{Root-of-unity classes}
+\label{sec:butson}
+
+\begin{theorem}[$\mu_6$-Butson quantisation]\label{thm:butson}
+Let $U,V$ be unitary $6\times6$ whose entries all have modulus $1/\sqrt6$ and lie in
+$\tfrac1{\sqrt6}\mu_6$.  Then $\dev(U,V)\ge\tfrac1{18}$, and in particular no such pair is
+exactly unbiased.
+\end{theorem}
+\begin{proof}
+$X_{ij}=\sum_k\overline{U_{ki}}V_{kj}=z_{ij}/6$ with $z_{ij}$ a sum of six sixth roots of
+unity, so $z_{ij}\in\mathbb Z[\omega]$, $\omega=e^{2\pi i/3}$, and
+$P_{ij}=N_{ij}/36$ with $N_{ij}=|z_{ij}|^2=a^2-ab+b^2\in\mathbb Z_{\ge0}$ the norm form of
+$\mathbb Z[\sqrt{-3}]$.  The $462$ multisets of six sixth roots realise the values
+\[
+\{0,1,3,4,7,9,12,13,16,19,21,25,27,28,31,36\},
+\]
+and $6$ is not among them, because the prime $2$ is inert in $\mathbb Q(\sqrt{-3})$ and
+divides $6$.  If $\dev<\tfrac1{18}$ then $|N_{ij}-6|<2$ for every entry, so
+$N_{ij}\in\{5,6,7\}$, hence $N_{ij}=7$ for all $36$ entries.  But $X$ is unitary, so $P$ is
+doubly stochastic, so each row of $N$ sums to $36$, not to $6\cdot7=42$.  Contradiction.
+\end{proof}
+
+The constant is attained inside the class at $\tfrac1{12}=0.0833$: $U=F_6$ and
+$V=\operatorname{diag}(\zeta_6^{0,0,0,2,4,2})F_6$ have overlap numerators in $\{3,9\}$ only.
+The same argument with $\mu_4$ (norm form $a^2+b^2$) gives $\ge\tfrac1{18}$, with $\mu_3$ it
+gives $\ge\tfrac1{12}$, and with $\mu_2$ it reproduces Theorem~\ref{thm:real}.  In $d=3$ and
+$d=4$ the analogous obstruction is absent, since $3=|2+\omega|^2$ and $4=|2|^2$: the
+arithmetic of $\mathbb Q(\sqrt{-3})$ locates the $d=6$ anomaly.
+
+\begin{proposition}[the $\mu_{12}$ Fourier orbit, exact]\label{prop:fourier}
+Let $\mathcal F=\{DF_6:\ D=\operatorname{diag}(\zeta^{p_0},\dots,\zeta^{p_5}),\ p\in\mathbb
+Z_{12}^6,\ \zeta=e^{2\pi i/12}\}$.  An exhaustive computation in
+$\mathbb Z[\zeta_{12}]=\mathbb Z[x]/(x^4-x^2+1)$ over the $12^5=248832$ phase vectors gives
+the exact optima
+\[
+k=2:\ 0,\qquad k=3:\ \tfrac1{12},\qquad k=4:\ \tfrac19 ,
+\]
+for the best choice of $k$ bases from $\mathcal F$.  The case $k=2$ is attained by the perfect
+sequence $p=(0,9,4,9,0,1)$.
+\end{proposition}
+
+So the Fourier orbit contains exactly unbiased \emph{pairs} but no unbiased triple, and it
+caps out at $\tfrac19$ for four bases.  The same $12$th-root phenomenon produces the exact
+MUB triple $\{I,\ F_6,\ \operatorname{diag}(e^{-i\pi l^2/6})_{l=0..5}F_6\}$: the phases
+$e^{-2\pi il^2/12}$ form a Zadoff--Chu (CAZAC) sequence of length $6$, whose Fourier transform
+is flat.  With a sixth root of unity in place of a twelfth this fails ---
+$\operatorname{diag}(\omega^{al^2})F_6$ has $\dev=\tfrac16$ for every $a$ --- because
+$\mathbb Z[\zeta_{12}]\cap\R=\mathbb Z[\sqrt3]$ is strictly larger than $\mathbb Z$, so six
+twelfth roots can sum to something of modulus $\sqrt6$.
+
+\section{Numerical search and the certified bound}
+\label{sec:num}
+
+\subsection{Method}
+Gauge $U_1=I$.  The minimax objective is smoothed by
+$\mathrm{LSE}_\beta(|D|)=\max|D|+\beta^{-1}\log\sum_k e^{\beta(|D_k|-\max|D|)}-\beta^{-1}\log216$
+and minimised by Riemannian gradient descent with backtracking and continuation
+$\beta=30\to10^{6}$, followed by an exchange/linear-programming polish on the true maximum.
+The body gradient is computed analytically (with $M^{ab}_{ij}=w^{ab}_{ij}
+\operatorname{sign}(D^{ab}_{ij})\overline{X^{ab}_{ij}}$, $X^{ab}=U_a^\dagger U_b$):
+\[
+G_a=\sum_{b>a}U_b(M^{ab})^{\!\top},\quad
+G_b=\sum_{a<b}U_a\overline{M^{ab}},\quad
+\nabla_a=\bigl(U_a^\dagger G_a\bigr)-\tfrac12\bigl(U_a^\dagger G_a+(U_a^\dagger G_a)^\dagger\bigr),
+\]
+retracting by $U_a\mapsto U_a\exp(-\eta\nabla_a)$; the gradient agrees with central
+differences to $1.7\times10^{-10}$ over all $108$ generators.
+
+\subsection{Results}
+Random multi-start statistics: 300 restarts give minimum $0.031382$, median $0.066900$,
+maximum $0.081381$, so the good basin is rare (2 of 300).  Basin hopping from the best point
+converges to a single point, $0.0302378$, stable to $10^{-9}$; a further 240 polished points
+all land inside $[0.0302377890,\,0.0302378006]$.  Seeding from three exact MUBs plus a random
+fourth basis, with the exchange polish, improves this to $0.0302242408$: at that point all six
+pairs are tied to $6\times10^{-6}$.
+
+\begin{theorem}[certified bound]\label{thm:cert}
+$\eps_6^*\le 0.030224240773$.  More precisely, the four rational Hermitian matrices $A_a$
+listed in \texttt{verify/data/candidates\_A.txt} give, through
+$U_a=(I-iA_a)^{-1}(I+iA_a)$, four exactly unitary matrices with exactly rational entries
+whose exact maximum deviation is
+\[
+\max_{a<b}\dev(a,b)=0.03022424077244261561\ldots<\frac{302243}{10^{7}} .
+\]
+\end{theorem}
+The point of the Cayley parametrisation is that it makes the certificate float-free: the
+Cayley transform of a Hermitian matrix is unitary, and of a rational Hermitian matrix is
+rational, so all $216$ numbers $P^{ab}_{ij}$ and hence $\dev$ are exact rationals and no
+perturbation lemma, interval arithmetic or error budget is needed.  An independent
+implementation (Appendix~\ref{app:verify}, checks 12--14) rebuilds the $U_a$ from the decimal
+literals as exact rationals and reproduces the value to all printed digits.  An alternative,
+independent certificate route --- exact rational arithmetic on the stored float64 matrices
+plus the polar-factor perturbation lemma --- gives $0.030237799893$ on an earlier quadruple.
+
+\subsection{Structure of the minimiser, and why it avoids MUB triples}
+At the best point the deviation matrix is
+\[
+\begin{pmatrix}
+0&0.02355&0.02815&0.02354\\
+0.02355&0&0.03022&0.03022\\
+0.02815&0.03022&0&0.03022\\
+0.02354&0.03022&0.03022&0
+\end{pmatrix},
+\]
+three pairs sit on the maximum, and only $6$ of the $216$ entries are active.  The bases are
+\emph{not} Hadamard: their moduli vary by $\pm8\%$ around $1/\sqrt6$, so the optimum balances
+modulus against phase deviation.  This is forced by the following fact: fixing an exact MUB
+triple and optimising only the fourth basis costs a factor $2.7$.  For the standard product
+triple the completion value is exactly $\sqrt3/18=0.096225$ if the fourth basis is also a
+product (attained; all $108$ numbers $|P^{a4}_{ij}-\tfrac16|$ are equal), and the best
+entangled fourth basis gives $0.080933$ (certified).  Restricting to \emph{three} exact MUB
+pairs is worse still.  Hence the minimiser must break the exact MUB pairs and spread the bias
+over all six.
+
+\subsection{The $\ell^2$ objective has a different minimiser}
+Let $E_2=\sum_{a<b}\sum_{ij}(P^{ab}_{ij}-\tfrac16)^2=\sum_{a<b}\bigl(\|P^{ab}\|_F^2-1\bigr)$,
+where the second identity is exact because $\sum_{ij}P_{ij}=6$ and
+$\|P-J/6\|_F^2=\|P\|_F^2-1$.  Then $E_2\ge0$ with equality iff all pairs are exactly
+unbiased, so the trivial bound is sharp for a pair.  Four hundred random restarts of the
+$E_2$ gradient flow converge to $E_2=0.0512492190$ with
+$\max\dev=0.0422687210$.  That minimiser has a striking shape: $U_1=I$ and $U_2,U_3,U_4$
+exactly Hadamard, the three pairs $(1,a)$ exactly unbiased, and the remaining three pairs all
+at $0.0422687210$.  So the $\ell^2$ minimiser is ``three exact MUBs plus three mutually
+compromising Hadamards'', while the minimax minimiser breaks the exact MUB pairs to spread the
+error --- the standard phenomenon that $\ell^2$ and $\ell^\infty$ regularisations of a minimax
+problem have different minimisers.  Since $\max\dev\ge\sqrt{E_2/216}$, a lower bound
+$E_2\ge c$ would give $\eps_6^*\ge\sqrt{c/216}$, but $E_2\ge0$ is sharp for pairs, so that
+route fails too.
+
+\subsection{Other restricted classes}
+\begin{itemize}
+\item \emph{Cyclic slice:} $U_a=S^{a-1}$ gives $U_a^\dagger U_b=S^{b-a}$, so the six pair
+matrices collapse to $|S|^2,|S^2|^2,|S^3|^2$.  An explicit $S$ gives, in exact rational
+arithmetic, $\max\dev=0.053981857136640353$, hence $\eps_6^*<\tfrac1{18}$ already on this
+$34$-dimensional slice.
+\item \emph{Diagonal-phase orbit:} $U_a=D_aF_6$ gives $0.057876$ from 25 restarts, no better
+than the tetrahedral construction.
+\item \emph{Quaternionic class} ($T$-invariant bases, $\mathrm{Sp}(3)\subset U(6)$): exactly
+unbiased pairs exist, the best three bases give $0.0251$, but the best four give $0.0778$
+(min/median/max $0.0778/0.0920/0.1020$ over 26 restarts) --- a dead end.
+\end{itemize}
+
+\subsection{A pitfall}
+A natural ansatz --- ``all four bases Hadamard, optimise the $3\times36$ phases of
+$\exp(i\theta_{kj})/\sqrt6$'' --- produces spectacular values ($0.0041$).  They are artefacts:
+a matrix all of whose entries have modulus $1/\sqrt6$ need not be unitary, and
+$\exp(i\theta)/\sqrt6$ satisfies $\|U^\dagger U-I\|\approx1$.  Every candidate must be checked
+for unitarity \emph{before} any deviation is quoted; the assertion ``unitarity defect
+$<1/100$'' in the certification routine is what caught this.
+
+\section{Quantum-information reading of the bounds}
+\label{sec:qi}
+
+Throughout, $\eps=\max_{a<b}\dev(a,b)$; with Theorem~\ref{thm:cert} one may take
+$\eps=0.0302243$, and with Theorem~\ref{thm:tetra} $\eps=\tfrac1{18}$.
+
+\begin{proposition}\label{prop:qi}
+The following hold.
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Outcome bias.}  If $\dev(a,b)\le\eps$ then for every basis state
+$|\psi\rangle=u^a_i$ the measurement in basis $b$ gives $p_j\in[\tfrac16-\eps,\tfrac16+\eps]$,
+so the ratio of the most to the least likely outcome is at most
+$(1+6\eps)/(1-6\eps)$ --- at most $1.444$ for $\eps=0.0302243$ and at most $2$ for
+$\eps=\tfrac1{18}$.
+\item \emph{Entropic uncertainty.}  For every state $\rho$ and every pair,
+\[
+H(p^a)+H(p^b)\ \ge\ -\log_2\Bigl(\max_{ij}P^{ab}_{ij}\Bigr)\ \ge\ -\log_2\bigl(\tfrac16+\eps\bigr),
+\]
+which is the classical bound $\log_26$ at $\eps=0$ and $2.344$ bits at $\eps=0.0302243$.
+\item \emph{Sequential measurements.}  On the maximally mixed state the joint law of the
+outcome pair from measuring first in basis $a$ and then in basis $b$ is
+$\Pr(i,j)=\tfrac16P^{ab}_{ij}=\tfrac1{36}(1+6E^{ab}_{ij})$, so its total variation distance
+from uniform is $\le3\eps$ and its min-entropy is $\ge\log_2\frac{36}{1+6\eps}$; both are
+sharp on the tetrahedral quadruple, where $\mathrm{TV}=3\eps=\tfrac16$ and
+$H_{\min}=\log_227$.
+\item \emph{Tomography: a negative statement.}  Four bases yield $4\cdot6=24$ probabilities
+with $4$ sum constraints, i.e.\ $20$ real numbers, fewer than the $35$ parameters of a density
+matrix on $\C^6$.  No quadruple is tomographically complete, unbiased or not, so $\eps$ cannot
+be a tomographic condition number.
+\end{enumerate}
+\end{proposition}
+The exact inversion formula behind (d) is $\rho=\sum_{a=1}^{7}\sum_ip^a_i\Pi^a_i-I$ for a
+complete set of seven MUBs, which holds because the $42$ vectors form a tight projective
+$2$-design; with only four bases the design condition fails by an amount that would only be
+controlled if all $\binom72$ pairs were, which is exactly the impossible configuration.
+
+\section{Open problems}
+\label{sec:open}
+
+\begin{enumerate}[label=(O\arabic*)]
+\item Find any $c>0$ with $\eps_6^*\ge c$.  By Corollary~\ref{cor:nogo} the proof must use
+three- or four-body structure.  The most concrete route is a stability version of the Stage-C
+exclusion of \cite{preprint}: re-run the adaptive ball covering with a slack parameter and show
+that the excluded set contains the whole $\eta$-neighbourhood of the exact-MUB variety.  Since
+the Stage-C radii are of order $10^{-2}$ and the numerical optimum is $0.030$, this is
+delicate but not hopeless.
+\item Decide whether $\eps_6^*=0.0302242\ldots$ or whether better basins exist.  The basin of
+the best configuration is found by about $1$ in $150$ random starts and by structured seeds
+only when seeded from three exact MUBs, which suggests that rarer, better basins may exist.
+\item Compute the triple-completion value exactly: the numerical value $0.080933$ for the
+standard product triple is not proved optimal, and the gap to the single-vector relaxation
+$0.0284$ is large.
+\item Is $\tfrac1{12}$ the exact real pair optimum (attained), and what is the exact real
+four-base value between $\tfrac1{18}$ and $0.1391$?
+\end{enumerate}
+
+\begin{conjecture}
+$\eps_6^*=0.0302242\ldots$, attained by a configuration with all six pairs tied to about
+$6\times10^{-6}$, and the minimiser is not on the Hadamard manifold.
+\end{conjecture}
+
+\section*{Acknowledgement of provenance}
+The results were obtained in a mixed human--AI process: the theorems of
+Sections~\ref{sec:nogo}--\ref{sec:product} and~\ref{sec:real}, the numerical picture of
+Section~\ref{sec:num} and the verification suite were produced with agent assistance, and
+several of the restricted-class results of Sections~\ref{sec:butson}--\ref{sec:num} were found
+independently more than once (the tetrahedral construction five times, the product-class
+theorem five times).  Every computational claim in this note is re-derivable from the scripts
+listed in Appendix~\ref{app:verify}; no claim of global optimality is made anywhere.
+
+\appendix
+\section{Independent verification}
+\label{app:verify}
+
+\texttt{verify/verify\_all.py} is a from-scratch checker (it imports nothing from the
+production code) that re-derives the computational content of every theorem above.  It prints
+one \textsc{pass}/\textsc{fail} line per check and exits non-zero on failure:
+
+\begin{center}
+\small
+\begin{tabular}{@{}rl@{}}
+\toprule
+1--2 & frame operator $=4I$ and frame potential $=16d=N^2/d$ for random quadruples, $d=2..7$\\
+3 & Gram matrix of the $4d$ traceless matrices $=\operatorname{diag}(I_d-J_d/d)$, $d=3,5,7$\\
+4 & tetrahedral Bloch data give $|\langle\cdot,\cdot\rangle|^2\in\{\tfrac13,\tfrac23\}$ exactly\\
+5 & the four $\C^3$ bases are exactly orthonormal and pairwise unbiased (Gauss sums)\\
+6 & multiplicativity: hence $P\in\{\tfrac19,\tfrac29\}$ and $\dev=\tfrac1{18}$\\
+7 & assembled quadruple: all $216$ moduli squared within $2\cdot10^{-16}$ of $\{\tfrac19,\tfrac29\}$\\
+8 & $400$ random product quadruples all satisfy $\dev\ge\tfrac1{18}$\\
+9 & $20000$ random quadruples of points of $S^2$ satisfy $\max|n_a\cdot n_b|\ge\tfrac13$\\
+10 & real pairs satisfy $\dev\ge2/d^2$ at $d=6,10$; the bound fails at $d=2$, as it must\\
+11 & the $462$ six-fold sums of $\mu_6$ realise exactly the value set, $6$ absent\\
+12--14 & the four $A_a$ are exactly Hermitian; the Cayley $U_a$ are exactly unitary; the exact\\
+ & maximum deviation is $0.03022424077244261561907<302243/10^7$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Reproduce with
+\begin{verbatim}
+cd verify && python3 verify_all.py
+\end{verbatim}
+The suite needs only \texttt{numpy} and \texttt{sympy}.  The cyclic certificate of
+\S\ref{sec:num} (exact value $0.053981857136640353$) is checked by its own script.
+
+\begin{thebibliography}{9}
+\bibitem{preprint} OpenAI, \emph{The maximum number of mutually unbiased bases in dimension
+six}, preprint, 24 September 2026.
+\bibitem{mu} H.~Maassen and J.~B.~M.~Uffink, \emph{Generalized entropic uncertainty
+relations}, Phys.\ Rev.\ Lett.\ \textbf{60} (1988) 1103.
+\end{thebibliography}
+
+\end{document}

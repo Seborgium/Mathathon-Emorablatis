@@ -1,0 +1,96 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "utc": "20261114T200322Z",
+ "verdict": "PASS",
+ "cache": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/crew/m3/saved-run",
+ "manifest": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/saved-run.manifest.json",
+ "manifest_tree_sha1": "ccba22651c54a8681de6f2fec2d96867445f2180",
+ "manifest_files": 308,
+ "manifest_bytes": 82505759,
+ "binaries": {},
+ "selection": null,
+ "commands": 100,
+ "commands_passed": 100,
+ "commands_failed": [],
+ "rc_zero": 85,
+ "rc_one": 15,
+ "rc_one_names": [
+  "C.batch10",
+  "C.batch3",
+  "C.batch4",
+  "C.batch5",
+  "C.batch52",
+  "C.batch53",
+  "C.batch55",
+  "C.batch56",
+  "C.batch6",
+  "C.batch7",
+  "C.batch78",
+  "C.batch79",
+  "C.batch8",
+  "C.batch80",
+  "C.batch84"
+ ],
+ "artefacts_compared": 196,
+ "artefacts_bytes": 82327359,
+ "artefacts_not_identical": [],
+ "corpus_checks": {
+  "C1_manifest_matches_published_bytes": {
+   "status": "PASS",
+   "detail": "308 files, 82505759 bytes, tree ccba22651c54a8681de6f2fec2d96867445f2180"
+  },
+  "C2_command_facts": {
+   "status": "PASS",
+   "detail": "100 commands, rc0=85 rc1=15, all completed=True"
+  },
+  "C3_artefact_coverage": {
+   "status": "PASS",
+   "detail": "declared names all recorded; unproduced recorded names: none"
+  },
+  "C4_record_structure": {
+   "status": "PASS",
+   "detail": "190 record files parse exactly, k in [0,10], radius/C bounds hold"
+  },
+  "C5a_rc_polarity_c_bad_files": {
+   "status": "PASS",
+   "detail": "93 C commands: rc=1 iff the bad file is non-empty"
+  },
+  "C5b_15_unresolved_are_the_fallback_inputs": {
+   "status": "PASS",
+   "detail": "15 C.initial rc=1 commands, 15 fallback inputs, sets equal=True, ascii-sorted=True"
+  },
+  "C5c_fallback_input_order": {
+   "status": "PASS",
+   "detail": "argv order = ASCII filename order"
+  },
+  "C5d_fallback_inputs_nonempty": {
+   "status": "PASS",
+   "detail": "counts [1, 2, 2, 4, 4, 4, 5, 6, 8, 13, 14, 16, 23, 29, 32]"
+  },
+  "C6_final_bad_files_count_zero": {
+   "status": "PASS",
+   "detail": "4 final C commands, rc 0, each output 8 bytes with uint64 count 0"
+  },
+  "C7_arun_bad_txt_zero_length": {
+   "status": "PASS",
+   "detail": "4 files, sizes [0]"
+  },
+  "C8_fine_to_batch_partition": {
+   "status": "PASS",
+   "detail": "88 batches, sizes 256..107, sum 22379 = fine.bin count, fdone.txt ['88', '22379']"
+  },
+  "C9_cross_command_counts": {
+   "status": "PASS",
+   "detail": "coarse 3083 = 4x arun global; mid 600; fine 22379; fallback parents 163 -> 1127 records; C.batch done=input count, bad=bad-file count; final parts cover fb1.bin mod 4"
+  },
+  "C10_argv_matches_declared": {
+   "status": "PASS",
+   "detail": "file arguments in argv equal the declared inputs in order, every declared output is named (Bfine's batch prefix included), no unexplained file argument"
+  }
+ },
+ "failed_checks": {},
+ "elapsed_ms": 100.5,
+ "per_command_logs": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/selftest/R%03d.json",
+ "notes": "Per-command logs are R001..R100 in commands.json key order. 'artefacts' includes the outputs commands.json does not declare (Bfine's 88 batch files + fdone.txt)."
+}

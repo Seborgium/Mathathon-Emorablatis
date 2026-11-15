@@ -1,0 +1,69 @@
+== Mub6/AssemblyScoped.lean
+Mub6/AssemblyScoped.lean:139:13: warning: Variable name `c` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _c
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Mub6/AssemblyScoped.lean:335:2: warning: Try `simp at hb` instead of `simpa using hb`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Mub6/AssemblyScoped.lean:327:8: warning: Variable name `t` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _t
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+Mub6/AssemblyScoped.lean:390:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Mub6/AssemblyScoped.lean:424:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+Mub6/AssemblyScoped.lean:459:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+== Mub6/StageCGraph.lean
+Mub6/StageCGraph.lean:351:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+Mub6/StageCGraph.lean:365:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+```
+open Lean.Parser.Tactic in
+macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+  `(tactic| push $cfg:optConfig Not $[$loc]?)
+```
+== Mub6/StageCNecessity.lean
+== axioms
+/tmp/AssemblyAxioms.lean:139:13: warning: Variable name `c` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _c
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/tmp/AssemblyAxioms.lean:335:2: warning: Try `simp at hb` instead of `simpa using hb`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+/tmp/AssemblyAxioms.lean:327:8: warning: Variable name `t` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _t
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+/tmp/AssemblyAxioms.lean:390:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+/tmp/AssemblyAxioms.lean:424:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+/tmp/AssemblyAxioms.lean:459:4: warning: Try `simp at this` instead of `simpa using this`
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+'Mub6.AssemblyScoped.chain_excluded' does not depend on any axioms
+'Mub6.AssemblyScoped.chain_excluded_emb' does not depend on any axioms
+COMPLETE

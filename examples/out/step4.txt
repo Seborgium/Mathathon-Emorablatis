@@ -1,0 +1,33 @@
+s4.candidates                 12                                 rays unbiased to the standard and Fourier bases
+s4.candidates.vectors         144                                counting all 12 global phases
+s4.candidates.tuples          [[0, 1, 0, 9, 4, 9], [0, 1, 4, 9, 4, 1], [0, 3, 4, 3, 0, 7], [0, 3, 8, 3, 0, 11], [0, 5, 0, 9, 8, 9], [0, 5, 8, 9, 8, 5], [0, 7, 0, 3, 4, 3], [0, 7, 4, 3, 4, 7], [0, 9, 4, 9, 0, 1], [0, 9, 8, 9, 0, 5], [0, 11, 0, 3, 8, 3], [0, 11, 8, 3, 8, 11]] exponents a_0..a_5, a_0 = 0
+s4.candidates.exact_residual  0                                  max |A-6| + |B| over all checks (exact ints)
+s4.O.edges                    48                                 pairs exactly orthogonal
+s4.O.degree.hist              {8: 12}                            
+s4.U.edges                    0                                  pairs exactly unbiased (|<x,y>| = 1/sqrt6)
+s4.pairs                      66                                 pairs of candidates
+s4.O.sixcliques               4                                  orthonormal bases among the candidates
+s4.O.sixcliques.sets          [(1, 2, 4, 6, 9, 11), (0, 2, 5, 6, 8, 11), (1, 3, 4, 7, 9, 10), (0, 3, 5, 7, 8, 10)] as candidate indices
+s4.O.sevencliques             0                                  
+s4.cross_unbiased.counts      [0, 0]                             of 36 cross pairs, per pair of bases
+s4.mub_pairs                  0                                  pairs of bases that are mutually unbiased
+s4.pattern                    False                              two disjoint six-cliques with all 36 cross edges?
+s4.bases                      4                                  
+s4.pair.same_basis            {'t': 2.8609792490763984e-17, 'disto': 1.1153481844503963e-17, 'distu': 0.15915494309189532, 'r': 1e-10, 'O': True, 'U': False} two vectors of one basis
+s4.pair.closest_cross         {'t': 0.5773502691896257, 'disto': 0.22507907903927651, 'distu': 0.06592413594738117, 'r': 1e-10, 'O': False, 'U': False} closest pair between two of the bases (best of 36)
+s4.kill.1e-07.disto           4.082482906e-08                    one entry rotated by 1e-07 cycles
+s4.kill.1e-07.O               True                               O edge at radius 0
+s4.kill.1e-07.radius          0                                  per-ball radius needed to keep the O edge anyway (false positive)
+s4.kill.1e-07.displacement    2.56509966e-07                     Euclidean displacement of the centre
+s4.kill.1e-06.disto           4.082482905e-07                    one entry rotated by 1e-06 cycles
+s4.kill.1e-06.O               False                              O edge at radius 0
+s4.kill.1e-06.radius          2.081482905e-07                    per-ball radius needed to keep the O edge anyway (false positive)
+s4.kill.1e-06.displacement    2.56509966e-06                     Euclidean displacement of the centre
+s4.kill.1e-05.disto           4.082482904e-06                    one entry rotated by 1e-05 cycles
+s4.kill.1e-05.O               False                              O edge at radius 0
+s4.kill.1e-05.radius          3.882382904e-06                    per-ball radius needed to keep the O edge anyway (false positive)
+s4.kill.1e-05.displacement    2.56509966e-05                     Euclidean displacement of the centre
+s4.kill.0.0001.disto          4.082482837e-05                    one entry rotated by 0.0001 cycles
+s4.kill.0.0001.O              False                              O edge at radius 0
+s4.kill.0.0001.radius         4.062472837e-05                    per-ball radius needed to keep the O edge anyway (false positive)
+s4.kill.0.0001.displacement   0.0002565099618                    Euclidean displacement of the centre

@@ -1,0 +1,38 @@
+s2.kernel.dimB             2                            
+s2.kernel.dimC             2                            
+s2.frame.KB.err            4.48405047e-16               ||K_B^*K_B - I||_max
+s2.frame.KC.err            2.220446049e-16              ||K_C^*K_C - I||_max
+s2.mB                      2                            smallest nonzero singular value of B'
+s2.mC                      2                            smallest nonzero singular value of C'^*
+s2.S                       0.000000+0.000000i           S = sum_j b_j; singular values of B are sqrt(4 +- |S|)
+s2.S.abs                   0                            
+s2.BB.svals.exact          [2.0, 2.0]                   sqrt(4 -+ |S|), exact
+s2.CC.svals.exact          [2.0, 2.0]                   the two nonzero singular values of C', exact
+s2.A0                      1.414213562                  operator norm of E' = sqrt(2)
+s2.Astar                   1.615275492                  min(2, A_0 + R_s)
+s2.Rs                      0.2010619298                 2*pi*0.032
+s2.q                       0.1274337035                 R_s^2 (1 + (A_*^2+6)/m_C^2)
+s2.p                       0.02615190078                q/(sqrt6 + sqrt(6-q))
+s2.p.limit                 0.067                        the value Step 3's grid is built for
+s2.q.limit                 0.32                         the value the paper quotes as the operating range
+s2.Rs.crit.q032            0.3139483438                 R_s at which q = 0.32
+s2.Rs.crit.q032.cycles     0.04996643079                
+s2.Rs.crit.q6              1.309307341                  R_s at which q = 6
+s2.headroom                1.561450962                  how much larger the seed radius could be
+s2.Y.YY.err                2.686181999e-15              ||Y^*Y - 6I||_max at the exact seed
+s2.exact.BstarB+DstarD     0                            exact 0
+s2.exact.EstarB+CstarD     0                            exact 0
+s2.defect.identity.err     2.686181999e-15              
+s2.defect.trace            1.776356839e-15              tr(6I - Y*Y) at the exact seed
+s2.defect.terms            [1.7481127227628486e-32, 6.980613742064483e-31] 
+s2.perturb.trials          40000                        random centres at distance R_s from the seed
+s2.perturb.failures        0                            centres with tr(6I-Y*Y) > q
+s2.perturb.trmax           0.07037515426                largest observed tr(6I-Y*Y)
+s2.perturb.trmax.over.q    0.5522491486                 
+s2.perturb.split           [0.2146726535567205, 0.7853273464432796] squared error share in the five x-phases / four y-phases at the maximum
+s2.perturb.b1max           0.2002209089                 largest ||Delta B||_F seen
+s2.perturb.c1max           0.2006367459                 largest ||Delta C||_F seen
+s2.estimate.sharp          0.1038224269                 max of the paper's estimate over the chord ball
+s2.degenerate.B.svals      [2.8284271247461903, 0.0]    b_0=..=b_3=1/4
+s2.degenerate.B.rank       1                            
+s2.degenerate.B.kerneldim  3                            no 2-dimensional frame exists -> seed unresolved

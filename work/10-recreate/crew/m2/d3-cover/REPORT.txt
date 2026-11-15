@@ -1,0 +1,11 @@
+d3 (the cover) complete: R2 PASS for the cover, byte-identical centres.txt.
+Files (in .ultramath/smwgt1mbm/m2/, mirrored at work/10-recreate/crew/m2/d3-cover/): c-seedcore.hpp, c-cover.hpp, c-covrun.cpp, c-harness.cpp, c-fixture.cpp, c-build.sh, c-verify.py, NOTES.md (open choices + source lines), FINDINGS.md (F1-F7), WHY-249878.md, RUN.md, evidence/*.log|json.
+Commands and exit statuses:
+ ./c-build.sh -> 0
+ ./build/c-fixture 112 -> 0 (FIXTURE-OK checks=7670878 fails=0: published covout.cpp compiled into my test TU, compared bitwise over all 22829 xs + 829306 ys cells, extend's lo/hi/J, supdual at iters 0/1/2)
+ ./build/c-covrun run/from-covrun.txt -> 0, 435.21 s, 7339546 bytes, sha256 c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789, IDENTICAL to .scratch/gh/data/centers.txt, all six counters exact
+ ./build/c-harness --load run/seeds-n112.bin --out run/mine-centers-inlined.txt -> 0, 434.82 s, IDENTICAL
+ ./c-verify.py compare|invariants|prefix -> 0 each
+Accounting (exact integers): 298638554 candidate pairs = 108445934 gap-dropped + 38448534 interval-dropped + 151744086 checked; checked = 45648766 cheap + 105845442 LP + 249878 accepted.
+Two spec defects: §4 bucket K,m are 4,28 not 3,38 (the visit counter pins it); §5.9's "pow(x,2) is a single multiply" is false (two pow@plt calls, values agree bitwise).
+Not done: no other source re-derived; published covrun never executed; nothing under src/, spec/, harness/ or another member's dir touched.

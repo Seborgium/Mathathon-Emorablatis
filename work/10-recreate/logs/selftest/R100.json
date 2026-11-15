@@ -1,0 +1,59 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 100,
+ "command": "covrun",
+ "stage": "cov",
+ "run_order": 1,
+ "argv": [
+  "./build/covrun",
+  "centers.txt"
+ ],
+ "inputs": [],
+ "outputs": [
+  "centers.txt"
+ ],
+ "declared_outputs": [
+  "centers.txt"
+ ],
+ "input_sources": {},
+ "rc_expected": 0,
+ "rc_got": 0,
+ "artefacts": [
+  {
+   "path": "centers.txt",
+   "declared": true,
+   "bytes_expected": 7339546,
+   "sha256_expected": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789",
+   "bytes_got": 7339546,
+   "sha256_got": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 7339546 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 0, got 0"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/covrun.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "5a4d8451ce1bc2a5f5a7f3363fcf10bff35438d78533ca6aa3d5e472b0952ad6",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

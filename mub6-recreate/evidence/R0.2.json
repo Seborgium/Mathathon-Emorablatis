@@ -1,0 +1,130 @@
+{
+  "artefacts": {
+    "abi_fp_probe_abc": {
+      "bytes": 16872,
+      "sha256": "7f615ef1ed35c1e600c0992c3d8775ec2a3b26164dd2f5b197aa04c9733a5007"
+    },
+    "abi_fp_probe_covrun": {
+      "bytes": 16872,
+      "sha256": "7f615ef1ed35c1e600c0992c3d8775ec2a3b26164dd2f5b197aa04c9733a5007"
+    },
+    "arun": {
+      "bytes": 160544,
+      "sha256": "b005a7ae8ce0c2a311af3de9f72c268276bdfd68a9e5bc7ca8ef13208f8a7322"
+    },
+    "brun": {
+      "bytes": 171672,
+      "sha256": "4b2fdae5b3b08ef7ae079fd27ffcf65a4ffbe1ca158f4cbe654994f17862a353"
+    },
+    "cover_square_probe": {
+      "bytes": 16896,
+      "sha256": "9e4e8e75766a16091f73974423febd8454943f55ae0de57a380958b121253c9d"
+    },
+    "covrun": {
+      "bytes": 43160,
+      "sha256": "4da2812163e6ca6d7898b913f160bc656e7c135c06542786cb11ec12fc9785af"
+    },
+    "covrun_disassembly_txt": {
+      "bytes": 364703,
+      "sha256": "e6d50053ad2bd3483b99ee5e32bcadae59dd3ead2ed2e4221621d383c58dc2c6"
+    },
+    "covrun_dynamic_symbols_txt": {
+      "bytes": 1059,
+      "sha256": "dd1ceef995cc2e64e9b5c9466ee8e35ca0e5cf14bdd8906304d5387c7ea3f4c0"
+    },
+    "crun": {
+      "bytes": 210176,
+      "sha256": "b72a67b5aaad94db5419aad16e46c4231ac8b31d88b9d0389f60e360ede6d29c"
+    }
+  },
+  "checks": {
+    "artefacts": {
+      "all_programs": "pass"
+    },
+    "build": {
+      "abi-fp-probe-abc": "pass",
+      "abi-fp-probe-covrun": "pass",
+      "arun": "pass",
+      "brun": "pass",
+      "cover-square-probe": "pass",
+      "covrun": "pass",
+      "crun": "pass"
+    },
+    "chain": {
+      "atlas_cpp": "pass",
+      "covout_cpp": "pass",
+      "patchx_cpp": "pass",
+      "seed_cpp": "pass",
+      "stageB_cpp": "pass",
+      "stageC_cpp": "pass",
+      "ub_cpp": "pass"
+    },
+    "failures": 0,
+    "pow": {
+      "call_shape": "pass",
+      "equivalence": "pass",
+      "source_sites": "pass"
+    },
+    "probe": {
+      "abi_probe_abc": "pass",
+      "abi_probe_covrun": "pass"
+    },
+    "src": {
+      "present": "pass"
+    },
+    "total": 25,
+    "tunit": {
+      "arun": "pass",
+      "brun": "pass",
+      "covrun": "pass",
+      "crun": "pass"
+    }
+  },
+  "criterion": "R0: probe passes on the build host, toolchain logged (gates.md, G-R1)",
+  "evidence": {
+    "detailed_log": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/build-20261114T201529Z.json",
+    "out_dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z"
+  },
+  "failed_checks": [],
+  "failures": {},
+  "finished_utc": "2026-11-14T20:15:43Z",
+  "pass": true,
+  "probe": {
+    "abi_probe_abc": {
+      "exit": 0,
+      "stdout": "arithmetic/ABI checks passed"
+    },
+    "abi_probe_covrun": {
+      "exit": 0,
+      "stdout": "arithmetic/ABI checks passed"
+    },
+    "enabled": true
+  },
+  "toolchain": {
+    "compiler": {
+      "dumpversion": "16.2.0",
+      "full_version": "g++ (conda-forge gcc 16.2.0-7) 16.2.0;Copyright (C) 2026 Free Software Foundation, Inc.;This is free software; see the source for copying conditions.  There is NO;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "libstdcxx": "(conda-forge gcc 16.2.0-7) 16.2.0",
+      "path": "/opt/math/bin/g++",
+      "search_path": " /opt/math/include  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/x86_64-conda-linux-gnu  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/backward  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include-fixed  /opt/math/bin/../x86_64-conda-linux-gnu/sysroot/usr/include ",
+      "target": "x86_64-conda-linux-gnu",
+      "version": "g++ (conda-forge gcc 16.2.0-7) 16.2.0"
+    },
+    "cpu": {
+      "family": "23",
+      "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl xtopology cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ibpb vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 clzero xsaveerptr arat npt nrip_save",
+      "hypervisor": "KVM",
+      "march_native": "znver1",
+      "model": "AMD EPYC Processor",
+      "model_no": "1",
+      "online": 4,
+      "stepping": "2"
+    },
+    "flags": {
+      "faithful": "-O3 -march=native -ffp-contract=off",
+      "faithful_gnu17": "-std=gnu++17 -O3 -march=native -ffp-contract=off"
+    },
+    "glibc": "ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43"
+  },
+  "unit": "R0"
+}

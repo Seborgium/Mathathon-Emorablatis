@@ -1,0 +1,198 @@
+\begin{thebibliography}{22}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Bandyopadhyay et~al.(2002)Bandyopadhyay, Boykin, Roychowdhury, and
+  Vatan]{BandyopadhyayEtAl2002}
+Somshubhro Bandyopadhyay, P.~Oscar Boykin, Vwani Roychowdhury, and Farrokh
+  Vatan.
+\newblock A new proof for the existence of mutually unbiased bases.
+\newblock \emph{Algorithmica}, 34\penalty0 (4):\penalty0 512--528, 2002.
+\newblock \doi{10.1007/s00453-002-0980-7}.
+\newblock URL \url{https://arxiv.org/abs/quant-ph/0103162}.
+\newblock \url{https://arxiv.org/abs/quant-ph/0103162}.
+
+\bibitem[Bengtsson et~al.(2007)Bengtsson, Bruzda, Ericsson, Larsson, Tadej, and
+  {\.{Z}}yczkowski]{BengtssonEtAl2007MUBHadamard}
+Ingemar Bengtsson, Wojciech Bruzda, {\AA}sa Ericsson, Jan-{\AA}ke Larsson,
+  Wojciech Tadej, and Karol {\.{Z}}yczkowski.
+\newblock Mutually unbiased bases and {Hadamard} matrices of order six.
+\newblock \emph{Journal of Mathematical Physics}, 48:\penalty0 052106, 2007.
+\newblock \doi{10.1063/1.2716990}.
+\newblock URL \url{https://arxiv.org/abs/quant-ph/0610161v2}.
+\newblock \url{https://arxiv.org/abs/quant-ph/0610161v2}.
+
+\bibitem[Brierley and Weigert(2008)]{BrierleyWeigert2008}
+Stephen Brierley and Stefan Weigert.
+\newblock Maximal sets of mutually unbiased quantum states in dimension 6.
+\newblock \emph{Physical Review A}, 78\penalty0 (4):\penalty0 042312, 2008.
+\newblock \doi{10.1103/PhysRevA.78.042312}.
+\newblock URL \url{https://arxiv.org/abs/0808.1614v1}.
+\newblock \url{https://arxiv.org/abs/0808.1614v1}.
+
+\bibitem[Brierley and Weigert(2009)]{BrierleyWeigert2009}
+Stephen Brierley and Stefan Weigert.
+\newblock Constructing mutually unbiased bases in dimension six.
+\newblock \emph{Physical Review A}, 79\penalty0 (5):\penalty0 052316, 2009.
+\newblock \doi{10.1103/PhysRevA.79.052316}.
+\newblock URL \url{https://arxiv.org/abs/0901.4051v2}.
+\newblock \url{https://arxiv.org/abs/0901.4051v2}.
+
+\bibitem[Butterley and Hall(2007)]{ButterleyHall2007Numerical}
+Paul Butterley and William Hall.
+\newblock Numerical evidence for the maximum number of mutually unbiased bases
+  in dimension six.
+\newblock \emph{Physics Letters A}, 369:\penalty0 5--8, 2007.
+\newblock \doi{10.1016/j.physleta.2007.04.059}.
+\newblock URL \url{https://arxiv.org/abs/quant-ph/0701122v2}.
+\newblock \url{https://arxiv.org/abs/quant-ph/0701122v2}.
+
+\bibitem[C{\'a}rdenes~Wuttig and
+  Tindall(2026)]{CardenesWuttigTindall2026Classification}
+Mateo C{\'a}rdenes~Wuttig and Joseph Tindall.
+\newblock A complete classification of complex {Hadamard} matrices of order
+  six, 2026.
+\newblock URL \url{https://arxiv.org/abs/2608.18053v2}.
+\newblock \url{https://arxiv.org/abs/2608.18053v2}.
+
+\bibitem[Gonthier(2008)]{Gonthier2008}
+Georges Gonthier.
+\newblock Formal proof---the four-color theorem.
+\newblock \emph{Notices of the American Mathematical Society}, 55\penalty0
+  (11):\penalty0 1382--1393, 2008.
+
+\bibitem[Grassl(2004)]{Grassl2004SICMUB6}
+Markus Grassl.
+\newblock On {SIC-POVMs} and {MUBs} in dimension 6, 2004.
+\newblock URL \url{https://arxiv.org/abs/quant-ph/0406175v2}.
+\newblock \url{https://arxiv.org/abs/quant-ph/0406175v2}.
+
+\bibitem[Hales et~al.(2017)Hales, Adams, Bauer, Dang, Harrison, Hoang,
+  Kaliszyk, Magron, McLaughlin, Nguyen, et~al.]{Hales2017}
+Thomas Hales, Mark Adams, Gertrud Bauer, Tat~Dat Dang, John Harrison, Le~Truong
+  Hoang, Cezary Kaliszyk, Victor Magron, Sean McLaughlin, Tat~Thang Nguyen,
+  et~al.
+\newblock A formal proof of the {Kepler} conjecture.
+\newblock \emph{Forum of Mathematics, Pi}, 5:\penalty0 e2, 2017.
+
+\bibitem[Hales(2005)]{Hales2005}
+Thomas~C. Hales.
+\newblock A proof of the {Kepler} conjecture.
+\newblock \emph{Annals of Mathematics}, 162\penalty0 (3):\penalty0 1065--1185,
+  2005.
+
+\bibitem[Higham(2002)]{Higham2002Accuracy}
+Nicholas~J. Higham.
+\newblock \emph{Accuracy and Stability of Numerical Algorithms}.
+\newblock Society for Industrial and Applied Mathematics, Philadelphia, PA, 2
+  edition, 2002.
+\newblock ISBN 978-0-89871-521-7.
+\newblock \doi{10.1137/1.9780898718027}.
+\newblock \url{https://doi.org/10.1137/1.9780898718027}.
+
+\bibitem[{IEEE}(2019)]{IEEE7542019}
+{IEEE}.
+\newblock {IEEE} standard for floating-point arithmetic.
+\newblock IEEE Std 754-2019 (Revision of IEEE Std 754-2008), 2019.
+\newblock URL \url{https://standards.ieee.org/ieee/754/6210/}.
+\newblock \url{https://standards.ieee.org/ieee/754/6210/}.
+
+\bibitem[Ivanovi{\'c}(1981)]{Ivanovic1981StateDetermination}
+I.~D. Ivanovi{\'c}.
+\newblock Geometrical description of quantal state determination.
+\newblock \emph{Journal of Physics A: Mathematical and General}, 14\penalty0
+  (12):\penalty0 3241--3245, 1981.
+\newblock \doi{10.1088/0305-4470/14/12/019}.
+\newblock URL \url{https://doi.org/10.1088/0305-4470/14/12/019}.
+\newblock \url{https://doi.org/10.1088/0305-4470/14/12/019}.
+
+\bibitem[Jaming et~al.(2009)Jaming, Matolcsi, M{\'o}ra, Sz{\"o}ll{\H o}si, and
+  Weiner]{JamingEtAl2009}
+Philippe Jaming, M{\'a}t{\'e} Matolcsi, P{\'e}ter M{\'o}ra, Ferenc Sz{\"o}ll{\H
+  o}si, and Mih{\'a}ly Weiner.
+\newblock A generalized {Pauli} problem and an infinite family of
+  {MUB}-triplets in dimension 6.
+\newblock \emph{Journal of Physics A: Mathematical and Theoretical},
+  42\penalty0 (24):\penalty0 245305, 2009.
+\newblock \doi{10.1088/1751-8113/42/24/245305}.
+\newblock URL \url{https://arxiv.org/abs/0902.0882v2}.
+\newblock \url{https://arxiv.org/abs/0902.0882v2}.
+
+\bibitem[Jaming et~al.(2010)Jaming, Matolcsi, and
+  M{\'o}ra]{JamingMatolcsiMora2010}
+Philippe Jaming, M{\'a}t{\'e} Matolcsi, and P{\'e}ter M{\'o}ra.
+\newblock The problem of mutually unbiased bases in dimension 6.
+\newblock \emph{Cryptography and Communications}, 2\penalty0 (2):\penalty0
+  211--220, 2010.
+\newblock \doi{10.1007/s12095-010-0023-1}.
+\newblock URL \url{https://arxiv.org/abs/1201.0640v1}.
+\newblock \url{https://arxiv.org/abs/1201.0640v1}.
+
+\bibitem[Klappenecker and R{\"o}tteler(2004)]{KlappeneckerRotteler2004}
+Andreas Klappenecker and Martin R{\"o}tteler.
+\newblock Constructions of mutually unbiased bases.
+\newblock In \emph{Finite Fields and Applications}, volume 2948 of
+  \emph{Lecture Notes in Computer Science}, pages 137--144. Springer, 2004.
+\newblock \doi{10.1007/978-3-540-24633-6_10}.
+\newblock URL \url{https://arxiv.org/abs/quant-ph/0309120}.
+\newblock \url{https://arxiv.org/abs/quant-ph/0309120}.
+
+\bibitem[Matolcsi et~al.(2026)Matolcsi, Matszangosz, Varga, and
+  Weiner]{MatolcsiEtAl2026}
+M{\'a}t{\'e} Matolcsi, {\'A}kos~K. Matszangosz, D{\'a}niel Varga, and
+  Mih{\'a}ly Weiner.
+\newblock Triplets of mutually unbiased bases.
+\newblock \emph{Journal of Algebraic Combinatorics}, 63:\penalty0 26, 2026.
+\newblock \doi{10.1007/s10801-026-01506-x}.
+\newblock URL
+  \url{https://link.springer.com/article/10.1007/s10801-026-01506-x}.
+\newblock Article 26.
+  \url{https://link.springer.com/article/10.1007/s10801-026-01506-x}.
+
+\bibitem[McNulty and Weigert(2026)]{McNultyWeigert2026Review}
+Daniel McNulty and Stefan Weigert.
+\newblock Mutually unbiased bases in composite dimensions---a review.
+\newblock \emph{Quantum}, 10:\penalty0 2051, 2026.
+\newblock \doi{10.22331/q-2026-04-01-2051}.
+\newblock URL \url{https://doi.org/10.22331/q-2026-04-01-2051}.
+\newblock \url{https://doi.org/10.22331/q-2026-04-01-2051}.
+
+\bibitem[{OpenAI}(2026)]{OpenAIMUB2026}
+{OpenAI}.
+\newblock {The maximum number of mutually unbiased bases in dimension six}.
+\newblock OpenAI Math Release preprint, \url{https://github.com/openai/math},
+  September 2026.
+\newblock 24 September 2026, 76 pages.
+
+\bibitem[Wootters and Fields(1989)]{WoottersFields1989}
+William~K. Wootters and Brian~D. Fields.
+\newblock Optimal state-determination by mutually unbiased measurements.
+\newblock \emph{Annals of Physics}, 191\penalty0 (2):\penalty0 363--381, 1989.
+\newblock \doi{10.1016/0003-4916(89)90322-9}.
+\newblock URL \url{https://doi.org/10.1016/0003-4916(89)90322-9}.
+\newblock \url{https://doi.org/10.1016/0003-4916(89)90322-9}.
+
+\bibitem[Zauner(1999)]{Zauner1999}
+Gerhard Zauner.
+\newblock \emph{{Quantendesigns: Grundz{\"u}ge einer nichtkommutativen
+  Designtheorie}}.
+\newblock PhD thesis, Universit{\"a}t Wien, 1999.
+\newblock URL \url{https://arnold-neumaier.at/ms/zauner.pdf}.
+\newblock See Section 3.3, p.~57, for the dimension-six MUB conjecture.
+  \url{https://arnold-neumaier.at/ms/zauner.pdf}.
+
+\bibitem[Zauner(2011)]{Zauner2011}
+Gerhard Zauner.
+\newblock Quantum designs: Foundations of a noncommutative design theory.
+\newblock \emph{International Journal of Quantum Information}, 9\penalty0
+  (1):\penalty0 445--507, 2011.
+\newblock \doi{10.1142/S0219749911006776}.
+\newblock URL
+  \url{https://www.gerhardzauner.at/documents/gz-quantumdesigns.pdf}.
+\newblock English translation of the 1999 doctoral thesis.
+  \url{https://www.gerhardzauner.at/documents/gz-quantumdesigns.pdf}.
+
+\end{thebibliography}

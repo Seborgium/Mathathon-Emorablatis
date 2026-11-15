@@ -1,0 +1,13 @@
+quantity,value,note
+numerator N*v.c bound,113.12,A.3: residual magnitude below 112 (norm<1.01 dir)
+support bound before division,3,A.3: 'the support before division is below three'
+skipped |a| > .999e-6,9.99e-7,at an accepted divisor
+largest quotient 3/|a|,3.003e+06,A.3: below 3e6
+largest midpoint quotient,1.121e+08,A.3: below 1.2e8
+division rounding at that scale,2.22e-16*1.12e8=2.49e-08,
+endpoint inflation,1e-5,A.3
+slack ratio,402,
+"E at R=.126, w=1e-4",0.12600073,
+L = ceil(E/1e-4 + .500001),1261,paper prints L <= 1262
+axis indices 2L+1,2523,paper prints 2524
+verdict,harmless over-estimate,"of one axis index; not worth a change, worth a footnote"

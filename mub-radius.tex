@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=3pt}
+
+\title{\bfseries Why $0.032$\\[6pt]
+\large\normalfont Notes on a parameter of OpenAI, \emph{The maximum number of\\[1pt]
+mutually unbiased bases in dimension six}, \S2.4 and \S3.1}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+The objection is right. In my previous note the floor $N\ge47$ came from $N\ge 3/(2R_s)$, and $R_s$
+was assumed. That is a relation between two free parameters, not a derivation of either. The preprint
+does not derive them either: it says, in as many words, ``Set $R=0.032$'' (and, earlier, ``Set
+$N=112$''). What can be done is to say what the two numbers \emph{are}, which quantities each one
+bounds, and why each is squeezed from both sides. Then the honest conclusion is that $(N,R_s)$ is a
+joint budget whose feasible set is a rectangle, and $(112,0.032)$ is one point in it.
+
+\section*{1.\ What $0.032$ measures}
+
+The seed ball is a statement of \emph{uncertainty}: Proposition 2.10 certifies that each of the nine
+seed phases of an exact Hadamard matrix lies within $0.032$ cycles of some recorded centre, that is,
+within
+\[
+R_s=2\pi r_s=2\pi(0.0320001)=0.201
+\]
+radians. Section 3 then spends that uncertainty, once, in the chord bound: writing $E',B',C'$ for the
+seed blocks of an exact matrix and $E_0,B_0,C_0$ for the centre's,
+\begin{equation}\label{eq:chord}
+e_1^2+(b_1')^2+(c_1')^2=\norm{\Delta E}_F^2+\norm{\Delta B}_F^2+\norm{\Delta C}_F^2\le\norm{s}^2\le R_s^2 ,
+\end{equation}
+by the chord bound $\abs{e^{ix}-1}\le\abs{x}$. Every later estimate in Stages A and B is a value
+computed at the centre \emph{plus a multiple of $R_s$}; the cleanest instance is
+\begin{equation}\label{eq:Astar}
+A_0=\norm{E_0}_{\mathrm{op}}=\sqrt{2+\abs{1+a}}\,,
+\qquad A_*=\min\bigl(2,\;A_0+R_s\bigr),
+\end{equation}
+where $A_*$ bounds $\norm{E'}_{\mathrm{op}}$ for the exact matrix: the displacement costs $R_s$, and
+the alternative bound $2$ holds for any $2\times2$ matrix of unit entries.
+
+So $R_s$ is not a resolution parameter like $N$; it is an \emph{error budget in radians}, and the
+question ``why $0.032$'' is the question ``why is $0.2$ radians of uncertainty affordable downstairs,
+and why is less of it unaffordable upstairs''.
+
+\section*{2.\ What bounds $R_s$ from above: the checks must stay conclusive}
+
+Each check in Stage A has a threshold, and each threshold is approached by the exact matrix at a rate
+proportional to $R_s$. Three examples, all from \S3:
+\begin{itemize}
+\item \emph{Frame conditioning.} The frame built from a unit $4$-vector $p$ has squared singular
+values $4\pm\abs{S}$, $S=\sum_jp_j$, and the pseudo-inverse that compresses the unknown block is
+\[
+M(M^*M)^{-1}=\frac{1}{16-\abs{S}^2}\bigl(4\mathbf 1-p\overline S,\;4p-\mathbf 1S\bigr).
+\]
+and the check needs $\abs{S}<4$ with a margin: the denominator is small exactly when the frame is
+nearly degenerate, and a displacement of $R_s$ moves $S$ by $O(R_s)$.
+\item \emph{Rank.} With $m_B=\sigma_{\min}(B_0)$, $m_C=\sigma_{\min}(C_0)$ and $m=\min(m_B,m_C)>0$,
+the projections $P_B=I-G_BB_0$ need $m>0$ to be defined at all.
+\item \emph{Compression.} The trace defect $q$ of $6I-Y^*Y$ and the distance $p\le q/(\sqrt6+\sqrt{6-q})$
+of the compressed block from $\sqrt6\,U(2)$ both grow with $R_s$; the paper's parameter range has
+$q<0.32$ and $p\lesssim0.09$.
+\end{itemize}
+None of these yields a closed-form ceiling on $R_s$. Each says: \emph{for every retained centre, $R_s$
+must be smaller than that centre's margin divided by the constant with which the displacement enters
+it}. The admissible maximum is therefore the minimum over some hundreds of thousands of centres, which
+is a computed number, not a derived one. It is also the reason the paper checks each centre
+individually and keeps a failed centre \emph{unresolved} instead of excluding it: a failed check is
+evidence about $R_s$, never a proof about Hadamards.
+
+\section*{3.\ What bounds $R_s$ from below: the cover must be affordable}
+
+The seed set is not nine-dimensional: a dephased Hadamard matrix has $25$ phases and the orthogonality
+conditions are $21$ real equations, so off the singular loci the set is \emph{four}-dimensional.
+Covering a four-dimensional set by balls of radius $R_s$ costs about $R_s^{-4}$ balls:
+
+\begin{center}
+\begin{tabular}{@{}ccccc@{}}
+\toprule
+$R_s$ (cycles) & seeds $\approx R_s^{-4}$ & smallest $N$ with $\tfrac32w\le R_s$ & boxes $\binom{N+4}{5}$ at that $N$\\
+\midrule
+$0.064$ & $6.0\times10^{4}$ & $24$ & $9.8\times10^{4}$\\
+$\mathbf{0.032}$ & $\mathbf{9.5\times10^{5}}$ & $\mathbf{47}$ & $\mathbf{2.3\times10^{6}}$\\
+$0.016$ & $1.5\times10^{7}$ & $94$ & $6.8\times10^{7}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Halving $R_s$ makes the seed cover sixteen times dearer and forces bins twice as fine. This keeps $R_s$
+from being tiny: the seed radius is what the cover can afford, the bin width is what the enumeration
+can afford, and $\tfrac32w\le R_s$ is the only inequality that couples them.
+
+\section*{4.\ So what is $0.032$?}
+
+It is the point where two costs of opposite sign meet, and the meeting point is found by measurement.
+\emph{Downstairs}, a smaller $R_s$ costs balls like $R_s^{-4}$ and forces finer bins like $R_s^{-1}$,
+so the first stage becomes unaffordable. \emph{Upstairs}, a larger $R_s$ inflates every Stage A
+bound by a multiple of it --- frame denominators, rank margins, $q$, $p$ --- and every Stage B and C
+ball downstream is measured against $R_s$ as well, so the per-seed work grows with $R_s$. The paper
+reports a feasibility check (Section 7) that fails if any centre remains unresolved; $0.032$ is a
+value at which it succeeds, and the ``why'' is that no larger value kept the checks conclusive and no
+smaller one kept the cover affordable.
+
+Two consequences worth stating. First, $0.032$ is not a threshold the mathematics depends on: any
+radius in the feasible window works, with Section A's constants recomputed. Second --- the correction
+to my earlier note --- $(112,\,0.032)$ is neither minimal nor canonical. At $R_s=0.032$ the coupling
+permits $N=47$, which would cut the enumeration from $1.60\times10^{8}$ boxes to $2.3\times10^{6}$,
+seventy times cheaper. The paper spends that factor on bins $2.4$ times finer than the coupling
+requires, because finer seeds mean smaller Taylor remainders, fewer $U(2)$ cells per seed and fewer
+vector balls in Stage C. That is tuning, not theorem, and one can disagree with it without touching the
+proof.
+
+\medskip
+\noindent
+The lesson is worth more than either number. There are two independent budgets --- how finely the
+space is cut, and how much error each cut is allowed to carry --- coupled by one geometric inequality
+(a box must fit in a ball). Neither follows from the other, and neither follows from the conjecture;
+both are chosen inside a window and then \emph{frozen}, because Section A is proved for those values.
+Asking ``why 112'' or ``why 0.032'' is asking for the window, and the window is the honest answer.
+
+\end{document}

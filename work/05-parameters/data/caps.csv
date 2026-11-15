@@ -1,0 +1,11 @@
+cap,where,observed_max,evidence,binding,at_half,at_double
+"5,000,000 graph steps",section 6.6 / 7.2 crun,"5,000,000 (163 records)","Table 1: 163 unresolved, all graph caps",YES,"2.5e6: more cap hits, larger fallback; soundness unaffected (cap -> unresolved, never negative)",1e7: probably resolves all 163 directly; saves 44.4 s of 4470 s = 1.0%
+256 records per batch file,section 5.6,256 (87 full batches + 107),"87*256+107 = 22,379",YES (by construction),128: 175 files instead of 88,512: 44 files
+"2,000,000 records per file",section 5.6,"22,379 (fine.bin)","87*256+107 = 22,379",no,1e6: still 2.2% used,4e6: no effect
+"8,000,000 concatenated inputs",section 5.6,"22,379 (initial C input)","largest concatenation = 22,379; final C = 1,127",no,4e6: 0.6% used,1.6e7: no effect
+"2,000,000 atlas Roots",section 5.6 / 4.7,"3,083 (764+774+757+788)",Table 1 A0..A3 outputs,no,1e6: 0.31% used,4e6: no effect
+"2,000,000 C bins",section 6.3 / 7.3,not reported; < 2e6,no initial bin overflow (7.5),no (but unmeasured),1e6: only matters if retained bins/record > 1e6,4e6: no effect
+2048 clusters,section 6.3 / 7.3,not reported; <= 2048,no clustering failures (7.5),unknown - plausibly near,1024: would trip if a record has >1024 bins at M=24 (see exp_stagec_cutoff),4096: only helps if F2's degenerate cutoff is left in place
+"1,000,000 extra nodes (A)",section 3.7 / 7.3,not reported; << 1e6 (EST 1e3-3e4/seed),zero unresolved A; throughput bound,no,5e5: no change (EST),"2e6: no change -- grid 64 still needs 2,097,152 cell tests"
+"50,000,000 boxes (B)",section 5.6,"at most 28,629,151 (pass 2, k=5)","L=23/31/11 with k<=5 => 23^5, 31^5=57.3% of cap","no, but within 1.75x","2.5e7: pass-2 k=5 (31^5=28,629,151) FAILS => bad parents",1e8: no k gain (31^6=8.9e8)
+depth 6,section 5.6,<= 5 (no depth-limit parent failures),a depth-limit hit fails the parent; zero bad parents,no,3: tau_1 needs 3 levels (tau/w = 5.38) => borderline,"12: pointless; needed levels are 3,2,2"

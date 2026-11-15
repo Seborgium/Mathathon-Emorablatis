@@ -1,0 +1,95 @@
+id	mapped_to	in_mine	in_canonical	status_mine	status_canonical	status_verdict	edges_mine_only	edges_canonical_only	edge_verdict	action
+sec-7.3	bounds-7.3	1	1	M	M	AGREE		flow-7.2	canonical-superset	see report
+cor-1.3	cor-1.3	1	1	M	C	canonical: C is right (inherits Thm 1.1 contract); mine over-tagged M	lem-1.2		mine-superset	see report
+cor-3.10	cor-3.10	1	1	M	M	AGREE	eq-3.26;eq-3.29		mine-superset	see report
+cor-5.8	cor-5.8	1	1	S	C	canonical: C (completed-run hypothesis); mine S. Adopt C, keep S-B-6 pointer	eq-5.26		mine-superset	see report
+def-2.1	def-2.1	1	1	M	D	canonical: D (definition). Mine overloaded M			same	see report
+def-4.1	def-4.1	1	1	M	D	canonical: D. Mine overloaded M		lem-2.3	canonical-superset	see report
+def-4.14	def-4.14	1	1	M	D	canonical: D. Mine overloaded M		lem-4.7	canonical-superset	see report
+eq-2.12	eq-2.12	1	1	M	M	AGREE			same	keep canonical
+eq-2.14	eq-2.14	1	1	M	M	AGREE			same	keep canonical
+eq-2.6	eq-2.6	1	1	M	M	AGREE			same	keep canonical
+eq-3.19	eq-3.19	1	1	M	M	AGREE	lem-3.4;lem-3.6	lem-3.5	different	see report
+eq-3.24	eq-3.24	1	1	M?	M?	AGREE	eq-3.19;lem-3.4;lem-3.6	lem-3.7	different	see report
+eq-3.26	eq-3.26	1	1	M	M	AGREE			same	keep canonical
+eq-3.29	eq-3.29	1	1	M	M	AGREE			same	keep canonical
+eq-4.17	eq-4.17	1	1	M	M	AGREE			same	keep canonical
+eq-4.20	eq-4.20	1	1	S	M	canonical: M (bound derived from chord argument) + CHECK row S-Root-2; mine S. Adopt both	lem-4.8	lem-4.9	different	see report
+eq-4.38	eq-4.38	1	1	M	M	AGREE	def-4.1	prop-4.13	different	see report
+eq-5.26	eq-5.26	1	1	M	C	canonical: C. Mine M	lem-5.3;lem-5.5;lem-5.6		mine-superset	see report
+eq-6.11	eq-6.11	1	1	M	M	AGREE			same	keep canonical
+eq-6.23	eq-6.23	1	1	M	M	AGREE			same	keep canonical
+eq-6.24	eq-6.24	1	1	M	M	AGREE			same	keep canonical
+eq-6.7	eq-6.7	1	1	M	M	AGREE			same	keep canonical
+fig-1	fig-1	1	0	M						ONLY-IN-MINE: no canonical counterpart; see report (a)
+fig-2	fig-2	1	0	M						ONLY-IN-MINE: no canonical counterpart; see report (a)
+sec-7.2	flow-7.2	1	1	S	E	different objects: mine = the five terminal conditions; canonical flow-7.2 = the control flow, tagged E (observed). Conditions are HYPOTHESIS (S-7-2). Recommend: split, and do not tag a specification E	run-7.5	prem-arith	different	see report
+tab-2	hashes-7.5	1	1	E	E	AGREE		run-7.5	canonical-superset	see report
+lem-1.2	lem-1.2	1	1	M	M	AGREE	def-2.1		mine-superset	see report
+lem-2.2	lem-2.2	1	1	M	M	AGREE			same	keep canonical
+lem-2.3	lem-2.3	1	1	M	M	AGREE	lem-2.2	def-2.1	different	see report
+lem-2.4	lem-2.4	1	1	M?	M?	AGREE		def-2.1	canonical-superset	see report
+lem-2.5	lem-2.5	1	1	M	M	AGREE			same	keep canonical
+lem-2.6	lem-2.6	1	1	M	M	AGREE		eq-2.7	canonical-superset	see report
+lem-2.7	lem-2.7	1	1	M	M	AGREE			same	keep canonical
+lem-2.8	lem-2.8	1	1	M	M	AGREE		eq-2.14	canonical-superset	see report
+lem-2.9	lem-2.9	1	1	M	M	AGREE	lem-2.7	eq-2.12	different	see report
+lem-3.1	lem-3.1	1	1	M	M	AGREE		def-2.1	canonical-superset	see report
+lem-3.2	lem-3.2	1	1	M	M	AGREE			same	keep canonical
+lem-3.3	lem-3.3	1	1	M	M	AGREE			same	keep canonical
+lem-3.4	lem-3.4	1	1	M	M	AGREE			same	keep canonical
+lem-3.5	lem-3.5	1	1	M	M	AGREE	lem-3.4	lem-3.3	different	see report
+lem-3.6	lem-3.6	1	1	M	M	AGREE	lem-3.5		mine-superset	see report
+lem-3.7	lem-3.7	1	1	M?	M?	AGREE	eq-3.19;eq-3.24	lem-3.4;lem-3.5;lem-3.6	different	see report
+lem-3.8	lem-3.8	1	1	M	M	AGREE	eq-3.19		mine-superset	see report
+lem-3.9	lem-3.9	1	1	M	M	AGREE			same	keep canonical
+lem-4.10	lem-4.10	1	1	M	M	AGREE	lem-4.11;lem-4.12		mine-superset	see report
+lem-4.11	lem-4.11	1	1	M	M	AGREE			same	keep canonical
+lem-4.12	lem-4.12	1	1	M	M	AGREE			same	keep canonical
+lem-4.15	lem-4.15	1	1	M	M	AGREE			same	keep canonical
+lem-4.3	lem-4.3	1	1	M	M	AGREE		def-2.1;def-4.1	canonical-superset	see report
+lem-4.4	lem-4.4	1	1	M	M	AGREE			same	keep canonical
+lem-4.7	lem-4.7	1	1	M	M	AGREE	lem-2.2	def-4.1	different	see report
+lem-4.8	lem-4.8	1	1	M	M	AGREE	eq-3.19	lem-3.8	different	see report
+lem-4.9	lem-4.9	1	1	S	M	canonical: M + S-Root-2 CHECK; mine S+HYPOTHESIS. Canonical stronger, adopt	eq-3.24;eq-4.20	prop-4.6	different	see report
+lem-5.1	lem-5.1	1	1	M	M	AGREE			same	keep canonical
+lem-5.3	lem-5.3	1	1	M	M	AGREE			same	keep canonical
+lem-5.4	lem-5.4	1	1	S	M	canonical: M + S-B-3 CHECK; mine S. Adopt both		def-4.14;eq-5.17;prop-5.2	canonical-superset	see report
+lem-5.5	lem-5.5	1	1	M	M	AGREE			same	keep canonical
+lem-5.6	lem-5.6	1	1	M	M	AGREE		lem-5.5	canonical-superset	see report
+lem-6.1	lem-6.1	1	1	M	M	AGREE			same	keep canonical
+lem-6.2	lem-6.2	1	1	M	M	AGREE		def-4.1;prem-arith	canonical-superset	see report
+lem-6.3	lem-6.3	1	1	M	M	AGREE			same	keep canonical
+lem-6.4	lem-6.4	1	1	S	M	canonical: M + S-C-3 CHECK; mine S. Adopt both (my own report already argued this)	lem-6.3	def-4.14	different	see report
+lem-6.5	lem-6.5	1	1	M	M	AGREE		lem-6.4	canonical-superset	see report
+lem-6.6	lem-6.6	1	1	M	M	AGREE	lem-6.3	lem-6.1	different	see report
+lem-6.7	lem-6.7	1	1	M	M	AGREE		lem-6.3	canonical-superset	see report
+lem-6.8	lem-6.8	1	1	M?	S	canonical: S with FORMALISE (S-C-4); mine M?. Canonical sharper; route fork see (c)		lem-6.5;lem-6.7	canonical-superset	see report
+lem-A.1	lem-a.1	1	1	S	S	AGREE		prem-arith	canonical-superset	see report
+lem-A.2	lem-a.2	1	1	S	S	AGREE		prem-arith	canonical-superset	see report
+lem-A.3	lem-a.3	1	1	S	S	AGREE		prem-arith	canonical-superset	see report
+tab-A12	margin-a.12	1	1	S	S	AGREE	sec-6.7	app-a4-a11;lem-a.2;lem-a.3	different	see report
+prop-2.10	prop-2.10	1	1	S	C	canonical: C. Mine S. Adopt C; code content carried by S-seed-5		eq-2.12;eq-2.14;eq-2.6;eq-2.7;lem-2.2	canonical-superset	see report
+prop-3.11	prop-3.11	1	1	S	C	canonical: C. Mine S. Adopt C; but see missing premise (d)		def-4.14;lem-3.1;lem-3.5;lem-3.6;lem-3.7;lem-3.8;lem-3.9	canonical-superset	see report
+prop-4.13	prop-4.13	1	1	M	M	AGREE	eq-4.38	lem-4.10	different	see report
+prop-4.16	prop-4.16	1	1	S	C	canonical: C. Mine S. Adopt C; but see missing premise (d)	def-4.14	lem-4.10;prop-4.13	different	see report
+prop-4.5	prop-4.5	1	1	M	M	AGREE			same	keep canonical
+prop-4.6	prop-4.6	1	1	S	S	AGREE	def-4.1;lem-4.4;lem-a.1	app-a4-a11;prem-arith	different	see report
+prop-5.2	prop-5.2	1	1	M	M	AGREE		eq-4.17	canonical-superset	see report
+prop-5.7	prop-5.7	1	1	S	C	canonical: C. Mine S. Adopt C; but see missing premise (d)	lem-5.3	def-4.14	different	see report
+prop-6.9	prop-6.9	1	1	S	C	canonical: C. Mine S. Adopt C	def-4.14;eq-6.11;eq-6.23;eq-6.24;eq-6.7	def-4.1;lem-6.1;lem-6.3;margin-a.12	different	see report
+rem-4.2	rem-4.2	1	1	M	M	AGREE			same	keep canonical
+tab-1	run-7.5	1	1	E	E	AGREE		flow-7.2	canonical-superset	see report
+sec-6.7	sec-6.7	1	0	S						ONLY-IN-MINE: no canonical counterpart; see report (a)
+thm-1.1	thm-1.1	1	1	C	C	AGREE	flow-7.2		mine-superset	see report
+thm-7.1	thm-7.1	1	1	C	C	AGREE		margin-a.12;prem-arith	canonical-superset	see report
+	app-a4-a11	0	1		S					ONLY-IN-CANONICAL: adds assumption; see report (a)
+	eq-2.7	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	eq-5.17	0	1		S					ONLY-IN-CANONICAL: adds equation; see report (a)
+	eq-6.12	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	prem-arith	0	1		E					ONLY-IN-CANONICAL: adds assumption; see report (a)
+	root-diff	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	root-disp-n	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	root-disp-s	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	root-suff	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)
+	stagec-iface	0	1		M					ONLY-IN-CANONICAL: adds equation; see report (a)

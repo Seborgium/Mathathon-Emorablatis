@@ -1,0 +1,191 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}
+
+\title{\bfseries Step 4 on one example\\[4pt]
+\large\normalfont the two graphs on the candidates of the Fourier pair in $\C^6$, and the pattern that is not there}
+\author{}\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+Step 4 decides the last question with a graph. Inside one certified region the first two bases are
+known only approximately; a vector unbiased to both is a \emph{candidate}; candidates are grouped into
+balls; and two graphs are built on the balls, with $O$ joining those that might be orthogonal and $U$
+those that might be unbiased. A third and a fourth basis would appear as two disjoint six-cliques in
+$O$ with all $36$ cross pairs in $U$. Because $O$ and $U$ are \emph{supersets} of the true relations,
+absence of that pattern is a proof and presence of it is not.
+
+\smallskip
+\noindent
+The example runs the whole of that on the most symmetric pair of bases in $\C^6$ --- the standard basis
+and the Fourier basis $F/\sqrt6$ --- because there the candidate set can be computed exactly rather
+than sampled.
+
+\key{1.\ The candidates, enumerated exactly}
+Unbiasedness to the standard basis forces $\abs{x_k}=1/\sqrt6$; write $x_k=\zeta^{a_k}/\sqrt6$ with
+$\zeta=e^{i\pi/6}$. Unbiasedness to the $j$-th Fourier column says
+\[
+\abs{\langle f_j,x\rangle}=\frac16\abs{\textstyle\sum_k\zeta^{a_k}\omega^{-jk}}=\frac1{\sqrt6}
+\quad\Longleftrightarrow\quad
+\Bigl|\textstyle\sum_k\zeta^{a_k-2jk}\Bigr|^2=6 ,
+\]
+and a sum of twelfth roots of unity is compared with $6$ exactly, since
+$\abs{\sum_c n_c\zeta^c}^2=A+B\sqrt3$ with $A,B$ rational and computable from the counts $n_c$.
+Fixing $a_0=0$ (global phase) and enumerating all $12^5=248{,}832$ exponent tuples gives
+\[
+\textbf{12 candidate rays},\qquad 144\ \text{vectors counting all global phases},
+\]
+with exponent tuples $a_0,\dots,a_5$
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+$(0,1,0,9,4,9)$ & $(0,1,4,9,4,1)$ & $(0,3,4,3,0,7)$\\
+$(0,3,8,3,0,11)$ & $(0,5,0,9,8,9)$ & $(0,5,8,9,8,5)$\\
+$(0,7,0,3,4,3)$ & $(0,7,4,3,4,7)$ & $(0,9,4,9,0,1)$\\
+$(0,9,8,9,0,5)$ & $(0,11,0,3,8,3)$ & $(0,11,8,3,8,11)$
+\end{tabular}
+\end{center}
+Every one of the $72$ checks $\abs{\cdot}^2=6$ was done in exact arithmetic; the residual is the
+integer $0$.
+
+\emph{A detail worth knowing.} On the \emph{sixth}-root lattice $\zeta^{a}=\omega^{a/2}$ the same
+enumeration returns \textbf{no candidate at all}, because there $\abs{\sum}^2$ is a value of the norm
+form $p^2+pq+q^2$ and $6$ is not one. The candidates appear only when half-integer powers of
+$\omega$ are allowed. A search that assumes sixth-root phases would conclude, wrongly, that this pair
+of bases admits no third basis.
+
+\key{2.\ The graph $O$: 48 edges, and four bases}
+Two candidates are joined in $O$ when the inner product is \emph{exactly} zero (checked in
+$\mathbb{Z}[\zeta]$, by reducing $\sum_k\zeta^{a_k-b_k}$ to the basis $1,\zeta,\zeta^2,\zeta^3$ and
+testing four integer coefficients). The result is a very regular graph:
+\begin{center}\small
+\begin{tabular}{@{}lr@{}}
+\toprule
+candidates & $12$\\
+pairs of candidates & $66$\\
+edges of $O$ (exactly orthogonal pairs) & $48$\\
+degree of every vertex & $8$ \quad(each candidate is orthogonal to $8$ of the other $11$)\\
+six-cliques in $O$ (orthonormal bases) & $\mathbf{4}$\\
+seven-cliques in $O$ & $0$\\[2pt]
+\multicolumn{2}{@{}l}{\small the four bases, as candidate indices:}\\
+& $\{0,2,5,6,8,11\},\ \ \{0,3,5,7,8,10\},\ \ \{1,2,4,6,9,11\},\ \ \{1,3,4,7,9,10\}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Four bases, and only four: since $4\times6=24=2\times12$, each candidate belongs to exactly two of
+them. This is the structure the doc warns about --- single candidates are plentiful and bases are not.
+
+\key{3.\ The graph $U$: empty, and the pattern with it}
+Two candidates are joined in $U$ when $\abs{\langle x,y\rangle}=1/\sqrt6$ exactly. The answer is
+striking:
+\[
+\textbf{0 edges in }U\text{ among the }66\text{ pairs},
+\qquad\text{and the }66\text{ inner products take exactly two moduli:}
+\]
+$\abs{\langle x,y\rangle}=0$ for $48$ pairs and $\abs{\langle x,y\rangle}=1/\sqrt3$ for the other
+$18$. There is no third value and nothing in between: the candidates of this pair sit at one of two
+distances from each other, and $1/\sqrt3$ is as close to $1/\sqrt6$ as any pair ever gets.
+So the fourth basis cannot be assembled, and it fails at the first opportunity: not merely do the four
+bases fail to be pairwise unbiased, no two candidates whatever are unbiased. Of the six pairs of
+bases, two are disjoint as sets of vectors, and each of those has
+\[
+0\ \text{of}\ 36\ \text{cross pairs unbiased}
+\]
+--- the pattern of Step~4 is absent from this candidate set, and the region is excluded.
+
+The distance to the threshold is worth putting in the run's own units. The edge test forms
+$t=\abs{\langle x,y\rangle}$ and compares
+\[
+\text{disto}=\frac{\sqrt6\,t}{2\pi}\quad\text{and}\quad
+\text{distu}=\frac{\abs{\sqrt6\,t-1}}{2\pi}
+\]
+with the ball radius. For a pair of candidates taken from one basis, $t=2.9\times10^{-17}$, so
+$\text{disto}=1.1\times10^{-17}$: the $O$ edge is kept with the whole margin $2\times10^{-7}$. For the
+\emph{closest} of the $36$ cross pairs, $t=1/\sqrt3=0.57735$, so
+\[
+\text{distu}=0.065924 ,
+\]
+which is $3\times10^{5}$ times the largest threshold any ball of the run's size could give. The
+unbiasedness test is not failing marginally here; it is failing by two thirds of the range.
+
+\key{4.\ What a radius does to an edge}
+The graphs are built on balls, not points, and an edge is kept unless it can be \emph{refuted}. Rotate
+one entry of a vector of a basis by $\delta$ cycles: the centre moves by
+$\sqrt2\,\abs{e^{2\pi i\delta}-1}/\sqrt6$, and the $O$ edge to its orthogonal partner decays linearly
+in $\delta$:
+\begin{center}\small
+\begin{tabular}{@{}r r r l r@{}}
+\toprule
+$\delta$ (cycles) & displacement of the centre & $\text{disto}$ & $O$ edge at radius $0$ & radius that keeps it\\
+\midrule
+$10^{-7}$ & $2.57\times10^{-7}$ & $4.08\times10^{-8}$ & kept & $0$\\
+$10^{-6}$ & $2.57\times10^{-6}$ & $4.08\times10^{-7}$ & \textbf{refused} & $2.08\times10^{-7}$\\
+$10^{-5}$ & $2.57\times10^{-5}$ & $4.08\times10^{-6}$ & refused & $3.88\times10^{-6}$\\
+$10^{-4}$ & $2.57\times10^{-4}$ & $4.08\times10^{-5}$ & refused & $4.06\times10^{-5}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Two readings. The exclusion is sharp: a single entry rotated by one part in $10^6$ of a turn already
+destroys the orthogonality, so at radius zero the graph is exactly the truth. And the exclusion is
+fragile in the right direction: with balls of radius $2\times10^{-7}$ the same edge is kept, because
+the ball might contain an exactly orthogonal pair. That is a false positive --- permitted, since $O$
+must be a superset --- and it is why the answer at a coarse region is always ``unresolved'', never
+``excluded''.
+
+\key{5.\ The other thirty-six candidates}
+The enumeration of \S1 is exhaustive only over twelfth roots of unity, and nothing forces a candidate
+onto a lattice: the condition is two modulus conditions on six continuous phases. In fact the lattice
+set is a proper subset. A multistart search of the six phase equations ($4000$ random starts, final
+residual below $10^{-14}$; \texttt{step4\_example.py -{}-slow}) finds
+\[
+\textbf{48}\ \text{candidates up to global phase},\qquad
+300\ \text{exactly orthogonal pairs},\qquad 16\ \text{orthonormal bases},
+\]
+and still \textbf{no} pair of candidates unbiased: the pattern is absent there too. This is the count
+quoted in \texttt{mub-step4.pdf} from the literature, and the two enumerations agree once the lattice
+is dropped: the search puts exactly $12$ of the $48$ on the twelfth-root lattice --- the same twelve
+that \S1 enumerates --- and the other $36$ on none of the lattices of order $6,12,24$ or $48$, which
+is why no lattice enumeration could have found them.
+
+The consequence is worth stating plainly, because it cuts both ways. The graph of \S2--3 is a genuine
+\emph{subgraph} of the real one: its four bases are real bases and its empty $U$ is really empty on
+those twelve vectors, so the exclusion it supports is sound --- but a lattice-restricted search is
+blind to thirty-six vertices, and a pattern living on them would not be seen. Coverage, not direction,
+is what a lattice costs; that is why the run's Stage~C works with balls and real iteration rather than
+with a lattice.
+
+\key{6.\ What these numbers do not say}
+Everything above is for \emph{one} pair of bases and for candidates on the twelfth-root lattice. The
+enumeration is exhaustive \emph{on that lattice} and therefore cannot rule out candidates with
+arbitrary phases; the count $12$ is a lower bound on the candidate set, and a larger set would only add
+vertices and edges, which is harmless for the direction of the implication but would change every
+number in the tables. In the run, Stage~C does this for $23{,}506$ regions with balls, not points, and
+its graph has hundreds of vertices, not twelve or forty-eight. Finally, the absence of the pattern here is a fact
+about this candidate list; it becomes a proof only when the list is known to contain every candidate
+of the region, which is what Step~3's certified balls provide.
+
+\medskip
+\noindent\footnotesize\textit{Provenance.} The two graphs, the pattern, and the edge tests are Step~4's
+as described in \texttt{mub-step4.pdf} and preprint \S6; the pairtest constants ($10^{-10}$, $2\times
+10^{-7}$, the factor $\sqrt6$) are those of the documented implementation \texttt{stageC.cpp}. Every
+number above was printed by \texttt{examples/step4\_example.py}, which carries its own exact
+arithmetic in $\mathbb{Z}[\zeta_{12}]$ and takes about one second; the $48$-candidate count of \S5
+comes from a multistart Newton search, \texttt{examples/step4\_example.py -{}-slow}, and reproduces
+the literature count quoted in \texttt{mub-step4.pdf}.
+
+\end{document}

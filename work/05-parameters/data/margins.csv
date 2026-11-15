@@ -1,0 +1,24 @@
+path,established_error,margin,ratio
+"Candidate external tangent error (rad)",1.200e-04,1.500e-04,1.2500
+"A flat norm",1.000e-06,1.000e-05,10.0000
+"A directional comparison",4.000e-06,1.000e-04,25.0000
+"C joint support",1.000e-08,3.000e-07,30.0000
+"Root identity Frobenius check",5.000e-08,2.000e-06,40.0000
+"B cross-Gram spectral perturbation",2.000e-09,1.000e-07,50.0000
+"Candidate direct support",2.000e-06,1.000e-04,50.0000
+"G entry error, second choice",1.000e-09,1.000e-07,100.0000
+"seed dual support",1.000e-04,1.000e-02,100.0000
+"Root orthogonal check",1.000e-10,1.000e-08,100.0000
+"shared-coordinate endpoints",1.000e-07,1.000e-05,100.0000
+"C direct / directional comparison",1.000e-09,2.000e-07,200.0000
+"B projected normal / local update",5.000e-11,1.000e-08,200.0000
+"tensor transformed row bound",1.000e-06,2.000e-04,200.0000
+"spectral row-sum bound",3.000e-13,1.000e-10,333.3333
+"seed direct support",1.000e-11,1.000e-08,1000.0000
+"Root horizontal check",1.000e-11,1.000e-08,1000.0000
+"spectral fourth-norm bound",1.000e-10,2.000e-07,2000.0000
+"shared-coordinate numerator",3.500e-11,1.000e-07,2857.1429
+"G entry error, first choice",1.000e-11,1.000e-07,10000.0000
+"bootstrap update",1.000e-12,1.000e-08,10000.0000
+"B local update (A.9)",1.000e-13,1.000e-08,100000.0000
+"seed gap / direct support",1.000e-14,1.000e-08,1000000.0000

@@ -1,0 +1,12 @@
+k2: work/10-recreate/findings/K2-1..4.md; logs: work/10-recreate/crew/m2/.
+
+BLOCKERS
+H-2: argv is `covrun centers.txt` and A0..A3 read centers.txt, so replaying in the recorded layout puts the reference at covrun's output path; covout.cpp:141 fopen("w") truncates it. Symlink/hardlink seeding makes R2 self-comparison and destroys the reference on a wrong output (r2demo.sh: PASS 6/6, DESTROYED 2/6).
+H-1: R2 has no input, so its evidence is the binary's provenance, which nothing pins; the upstream binary that made it is at .scratch/gh/build/covrun.
+H-7: results/*.txt cannot come from the published sources (covout.cpp:132,139 vs `xs 22829`, `completed_write`) yet check_records.py:240-244 fullmatches them; checkerdemo.sh rejects all five published-format substitutions. R6's "shipped checker passes on our output" is unsatisfiable: gate data plus the recorded checked151744086/centers249878.
+
+MAJOR: H-3 stale artefact + ignored rc (3/5 stubs pass); H-4 three untracked reference copies, one named mine-centers.txt; H-5 `--check` never reads tree_sha1, a tampered pin passes; H-6 no negative control (two mutants supplied, 0.005 s and 0.019 s); H-8 `[ ! -s f ]` passes for missing files, exactly the eight empty bad files; H-11 glob-driven file lists miss missing batches (7/8, PASS).
+
+MINOR: H-9 no pow(x,2) test though both cover-square sites are libm calls (pow!=x*x 1765/4e6); H-10 build-tree hazards; H-12 `set -e` dies at the first recorded rc-1 command (15 of 100).
+
+Escalate: H-2.

@@ -1,0 +1,77 @@
+{
+ "scope": "two specific formerly tensor-C-unresolved records; conditional on the quoted preprint lemmas; not whole Root census",
+ "records": [
+  {
+   "file": "coarse0.bin",
+   "index": 678,
+   "map": {
+    "i": 2,
+    "j": 4,
+    "rot": 2,
+    "trans": 1,
+    "neg": 0
+   },
+   "phase_image_exact_bitwise": true,
+   "projector_delta_squared_fraction": [
+    154226384458449405493647287522396282572343545809,
+    28269553036454149273332760011886696253239742350009903329945699220681916416
+   ],
+   "sqrt_delta_upper_dyadic": [
+    5851934432825815,
+    79228162514264337593543950336
+   ],
+   "q_residual_upper": "77968482086956403992368514205401/170141183460469231731687303715884105728",
+   "sum_upper_le_id": true,
+   "id": 2.0000000698255162e-06,
+   "tensor_witness_at_q_pass": "pass",
+   "mutation_classes_rejected": [
+    "M*1.2",
+    "M[0][0]+=1e-3",
+    "mnorm*0.99",
+    "C*0.99"
+   ],
+   "lemma_hypotheses_not_reproved": [
+    "Lemma 4.4 remainder constants",
+    "Lemma 4.7 transport and phase equivalence"
+   ],
+   "not_original_M": "this proven proof uses a explicitly constructed rescaled M, not a recovered original source M",
+   "scope_note": "the produced Root witness is existential; C is not recovered bitwise from stored P alone"
+  },
+  {
+   "file": "coarse3.bin",
+   "index": 33,
+   "map": {
+    "i": 0,
+    "j": 1,
+    "rot": 0,
+    "trans": 1,
+    "neg": 0
+   },
+   "phase_image_exact_bitwise": true,
+   "projector_delta_squared_fraction": [
+    3565331013182321692380841216536579464599277547,
+    883423532389192164791648750371459257913741948437809479060803100646309888
+   ],
+   "sqrt_delta_upper_dyadic": [
+    5033209763159983,
+    79228162514264337593543950336
+   ],
+   "q_residual_upper": "155936962801600431433093111998297/340282366920938463463374607431768211456",
+   "sum_upper_le_id": true,
+   "id": 2.0000000765617147e-06,
+   "tensor_witness_at_q_pass": "pass",
+   "mutation_classes_rejected": [
+    "M*1.2",
+    "M[0][0]+=1e-3",
+    "mnorm*0.99",
+    "C*0.99"
+   ],
+   "lemma_hypotheses_not_reproved": [
+    "Lemma 4.4 remainder constants",
+    "Lemma 4.7 transport and phase equivalence"
+   ],
+   "not_original_M": "this proven proof uses a explicitly constructed rescaled M, not a recovered original source M",
+   "scope_note": "the produced Root witness is existential; C is not recovered bitwise from stored P alone"
+  }
+ ]
+}

@@ -1,0 +1,275 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{needspace}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Frob}{\mathrm{F}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\U}{U}
+\newcommand{\key}[1]{\par\Needspace{5\baselineskip}\medskip\noindent{\normalsize\bfseries #1}\par\nobreak\vspace{-1pt}}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+
+\newtcolorbox{recap}[1][]{colback=black!3,colframe=black!55,fonttitle=\bfseries,
+  left=6pt,right=6pt,top=5pt,bottom=5pt,
+  title={Step 1 in brief: everything from it that is used below},#1}
+
+\title{\bfseries Step 2 of 5: the dimension collapse\\[5pt]
+\large\normalfont Companion to \texttt{mub-outline.pdf}, Figure 1; preprint \S3.1--3.3 (Lemmas 3.1--3.3)\\[3pt]
+\normalsize\itshape A version that assumes only school mathematics, with a summary of Step 1}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.4em}
+
+\noindent\textbf{What is assumed.} Complex numbers and their moduli, matrix multiplication, the
+conjugate transpose $A^*$ (transpose, then conjugate every entry), orthonormal bases, $2\times2$
+determinants, and solving two equations in four unknowns. No eigenvalues, singular values or positive
+definite matrices are assumed: the one $2\times2$ fact needed is proved in \S4.
+
+\begin{recap}
+\small
+\textbf{The problem.} Two orthonormal bases of $\C^6$ are \emph{unbiased} if every scalar product
+$\inner{b}{c}=\sum_j\overline{b_j}c_j$ between a vector of one and a vector of the other has modulus
+$1/\sqrt6$. The theorem is that no four
+orthonormal bases of $\C^6$ are pairwise unbiased.
+
+\textbf{The object.} A unitary change of coordinates (one that preserves all lengths and angles) makes
+the first basis the standard basis
+$e_1,\dots,e_6$; the second is then the six columns of $H/\sqrt6$. Being unbiased to the first basis
+says $\abs{H_{ij}}=1$ for all $i,j$, and being orthonormal says $H^*H=6I_6$. So the second basis is a
+single matrix $H$, all of whose entries have modulus one and whose columns are orthogonal of length
+$\sqrt6$.
+
+\textbf{Dephasing.} Multiplying row $i$ of $H$ by a unit complex number, and column $j$ by another,
+preserves both properties. Choose them so that the first row and the first column of $H$ are all $1$;
+then eleven of the $36$ phases are fixed and $25$ remain, in the $5\times5$ block left after deleting
+the first row and column.
+
+\textbf{The seed.} The canonical ordering of Step 1 selects two rows and two columns of $H$; permuting
+rows and columns (harmless) brings them to the front. Nine of the $25$ phases then sit in the first row
+and the first column of that $5\times5$ block:
+\[
+a;\quad b_0,b_1,b_2,b_3;\quad c_0,c_1,c_2,c_3 ,
+\]
+with $a$ counted once. These nine numbers are the \emph{seed}; the other sixteen entries form the
+$4\times4$ block $D'$.
+
+\textbf{What Step 1 proved.} There is a \emph{finite} list of centres $u$, each a list of nine phases, such that every exact $H$,
+after the row and column permutations of that arrangement, has its nine seed phases within Euclidean
+distance $r_s=0.032$ cycles, that is $R_s=2\pi r_s=0.201$ radians, of those of some centre $u$. In one line, how: order
+the six phases of two rows and of two columns canonically, cut each circle into $112$ bins, and
+discard a box only when a necessary condition fails: $112^9\approx2.8\times10^{18}$ naive boxes become
+about $1.6\times10^8$. A centre is a rational point chosen by the search and need not be the seed of any Hadamard matrix.
+Step 1 says nothing about $D'$.
+
+\textbf{The one inequality carried over.} If two phases differ by $\delta$ radians, the corresponding
+unit complex numbers differ by at most $\delta$ (a chord is no longer than its arc). Summing the nine
+squared differences gives the \emph{chord bound}
+\begin{equation}\label{eq:chord}
+\norm{\Delta E}_F^2+\norm{\Delta B}_F^2+\norm{\Delta C}_F^2\le R_s^2,
+\end{equation}
+where $E',B',C'$ are the $2+4$ blocks of $H'$ (written out in \S1), $E_0,B_0,C_0$ the corresponding
+blocks of the centre, $\Delta E=E'-E_0$ and so on, and
+$\norm{M}_F^2=\sum_{ij}\abs{M_{ij}}^2$ is the sum of squared moduli. Nothing else about the seed is
+used below.
+\end{recap}
+
+\par\medskip\noindent\textbf{What this step receives.} One seed ball: nine phases known to within
+$R_s=0.201$ radians of a centre, and nothing known about the sixteen entries of $D'$.
+
+\par\smallskip\noindent\textbf{What it must produce.} A description of \emph{all} fillings of $D'$ that
+can be covered by finitely many cells; the answer is that every completion gives a point of the
+four-dimensional group $\U(2)$, at a computable distance.
+
+\key{1.\ Where the unknown entries sit}
+
+Write the matrix in $2+4$ block form, after the permutations of the canonical arrangement:
+\[
+H'=\begin{pmatrix}E'&B'\\ C'&D'\end{pmatrix},\qquad
+E'=\begin{pmatrix}1&1\\ 1&a\end{pmatrix},\quad
+B'=\begin{pmatrix}1&1&1&1\\[2pt] b_0&b_1&b_2&b_3\end{pmatrix},\quad
+C'=\begin{pmatrix}1&c_0\\ \vdots&\vdots\\ 1&c_3\end{pmatrix},
+\]
+with $D'$ a full $4\times4$ block. The primes are only labels. Of the twenty entries of $E',B',C'$,
+eleven are $1$ and nine are the seed; the sixteen entries of $D'$ are unknown.
+
+The columns of $H'$ are orthogonal and have length $\sqrt6$, that is $H'^*H'=6I_6$; since
+$H'/\sqrt6$ is then unitary, its rows are orthogonal as well, $H'H'^*=6I_6$. Reading the first
+equation in $2+4$ blocks, the two blocks that involve $D'$ and that are used below are
+\begin{equation}\label{eq:blocks}
+E'^*B'+C'^*D'=0\quad(2\times4),\qquad B'^*B'+D'^*D'=6I_4 .
+\end{equation}
+(The remaining block involving $D'$ is the mirror image read from $H'H'^*=6I_6$ and is not used.)
+
+\key{2.\ Two two-dimensional solution spaces}
+
+$B'$ is $2\times4$, and its two rows $(1,1,1,1)$ and $(b_0,\dots,b_3)$ are not proportional: if they
+were, all $b_j$ would equal one number $b$, and orthogonality of the first two rows of $H'$,
+$1+a+4b=0$, would give $\abs{1+a}=4>2$, impossible since $\abs a=1$. So $B'v=0$ is two independent
+equations in four unknowns and its solutions form a two-dimensional space $\ker B'$. The same
+argument with the first two columns (whose block has rows $(1,1,1,1)$ and $(\bar c_0,\dots,\bar c_3)$,
+so proportionality would again force $1+a+4c=0$) shows that the solutions of $C'^*u=0$ form a
+two-dimensional space $\ker C'^*$.
+
+Both arguments use that $H'$ is exact. A centre need not be a Hadamard matrix, so at the centre the
+same two statements are \emph{checked} with room to spare rather than derived; if either check fails,
+the seed is left unresolved and nothing below applies to it. The frames are therefore orthonormal
+bases $u_1,u_2$ of $\ker B_0$ and $w_1,w_2$ of $\ker C_0^*$, the centre's planes, put side by side as
+$4\times2$ matrices
+\[
+K_B=(u_1\;\;u_2),\qquad K_C=(w_1\;\;w_2),\qquad K_B^*K_B=K_C^*K_C=I_2 .
+\]
+The paper calls $K_B,K_C$ the \emph{frames}. They are computed once and held fixed for the whole
+ball; all that is needed is solving two linear systems.
+
+\key{3.\ Exact seeds: the block becomes a unitary matrix}
+
+Suppose first that the seed is exactly the centre's. Let $v\in\C^4$ be nonzero with $B'v=0$. The
+second equation of \eqref{eq:blocks} gives
+\[
+v^*D'^*D'v=6v^*v-v^*B'^*B'v=6\norm{v}^2,
+\]
+so $\norm{D'v}=\sqrt6\,\norm{v}$; and the first gives $C'^*D'v=-E'^*B'v=0$, so $D'v\in\ker C'^*$.
+Thus
+
+\begin{center}
+\emph{$D'$ maps the plane $\ker B'$ onto the plane $\ker C'^*$ and multiplies every length by
+exactly $\sqrt6$.}
+\end{center}
+
+\noindent Define $Y=K_C^*D'K_B$, a $2\times2$ matrix. If $v=K_Bc$ with $c\in\C^2$, then
+$K_C^*D'v=Yc$, and since $D'v\in\ker C'^*$ and $K_C^*$ preserves lengths on that plane,
+\[
+\norm{Yc}=\norm{K_C^*D'K_Bc}=\norm{D'K_Bc}=\sqrt6\,\norm{c}\qquad(c\in\C^2).
+\]
+Hence $Y^*Y=6I_2$, that is $V=Y/\sqrt6$ satisfies $V^*V=I_2$, so $V\in\U(2)$. Sixteen unknown phases
+have produced four real numbers.
+
+\key{4.\ The price of knowing the seed only approximately}
+
+Now the seed of $H'$ is merely within $R_s$ of the centre's, so the frames $K_B,K_C$ belong to the
+centre and $B',C'$ differ from $B_0,C_0$ by $\Delta B,\Delta C$. Repeat the computation of \S3
+without assuming the errors vanish. Substituting $D'^*D'=6I_4-B'^*B'$ into
+$Y^*Y=K_B^*D'^*K_CK_C^*D'K_B$, and writing $P_C=I_4-K_CK_C^*$ (which deletes the part in the plane
+$\ker C_0^*$), gives
+\begin{equation}\label{eq:defect}
+6I_2-Y^*Y=K_B^*B'^*B'K_B+K_B^*D'^*P_CD'K_B=M_1^*M_1+M_2^*M_2
+\end{equation}
+with $M_1=B'K_B$ and $M_2=P_CD'K_B$. A sum of matrices of the form $M^*M$ satisfies
+$z^*(6I_2-Y^*Y)z\ge0$ for every $z\in\C^2$. Its trace (the sum of the two diagonal entries) is
+\[
+\tr(6I_2-Y^*Y)=\norm{B'K_B}_F^2+\norm{P_CD'K_B}_F^2
+\le (b_1')^2+\Bigl(\frac{A_*b_1'+\sqrt6\,c_1'}{m_C}\Bigr)^2\le q,
+\]
+where $b_1'=\norm{\Delta B}_F$, $c_1'=\norm{\Delta C}_F$, $m_C>0$ is the least amount by which
+$C_0^*$ stretches a vector orthogonal to $\ker C_0^*$ (checked at the centre), and
+\begin{equation}\label{eq:q}
+q=R_s^2\Bigl(1+\frac{A_*^2+6}{m_C^2}\Bigr).
+\end{equation}
+Here $A_*$ is a bound on $\norm{E'z}$: since every entry of $E'$ has modulus one, $A_*=2$ always
+suffices, and the paper uses the smaller $\min(2,A_0+R_s)$, where $A_0$ is the largest amount by
+which the centre's $E_0$ stretches a vector.
+
+Here is the estimate, the only one in the step (Lemma 3.2). \emph{First term.} $B_0K_B=0$, so
+$\norm{B'K_B}_F=\norm{\Delta BK_B}_F\le b_1'$. \emph{Second term.} Let $z=D'K_Bw$ with $\norm w=1$.
+Since $C_0^*$ kills the plane $\ker C_0^*$, $C_0^*z=C_0^*P_Cz$, and by the definition of $m_C$
+applied to $P_Cz$, which is orthogonal to $\ker C_0^*$, $\norm{P_Cz}\le\norm{C_0^*z}/m_C$. By
+\eqref{eq:blocks}, $C_0^*D'K_B=-E'^*\Delta BK_B-\Delta C^*D'K_B$ (substitute $B'=B_0+\Delta B$ and
+$C'=C_0+\Delta C$, and use $B_0K_B=0$), and the two terms on the right are at
+most $A_*b_1'$ and $\sqrt6\,c_1'$, because $\norm{D'u}\le\sqrt6\norm u$ for every $u$ (as
+$D'^*D'=6I_4-B'^*B'$). Squaring, summing over the two columns of $K_B$, and applying Cauchy--Schwarz
+and \eqref{eq:chord} gives the bound.
+
+\smallskip
+\noindent Now the bookkeeping of \S3 pays off. One fact about $2\times2$ matrices is needed: if $A^*=A$,
+then $A=W\diag(\mu_1,\mu_2)W^*$ with $W$ unitary and $\mu_j$ real. Indeed, for
+$A=\begin{pmatrix}x&z\\ \bar z&y\end{pmatrix}$ with $x,y\in\R$, a nonzero $v$ with $Av=\mu v$ exists
+exactly when $\det(A-\mu I)=0$, because a $2\times2$ matrix with determinant $0$ has a nonzero kernel;
+that equation is $\mu^2-(x+y)\mu+(xy-\abs z^2)=0$, whose discriminant $(x-y)^2+4\abs z^2$ is
+non-negative, so both roots are real. If the roots differ, the corresponding vectors are orthogonal,
+since $(\mu_1-\mu_2)\inner{v_1}{v_2}=\inner{Av_1}{v_2}-\inner{v_1}{Av_2}=0$ when $A^*=A$; if they
+coincide, $A=\mu I$ and any orthonormal pair will do. Applied to $A=Y^*Y$: the numbers
+$\mu_j=\norm{Yw_j}^2$ are non-negative, $Y$ stretches by $\sqrt{\mu_j}$ along $w_j$, and
+$\mu_1+\mu_2=\tr A$.
+
+\smallskip
+\noindent Put $\ell_j=6-\mu_j$. Then $\ell_j\ge0$ and, by \eqref{eq:defect},
+$\ell_1+\ell_2=\tr(6I_2-Y^*Y)\le q<6$, so $\mu_j\ge6-q>0$. Set
+$V=YW\diag(\mu_1^{-1/2},\mu_2^{-1/2})W^*$. Then $V^*V=I_2$, and $YW$ has orthogonal columns of
+lengths $\sqrt{\mu_j}$, so $YW=W''\diag(\sqrt{\mu_1},\sqrt{\mu_2})$ for a unitary $W''$ and
+\[
+Y-\sqrt6\,V=W''\diag\bigl(\sqrt{\mu_1}-\sqrt6,\ \sqrt{\mu_2}-\sqrt6\bigr)W^*,
+\qquad
+\norm{Y-\sqrt6\,V}_F^2=\sum_{j=1}^2\bigl(\sqrt{\mu_j}-\sqrt6\bigr)^2 .
+\]
+Since $\sqrt6-\sqrt{\mu_j}=\ell_j/(\sqrt6+\sqrt{\mu_j})\le\ell_j/(\sqrt6+\sqrt{6-q})$,
+\begin{equation}\label{eq:p}
+\norm{Y-\sqrt6\,V}_F\ \le\ \frac{\ell_1+\ell_2}{\sqrt6+\sqrt{6-q}}\ \le\
+p:=\frac{q}{\sqrt6+\sqrt{6-q}} .
+\end{equation}
+In the range used by the paper, $q<0.32$, hence $p<0.067$: the compressed block is not merely close
+to a rigid motion, it is at a computed distance from one.
+
+\key{5.\ Four parameters are few enough to cover}
+
+$\U(2)$ is the set of $2\times2$ complex matrices $V$ with $V^*V=I_2$, that is, the linear maps of
+$\C^2$ that preserve all lengths and angles. A $2\times2$ complex matrix is eight real numbers, and
+$V^*V=I_2$ is four real equations, so four real parameters remain. They can be written out: with
+$e(x)=e^{2\pi ix}$, every element of $\U(2)$ is
+\[
+V=e(\alpha)\begin{pmatrix}e(\beta)\cos2\pi t&e(\gamma)\sin2\pi t\\[1pt]
+-e(-\gamma)\sin2\pi t&e(-\beta)\cos2\pi t\end{pmatrix},
+\qquad 0\le\alpha\le\tfrac12,\quad 0\le t\le\tfrac14,\quad 0\le\beta,\gamma\le1,
+\]
+and a direct check shows that the two rows are orthonormal, so all these matrices are unitary.
+Conversely, every $V\in\U(2)$ has this form: $\abs{\det V}=1$, so with $\alpha\in[0,\tfrac12]$ chosen
+by $e(2\alpha)=\det V$ the matrix $V_0=e(-\alpha)V$ has determinant $1$, hence $V_0^{-1}=V_0^*$, and
+comparing this with the $2\times2$ inverse formula gives $V_0=\begin{pmatrix}z&w\\-\bar w&\bar
+z\end{pmatrix}$ with $\abs z^2+\abs w^2=1$; writing $z=e(\beta)\cos2\pi t$ and
+$w=e(\gamma)\sin2\pi t$ with $0\le t\le\tfrac14$ gives the display. So the four parameters are four
+angles, each in a bounded interval, and $\U(2)$ is closed and bounded. Step 3 cuts each of the four intervals
+into finitely many cells; a product of four cells is a cell of $\U(2)$, and finitely many cells cover
+all of it.
+
+Counting the freedom: $25=9+16$ phases, nine in a ball and sixteen in $D'$. What the rest of the
+proof keeps from $D'$ is only $Y$: every completion produces one, and $Y^*Y=6I_2$ cuts its eight real
+entries down to four; many
+blocks give the same $Y$, which costs nothing, since a necessary description may forget information.
+So a completion is described by nine numbers in a ball and a point of a closed and bounded
+four-dimensional group --- small enough to cover by finitely many cells, as a sixteen-dimensional
+space would not be. Nothing here is special to dimension six except the $2+4$ arithmetic.
+
+\key{6.\ What is computed, and what is proved}
+
+The frames, $m_C$, $q$ and the point $V$ are computed in floating point; the inequality \eqref{eq:p},
+checked with an explicit margin (Appendix A of the preprint), is what makes them usable. Two checks
+can fail, and both lead to refusal rather than exclusion: if $B_0$ or $C_0$ has no two-dimensional
+kernel with room to spare (its rows nearly proportional; for a block with unit entries this is the
+$|S|<4$ of the exercise), the frames are not defined; if $q\ge6$,
+then $Y$ need not be invertible and \eqref{eq:p} says nothing. Either way the seed is left
+\emph{unresolved} --- refined later, never excluded --- and a run that ends with an unresolved seed
+has not finished the proof. A failed check is never a proof of anything.
+
+\medskip
+\noindent\textit{Exercise.} (a) Check \eqref{eq:blocks} by multiplying out $H'^*H'=6I_6$ in blocks.
+(b) With $S=\sum_jb_j$, show that $B'B'^*=\begin{pmatrix}4&\bar S\\ S&4\end{pmatrix}$, so the stretching
+factors of $B'$ are $\sqrt{4\pm\abs S}$, and that for an exact $H$ they lie between $\sqrt2$ and
+$\sqrt6$. (c) Show that \eqref{eq:p} is sharp: for $\ell_1=q$, $\ell_2=0$ both sides are equal.
+
+\end{document}

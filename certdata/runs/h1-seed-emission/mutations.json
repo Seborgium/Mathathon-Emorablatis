@@ -1,0 +1,442 @@
+{
+  "baseline": "158 pairs: all prefix duals proved; all structural checks passed",
+  "mutations": 62,
+  "refused": 62,
+  "all_refused": true,
+  "cases": [
+    {
+      "label": "dual-08-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":131.61935188992925,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "dual-08-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":436.30245651656168,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "dual-08-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16096.197135864913,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "dual-08-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":1107.054576345997,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "dual-13-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":131.68293273236148,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 1 xi 0"
+    },
+    {
+      "label": "dual-13-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":436.05473859850628,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 1 xi 0"
+    },
+    {
+      "label": "dual-13-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16096.369693295295,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 1 xi 0"
+    },
+    {
+      "label": "dual-13-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":662.53179016868842,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 1 xi 0"
+    },
+    {
+      "label": "dual-19-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":131.55587255831821,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 2 xi 0"
+    },
+    {
+      "label": "dual-19-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":435.8649229232206,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 2 xi 0"
+    },
+    {
+      "label": "dual-19-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16096.228033532623,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 2 xi 0"
+    },
+    {
+      "label": "dual-19-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":218.3220132591359,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 2 xi 0"
+    },
+    {
+      "label": "dual-56-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4134.5667135553122,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 3 xi 1"
+    },
+    {
+      "label": "dual-56-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":446.06954832417705,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 3 xi 1"
+    },
+    {
+      "label": "dual-56-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16100.813963720155,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 3 xi 1"
+    },
+    {
+      "label": "dual-56-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":1112.7040734330053,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 3 xi 1"
+    },
+    {
+      "label": "dual-61-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4136.2535307808394,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 4 xi 1"
+    },
+    {
+      "label": "dual-61-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":444.712469917475,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 4 xi 1"
+    },
+    {
+      "label": "dual-61-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":135.63185468981106,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 4 xi 1"
+    },
+    {
+      "label": "dual-61-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":219.37546069885352,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 4 xi 1"
+    },
+    {
+      "label": "dual-67-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4136.2333413457754,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 5 xi 1"
+    },
+    {
+      "label": "dual-67-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":446.55499256435075,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 5 xi 1"
+    },
+    {
+      "label": "dual-67-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":12068.177899622226,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 5 xi 1"
+    },
+    {
+      "label": "dual-67-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":1451.0342137608532,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 5 xi 1"
+    },
+    {
+      "label": "dual-73-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4132.7354213593826,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 6 xi 1"
+    },
+    {
+      "label": "dual-73-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":444.45537745112262,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 6 xi 1"
+    },
+    {
+      "label": "dual-73-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16063.550282469707,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 6 xi 1"
+    },
+    {
+      "label": "dual-73-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":666.44821735835046,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 6 xi 1"
+    },
+    {
+      "label": "dual-96-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4134.9552318833394,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 7 xi 1"
+    },
+    {
+      "label": "dual-96-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":446.90375785046933,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 7 xi 1"
+    },
+    {
+      "label": "dual-96-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16101.127347386595,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 7 xi 1"
+    },
+    {
+      "label": "dual-96-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":667.97433712296549,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 7 xi 1"
+    },
+    {
+      "label": "dual-107-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4133.1353576415195,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 8 xi 1"
+    },
+    {
+      "label": "dual-107-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":444.80977463160406,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 8 xi 1"
+    },
+    {
+      "label": "dual-107-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16063.650304293433,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 8 xi 1"
+    },
+    {
+      "label": "dual-107-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":220.65820784951001,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 8 xi 1"
+    },
+    {
+      "label": "dual-108-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4133.0967059839295,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 9 xi 1"
+    },
+    {
+      "label": "dual-108-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":441.74690047812976,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 9 xi 1"
+    },
+    {
+      "label": "dual-108-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":133.63433926154656,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 9 xi 1"
+    },
+    {
+      "label": "dual-108-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":2002.0368967174363,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 9 xi 1"
+    },
+    {
+      "label": "dual-113-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4135.0324287139383,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 10 xi 1"
+    },
+    {
+      "label": "dual-113-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":447.08327310722217,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 10 xi 1"
+    },
+    {
+      "label": "dual-113-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":16100.972844398633,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 10 xi 1"
+    },
+    {
+      "label": "dual-113-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":223.35600859045479,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 10 xi 1"
+    },
+    {
+      "label": "dual-114-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4136.7390108346299,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 11 xi 1"
+    },
+    {
+      "label": "dual-114-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":447.61591441916721,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 11 xi 1"
+    },
+    {
+      "label": "dual-114-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":12118.744173036672,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 11 xi 1"
+    },
+    {
+      "label": "dual-114-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":1117.0362202319996,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 11 xi 1"
+    },
+    {
+      "label": "dual-144-component-0",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":4136.4944835175083,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 12 xi 1"
+    },
+    {
+      "label": "dual-144-component-1",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":444.76717362684019,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 12 xi 1"
+    },
+    {
+      "label": "dual-144-component-2",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":135.59077838876283,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 12 xi 1"
+    },
+    {
+      "label": "dual-144-component-3",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":1,\"undecided\":0,\"largest_upper_excess\":1555.7821439458035,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 12 xi 1"
+    },
+    {
+      "label": "future-retained-centre",
+      "kind": "structural",
+      "refused": true,
+      "returncode": 1,
+      "detail": "unknown outcome at 1"
+    },
+    {
+      "label": "nan-dual",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":0,\"undecided\":1,\"largest_upper_excess\":-0.069051743835268464,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "infinite-dual",
+      "kind": "dual",
+      "refused": true,
+      "returncode": 0,
+      "detail": "{\"duals_processed\":13,\"total_records_scanned\":158,\"duals\":13,\"proved\":12,\"failed\":0,\"undecided\":1,\"largest_upper_excess\":-0.069051743835268464,\"complete_stream\":true,\"mpfr\":\"4.2.2\"}\nunresolved/fail pair 0 xi 0"
+    },
+    {
+      "label": "wrong-outcome-tag",
+      "kind": "structural",
+      "refused": true,
+      "returncode": 1,
+      "detail": "unknown outcome at 0"
+    },
+    {
+      "label": "future-pair-X-index",
+      "kind": "structural",
+      "refused": true,
+      "returncode": 1,
+      "detail": ""
+    },
+    {
+      "label": "wrong-magic",
+      "kind": "structural",
+      "refused": true,
+      "returncode": -6,
+      "detail": ""
+    },
+    {
+      "label": "bad-X-count",
+      "kind": "structural",
+      "refused": true,
+      "returncode": -6,
+      "detail": ""
+    },
+    {
+      "label": "selected-position-corruption",
+      "kind": "filter",
+      "refused": true,
+      "returncode": 2,
+      "detail": "X traversal mismatch"
+    },
+    {
+      "label": "truncated-dual",
+      "kind": "structural",
+      "refused": true,
+      "returncode": -6,
+      "detail": "unexpected EOF"
+    },
+    {
+      "label": "deleted-pair",
+      "kind": "structural",
+      "refused": true,
+      "returncode": 1,
+      "detail": "{\"N\":112,\"Xtuples\":22829,\"pairs\":157,\"R\":8,\"C\":136,\"D\":13,\"cheap_exact_pass\":136,\"nonfinite_dual_v\":0,\"fresh_centres_declared\":9,\"centres_in_source\":9,\"complete_parse\":true}"
+    }
+  ]
+}

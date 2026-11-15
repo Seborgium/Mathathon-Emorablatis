@@ -1,0 +1,16 @@
+T0 recorded results verbatim
+   verdict: PASS within numerical consistency scope | None
+T1 covrun.txt in the published printf format (covout.cpp:139,130,132,142)
+   verdict: NOT ESTABLISHED | cover seed completion is absent or malformed
+T2 N-line counters kept, other covrun lines as recorded
+   verdict: NOT ESTABLISHED | cover terminal center count differs
+T2b 'xs' without the space
+   verdict: NOT ESTABLISHED | cover seed completion is absent or malformed
+T3 A0.txt in the published format (atlas.cpp:233,237)
+   verdict: NOT ESTABLISHED | unexpected A progress line: A0/0
+T4 C.batch0.txt in the published format (stageC.cpp:553,561)
+   verdict: NOT ESTABLISHED | unexpected C result line: C.batch0/0
+T5 Bfine.txt with the published time field (stageB.cpp:324)
+   verdict: NOT ESTABLISHED | unexpected B progress line: Bfine/0
+T6 restored
+   verdict: PASS within numerical consistency scope | None

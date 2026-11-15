@@ -1,0 +1,34 @@
+{
+ "C13_census_arithmetic": {
+  "records": 23506,
+  "completed_negatives": 23343,
+  "capped": 163,
+  "steps_completed_negatives": 2932018956,
+  "steps_capped_total": 815000163,
+  "capped_steps_uniform": [
+   5000001
+  ],
+  "pairs_completed_negatives": 622704036,
+  "adjacency_bytes": 350022800,
+  "O_plus_U": 357191053,
+  "records_with_O_plus_U_gt_pairs": 0,
+  "matches_probe_summary": {
+   "steps": true,
+   "pairs": true,
+   "adjacency": true,
+   "O_plus_U": true
+  },
+  "all_four_match": true
+ },
+ "C14_parent_order": {
+  "k_hist": {
+   "4": 163
+  },
+  "radius_hist": {
+   "0.016": 163
+  },
+  "all_target": true,
+  "all_k4": true,
+  "note": "stable_sort by decreasing radius therefore preserves argv order; the 15 files are passed in ASCII order bad10<bad3<...<bad84, each in record order"
+ }
+}

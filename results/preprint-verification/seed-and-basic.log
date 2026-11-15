@@ -1,0 +1,144 @@
+== seed witness hash
+6118607511
+de0d07909b8fb46500d383279923db68a5f94c644bb39f14e16253242c06ae87  certdata/runs/h1-seed-emission/seed.wit
+c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789  certdata/runs/h1-seed-emission/centers.txt
+== seed summary consistency
+H1 report verified and written: certdata/runs/h1-seed-emission/report.md
+== prefix and structure
+21581207f75618cc51f1e0f1a1650a1cb57591b777a72eb687d6471b4d2895bf  prefix2.wit
+a18521e20636d449141dd3a9024369e9c2df06a64195ba60ada4f09760c357ce  prefix2-centers.txt
+{"pairs_processed":151744086,"independent_X_membership":true,"invalid_Y":0,"gap_violations":0,"rigorously_disjoint":1160,"duplicate_pairs":0,"mandatory_eligible_pairs":151742926,"missing_mandatory":0,"complete_stream":true}
+{"duals_processed":105845442,"total_records_scanned":151744086,"duals":105845442,"proved":105845442,"failed":0,"undecided":0,"largest_upper_excess":-1.1131595859164135e-08,"complete_stream":true,"mpfr":"4.2.2"}
+{"N":112,"Xtuples":22829,"pairs":151744086,"R":249878,"C":45648766,"D":105845442,"cheap_exact_pass":45648766,"nonfinite_dual_v":0,"fresh_centres_declared":249878,"centres_in_source":249878,"complete_parse":true}
+== basic pair witness
+PASS 16o  pair(137, 84) claimed=excluded recheck=excluded 16o/tight: |margin| = 8.494366e-07
+PASS 16o  pair( 51, 49) claimed=excluded recheck=excluded 16o/hard: |margin| = 3.343698e-01
+PASS 16o  pair( 74, 37) claimed=retained recheck=retained 16o/near_retained: |margin| = 3.321225e-05
+PASS 16u  pair(153, 47) claimed=excluded recheck=excluded 16u/tight: |margin| = 8.774554e-06
+PASS 16u  pair( 51, 49) claimed=excluded recheck=excluded 16u/hard: |margin| = 1.752149e-01
+PASS 16u  pair(204, 54) claimed=retained recheck=retained 16u/near_retained: |margin| = 5.896859e-06
+PASS 20   pair(173, 29) claimed=excluded recheck=excluded 20/tight: |margin| = 2.873108e-05
+PASS 20   pair(117, 29) claimed=excluded recheck=excluded 20/hard: |margin| = 8.131967e-02
+PASS 20   pair(153, 62) claimed=retained recheck=retained 20/near_retained: |margin| = 3.573221e-07
+PASS 21   pair(187, 44) claimed=excluded recheck=excluded 21/tight: |margin| = 3.596107e-07
+PASS 21   pair( 71, 23) claimed=excluded recheck=excluded 21/hard: |margin| = 2.038471e-02
+PASS 21   pair(124, 93) claimed=retained recheck=retained 21/near_retained: |margin| = 5.980557e-06
+PASS sign-flip 16o  pair(137, 84) delta in [2.0938714067131511e-06, 2.0938714067146063e-06] (excluded -> retained)
+PASS sign-flip 16u  pair(153, 47) delta in [0.35193925065670018, 0.35193925065689091] (excluded -> retained)
+PASS sign-flip 20   pair(173, 29) delta in [5.0125349684525272e-05, 5.0125349684548555e-05] (excluded -> retained)
+PASS sign-flip 21   pair(187, 44) delta in [0.11206441388826366, 0.11206441388835903] (excluded -> retained)
+
+12 claims, 0 failures
+== basic pair all-pair census (f0#0)
+{
+ "record": "f0 record 0 of batches/f0.bin (212 balls, k=4, detail=1, M=12, layers=4, RB=.042)",
+ "dump": "runs/f0r0.emitted.txt",
+ "precision_bits": 200,
+ "n_balls": 212,
+ "n_pairs": 22366,
+ "populations": {
+  "16o": 22366,
+  "16u": 22366,
+  "20": 3760,
+  "21": 13112
+ },
+ "certified_exclusions": {
+  "16o": 18606,
+  "16u": 9254,
+  "20": 1032,
+  "21": 1619
+ },
+ "code_fired": {
+  "16o": 18606,
+  "16u": 9254,
+  "20": 1032,
+  "21": 1619
+ },
+ "code_fired_but_not_certified": {
+  "16o": [],
+  "16u": [],
+  "20": [],
+  "21": []
+ },
+ "certified_but_code_did_not_fire": {
+  "16o": [],
+  "16u": [],
+  "20": [],
+  "21": []
+ },
+ "unknown_interval": {
+  "16o": [],
+  "16u": [],
+  "20": [],
+  "21": []
+ },
+ "edge_violations": [],
+ "code_vs_exact_max_abs_gap": {
+  "mag": 1.7763568394002505e-15,
+  "disto": 1.6653345369377348e-16,
+  "distu": 1.942890293094024e-16,
+  "DUn": 4.440892098500626e-16,
+  "qU": 1.3877787807814457e-16,
+  "r": 1.000000013351432e-10,
+  "Sre": 1.7763568394002505e-15,
+  "Sim": 1.3322676295501878e-15
+ },
+ "loosest_certified": {
+  "16o": [
+   0.3343697993046123,
+   51,
+   49
+  ],
+  "16u": [
+   0.17521485621271696,
+   51,
+   49
+  ],
+  "20": [
+   0.08131966637432245,
+   117,
+   29
+  ],
+  "21": [
+   0.020384713516082353,
+   71,
+   23
+  ]
+ },
+ "tightest_certified": {
+  "16o": [
+   8.494366334751504e-07,
+   137,
+   84
+  ],
+  "16u": [
+   8.774554108737507e-06,
+   153,
+   47
+  ],
+  "20": [
+   2.8731077002129777e-05,
+   173,
+   29
+  ],
+  "21": [
+   3.5961067714393286e-07,
+   187,
+   44
+  ]
+ },
+ "gate_histogram": {
+  "both-distance-fail": 5494,
+  "20-reject": 1032,
+  "21-reject": 1619,
+  "Ojoint-reject": 784,
+  "Ujoint-reject": 1562,
+  "O-edge": 1944,
+  "U-edge": 9931
+ },
+ "code_edges": {
+  "O_directed": 3888,
+  "U_directed": 19862
+ }
+}
+COMPLETE

@@ -1,0 +1,1883 @@
+# claims.yaml -- T1 catalogue of "The maximum number of mutually unbiased bases in
+# dimension six" (OpenAI, 24 Sep 2026, 76 pp).
+# FROZEN AT GATE G0. Other teams cite ids from this file; they do not edit it.
+# Change requests: work/01-catalogue/changerequests/<team>.md
+version: 1
+paper: "The maximum number of mutually unbiased bases in dimension six (OpenAI, 24 Sep 2026)"
+source_text: ".scratch/mub6.txt (4164 lines, layout-preserving extraction of the PDF)"
+page_convention: >-
+  "p. N is the PDF page on which the statement begins, as located by pdftotext -layout on
+  .scratch/mub6.pdf (76 pages). Whether the printed footer of that page reads N or N-1 depends on
+  counting the unnumbered title page; both readings occur in the literature of this file, so section
+  and equation numbers are authoritative and page numbers are for navigation only. Page numbers inside
+  evidence strings may be one low in the appendix."
+status_key:
+  M: "mathematical statement with a proof in the paper; statement checked and the main steps re-derived (results/proof-claims.md)"
+  M?: "mathematical statement with a proof in the paper whose bookkeeping is long; sampled, not re-derived"
+  S: "assertion about what a named routine does; the source is not in the packet, so this is a specification claim"
+  C: "carries a hypothesis that a particular finite execution succeeded -- an event, not a mathematical condition"
+  E: "observed datum: counts, hashes, timings"
+  D: "definition or notation; no proof obligation. Listed because T2/T3/T4 must cite the exact statement."
+conventions:
+  status: >-
+    Each entry has exactly one status: the weakest tag on which the claim AS STATED depends.
+    The decomposition is in status_parts. So a coverage proposition whose argument is a proof but
+    whose hypothesis is a completed run is tagged C, and its status_parts reads "M: ... ; S: ... ; C: ...".
+  owner_team: >-
+    The team that must discharge or dispose of the claim next, not the team that proved it.
+    T1 catalogue owns nothing after G0 except this file; every entry below names a live owner.
+  depends_on: "ids in this file; the graph is work/01-catalogue/dependencies.dot and is acyclic"
+teams:
+  - T1 catalogue
+  - T2 checker
+  - T3 reference
+  - T4 lean
+  - T5 parameters
+  - T6 figures
+  - T7 quantum
+  - T8 paper
+claims:
+
+  # ------------------------------------------------------------------ 1
+  - id: thm-1.1
+    kind: theorem
+    title: "Computer-assisted: no four MUBs in dimension six"
+    paper_locator: "§1, Theorem 1.1, p. 3; restated as Theorem 7.1, §7.4, p. 52"
+    one_line_statement: >-
+      Under the arithmetic and compiler conditions of Appendix A, if the execution documented in
+      §7.5 satisfies every terminal condition of §7.2, then there do not exist four pairwise
+      mutually unbiased orthonormal bases of C^6; consequently N(6) = 3, where N(d) is the largest
+      cardinality of a family of pairwise MUBs in C^d (with Lemma 1.2 for the lower bound).
+    hypotheses:
+      - "binary64 arithmetic, round-to-nearest, no contraction and no fast-math reassociation, correctly rounded sqrt, masked exceptions, no flush-to-zero (Appendix A, §7.1)"
+      - "the seven sources of §7.1 compiled as recorded, and the bounded seven-stage control flow of §7.2"
+      - "every terminal condition of §7.2 holds on that run (five numbered conditions, p. 51)"
+    status: C
+    status_parts: >-
+      M: the implication from the coverage/exclusion propositions to the theorem (Lemma 1.2 and the
+      chain of §7.4). S: the seven routines behave as §§2-6 describe. C: the run closed. E: Table 1.
+    depends_on: [thm-7.1, lem-1.2]
+    owner_team: T8 paper
+    evidence: >-
+      §1 p. 2 statement; the whole of §§2-7; restated as Theorem 7.1 p. 52 with its proof pp. 52-53.
+      results/proof-claims.md §1 gives the six-link skeleton and tags every link.
+    open_questions: >-
+      The theorem's statement is honest (it names the execution) but its truth is not a function of
+      the mathematics alone: 4 of the 6 links are S or C. T8 must decide whether the final paper
+      states the theorem this way or replaces the S links by checkable inequalities (T2's format).
+
+  - id: lem-1.2
+    kind: lemma
+    title: "Three mutually unbiased bases in dimension six"
+    paper_locator: "§1.3, Lemma 1.2, p. 5"
+    one_line_statement: >-
+      There exist three pairwise mutually unbiased orthonormal bases of C^6: with
+      w = e^(2*pi*i/3), A_0 = I_2, A_1 = (1/sqrt2)[[1,1],[1,-1]], A_2 = (1/sqrt2)[[1,1],[i,-i]],
+      B_0 = I_3, B_1 = F = 3^(-1/2)(w^(jk)), B_2 = D F with D = diag(1,w,w), the three matrices
+      U_r = A_r tensor B_r, r = 0,1,2, are unitary with pairwise unbiased column bases.
+    hypotheses:
+      - "no hypothesis beyond d = 6 = 2*3; the construction is the tensor product of d = 2 and d = 3 complete sets"
+    status: M
+    status_parts: "M: the proof is a finite computation; the only non-immediate step is the Gauss sum (F^* D F)_{jk} = (1/3) sum_x w^(x^2+(k-j)x) with squared modulus 1/3 for k != j"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§1.3 pp. 5-6; independently recomputed in results/proof-claims.md §2 (values 1+2w and 2+w^2, each of modulus^2 3)"
+    open_questions: >-
+      None mathematically. Note the paper prints D = diag(1,w,w), not diag(1,w,w^2); results/proof-claims.md
+      records that the printed value is the corrected one. T4 should formalise exactly the printed D.
+
+  - id: cor-1.3
+    kind: corollary
+    title: "Adjoint-closed Cartan subalgebras of sl_6(C)"
+    paper_locator: "§1.4, Corollary 1.3, p. 6"
+    one_line_statement: >-
+      Under the arithmetic and compiler conditions of Appendix A and using the completed execution
+      of §7.5 as in Theorem 1.1: for every family of pairwise Killing-orthogonal Cartan subalgebras
+      of sl_6(C) that are all closed under one and the same standard adjoint X -> X^*, the family has
+      at most three members, and three is attained.
+    hypotheses:
+      - "same hypotheses as Theorem 1.1 (it is invoked)"
+      - "the reduction from MUBs to Cartan subalgebras of Boykin-Sitharam-Tiep-Wocjan [3, Thm 5.2]"
+    status: C
+    status_parts: "M: the key identity tr((bb^* - I/6)(cc^* - I/6)) = |<b,c>|^2 - 1/6 modulo the cited reduction. C: inherits Theorem 1.1"
+    depends_on: [thm-1.1]
+    owner_team: T7 quantum
+    evidence: "§1.4 p. 6; proof cites [3, Theorem 5.2]; identity verified in results/proof-claims.md §1"
+    open_questions: >-
+      Adds nothing to the MUB statement but is the paper's only non-trivial corollary, so T7 must decide
+      whether the final paper keeps it. If kept, the citation must be checked against [3] itself, which is
+      not in the packet.
+
+  # ------------------------------------------------------------------ 2
+  - id: def-2.1
+    kind: definition
+    title: "Complex Hadamard matrix; extendible"
+    paper_locator: "§2.1, Definition 2.1, p. 7"
+    one_line_statement: >-
+      H in C^{6x6} is called a complex Hadamard matrix here iff |H_ij| = 1 for all i,j and
+      H H^* = 6 I; it is extendible iff the standard basis together with the columns of H/sqrt6 are
+      contained in some family of four pairwise MUBs. (Remark, proved in the same paragraph: H H^* = 6I
+      forces H^* H = 6I because H is square, and every such H equals e(P) = (exp(2*pi*i*P_ij)) for a
+      real phase matrix P.)
+    hypotheses:
+      - "dimension fixed at 6 throughout"
+    status: D
+    status_parts: "D: the definition. The two appended facts (H^*H = 6I, existence of a real phase lift) are proved in one line each at p. 7"
+    depends_on: []
+    owner_team: T3 reference
+    evidence: "§2.1 p. 7; the phase-lift and square-matrix facts are stated there without numbering"
+    open_questions: >-
+      The word extendible is defined relative to the coordinate basis. Lemma 2.2 asserts invariance of
+      this notion under transposition, which is where the definition has to be read with care (see lem-2.2).
+
+  - id: lem-2.2
+    kind: lemma
+    title: "Equivalences"
+    paper_locator: "§2.1, Lemma 2.2, p. 7"
+    one_line_statement: >-
+      For every complex Hadamard H and every transformation Phi in the set {row permutation, column
+      permutation, multiplication of rows by unit scalars, multiplication of columns by unit scalars,
+      complex conjugation, transposition}: H is extendible iff Phi(H) is extendible.
+    hypotheses:
+      - "H is 6x6 complex Hadamard (Definition 2.1)"
+      - "extendibility is read after normalising the first basis to the coordinate basis, as in §2.1"
+    status: M
+    status_parts: "M: all six cases are reversible; transposition is the only one that needs the swapping argument"
+    depends_on: [def-2.1]
+    owner_team: T4 lean
+    evidence: "§2.1 pp. 7-8; results/proof-claims.md §2 records the transposition case (move to the pair (U^*,I))"
+    open_questions: "none"
+
+  - id: lem-2.3
+    kind: lemma
+    title: "Horizontal phase representatives"
+    paper_locator: "§2.1, Lemma 2.3, p. 7, eq. (2.1)"
+    one_line_statement: >-
+      The map Pi(z) = z - (row means) - (column means) + (grand mean) is the orthogonal projection of
+      R^{36} onto the horizontal subspace V = {z : all row sums and all column sums vanish}; hence
+      ||Pi z||_F <= ||z||_F. If two phase matrices differ by z then they are row/column rephasing
+      equivalent to matrices differing by Pi z, and the statement survives arbitrary entrywise integer
+      changes of the phase representatives.
+    hypotheses:
+      - "phase matrices are identified with vectors in R^36 in row-major order"
+    status: M
+    status_parts: "M: projection is checked by the two symmetries of the centring operator; the invariance is immediate"
+    depends_on: [def-2.1]
+    owner_team: T4 lean
+    evidence: "§2.1 p. 8, eq. (2.1); results/proof-claims.md §2 calls this the licence for all horizontal reasoning"
+    open_questions: "none"
+
+  - id: lem-2.4
+    kind: lemma
+    title: "Seed arrangement"
+    paper_locator: "§2.2, Lemma 2.4, p. 8, eqs. (2.3)-(2.5)"
+    one_line_statement: >-
+      For every exact complex Hadamard matrix there is an equivalent dephased representative and a
+      choice of a row pair attaining the minimum circular gap over all row and column pairs such that
+      the first row phase list is x = (0,x_1..x_5) with 0 <= x_1 <= ... <= x_5 <= 1, gap g_x = 1 - x_5,
+      and x_1 <= x_5 - x_4; and, after moving one of the five non-initial columns to position 2 and
+      permuting the last four rows, the second column is y = (0,xi,y_2..y_5) with 0 <= y_2 <= ... <= y_5,
+      xi the selected entry of x; moreover sum_j e(x_j) = 0, sum_j e(y_j) = 0 and g_y >= g_x.
+    hypotheses:
+      - "H exact (Definition 2.1), dephased so that its first row and column are 1"
+      - "the minimum-gap pair is chosen once and used for both the x and the y list"
+    status: M?
+    status_parts: "M?: three-step construction (min-gap pair, transpose if needed, orientation swap x'_i = x_5 - x_{5-i}); the orientation step is where a reader must check, and it is four lines"
+    depends_on: [lem-2.2, lem-2.3, def-2.1]
+    owner_team: T4 lean
+    evidence: "§2.2 pp. 8-9; proof pp. 9-10; results/proof-claims.md §2 (tagged M?)"
+    open_questions: >-
+      The statement quantifies over a choice (the selected column). Check that the selected position s
+      used by seeds::mk (first minimiser of |2 b_s + 1 - N|, p. 8) is one of the five non-initial columns
+      in the sense of the lemma; the paper says the selection "imposes no further condition on xi", so any
+      choice must work. T2 must confirm the code records the same s it used.
+
+  - id: lem-2.5
+    kind: lemma
+    title: "Stability of circular gaps"
+    paper_locator: "§2.2, Lemma 2.5, p. 9"
+    one_line_statement: >-
+      For every pair of circular multisets in R/Z and every delta >= 0: if each point of the first is
+      matched to a point of the second at circular distance at most delta, then every gap of the first
+      differs from the corresponding gap of the second by at most 2*delta.
+    hypotheses:
+      - "matching is a bijection between the multisets"
+    status: M
+    status_parts: "M: trim delta from each end of an empty arc"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§2.2 p. 9; proof four lines"
+    open_questions: "none"
+
+  - id: lem-2.6
+    kind: lemma
+    title: "Necessary midpoint gap filters"
+    paper_locator: "§2.2, Lemma 2.6, p. 9, eq. (2.8); filter (2.7) p. 7"
+    one_line_statement: >-
+      For every bin pair in the seed enumeration that contains lists x,y as in Lemma 2.4, with N = 112
+      and l the bin index of x_5: the midpoint gaps satisfy g_{x,mid} <= 1 - (l-1)/N and
+      g_{y,mid} >= 1 - (l+2)/N; and the index tuple satisfies a <= l - d + 1 and
+      a/N <= x_1 <= x_5 - x_4 <= (l+1-d)/N.
+    hypotheses:
+      - "x,y arising from an exact Hadamard as in Lemma 2.4"
+      - "bins of width w = 1/N, N = 112, closed, as in (2.6)"
+    status: M
+    status_parts: "M: Lemma 2.5 plus x_5 in [l/N,(l+1)/N]; the orientation restriction (2.7) is integral"
+    depends_on: [lem-2.4, lem-2.5, eq-2.6, eq-2.7]
+    owner_team: T4 lean
+    evidence: "§2.2 p. 9; results/proof-claims.md §2"
+    open_questions: "none"
+
+  - id: lem-2.7
+    kind: lemma
+    title: "Necessary sum test"
+    paper_locator: "§2.3, Lemma 2.7, p. 10, eqs. (2.10)-(2.11)"
+    one_line_statement: >-
+      Let w > 0, u in R^6, Delta in R^6 with |Delta_j| <= w/2 and 1 + sum_j e(u_j + Delta_j) = 0. Then
+      with c = (1 + sum_j e(u_j))/(2*pi*i) and J_j the realification of e(u_j):
+      ||c + J Delta|| <= 5*pi*w^2/4, and for every v in R^2,
+      |v.c| <= (5*pi*w^2/4)||v|| + (w/2) sum_j |v.J_j|.
+    hypotheses:
+      - "the vanishing-sum hypothesis 1 + sum_j e(u_j + Delta_j) = 0"
+      - "|Delta_j| <= w/2 for the six coordinates"
+    status: M
+    status_parts: "M: Taylor with |e''| = 4*pi^2; the division by 2*pi*i is what turns a vanishing sum into c + J Delta ~ 0"
+    depends_on: [eq-2.6]
+    owner_team: T4 lean
+    evidence: "§2.3 pp. 9-10; results/proof-claims.md §2 notes the paper does not state the division by 2*pi*i explicitly"
+    open_questions: >-
+      The dimension of the varying list: the paper's Lemma 2.7 sums over the five varying entries while the
+      seed normal form (2.3) has six entries with x_0 = 0 fixed. An audit (changerequests/T1-audit.md,
+      CR-T1A-7) reads u, Delta in R^5 with J a 2x5 realification, which is what (2.13)-(2.14) and
+      Lemma 2.9's J_* in R^{4x9} need. T4 must fix the index range from the PDF before formalising; the
+      inequality itself is unaffected (the fixed coordinate contributes |v.J_0| = 0 if J_0 = 0).
+
+  - id: lem-2.8
+    kind: lemma
+    title: "Shared-coordinate intervals"
+    paper_locator: "§2.3, Lemma 2.8, p. 10, eqs. (2.12)-(2.14)"
+    one_line_statement: >-
+      Let t index a shared entry of the two lists (t = s for the x list, t = 0 for the y list) and put
+      h = N(q - u) in [-1/2,1/2]^9, E = 5*pi/(4N). Every feasible displacement q satisfies, for every
+      v in R^2, |N v.c + (v.J_t) h_t| <= E||v|| + (1/2) sum_{j != t} |v.J_j|; if a = v.J_t != 0 and r
+      denotes the right side, then h_t lies in the closed interval [-Nv.c/a - r/|a|, -Nv.c/a + r/|a|].
+      Necessity: the intervals computed from the x list and from the y list must intersect.
+    hypotheses:
+      - "the list pair is a feasible bin pair (Lemma 2.7 applies to both)"
+      - "v.J_t != 0 for the direction actually used"
+    status: M
+    status_parts: "M: separate the shared term from (2.12), take the dot product with v, bound the rest"
+    depends_on: [lem-2.7, eq-2.12, eq-2.14]
+    owner_team: T4 lean
+    evidence: "§2.3 pp. 9-10; results/proof-claims.md §2"
+    open_questions: "none"
+
+  - id: lem-2.9
+    kind: lemma
+    title: "Support bounds for center reuse"
+    paper_locator: "§2.4, Lemma 2.9, p. 11, eqs. (2.17)-(2.19)"
+    one_line_statement: >-
+      Let u' be a previously retained midpoint with the same selected position s, k = N(u - u') in Z^9,
+      h = N(q - u) in [-1/2,1/2]^9. Every feasible displacement q of the current bin pair satisfies
+      N^2 ||q - u'||^2 = ||k + h||^2 <= ||k||^2 + 9/4 + 2 k.h; and for every v in R^4 the last term is
+      bounded by 2k.h <= sum_j |k_j| (2.18) and by
+      2k.h <= sum_j |k_j - (J^*_T v)_j| + 2 v.p_* + 2E(||v_X|| + ||v_Y||) (2.19), where v_X, v_Y are the
+      two real two-vector blocks of v.
+    hypotheses:
+      - "u' was retained with the same selected position s"
+      - "q is a feasible displacement of the current bin pair, so h = N(q-u) in [-1/2,1/2]^9"
+    status: M
+    status_parts: "M: expand ||k+h||^2 and bound 2k.h in two ways"
+    depends_on: [eq-2.12]
+    owner_team: T4 lean
+    evidence: "§2.4 p. 11; results/proof-claims.md §2"
+    open_questions: >-
+      (2.19) is the one place where the paper lets a stored dual proposal v be anything with entries in
+      modulus <= 1e4; the inequality is valid for every v, so the proposal method is irrelevant (T2 must
+      keep it that way: evaluate the inequality, do not trust the proposal).
+
+  - id: prop-2.10
+    kind: proposition
+    title: "Exhaustive seed cover"
+    paper_locator: "§2.4, Proposition 2.10, p. 12; arithmetic in §A.3, p. 58"
+    one_line_statement: >-
+      For every completed execution of the specified covout traversal under the arithmetic of
+      Appendix A: for every exact complex Hadamard matrix H there is an equivalent (Definition 2.1,
+      Lemma 2.2) Hadamard matrix whose nine seed coordinates (s; q as in (2.15)) lie in one of the
+      written rational midpoint balls, with the recorded selected position, at distance at most 0.032;
+      and after conversion of the centres to binary phases the radius 0.0320001 suffices.
+    hypotheses:
+      - "the traversal covout completed normally"
+      - "the enumeration visits every admissible bin tuple (2.6)-(2.7) and every matching y-tuple"
+      - "the arithmetic conditions of Appendix A hold"
+    status: C
+    status_parts: >-
+      M: induction over the traversal; a fresh centre is within sqrt9/(2N) = 3/224 < 0.032 and each
+      retained centre is certified by Lemma 2.9. S: seeds::build enumerates every tuple. C: covout closed.
+    depends_on: [lem-2.2, lem-2.4, lem-2.6, lem-2.7, lem-2.8, lem-2.9, eq-2.6, eq-2.7, eq-2.12, eq-2.14]
+    owner_team: T4 lean
+    evidence: "§2.4 pp. 11-12 (proof pp. 11-12); §A.3 pp. 58-59; Table 1 row 'Seed cover' p. 53"
+    open_questions: >-
+      The enumeration completeness (S) is the only unproved part; results/code-audit.md rates it UNCHK
+      but lists centres.txt as sufficient evidence. Disposition proposed in reports/T1-report.md.
+
+  - id: eq-2.6
+    kind: equation
+    title: "Closed bins"
+    paper_locator: "§2.2, eq. (2.6), p. 8"
+    one_line_statement: >-
+      With N = 112 and w = 1/N: for every b with 0 <= b < N the interval I_b = [b/N,(b+1)/N] is closed
+      and has midpoint u_b = (b+1/2)/N; the family {I_b} covers [0,1] including both endpoints, so every
+      phase has a bin index and boundary points may get two.
+    hypotheses:
+      - "N = 112 chosen in the run; the statement holds for every N >= 1"
+    status: M
+    status_parts: "M: trivial; load-bearing because closure and endpoint sharing is what makes the cover sound (an open bin would lose the torus boundary)"
+    depends_on: []
+    owner_team: T3 reference
+    evidence: "§2.2 p. 7"
+    open_questions: "none"
+
+  - id: eq-2.7
+    kind: equation
+    title: "Necessary integral restriction on the seed index tuple"
+    paper_locator: "§2.2, eq. (2.7), p. 9"
+    one_line_statement: >-
+      For every feasible seed with nondecreasing bin indices b_X = (a,b,c,d,l) of x_1..x_5:
+      a <= l - d + 1 and a/N <= x_1 <= x_5 - x_4 <= (l+1-d)/N.
+    hypotheses:
+      - "indices are nondecreasing, so the exact phases lie in their bins"
+      - "the orientation condition x_1 <= x_5 - x_4 of Lemma 2.4"
+    status: M
+    status_parts: "M: one-line interval arithmetic"
+    depends_on: [lem-2.4, eq-2.6]
+    owner_team: T4 lean
+    evidence: "§2.2 p. 7"
+    open_questions: "none"
+
+  - id: eq-2.12
+    kind: equation
+    title: "Grid-unit form of the sum test"
+    paper_locator: "§2.3, eq. (2.12), p. 10"
+    one_line_statement: >-
+      For every h = N*Delta with |h_j| <= 1/2: with E = 5*pi/(4N), ||J h + N c|| <= E, where c and J are
+      as in Lemma 2.7.
+    hypotheses:
+      - "the vanishing-sum hypothesis of Lemma 2.7"
+      - "|h_j| <= 1/2"
+    status: M
+    status_parts: "M: Lemma 2.7 multiplied by N"
+    depends_on: [lem-2.7]
+    owner_team: T4 lean
+    evidence: "§2.3 p. 9"
+    open_questions: "none"
+
+  - id: eq-2.14
+    kind: equation
+    title: "Closed interval constraint for the shared coordinate"
+    paper_locator: "§2.3, eq. (2.14), p. 10"
+    one_line_statement: >-
+      Let a = v.J_t != 0 and let r be the right side of (2.13). Then h_t lies in the closed interval
+      [-Nv.c/a - r/|a|, -Nv.c/a + r/|a|]; and for a feasible pair the intervals obtained from the x list
+      and from the y list intersect.
+    hypotheses:
+      - "a != 0"
+      - "Lemma 2.8 applies to both lists"
+    status: M
+    status_parts: "M: solve the scalar inequality of Lemma 2.8"
+    depends_on: [eq-2.12]
+    owner_team: T4 lean
+    evidence: "§2.3 p. 9"
+    open_questions: "none"
+
+  # ------------------------------------------------------------------ 3
+  - id: lem-3.1
+    kind: lemma
+    title: "Fixed frames"
+    paper_locator: "§3.1, Lemma 3.1, p. 13, eqs. (3.4)-(3.5)"
+    one_line_statement: >-
+      Let p in C^4 have unit-modulus entries, S = sum_j p_j, M = (1 p) the 4x2 matrix. Then the squared
+      singular values of M are 4 +/- |S|; if |S| < 4 then
+      M (M^* M)^{-1} = (16 - |S|^2)^{-1} (4*1 - p conj(S), 4p - 1 S) and there exists an orthonormal 4x2
+      matrix K with range K = ker M^* (constructible by Gram-Schmidt from 1/2, the normalised residual of
+      p and projected coordinate vectors with nonzero residuals).
+    hypotheses:
+      - "|p_j| = 1 for j = 1..4, i.e. the seed's upper rows are unit-modulus"
+      - "|S| < 4"
+    status: M
+    status_parts: "M: direct computation of M^*M and of the pseudo-inverse; the Gram-Schmidt claim is contingent on the residual being nonzero, which is where the frame check m > 1.25 enters"
+    depends_on: [def-2.1]
+    owner_team: T4 lean
+    evidence: "§3.1 pp. 12-13; §A.4 pp. 59-60 for the numerical frame check (m_B, m_C > 1.24 ideal, 16 - |S|^2 > 6.1)"
+    open_questions: >-
+      The lemma is about p with |S| < 4; the run needs the quantitative m_B, m_C > 0 and uses 1/m_B, 1/m_C
+      in every later bound. Those lower bounds are empirical frame-check outputs, not part of Lemma 3.1.
+
+  - id: lem-3.2
+    kind: lemma
+    title: "Polar comparison"
+    paper_locator: "§3.2, Lemma 3.2, p. 14, eqs. (3.8)-(3.11)"
+    one_line_statement: >-
+      For every feasible completion of the seed (H' as in §3.1), with Y = K_C^* D' K_B:
+      6I - Y^*Y = K_B^* B'^*B' K_B + K_B^* D'^* P_C D' K_B >= 0 and
+      tr(6I - Y^*Y) <= q := R_s^2 (1 + (A_*^2 + 6)/m_C^2); if q < 6 then the polar factor
+      V = Y (Y^*Y)^{-1/2} lies in U(2) and ||Y - sqrt6 V||_F <= p := sqrt(q/(6 + sqrt6 - q)) ... (3.11).
+    hypotheses:
+      - "H' H'^* = H'^* H' = 6I, first row and column equal to one"
+      - "the fixed frames of (3.5) exist, i.e. m_B, m_C > 0"
+      - "q < 6"
+    status: M
+    status_parts: "M: (3.8) from K_C K_C^* = I - P_C; the trace bound from Cauchy-Schwarz on A_* b'_1 + sqrt6 c'_1 and (3.3)"
+    depends_on: [lem-3.1]
+    owner_team: T4 lean
+    evidence: "§3.2 pp. 13-14; results/proof-claims.md §3 calls this the hinge: every completion gives a point of U(2), so a fixed cover of U(2) covers all completions"
+    open_questions: >-
+      The printed bound (3.11) must be transcribed with care: the ideal-norm is q/(6 + sqrt6 - q) whose
+      square root is p. T5 should confirm the value q < .32 used in the run (A.4) satisfies q < 6 with slack.
+
+  - id: lem-3.3
+    kind: lemma
+    title: "A closed covering of U(2)"
+    paper_locator: "§3.3, Lemma 3.3, p. 15, eq. (3.12)"
+    one_line_statement: >-
+      Every V in U(2) has a representation V = e(alpha) * [[e(beta) cos(2 pi t), e(gamma) sin(2 pi t)],
+      [-e(-gamma) sin(2 pi t), e(-beta) cos(2 pi t)]] with 0 <= alpha <= 1/2, 0 <= t <= 1/4,
+      0 <= beta, gamma <= 1; and for every integer N_u divisible by 4 the products of closed intervals
+      of width 1/N_u in these four coordinates cover that parameter domain, with bin counts
+      N_u/2, N_u/4, N_u, N_u.
+    hypotheses:
+      - "N_u a positive integer divisible by 4 (the run uses N_u = 16, 32, 64, ... up to 512)"
+    status: M
+    status_parts: "M: row/column phase normalisation plus the determinant constraint; the four angle ranges are a fundamental domain"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§3.3 p. 14; results/proof-claims.md §3"
+    open_questions: >-
+      The lemma covers the parameter domain, not the canonical V of a given completion. Lemma 3.2 attaches
+      a specific V and (3.11) bounds its distance to sqrt6 V; the paper then uses cell Taylor bounds for
+      every representative. T9 should check the direction of that implication once (a point in the domain
+      versus a point of U(2)).
+
+  - id: lem-3.4
+    kind: lemma
+    title: "Uniform cell Taylor estimates"
+    paper_locator: "§3.3, Lemma 3.4, p. 15, eqs. (3.13)-(3.14)"
+    one_line_statement: >-
+      For every cell (3.13) with |theta_j| <= h = pi/N_u and every parameter point V of that cell:
+      ||V - U||_F <= sqrt6 h and ||V - U - dU[theta]||_F <= (sqrt42/2) h^2, where U is the cell midpoint
+      and dU the first variation.
+    hypotheses:
+      - "the four angular coordinates of (3.12)"
+      - "|theta_j| <= h for all four"
+    status: M
+    status_parts: "M: second-derivative ledger: cos^2 and sin^2 parts contribute 26 h^4 and 16 h^4, total 42 h^4"
+    depends_on: [lem-3.3]
+    owner_team: T4 lean
+    evidence: "§3.3 pp. 14-15; re-derived in results/proof-claims.md §3"
+    open_questions: >-
+      The paper prints the four angular derivatives only as prose ('its alpha derivative is iU, ...'), p. 15.
+      T3's implementation must reproduce those formulas; T4 must formalise them, since Lemma 3.4's constant
+      42 depends on them.
+
+  - id: lem-3.5
+    kind: lemma
+    title: "Orthogonal comparison pieces"
+    paper_locator: "§3.4, Lemma 3.5, p. 16, eqs. (3.15)-(3.19)"
+    one_line_statement: >-
+      With D = D_span + D_ker, D_span = -C_0 E_0^* G_B^*, D_ker = sqrt6 K_C U K_B^*, Z = D' - D: the
+      three matrices Z P_B, P_C Z P_K, (I - P_C) Z P_K are pairwise Frobenius-orthogonal and sum to Z;
+      they equal (3.16), (3.17), (3.18); and every feasible completion of the cell satisfies
+      ||Z||_F <= z := sqrt( (R_s (sqrt6 + A_*)/m)^2 + (6h + p)^2 ).
+    hypotheses:
+      - "the seed frames and the cell midpoint U are fixed"
+      - "the completion is feasible"
+    status: M
+    status_parts: "M: orthogonality immediate from P_B = I - P_K; the norm bookkeeping is the content"
+    depends_on: [lem-3.2, lem-3.3]
+    owner_team: T4 lean
+    evidence: "§3.4 pp. 16-17; the value z = .808 < 1.5 is quoted in results/code-audit.md §4"
+    open_questions: "none"
+
+  - id: lem-3.6
+    kind: lemma
+    title: "A row-block operator bound"
+    paper_locator: "§3.4, Lemma 3.6, p. 17, eqs. (3.20)-(3.21)"
+    one_line_statement: >-
+      For every cell midpoint U in U(2): ||[C_0 D]||_op <= L := max( sqrt6, ||C_0||_op sqrt(1 + (A_0/m_B)^2) ),
+      and ||D P_K||_op = sqrt6, ||D||_op <= max( sqrt6, ||C_0||_op A_0/m_B ).
+    hypotheses:
+      - "m_B > 0 and the frame identities of (3.5)-(3.7)"
+    status: M
+    status_parts: "M: the two pieces have orthogonal right domains and ranges, so cross terms vanish"
+    depends_on: [lem-3.1]
+    owner_team: T4 lean
+    evidence: "§3.4 p. 16; §A.4 p. 60 gives ||D|| < 4.6"
+    open_questions: "none"
+
+  - id: lem-3.7
+    kind: lemma
+    title: "Linear remainder bound"
+    paper_locator: "§3.5, Lemma 3.7, p. 18, eqs. (3.24)-(3.25)"
+    one_line_statement: >-
+      Every feasible completion associated to the cell satisfies ||Z - J(s,theta)||_F <= E_r, where
+      E_r^2 = e_off^2 + 63 h^4 + p^2, i.e. ((sqrt6 * sqrt42)/2)^2 h^4, and
+      e_off = R_s^2 (L + A_0 + 1)/(2m) + z R_s/m.
+    hypotheses:
+      - "the cell, its feasible completion, and the constants of Lemmas 3.5-3.6"
+    status: M?
+    status_parts: "M?: three remainder groups (seed product terms, Z-product terms, the |e^{ix}-1-ix| <= x^2/2 terms) each bounded in the right subspace; the arithmetic combining them is checked only in A.4"
+    depends_on: [lem-3.4, lem-3.5, lem-3.6]
+    owner_team: T5 parameters
+    evidence: "§3.5 pp. 17-19 (proof pp. 17-18 and 18-19); §A.4 pp. 59-61"
+    open_questions: >-
+      The single most arithmetic-dense statement in §3 and the one where a slip would be invisible:
+      results/proof-claims.md tags it M? and says so. T5 should re-derive E_r symbolically for the run's
+      constants and compare with the value the code uses.
+
+  - id: lem-3.8
+    kind: lemma
+    title: "Norm exclusion"
+    paper_locator: "§3.6, Lemma 3.8, p. 19, eq. (3.26)"
+    one_line_statement: >-
+      Every feasible completion associated to a cell satisfies
+      sum_{i,j=0}^{3} (|D_ij| - 1)^2 <= z^2.
+    hypotheses:
+      - "the completion is associated to the cell (so ||Z||_F <= z by Lemma 3.5)"
+      - "|D'_ij| = 1, which holds because D' is the lower-right block of a Hadamard matrix"
+    status: M
+    status_parts: "M: reverse triangle inequality entrywise"
+    depends_on: [lem-3.5]
+    owner_team: T4 lean
+    evidence: "§3.6 p. 18; results/proof-claims.md §3"
+    open_questions: "none"
+
+  - id: lem-3.9
+    kind: lemma
+    title: "Directional exclusion"
+    paper_locator: "§3.6, Lemma 3.9, p. 20, eq. (3.29); twenty equations (3.28)"
+    one_line_statement: >-
+      Let y in R^20 be arbitrary, split as two pairs y_X, y_Y in R^2 and a flat part y_D in R^16, and
+      put g = J_all^* y = (g_s, g_theta) in R^9 x R^4. Every feasible completion associated to the cell
+      satisfies y.c_all <= R_s ||g_s|| + h ||g_theta||_1 + E_r ||D o y_D||_F
+      + (1/2) z^2 max(0, max_{i,j}(-y_{D,ij})) + (1/2) R_s^2 (||y_X|| + ||y_Y||).
+    hypotheses:
+      - "the completion is associated to the cell"
+      - "the twenty exact equations of (3.28): sixteen flat and two-by-two seed sums"
+    status: M
+    status_parts: "M: weight the 20 exact equations; the only subtlety is the sign of the quadratic term, which is why max(0,.) appears"
+    depends_on: [lem-3.7, lem-3.8]
+    owner_team: T4 lean
+    evidence: "§3.6 p. 19; results/proof-claims.md §3"
+    open_questions: "none"
+
+  - id: cor-3.10
+    kind: corollary
+    title: "Dual certificates"
+    paper_locator: "§3.6, Corollary 3.10, p. 20"
+    one_line_statement: >-
+      A cell contains no feasible completion if (3.26) fails for its z, or if some real direction y
+      violates (3.29). The choice of y may be heuristic; only the final inequality has to hold, and
+      a positive rescaling of y preserves the certificate.
+    hypotheses:
+      - "the cell's z, R_s, h, E_r and the fixed comparison block D"
+    status: M
+    status_parts: "M: both are necessary conditions, and (3.29) is positively homogeneous in y"
+    depends_on: [lem-3.8, lem-3.9]
+    owner_team: T2 checker
+    evidence: "§3.6 p. 19; the routine trial::certificate is described at p. 20 as checking exactly this"
+    open_questions: >-
+      The certificate is a per-cell witness (y and both sides). T2's format must carry it; a run that only
+      stores 'cell failed' is not checkable.
+
+  - id: prop-3.11
+    kind: proposition
+    title: "Completion coverage conditional on successful termination"
+    paper_locator: "§3.7, Proposition 3.11, p. 20"
+    one_line_statement: >-
+      Fix a seed ball whose frame and bound constructions are certified. If every final (terminal) cell
+      of the finite recursion is either excluded by a certified necessary-condition test or covered by a
+      certified phase ball as in §4, then those phase balls cover all feasible Hadamard completions of
+      the seed ball, up to the equivalences named by the phase-ball certificates; equivalently, the
+      Stage A recursion yields precisely this conclusion when it terminates with zero unresolved cells.
+    hypotheses:
+      - "the seed ball's frames exist (m_B, m_C > 0) and its constants are certified"
+      - "the recursion terminates with zero unresolved cells and no failed setup"
+      - "every terminal cell is excluded by a certified test or covered by a certified ball"
+    status: C
+    status_parts: "M: induction over the cell tree (closed children cover the parent cell). S: Asearch::testA is the used path and the recursion is implemented as described. C: the recursion terminates with zero unresolved"
+    depends_on: [lem-3.1, lem-3.2, lem-3.3, lem-3.4, lem-3.5, lem-3.6, lem-3.7, lem-3.8, lem-3.9, cor-3.10, def-4.14]
+    owner_team: T4 lean
+    evidence: "§3.7 pp. 20-21 (proof p. 20); results/proof-claims.md §3"
+    open_questions: >-
+      Prop 3.11 is one of the five assembly implications (plan P4.3). Its content is an induction over an
+      abstract region list, so T4 can prove it with no topology of the Hadamard locus -- but only if the
+      'terminal cell' and 'unresolved' predicates are stated abstractly rather than read off the code.
+
+  - id: eq-3.19
+    kind: equation
+    title: "The comparison-block radius z"
+    paper_locator: "§3.4, eq. (3.19), p. 16"
+    one_line_statement: >-
+      z := sqrt( (R_s (sqrt6 + A_*)/m)^2 + (6h + p)^2 ), an upper bound for ||Z||_F valid for every
+      feasible completion of the cell, with m = min(m_B, m_C), A_* = min(2, A_0 + R_s), h = pi/N_u.
+    hypotheses:
+      - "Lemmas 3.2, 3.3, 3.5 and the frame constants"
+    status: M
+    status_parts: "M: triangle inequality on the three orthogonal pieces"
+    depends_on: [lem-3.5]
+    owner_team: T5 parameters
+    evidence: "§3.4 p. 17; the run's value z = .808 with the bound z < 1.5 is in results/code-audit.md §4"
+    open_questions: "The bound is loose by a factor ~2; T5 should record the slack (it is the licence for (3.26) tests firing)."
+
+  - id: eq-3.24
+    kind: equation
+    title: "The linearisation remainder E_r"
+    paper_locator: "§3.5, eq. (3.24), p. 18"
+    one_line_statement: >-
+      E_r = sqrt( e_off^2 + 63 h^4 + p^2 ), i.e. the coefficient of h^4 is ((sqrt6 * sqrt42)/2)^2 = 252/4 = 63, with
+      e_off = R_s^2 (L + A_0 + 1)/(2m) + z R_s/m, an upper bound for ||Z - J(s,theta)||_F.
+    hypotheses:
+      - "the constants of Lemmas 3.5-3.7"
+    status: M?
+    status_parts: "M?: the three groups are bounded correctly; the combination is only checked in A.4"
+    depends_on: [lem-3.7]
+    owner_team: T5 parameters
+    evidence: "§3.5 p. 17; §A.4 pp. 59-61"
+    open_questions: "Same as lem-3.7: re-derive symbolically."
+
+  - id: eq-3.26
+    kind: equation
+    title: "Norm exclusion test"
+    paper_locator: "§3.6, eq. (3.26), p. 19"
+    one_line_statement: >-
+      For every feasible completion associated to a cell: sum_{i,j=0}^{3} (|D_ij| - 1)^2 <= z^2.
+      A cell whose comparison block D violates it contains no feasible completion.
+    hypotheses:
+      - "the cell and its z"
+    status: M
+    status_parts: "M: Lemma 3.8"
+    depends_on: [lem-3.8]
+    owner_team: T2 checker
+    evidence: "§3.6 p. 18"
+    open_questions: "The certificate needs both sides of the inequality stored; see cor-3.10."
+
+  - id: eq-3.29
+    kind: equation
+    title: "Directional exclusion test"
+    paper_locator: "§3.6, eq. (3.29), p. 20"
+    one_line_statement: >-
+      For every y in R^20, every feasible completion of the cell satisfies
+      y.c_all <= R_s ||g_s|| + h ||g_theta||_1 + E_r ||D o y_D||_F
+      + (1/2) z^2 max(0, max(-y_{D,ij})) + (1/2) R_s^2 (||y_X|| + ||y_Y||), with g = J_all^* y.
+    hypotheses:
+      - "the twenty exact equations (3.28)"
+    status: M
+    status_parts: "M: Lemma 3.9"
+    depends_on: [lem-3.9]
+    owner_team: T2 checker
+    evidence: "§3.6 p. 19"
+    open_questions: "The direction y is found heuristically; only the final inequality is a certificate. T2 must reject a record whose y fails the inequality, not repair it."
+
+  # ------------------------------------------------------------------ 4
+  - id: def-4.1
+    kind: definition
+    title: "Root certificate"
+    paper_locator: "§4.1, Definition 4.1, p. 22, eqs. (4.3)-(4.7)"
+    one_line_statement: >-
+      A Root is data (P, T, (C, n0, id, ort, hor, mnorm, froot)) with P in R^36 a stored centre,
+      T in R^{36 x k} a stored real tangent matrix with 0 <= k <= 10, and seven nonnegative constants,
+      such that ||T^*T - I|| <= ort, ||(I - Pi)T|| <= hor, ||F(P)|| <= froot (4.4) and, for EVERY
+      horizontal delta with F(P + delta) = 0, with eta = T^* delta and s = ||delta||:
+      ||(I - TT^*) delta|| <= n_P(s) := n0 + id s + C s^2, s^2 <= (1+ort)||eta||^2 + ||(I-TT^*)delta||^2,
+      and for every horizontal v, with h' = delta - v:
+      ||(I - TT^*) h'|| <= (id + C(||delta|| + ||v||)) ||h'|| + mnorm ||F(P + v)||. There is no radius
+      restriction and no assertion that F(P) = 0.
+    hypotheses:
+      - "dimension 6, horizontal subspace V = im Pi"
+    status: D
+    status_parts: "D: the definition (seven constants; the assertions are (4.5)-(4.7)). Satisfiability is Prop 4.5, and production by the code is Prop 4.6"
+    depends_on: [lem-2.3]
+    owner_team: T2 checker
+    evidence: "§4.1 pp. 21-22; results/code-audit.md §2 tabulates which routine supplies which constant"
+    open_questions: >-
+      The seven constants are the interface between Stages A, B and C, and they are renamed twice
+      (§5.1, §6.1). notation.tex fixes the mapping; T2's record format should store the Def 4.1 names only.
+
+  - id: root-disp-n
+    kind: equation
+    title: "Root displacement assertion: normal bound"
+    paper_locator: "§4.1, eq. (4.5), p. 22"
+    one_line_statement: >-
+      For every Horizontal delta with F(P + delta) = 0, with eta = T^* delta and s = ||delta||:
+      ||(I - T T^*) delta|| <= n_P(s) = n_0 + id s + C s^2. No radius restriction.
+    hypotheses:
+      - "the Root data (P,T,C,n0,id) of Definition 4.1"
+      - "delta horizontal and F(P+delta) = 0"
+    status: M
+    status_parts: "D: an assertion required of certified Root data. Its satisfiability is Prop 4.5; its production is Prop 4.6. The inequality is the object T2 must check on a stored Root"
+    depends_on: [def-4.1]
+    owner_team: T2 checker
+    evidence: "§4.1 p. 22; used in Prop 4.13 / (4.38) and in (6.2)"
+    open_questions: "This id exists so that T2's inequalities.md can cite (4.5) itself rather than def-4.1 (changerequest T1-audit CR-T1A-4)."
+
+  - id: root-disp-s
+    kind: equation
+    title: "Root displacement assertion: reconstruction bound"
+    paper_locator: "§4.1, eq. (4.6), p. 22"
+    one_line_statement: >-
+      For every horizontal delta with F(P + delta) = 0: s^2 <= (1 + ort) ||eta||^2 + ||(I - T T^*) delta||^2,
+      with eta = T^* delta and s = ||delta||. No radius restriction and no exact projectivity of T T^*.
+    hypotheses:
+      - "the Root data (T,ort)"
+    status: M
+    status_parts: "D: required by Definition 4.1; satisfied under Prop 4.5's hypotheses"
+    depends_on: [def-4.1]
+    owner_team: T2 checker
+    evidence: "§4.1 p. 22; the proof of Prop 4.5 uses exactly this inequality"
+    open_questions: "none"
+
+  - id: root-diff
+    kind: equation
+    title: "Root difference assertion between two nearby centres"
+    paper_locator: "§4.1, eq. (4.7), p. 22"
+    one_line_statement: >-
+      For every horizontal delta with F(P+delta) = 0 and every horizontal v, with h' = delta - v:
+      ||(I - T T^*) h'|| <= (id + C(||delta|| + ||v||)) ||h'|| + mnorm ||F(P + v)||.
+    hypotheses:
+      - "the Root data (T,id,C,mnorm)"
+    status: M
+    status_parts: "D: required by Definition 4.1; it is the assertion that makes Proposition 5.2 work at two centres"
+    depends_on: [def-4.1]
+    owner_team: T2 checker
+    evidence: "§4.1 p. 22; the only use is Stage B's relation estimates (prop-5.2)"
+    open_questions: >-
+      (4.7) is quoted once (Definition 4.1) and used once (§5.1). It is the least-tested of the three
+      displacement assertions and the one whose constants (mnorm together with froot) are tied by (4.15).
+
+  - id: rem-4.2
+    kind: remark
+    title: "T is only a frame of numerical directions"
+    paper_locator: "§4.1, Remark 4.2, p. 22"
+    one_line_statement: >-
+      The columns of T are numerical directions only: neither exact horizontality nor exact orthogonality
+      is assumed, ||T|| <= sqrt(1 + ort), the hor error is retained when raw displacements are projected,
+      and no constant-rank or manifold hypothesis on the exact solution set is needed.
+    hypotheses:
+      - "T is the stored tangent matrix of a Root"
+    status: M
+    status_parts: "M: (4.4) gives the operator bound; the remark records what the proof does not assume"
+    depends_on: [def-4.1]
+    owner_team: T4 lean
+    evidence: "§4.1 p. 22"
+    open_questions: >-
+      This remark is what makes the whole argument not a manifold-parametrisation argument. T8's narrative
+      should say so explicitly: the normal directions are bounded, not eliminated.
+
+  - id: lem-4.3
+    kind: lemma
+    title: "Quadratic and difference remainders"
+    paper_locator: "§4.2, Lemma 4.3, p. 23, eqs. (4.8)-(4.12)"
+    one_line_statement: >-
+      With F_ij(P) = (1/2 pi i) sum_g e(P_ig - P_jg) and L_P the first variation: there is a real 30-vector
+      R_P(x) with F(P+x) = F(P) + L_P x + R_P(x); for a_ij(x) = ||x_i - x_j||^2,
+      |(R_P(x))_ij| <= pi a_ij(x) and |(R_P(x) - R_P(v))_ij| <= pi sqrt(a_ij(x-v)) (sqrt(a_ij(x)) + sqrt(a_ij(v))).
+      Moreover if M: R^30 -> R^36 is any real matrix and for every horizontal x and every unit y in R^36,
+      sum_{i>j} w_ij(y) a_ij(x) <= b ||x||^2 (w_ij(y) = norm of the two edge coordinates of M^*y), then
+      ||M R_P(x)|| <= pi b ||x||^2 and ||M(R_P(x) - R_P(v))|| <= pi b ||x - v|| (||x|| + ||v||).
+    hypotheses:
+      - "x, v horizontal (in im Pi)"
+      - "the scalar remainder r(t) = (e(t) - 1 - 2 pi i t)/(2 pi i) with |r| <= pi t^2"
+    status: M
+    status_parts: "M: two-line scalar estimates"
+    depends_on: [def-4.1, def-2.1]
+    owner_team: T4 lean
+    evidence: "§4.2 p. 22; results/proof-claims.md §4"
+    open_questions: "none"
+
+  - id: lem-4.4
+    kind: lemma
+    title: "Two computable remainder constants"
+    paper_locator: "§4.2, Lemma 4.4, p. 23, eqs. (4.13)-(4.14)"
+    one_line_statement: >-
+      Two sufficient choices for b in (4.10) are b = sqrt(8) ||M|| and b = sqrt(6) ||S||, where S is the
+      30x216 real matrix with rows S_{a,:} = M_{:,a} tensor (e_i - e_j)^* for the two real-coordinate
+      indices a of each edge i > j; consequently pi times the smaller certified upper bound for these two
+      quantities is a valid C for Definition 4.1. (§A.5 states the first of the two as C = pi sqrt(8) mnorm + 1e-7.)
+    hypotheses:
+      - "the identifications sum_{i>j} a_ij = 6 s^2, sum u_i^2 <= (5/6) s^4, sum a_ij^2 <= 8 s^4"
+      - "a certified upper bound for ||S|| (or ||M||)"
+    status: M
+    status_parts: "M: the three combinatorial identities plus the tensorisation (sum_{i>j} a_ij <= 6 s^2, sum u_i^2 <= (5/6) s^4, sum a_ij^2 <= 8 s^4); the radicals are sqrt(8) and sqrt(6), not 8 and 6"
+    depends_on: [lem-4.3]
+    owner_team: T4 lean
+    evidence: "§4.2 p. 23; the Gram SS^* formula (4.14) is what the code evaluates"
+    open_questions: "none"
+
+  - id: prop-4.5
+    kind: proposition
+    title: "Sufficient conditions for a Root certificate"
+    paper_locator: "§4.2, Proposition 4.5, p. 24, eq. (4.15)"
+    one_line_statement: >-
+      Let P, T and the seven nonnegative constants be as in Definition 4.1. Suppose (4.4) holds and there
+      is a stored real 36x30 matrix M with ||M|| <= mnorm, mnorm * froot <= n0 and
+      ||Pi - T T^* - M L_P Pi|| <= id, and suppose C is an upper bound for a remainder constant pi b of
+      Lemma 4.3. Then (P,T,(C,n0,id,ort,hor,mnorm,froot)) is a certified Root.
+    hypotheses:
+      - "(4.4) and (4.15)"
+      - "C >= pi b for some b satisfying (4.10)"
+    status: M
+    status_parts: "M: the Taylor identity plus ||delta - T eta||^2 >= ||delta||^2 - (1+ort)||eta||^2, which needs no exact projectivity of TT^*"
+    depends_on: [def-4.1, lem-4.3, lem-4.4]
+    owner_team: T4 lean
+    evidence: "§4.2 pp. 24-25 (proof p. 24); results/proof-claims.md §4"
+    open_questions: "none"
+
+  - id: prop-4.6
+    kind: proposition
+    title: "Certificates produced by the source"
+    paper_locator: "§4.2, Proposition 4.6, p. 25; §A.5, p. 61"
+    one_line_statement: >-
+      Under the arithmetic conditions of Appendix A, every successful call to buildH::patch certifies
+      (4.4), (4.15) and a valid remainder constant C, and therefore produces certified Root data in the
+      sense of Definition 4.1.
+    hypotheses:
+      - "the routine behaves as described in §4.2 (the source is not in the packet)"
+      - "the arithmetic conditions of Appendix A"
+    status: S
+    status_parts: "S: this is a statement about what buildH::patch does. M: the implication 'checked (4.4)+(4.15)+C => Root' is Prop 4.5, which is proved"
+    depends_on: [prop-4.5, prem-arith, app-a4-a11]
+    owner_team: T8 paper
+    evidence: "§4.2 p. 24; §A.5 pp. 61-63 (budgets 2.1e-11 factor product, 1e-9 per entry identity residual, 2e-6 id addition); routine table in results/code-audit.md §2, verdict UNCHK, finding F1 severity high"
+    open_questions: >-
+      The single most load-bearing code claim in the paper (results/code-audit.md F1). No later stage can
+      detect a false Root. Disposition proposed in reports/T1-report.md: promote to an explicit hypothesis
+      of the printed theorem AND require T2's checker to verify (4.4)/(4.15) from a stored Root.
+
+  - id: root-suff
+    kind: equation
+    title: "The auxiliary matrix test for a Root"
+    paper_locator: "§4.2, eq. (4.15), p. 24"
+    one_line_statement: >-
+      There exists a stored real 36x30 matrix M with ||M|| <= mnorm, mnorm * froot <= n_0 and
+      ||Pi - T T^* - M L_P Pi|| <= id; together with (4.4) and a valid remainder constant C this makes
+      (P,T,(C,n0,id,ort,hor,mnorm,froot)) a certified Root.
+    hypotheses:
+      - "the basic bounds (4.4)"
+      - "C >= pi b for some b satisfying (4.10)"
+    status: M
+    status_parts: "M: this is the hypothesis of Prop 4.5, which proves the implication. It is listed separately because it is the three-part test T2 evaluates on a stored Root"
+    depends_on: [prop-4.5, lem-4.3]
+    owner_team: T2 checker
+    evidence: "§4.2 p. 24; §A.5 pp. 61-63 gives the budgets for the three parts"
+    open_questions: "none"
+
+  - id: lem-4.7
+    kind: lemma
+    title: "Equivalence transport"
+    paper_locator: "§4.3, Lemma 4.7, p. 25, eq. (4.16)"
+    one_line_statement: >-
+      Let Phi be a signed row/column permutation with optional transpose and optional simultaneous sign
+      change of all entries. Then Phi is a real linear isometry commuting with Pi, ||F(Phi P)|| = ||F(P)||,
+      the residual norm is invariant under row/column rephasings and entrywise integer additions,
+      replacing (P,T) by (Phi P, Phi T) (Phi applied to every column) preserves every certified Root
+      assertion with the same scalar constants, and the existence of an extension by two further MUBs is
+      preserved in both directions.
+    hypotheses:
+      - "Phi in the signed permutation/transpose group"
+    status: M
+    status_parts: "M: ||A A^*||_F = ||A^* A||_F and ||F(P)||^2 = (||AA^*||_F^2 - 216)/(8 pi^2)"
+    depends_on: [def-4.1, def-2.1]
+    owner_team: T4 lean
+    evidence: "§4.3 pp. 24-25; results/proof-claims.md §4"
+    open_questions: >-
+      The claim that extendibility is preserved in BOTH directions is what licenses quotienting by Phi.
+      T9 should check the transpose direction separately (it is the one that is not obvious).
+
+  - id: lem-4.8
+    kind: lemma
+    title: "Arc and weighted-arc bounds"
+    paper_locator: "§4.4, Lemma 4.8, p. 26, eqs. (4.18)-(4.19)"
+    one_line_statement: >-
+      Suppose m_j = |D_j| > 0 at every lower-right position, put D_j^o = D_j/m_j, and let d_j in [-pi,pi]
+      be the shortest angular displacement from D_j^o to D'_j. Let slack be a nonnegative upper bound for
+      z^2 - sum_j (m_j - 1)^2, let m_i be a positive lower bound for min_j m_j, and let q_d >= slack/m_i with
+      q_d < 3.8. Then ||d|| <= arc and sqrt(sum_j m_j d_j^2) <= weighted, provided
+      arc >= sqrt(q_d/(1 - q_d/4)) and weighted >= sqrt(slack/(1 - q_d/4)).
+    hypotheses:
+      - "m_j > 0 for all sixteen positions"
+      - "a nonnegative upper bound slack for z^2 - sum_j (m_j-1)^2"
+      - "q_d < 3.8"
+    status: M
+    status_parts: "M: entrywise identity |D'_j - D_j|^2 = (m_j-1)^2 + m_j |D'^o_j - D_j^o|^2, then |arcsin| <= t/sqrt(1 - q_d/4)"
+    depends_on: [lem-3.8]
+    owner_team: T4 lean
+    evidence: "§4.4 pp. 25-26; the run's guard q_d < 3.8 in Candidate::prep is recorded in results/code-audit.md §2"
+    open_questions: >-
+      q_d < 3.8 is a hypothesis of the lemma; the code checks it. That check must be part of the Root's
+      stored certificate, since with q_d >= 4 the factor 1 - q_d/4 changes sign.
+
+  - id: lem-4.9
+    kind: lemma
+    title: "Stored center and support representation"
+    paper_locator: "§4.4, Lemma 4.9, p. 27, eqs. (4.20)-(4.24)"
+    one_line_statement: >-
+      Let P_0 be the stored Candidate phase matrix. On a successful preparation path there is a correction
+      epsilon, in cycles, with ||epsilon|| <= 2e-6 such that, up to entrywise integers, the feasible phase
+      matrix is P_0 + epsilon + u/(2 pi), where u is s on the seed positions I_s, d on I_D and zero elsewhere;
+      in particular ||u|| <= sqrt(R_s^2 + arc^2). With X: R^13 -> R^36 giving s at the seed positions and
+      (X(s,theta))_j = Im(D_j^o J(s,theta)_j) at the lower-right positions, u = X(s,theta) + e_D + e_sin with
+      ||e_D|| <= E_r and ||e_sin||_1 <= arc^3/6, both supported on I_D.
+    hypotheses:
+      - "Candidate::prep succeeded (direction and magnitude checks, slack and q_d < 3.8)"
+      - "a retained completion cell with its feasible phase matrix"
+    status: M
+    status_parts: "M: Im(D_j^o Z_j) = sin d_j and |d - sin d| <= |d|^3/6, both one line. S: the 2e-6 budget rests on the unit-direction test and the chord bound 2 sin(pi t) >= 4t in the code"
+    depends_on: [lem-4.8, prop-4.6]
+    owner_team: T5 parameters
+    evidence: "§4.4 pp. 26-27; §A.7 pp. 64-65 (5.5e-8 direction error, 1.56e-7 chord); results/code-audit.md §2 row Candidate::prep verdict OK"
+    open_questions: >-
+      epsilon here is a centre correction in cycles; epsilon is ALSO the §5.1 name of froot and the
+      Appendix A name of the exponential error. Three different objects, one letter: see notation.tex.
+
+  - id: lem-4.10
+    kind: lemma
+    title: "A direct displacement bound"
+    paper_locator: "§4.5, Lemma 4.10, p. 28, eqs. (4.25)-(4.29)"
+    one_line_statement: >-
+      Let Delta = Pi(P_0 - D_0(P) - N) (4.25) and let S_1 (4.27), S_2 (4.28) be the two support bounds,
+      S_Delta = min(S_1,S_2). Then for every feasible solution of the cell,
+      ||delta|| <= ( ||Delta||^2 + (R_s^2 + arc^2)/(2 pi)^2 + S_Delta/pi )^(1/2) + ||epsilon||.
+      The S_Delta/pi term is INSIDE the radical: S_Delta has the dimensions of a squared length, and
+      covercompute::value evaluates the sum inside the square root.
+    hypotheses:
+      - "the representation of Lemma 4.9 and the arc bound of Lemma 4.8"
+      - "any fixed integer lift N"
+    status: M
+    status_parts: "M: split delta into the seed part, the comparison part and epsilon, and bound each"
+    depends_on: [lem-4.9, lem-4.8]
+    owner_team: T4 lean
+    evidence: "§4.5 pp. 27-28; results/proof-claims.md §4"
+    open_questions: "none"
+
+  - id: lem-4.11
+    kind: lemma
+    title: "Ellipsoid containment"
+    paper_locator: "§4.5, Lemma 4.11, p. 29, eq. (4.30)"
+    one_line_statement: >-
+      For real linear maps A, B, vectors ||s|| <= r, ||v|| <= q and beta > 0, the sum A s + B v belongs to
+      the ellipsoid {G^{1/2} w : ||w|| <= 1} whenever G >= (1+beta) r^2 A A^* + (1 + 1/beta) q^2 B B^*.
+      The statement holds for singular G.
+    hypotheses:
+      - "G symmetric positive semidefinite"
+      - "beta > 0"
+    status: M
+    status_parts: "M: support-function proof"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§4.5 p. 28"
+    open_questions: "none"
+
+  - id: lem-4.12
+    kind: lemma
+    title: "Offset ellipsoid norm bound"
+    paper_locator: "§4.5, Lemma 4.12, p. 30, eq. (4.34)"
+    one_line_statement: >-
+      Let G >= 0 and U in R^k. For every gamma > lambda_max(G) and every w with ||w|| <= 1:
+      ||U + G^{1/2} w||^2 <= gamma (1 + U^*(gamma I - G)^{-1} U); also ||U|| + sqrt(lambda_max(G)) is an
+      upper bound; and if the offsets range over the convex hull of finitely many U_sigma, it suffices to
+      take the largest of the bounds at those offsets.
+    hypotheses:
+      - "gamma > lambda_max(G)"
+    status: M
+    status_parts: "M: Cauchy-Schwarz in the gamma-inner product"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§4.5 p. 29; §A.8 pp. 65-67 for the signed-addition argument used by the code"
+    open_questions: "none"
+
+  - id: prop-4.13
+    kind: proposition
+    title: "Finite improvement of a certified radius"
+    paper_locator: "§4.6, Proposition 4.13, p. 31, eq. (4.38)"
+    one_line_statement: >-
+      Suppose s_0 >= ||delta|| and t_0 >= ||T^* delta|| for every feasible solution of a completion cell
+      under the particular alignment (4.26). Then for any upper bound s of ||delta||,
+      ( n_P(s)^2 + (1 + ort) t_0^2 )^(1/2) is again an upper bound; replacing s by this number only when it
+      decreases, and stopping after any finite number of steps, preserves coverage of every feasible
+      solution in the cell.
+    hypotheses:
+      - "s_0, t_0 are upper bounds over all feasible solutions of the cell"
+      - "(4.5)-(4.6) of the Root definition"
+    status: M
+    status_parts: "M: monotonicity of n_P; no convergence claim"
+    depends_on: [def-4.1, lem-4.10]
+    owner_team: T4 lean
+    evidence: "§4.6 p. 30; the code's bootstrap routine does <= 30 Updates (results/code-audit.md §2)"
+    open_questions: "none"
+
+  - id: def-4.14
+    kind: definition
+    title: "Record and its covered solution set"
+    paper_locator: "§4.7, Definition 4.14, p. 31"
+    one_line_statement: >-
+      A Record is a certified Root together with a nonnegative radius r. Its solution set is the set of
+      equivalence classes [e(P + delta)] with delta horizontal, ||delta|| <= r and F(P + delta) = 0;
+      coverage by Records is up to the extendibility-preserving equivalences of Lemma 4.7, and the
+      equivalence used may differ from assignment to assignment.
+    hypotheses:
+      - "the Root is certified in the sense of Definition 4.1"
+    status: D
+    status_parts: "D: the definition. Note the paper's wording that 'the term sphere in the source includes the interior and boundary of this closed ball'"
+    depends_on: [def-4.1, lem-4.7]
+    owner_team: T2 checker
+    evidence: "§4.7 p. 30"
+    open_questions: >-
+      The word sphere in the paper is this closed ball, not a topological sphere. notation.tex fixes it.
+
+  - id: lem-4.15
+    kind: lemma
+    title: "A certified atlas merge"
+    paper_locator: "§4.7, Lemma 4.15, p. 31, eq. (4.17)"
+    one_line_statement: >-
+      Let a local Record have centre P and radius r, and let Q be an existing certified atlas centre.
+      Suppose an allowed Phi and an integer matrix N have been selected and d is a certified upper bound
+      for ||Pi(D_0(Phi P) - D_0(Q) - N)||, where D_0(P)_ij = P_ij - P_i0 - P_0j + P_00. Then the local
+      Record is covered, up to equivalence, by the Record at Q with radius r + d.
+    hypotheses:
+      - "Q carries a certified Root"
+      - "Phi allowed in the sense of Lemma 4.7 and N integral"
+    status: M
+    status_parts: "M: triangle inequality in the horizontal metric"
+    depends_on: [def-4.14, eq-4.17, lem-4.7]
+    owner_team: T4 lean
+    evidence: "§4.7 pp. 30-31; results/proof-claims.md §4"
+    open_questions: >-
+      The merged record stores radius r + d but the Root constants of Q; the paper does not say the
+      certificate records Phi and N. results/code-audit.md F7 (severity low): a witness must record them.
+
+  - id: prop-4.16
+    kind: proposition
+    title: "Output meaning of a successful A stage"
+    paper_locator: "§4.7, Proposition 4.16, p. 32"
+    one_line_statement: >-
+      Suppose the initial seed cover is valid and the completion search processes all its seeds with no
+      failed or unresolved seed. Then the A-stage Records cover, up to extendibility-preserving
+      equivalence, every exact second-basis Hadamard matrix needed for the four-basis problem.
+    hypotheses:
+      - "the seed cover of Proposition 2.10 holds for this run"
+      - "every seed is processed and none is failed or unresolved"
+      - "every terminal cell is excluded or covered (Proposition 3.11)"
+      - "atlas insertions preserve solution sets (Lemma 4.15)"
+    status: C
+    status_parts: "M: composition of Prop 2.10, Prop 3.11, Lemma 4.10, Prop 4.13, Lemma 4.15. S: the A shards process all seeds. C: no failed and no unresolved seed"
+    depends_on: [prop-2.10, prop-3.11, prop-4.6, lem-4.10, prop-4.13, lem-4.15]
+    owner_team: T4 lean
+    evidence: "§4.7 p. 31; Table 1 A0-A3 rows, p. 53 (all four exited 0, empty bad files, unresolved 0)"
+    open_questions: >-
+      This is the second of the five assembly implications. Its hypothesis 'no failed and no unresolved
+      seed' is exactly what A's ownfail diagnostic is: A0 reported an ownfail and still had zero terminal
+      unresolved, so the distinction between a failed proposal and a failed seed matters.
+
+  - id: eq-4.17
+    kind: equation
+    title: "Integer lifts and phase equivalence"
+    paper_locator: "§4.3, eq. (4.17), p. 26"
+    one_line_statement: >-
+      For centres P, Q and an integer matrix N: d = Pi(D_0(P) - D_0(Q) - N) satisfies
+      e(Q + d) is phase-equivalent to e(P); and for every horizontal delta,
+      e(Q + d + delta) is phase-equivalent to e(P + delta).
+    hypotheses:
+      - "N integral"
+      - "D_0(P)_ij = P_ij - P_i0 - P_0j + P_00"
+    status: M
+    status_parts: "M: Pi D_0(P) = Pi P; subtracting Pi from the identity leaves a matrix constant on rows and columns, which is a row+column rephasing"
+    depends_on: [lem-2.3]
+    owner_team: T4 lean
+    evidence: "§4.3 p. 25"
+    open_questions: >-
+      This is what makes a fixed choice of integer lifts sufficient, and it is used inside every merge.
+      It is numbered but never stated as a lemma; T4 should make it a named lemma.
+
+  - id: eq-4.20
+    kind: equation
+    title: "The centre correction epsilon is at most 2e-6 cycles"
+    paper_locator: "§4.4, eq. (4.20), p. 27"
+    one_line_statement: >-
+      On a successful Candidate preparation path there is a correction epsilon, in cycles, with
+      ||epsilon|| <= 2e-6.
+    hypotheses:
+      - "the unit-direction and chord checks of Candidate::prep succeeded"
+    status: M
+    status_parts: "M: the chord bound 2 sin(pi t) >= 4 t and the checked direction error 5.5e-8. S: that the check is as described"
+    depends_on: [lem-4.9]
+    owner_team: T5 parameters
+    evidence: "§4.4 p. 26; §A.7 p. 64"
+    open_questions: "Same letter as froot (epsilon_P in §5.1) and as the exponential error eps_exp in A.2: see notation.tex."
+
+  - id: eq-4.38
+    kind: equation
+    title: "Bootstrap radius update"
+    paper_locator: "§4.6, eq. (4.38), p. 31"
+    one_line_statement: >-
+      If s is an upper bound for ||delta|| and t_0 for ||T^* delta|| over a completion cell, then
+      ( n_P(s)^2 + (1 + ort) t_0^2 )^(1/2) is an upper bound for ||delta||.
+    hypotheses:
+      - "Definition 4.1 (4.5)-(4.6) with s_0 >= ||delta||, t_0 >= ||T^*delta||"
+    status: M
+    status_parts: "M: Prop 4.13"
+    depends_on: [prop-4.13]
+    owner_team: T2 checker
+    evidence: "§4.6 p. 30"
+    open_questions: "The code applies <= 30 iterations with 1e-6 and 2e-5 inflations; the certificate must record the final s, not the iteration count."
+
+  # ------------------------------------------------------------------ 5
+  - id: lem-5.1
+    kind: lemma
+    title: "Approximate orthogonality is enough"
+    paper_locator: "§5.1, Lemma 5.1, p. 33, eq. (5.4)"
+    one_line_statement: >-
+      Put A = I - T T^*. For every x in R^36, with zeta = T^* x: ||T|| <= sqrt(1 + o_P), ||A|| <= 1 + o_P
+      and ||x||^2 <= (1 + o_P) ||zeta||^2 + ||A x||^2. Neither x nor the columns of T need be horizontal.
+    hypotheses:
+      - "||T^*T - I|| <= o_P, so the spectrum of TT^* lies in [0, 1+o_P]"
+    status: M
+    status_parts: "M: spectral theorem in one line"
+    depends_on: [def-4.1]
+    owner_team: T4 lean
+    evidence: "§5.1 p. 33; results/proof-claims.md §5"
+    open_questions: "none"
+
+  - id: prop-5.2
+    kind: proposition
+    title: "Relation estimates between two centres"
+    paper_locator: "§5.1, Proposition 5.2, p. 34, eqs. (5.7)-(5.12)"
+    one_line_statement: >-
+      Let d_q = Pi(D_0(Q) - D_0(P) - N), eta_q = T^* d_q, h' = delta - d_q, xi = T^* h', nu = A h', and let
+      D >= R + ||d_q||, v_0 >= n_P(R) + n_q, lambda >= alpha_P + gamma_P D, e_0 >= mu_P epsilon_Q,
+      sigma >= ||S_h^* A||, beta = sqrt((1+o_P)(1+o_P)(1+o_Q)) be upper bounds, where S is the tangent
+      matrix of the Q Root and S_h = Pi S. Then for every parent solution with t >= ||xi||:
+      d <= D, d^2 <= (1+o_P) t^2 + ||nu||^2, ||nu|| <= min{v_0, (1+o_P)d, lambda d + e_0},
+      ||S^* h'|| <= beta t + sigma ||nu|| and d^2 <= (1+o_Q)||S^*h'||^2 + n_Q(d)^2, where d = ||delta - d_q||.
+    hypotheses:
+      - "two certified Roots at P (radius R) and Q, and a parent solution delta with ||delta|| <= R"
+      - "t >= ||xi|| and the stated upper bounds"
+    status: M
+    status_parts: "M: Lemma 5.1 applied at both centres plus the normal polynomial at Q"
+    depends_on: [lem-5.1, def-4.1, eq-4.17]
+    owner_team: T4 lean
+    evidence: "§5.1 pp. 33-35 (proof pp. 34-35); results/proof-claims.md §5 calls it the technical heart of Stage B"
+    open_questions: >-
+      Notation clash: in §5.1 the letter S is the tangent matrix of the Q Root, while in §3 and §6 it is a
+      block or a sum of unit vectors. See notation.tex.
+
+  - id: lem-5.3
+    kind: lemma
+    title: "Distance iteration keeps an upper bound"
+    paper_locator: "§5.2, Lemma 5.3, p. 35, eqs. (5.15)-(5.16)"
+    one_line_statement: >-
+      With b_0 = min{D, sqrt(z^2 + v_0^2)} and b_{j+1} = min{b_j, psi_P(b_j), psi_Q(b_j)}: every b_j is an
+      upper bound for the distance d of every parent solution with ||eta - eta_q|| <= t. The conclusion
+      survives replacing any proposed bound by a larger certified number and stopping after any finite
+      number of steps.
+    hypotheses:
+      - "the bounds of Proposition 5.2"
+      - "0 <= t <= 2 (the guard of relationB::eval)"
+    status: M
+    status_parts: "M: induction; no contraction and no fixed point is claimed"
+    depends_on: [prop-5.2]
+    owner_team: T4 lean
+    evidence: "§5.2 p. 35; results/proof-claims.md §5"
+    open_questions: "none"
+
+  - id: lem-5.4
+    kind: lemma
+    title: "A returned threshold is a certificate"
+    paper_locator: "§5.2, Lemma 5.4, p. 36, eqs. (5.17)-(5.19)"
+    one_line_statement: >-
+      Every usable threshold rho returned by the rho search certifies
+      ||eta - eta_q|| <= rho implies [e(P + delta)] lies in S(Q,a). The search need not find the largest
+      possible threshold, and its correctness does not require monotonicity of the floating-point
+      function D_hat.
+    hypotheses:
+      - "the stored trial value at which the search accepted, and the guard 0 <= t <= 2"
+      - "a computed function D_hat satisfying (5.17)"
+    status: M
+    status_parts: "M: a single stored trial is the certificate; the 1e-8 and 2e-7 arithmetic margins are in A.9. S: the rho-search protocol is code (25 midpoint trials, rho = max(0, ell - 1e-8), usable iff rho > 1e-7)"
+    depends_on: [lem-5.3, prop-5.2, def-4.14, eq-5.17]
+    owner_team: T2 checker
+    evidence: "§5.2 p. 35; §A.9 pp. 67-69; results/code-audit.md §2 row rho-search verdict OK"
+    open_questions: >-
+      Lemma 5.4 is the cleanest place in the paper where a heuristic search carries a certificate. T2
+      should make the stored trial (t, D_hat(t)) part of the record format -- otherwise the record says
+      'relation found' with nothing to check.
+
+  - id: lem-5.5
+    kind: lemma
+    title: "Boxes, the farthest tangent distance, and marking"
+    paper_locator: "§5.2, Lemma 5.5, p. 37, eqs. (5.20)-(5.24)"
+    one_line_statement: >-
+      For every tangent box B(u,h): max over eta in B(u,h) of ||eta - eta_q|| equals
+      ( sum_{a=1}^{k} (|u_a - eta_{q,a}| + h)^2 )^(1/2) (5.24). Consequently if a certified upper bound
+      t_B in [0,2] for that number satisfies D_hat(t_B) <= r, all parent solutions with tangent vector in
+      the box belong to S(Q,r); and the same holds with r = a if t_B <= rho for a usable searched relation.
+    hypotheses:
+      - "the tangent box grid covers the ball of radius (1+o_P)^(1/2) R (5.20)-(5.21)"
+      - "t_B in [0,2]"
+    status: M
+    status_parts: "M: the max of a sum of squares over a box is attained at a corner"
+    depends_on: [lem-5.4]
+    owner_team: T4 lean
+    evidence: "§5.2 pp. 36-37; results/proof-claims.md §5"
+    open_questions: >-
+      The paper is explicit that a subbox success does not license marking the base box. T3's
+      implementation of markRec must respect that; results/code-audit.md §2 records that it does.
+
+  - id: lem-5.6
+    kind: lemma
+    title: "Assignment, symmetry maps and radius growth"
+    paper_locator: "§5.3, Lemma 5.6, p. 38, eq. (5.25)"
+    one_line_statement: >-
+      Suppose a box has been certified into S(Q,r) with r < tau. A signed permutation/transpose map Phi may
+      be used to arrange Q. If an existing atlas centre Z has a certified aligned distance ell from Phi Q,
+      then growing its radius to any certified upper bound for r + ell covers the box, provided that bound
+      is at most tau; alternatively inserting Phi Q with radius r covers the box. A later failure to
+      construct a reuse relation does not undo either assignment.
+    hypotheses:
+      - "r < tau (the stage's target radius)"
+      - "Phi allowed in the sense of Lemma 4.7; ell certified"
+    status: M
+    status_parts: "M: Lemma 4.15 with Triangle inequality. S: the code's +2e-8 and +1e-8 margins"
+    depends_on: [lem-5.5, lem-4.15, lem-4.7]
+    owner_team: T4 lean
+    evidence: "§5.3 p. 37; results/code-audit.md §2 row assign verdict OK"
+    open_questions: "none"
+
+  - id: prop-5.7
+    kind: proposition
+    title: "Stage B coverage with bad parents retained"
+    paper_locator: "§5.4-§5.5, Proposition 5.7, p. 38, eq. (5.26)"
+    one_line_statement: >-
+      Suppose Stage B is run on a finite list of Records with valid Root certificates under the arithmetic
+      assumptions of Appendix A. On a completed run, with A the final atlas of children and B the list of
+      input parents whose refinement failed:
+      the union of S(P,R) over the input parents is contained in the union of S(Q,r) over the final atlas
+      together with the union of S(P,R) over the bad parents. In particular a completed run with no bad
+      parents replaces the input cover by a child cover; a nonempty bad list remains an obligation.
+    hypotheses:
+      - "finite input list of certified Records"
+      - "the run completed (all parents processed, none unresolved except as recorded in B)"
+      - "arithmetic assumptions of Appendix A"
+    status: C
+    status_parts: "M: two finite inductions, on subdivision depth and on the order of completed parents. S: relationB/outside/assign behave as described. C: the run completed"
+    depends_on: [eq-5.26, lem-5.6, lem-5.5, prop-5.2, def-4.14]
+    owner_team: T4 lean
+    evidence: "§5.4-5.5 pp. 37-39 (proof pp. 38-39); results/proof-claims.md §5 flags the blocker induction as the circularity risk and records that the paper distinguishes already-completed parents"
+    open_questions: >-
+      The 'blocker is only an already completed parent' distinction is the one place where Stage B could be
+      circular. It is stated explicitly at pp. 38-39; T4 must formalise the induction with that order
+      hypothesis, and T9 should attack it.
+
+  - id: cor-5.8
+    kind: corollary
+    title: "Batch invocation coverage"
+    paper_locator: "§5.6, Corollary 5.8, p. 39"
+    one_line_statement: >-
+      Under the hypotheses of Proposition 5.7, if a batching invocation completes with no bad parents and
+      every emitted batch is included, then the input solution sets are covered, up to the permitted
+      equivalences, by the emitted records with their stored target radius tau.
+    hypotheses:
+      - "Proposition 5.7 applies"
+      - "no bad parents and every emitted batch is included"
+    status: C
+    status_parts: "M: (5.26) with the bad union empty, then enlarge each child to tau. S: the batch writer and its count marker. C: the invocation completed"
+    depends_on: [prop-5.7]
+    owner_team: T4 lean
+    evidence: "§5.6 p. 39; Table 1 rows 'B mid', 'B fine', 'B fallback', p. 53"
+    open_questions: >-
+      The count marker alone is not a certificate: the batch records themselves must be included and
+      checked. T2's format has to carry the batch partition.
+
+  - id: eq-5.26
+    kind: equation
+    title: "Stage B coverage inclusion"
+    paper_locator: "§5.5, eq. (5.26), p. 38"
+    one_line_statement: >-
+      The union of S(P,R) over the input parents is contained in the union of S(Q,r) over the final atlas
+      children together with the union of S(P,R) over the parents whose refinement failed.
+    hypotheses:
+      - "Stage B run on a finite list of certified Records, completed"
+    status: C
+    status_parts: "M: Proposition 5.7. Note the inclusion is trivially satisfiable by putting every parent in the bad list, so the content is the induction that keeps the bad list empty unless a parent genuinely failed"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§5.5 p. 37; results/proof-claims.md §5"
+    open_questions: >-
+      Because the bad list is retained on the right side, (5.26) alone never shrinks the cover. Only the
+      completed run with an empty bad list does that, which is why Table 1's 'zero bad parents' rows are
+      load-bearing.
+
+  - id: eq-5.17
+    kind: equation
+    title: "Semantics of the computed distance function D_hat"
+    paper_locator: "§5.2, eq. (5.17), p. 35"
+    one_line_statement: >-
+      If the computed function D_hat of relationB::eval satisfies, for every 0 <= t <= 2,
+      ||eta - eta_q|| <= t implies ||delta - d_q|| <= D_hat(t), then every use of D_hat in Lemmas 5.4-5.5
+      is sound.
+    hypotheses:
+      - "the guard 0 <= t <= 2; the sentinel 10 for t outside the guard"
+      - "the arithmetic bounds of §A.9 for the computed quantity"
+    status: S
+    status_parts: "S: the property is a statement about what the routine computes. M: the induction that would prove it from Lemma 5.3 (stated at pp. 35-36). C: nothing"
+    depends_on: [lem-5.3]
+    owner_team: T2 checker
+    evidence: "§5.2 pp. 35-36; §A.9 pp. 67-69 lists the inflations 2e-8, 1e-9, 1e-8 and the local error bound 1e-13"
+    open_questions: >-
+      This equation is where the paper's 'propose vs certify' discipline has to do the most work: D_hat is
+      floating point, and the only check is a stored upper bound. notation.tex separates D_hat(t) from the
+      comparison block D.
+
+  # ------------------------------------------------------------------ 6
+  - id: stagec-iface
+    kind: equation
+    title: "The interface Section 6 assumes from a Root"
+    paper_locator: "§6.1, eqs. (6.1)-(6.2), p. 41"
+    one_line_statement: >-
+      For a Record with centre P, radius 0 <= r <= .03 and tangent matrix T: ||T^*T - I|| <= omega,
+      ||F(P)|| <= f0 < 1e-6, 0 <= omega < 1e-5; and for every horizontal delta with ||delta|| <= r such
+      that e(P+delta) is Hadamard, with eta = T^*delta and nu = delta - T eta:
+      ||eta|| <= r_H := sqrt(1+omega) r and ||nu|| <= n_0 + iota r + Gamma r^2, where 0 <= n_0 < 1e-6,
+      0 <= iota < 1e-4, 0 <= Gamma < 20.
+    hypotheses:
+      - "a certified Root in the sense of Definition 4.1, plus the admitted ranges displayed above"
+    status: M
+    status_parts: "M: the two bounds follow from (4.4)-(4.5) and monotonicity of n_P. The admitted NUMERICAL ranges are not consequences of Definition 4.1 (see open_questions)"
+    depends_on: [def-4.1, root-disp-n]
+    owner_team: T8 paper
+    evidence: "§6.1 p. 41; §A.10 p. 70 ('the C stage validates its Root and 0 <= r <= .03')"
+    open_questions: >-
+      The admitted ranges (f0 < 1e-6, omega < 1e-5, n0 < 1e-6, iota < 1e-4, Gamma < 20) are NOT part of
+      Definition 4.1, are not claimed by Prop 4.6, and are not one of the five terminal conditions of §7.2.
+      This is report item I2, the sharpest internal gap in the paper. Resolve by proving them from A.5, or
+      by making 'all Records pass validate' terminal condition 6 with emitted counts.
+
+  - id: lem-6.1
+    kind: lemma
+    title: "Bin displacement bounds"
+    paper_locator: "§6.2, Lemma 6.1, p. 41, eq. (6.4)"
+    one_line_statement: >-
+      For every bin at resolution M >= 1, with a = 1/(2M), d_0 = 0, |d_j| <= a and
+      x = d - (1/6)(sum_j d_j) 1: sum_j x_j = 0, ||x|| <= X_M := sqrt(29/6) a, ||x||_1 <= L_M := 5a and
+      ||x||_infty <= I_M := (3/2) a.
+    hypotheses:
+      - "the five free phases of a vector unbiased to the coordinate basis, lifted to [0,1]"
+      - "a = 1/(2M)"
+    status: M
+    status_parts: "M: convexity, so the maximum is attained at a vertex"
+    depends_on: []
+    owner_team: T4 lean
+    evidence: "§6.2 p. 41; results/proof-claims.md §6"
+    open_questions: "none"
+
+  - id: lem-6.2
+    kind: lemma
+    title: "Direct displacement tests"
+    paper_locator: "§6.2, Lemma 6.2, p. 42, eqs. (6.6)-(6.7)"
+    one_line_statement: >-
+      If ||x|| <= X, ||x||_1 <= L and ||delta|| <= r then ||S' - S|| <= 2 pi (K X + r) and
+      |S'_i - S_i| <= 2 pi (L/sqrt6 + r). Consequently, with tau = 2 pi (L/sqrt6 + r), unbiasedness requires
+      max{0,1-tau}^2 <= |S_i|^2 <= (1+tau)^2 and sum_i (|S_i| - 1)^2 <= [2 pi (K X + r)]^2.
+    hypotheses:
+      - "K bounds ||e(P)/sqrt6||_op: K = 1.00001 suffices when f0 < 1e-6 (6.3)"
+      - "the five-vector sums S_i of (6.5)"
+    status: M
+    status_parts: "M: the two changes of the five phases and of the Hadamard centre"
+    depends_on: [lem-6.1, def-4.1, prem-arith]
+    owner_team: T4 lean
+    evidence: "§6.2 pp. 41-42; §A.10 p. 70 gives X < .19, x1 < .42, x_inf < .126 at M >= 6"
+    open_questions: "none"
+
+  - id: lem-6.3
+    kind: lemma
+    title: "Weighted Taylor estimate"
+    paper_locator: "§6.2, Lemma 6.3, p. 42, eqs. (6.9)-(6.11)"
+    one_line_statement: >-
+      Suppose ||x|| <= X and ||x||_infty <= I. Then for every y in R^6 the unbiasedness equations imply
+      |y.(c + J x - B eta)| <= E(y;X,I), where E(y;X,I) := n N_y + pi ||y||_infty (KX+r)^2
+      + min{G_y X^2, K ||S o y|| I X} + (2/sqrt6)||S o y|| X r + (1/sqrt6)||S o y||_infty r^2;
+      and for a bin, |y.c| <= a sum_{j>0} |(J^*y)_j| + r_H ||B^*y|| + E(y;X_M,I_M).
+    hypotheses:
+      - "one vector unbiased to both bases, with the common Hadamard displacement delta, ||delta|| <= r"
+      - "||x|| <= X, ||x||_infty <= I"
+    status: M
+    status_parts: "M: Taylor to second order in the five phases and first order in the centre; the 2pi/4pi normalisations of c, J, B, D_O, D_U and the O/U residual constants pi r_e^2 and pi r_e^2 (1 + |S|/6) are consistent"
+    depends_on: [lem-6.1]
+    owner_team: T5 parameters
+    evidence: "§6.2 pp. 41-44 (proof pp. 42-44); §A.10 pp. 70-72; results/proof-claims.md §6 records that the normalisations check out"
+    open_questions: >-
+      Sign convention in (6.8): the paper prints J_ij = -Im(S_i q_ji), but sum_j q_ji = S_i, so
+      sum_j J_ij = -Im(S_i^2), which does not vanish in general; the row-sum property used later needs
+      J_ij = -Im(conj(S_i) q_ji). An audit (changerequests/T1-audit.md, CR-T1A-5) flags this. It is a
+      printed-formula defect if it is real: T4/T3 must settle it before implementing (6.11).
+
+      The definition of E(y;X,I) (6.10) contains five terms whose relative size changes with M; T5 should
+      report which term dominates at each of the four grids 12, 24, 48, 96.
+
+  - id: lem-6.4
+    kind: lemma
+    title: "Certified clustering"
+    paper_locator: "§6.3, Lemma 6.4, p. 44, eq. (6.14)"
+    one_line_statement: >-
+      Suppose each retained bin midpoint u is assigned a centre v and an integer vector m in Z^6, and let
+      h = u - v - m - (1/6)(sum_j (u_j - v_j - m_j)) 1. If the assigned radius s is at least ||h|| + X_M
+      then the vector ball B_vec(v,s) covers the whole bin up to global phase. The final assignment in the
+      clustering routine has this property.
+    hypotheses:
+      - "the bin is at resolution M and its displacement bound X_M (Lemma 6.1)"
+      - "the integer lift m and the centre v are the ones stored"
+    status: M
+    status_parts: "M: h + x is the centred wrap and ||x|| <= X_M. S: the clustering routine is heuristic, the final radius recomputation is what carries the proof"
+    depends_on: [lem-6.1, def-4.14]
+    owner_team: T2 checker
+    evidence: "§6.3 p. 43; results/code-audit.md §2 row cluster verdict OK-U (assignments) / OK (radii), finding F2 on the cutoff formula"
+    open_questions: >-
+      The assignment is free, so the lemma is universally quantified over it -- which is why a heuristic
+      clustering is sound. T2 must check the recomputed radius, not the assignment.
+
+  - id: lem-6.5
+    kind: lemma
+    title: "Distinct labels"
+    paper_locator: "§6.3, Lemma 6.5, p. 45"
+    one_line_statement: >-
+      Two vectors in the same ball B_vec(v,s) with s < .1 are neither orthogonal nor mutually unbiased.
+      Hence the twelve vectors of two further MUBs occupy twelve distinct retained balls.
+    hypotheses:
+      - "s < .1"
+      - "the vectors are normalised and the ball is as in (6.14)"
+    status: M
+    status_parts: "M: 6 - 2 pi sqrt6 ||z|| > 6 - 22/7 > sqrt6 for ||z|| <= .2"
+    depends_on: [lem-6.4]
+    owner_team: T4 lean
+    evidence: "§6.3 p. 44; constants re-checked in results/proof-claims.md §6"
+    open_questions: >-
+      The numerical chain uses 2 pi sqrt6 * .2 < 22/7 (3.078 < 3.143). It is tight-ish but correct; T4's
+      formalisation needs the rational bound 22/7, not a decimal.
+
+  - id: lem-6.6
+    kind: lemma
+    title: "Edge Taylor equations"
+    paper_locator: "§6.4, Lemma 6.6, p. 45, eqs. (6.15)-(6.21)"
+    one_line_statement: >-
+      For two balls with radii s_u, s_v and r_e = s_u + s_v, for any one vector from each:
+      ||q_O + D_O z|| <= E_O := pi r_e^2 and |q_U + D_U z| <= E_U := pi r_e^2 (1 + |S|/6), where
+      q_O = (Re S, Im S)^*/(2 pi), q_U = (|S|^2/6 - 1)/(4 pi); consequently the direct support tests
+      |S|^2/(2 pi) <= 6 r_e ||D_U|| + E_O |S| and |q_U| <= r_e ||D_U|| + E_U are necessary as well.
+    hypotheses:
+      - "two vectors with displacements x_u, x_v of norms at most s_u, s_v"
+      - "the relation E between the pair (orthogonality or unbiasedness)"
+    status: M
+    status_parts: "M: second-order Taylor with the stated residual constants"
+    depends_on: [lem-6.1]
+    owner_team: T4 lean
+    evidence: "§6.4 pp. 44-45; §A.11 pp. 72-73; results/proof-claims.md §6"
+    open_questions: "none"
+
+  - id: lem-6.7
+    kind: lemma
+    title: "Joint necessary support with one tangent variable"
+    paper_locator: "§6.5, Lemma 6.7, p. 46, eq. (6.23)"
+    one_line_statement: >-
+      Suppose one vector from each of the two balls is unbiased to the coordinate basis and to the same
+      second basis e(P+delta)/sqrt6, and the pair has relation E. Then for every y_0, y_1 in R^6 and
+      y_e in R^l: |y_0.c_0 + y_1.c_1 + y_e.q_E| is at most
+      sum_{t=0}^{1} [ E^st_t ||(J^t)^* y_t + (-1)^t D^* y_e|| + E^ball(y_t) + r_H ||(B^0)^*y_0 + (B^1)^*y_1|| + E_E ||y_e|| ].
+    hypotheses:
+      - "both vectors lie in their balls and share one Hadamard displacement delta"
+      - "the relation E between the two vectors"
+    status: M
+    status_parts: "M: the single shared eta is what makes the joint test stronger than two separate ones"
+    depends_on: [lem-6.6, lem-6.3]
+    owner_team: T4 lean
+    evidence: "§6.5 pp. 45-46; §A.11 pp. 72-73; results/proof-claims.md §6"
+    open_questions: >-
+      The joint term ||(B^0)^*y_0 + (B^1)^*y_1|| is the only genuine coupling between the two vectors and
+      the reason the O/U graphs are not independent. T4's statement must keep it.
+
+  - id: lem-6.8
+    kind: lemma
+    title: "Complete graph search"
+    paper_locator: "§6.6, Lemma 6.8, p. 47, eq. (6.24)"
+    one_line_statement: >-
+      The mode-1 search of graph::exist, started with both pools equal to the full vertex set and
+      first-clique target size six, returns false only if configuration (6.24) is impossible: there are no
+      two disjoint O-cliques A, B with |A| = |B| = 6 and A x B contained in E(U). A work-cap exhaustion
+      never gives a negative certificate.
+    hypotheses:
+      - "the two graphs O and U on the retained ball labels"
+      - "graph mode 1, first-clique target 6, step cap 5,000,000"
+    status: S
+    status_parts: "S: the proof recites the least-vertex enumeration, the root-deletion convention, the two-pool intersections and the auxiliary six-clique prune. M?: the enumeration argument is correct if the code is as described. C: nothing -- a cap exhaustion is explicitly not a negative"
+    depends_on: [eq-6.24, lem-6.7, lem-6.5]
+    owner_team: T2 checker
+    evidence: "§6.6 pp. 46-47 (proof pp. 46-47); results/code-audit.md §2 row graph::exist verdict UNCHK, finding F9 severity medium"
+    open_questions: >-
+      The only lemma in the paper whose subject is an algorithm. results/code-audit.md F9 lists the two
+      ways out: a mathematical criterion for (6.24) infeasibility checkable on the adjacency sets, or an
+      emitted search trace. Disposition in reports/T1-report.md.
+
+  - id: prop-6.9
+    kind: proposition
+    title: "Local exclusion certificate"
+    paper_locator: "§6.7, Proposition 6.9, p. 48"
+    one_line_statement: >-
+      Assume the Root certificate (6.1)-(6.2) for a Record of radius r <= .03 and the arithmetic
+      guarantees of Appendix A. If Stage C returns a negative result for that Record, then no exact
+      Hadamard matrix e(P + delta) with delta horizontal and ||delta|| <= r can be extended, together with
+      the coordinate basis, by two further mutually unbiased orthonormal bases.
+    hypotheses:
+      - "(6.1)-(6.2): ||T^*T - I|| <= omega, ||F(P)|| <= f0 < 1e-6, 0 <= omega < 1e-5, and the normal bound with 0 <= n0 < 1e-6, 0 <= iota < 1e-4, 0 <= Gamma < 20"
+      - "a completed negative Stage C result (not a cap, not a failure)"
+      - "the arithmetic guarantees of Appendix A"
+    status: C
+    status_parts: "M: the composition of Lemmas 6.1-6.8. S: the routines behave as described. C: Stage C returned negative for this Record"
+    depends_on: [lem-6.1, lem-6.2, lem-6.3, lem-6.4, lem-6.5, lem-6.6, lem-6.7, lem-6.8, def-4.1, margin-a.12]
+    owner_team: T4 lean
+    evidence: "§6.7 pp. 47-49; Table 1 Initial C and Final C rows, p. 53 (163 graph-cap failures then 1127 resolved)"
+    open_questions: >-
+      (6.2)'s admitted ranges (f0 < 1e-6, omega < 1e-5, n0 < 1e-6, iota < 1e-4, Gamma < 20) are NOT part
+      of Definition 4.1 and nothing in §§4-5 is shown to produce them. This is the sharpest internal gap
+      in the paper: see reports/T1-report.md item I3. Until it is closed, Prop 6.9's hypothesis is not
+      known to be met by the records Stage B emits.
+
+  - id: eq-6.7
+    kind: equation
+    title: "Single-vector necessary tests"
+    paper_locator: "§6.2, eq. (6.7), p. 42"
+    one_line_statement: >-
+      With tau = 2 pi (L/sqrt6 + r): max{0, 1 - tau}^2 <= |S_i|^2 <= (1 + tau)^2 and
+      sum_i (|S_i| - 1)^2 <= [2 pi (K X + r)]^2 for every vector of a further MUB.
+    hypotheses:
+      - "Lemma 6.2 applies"
+    status: M
+    status_parts: "M: Lemma 6.2"
+    depends_on: [lem-6.2]
+    owner_team: T2 checker
+    evidence: "§6.2 p. 41; the routine Layer::test applies it (results/code-audit.md §2)"
+    open_questions: "none"
+
+  - id: eq-6.11
+    kind: equation
+    title: "Bin support inequality"
+    paper_locator: "§6.2, eq. (6.11), p. 43"
+    one_line_statement: >-
+      For every y in R^6, a vector in a bin at resolution M satisfies
+      |y.c| <= a sum_{j>0} |(J^*y)_j| + r_H ||B^*y|| + E(y;X_M,I_M).
+    hypotheses:
+      - "Lemma 6.3 applies with X = X_M, I = I_M"
+    status: M
+    status_parts: "M: Lemma 6.3"
+    depends_on: [lem-6.3]
+    owner_team: T2 checker
+    evidence: "§6.2 p. 42"
+    open_questions: "none"
+
+  - id: eq-6.12
+    kind: equation
+    title: "Scalar test without the tangent decomposition"
+    paper_locator: "§6.2, eqs. (6.12)-(6.13), p. 43"
+    one_line_statement: >-
+      Without the tangent decomposition, |c_i| <= a sum_{j>0} |J_ij| + r ||J_{i,:}|| + rho, where rho is
+      the minimum of the two remainder bounds.
+    hypotheses:
+      - "the bin displacement bounds of Lemma 6.1"
+    status: M
+    status_parts: "M: one-dimensional version of Lemma 6.3. It is the cheapest of the three tests Layer::test applies"
+    depends_on: [lem-6.3]
+    owner_team: T2 checker
+    evidence: "§6.2 p. 42"
+    open_questions: "none"
+
+  - id: eq-6.23
+    kind: equation
+    title: "Joint directional test"
+    paper_locator: "§6.5, eq. (6.23), p. 46"
+    one_line_statement: >-
+      For every y_0, y_1 in R^6 and y_e in R^l, the size of y_0.c_0 + y_1.c_1 + y_e.q_E is at most the
+      right side of Lemma 6.7.
+    hypotheses:
+      - "Lemma 6.7's hypotheses"
+    status: M
+    status_parts: "M: Lemma 6.7"
+    depends_on: [lem-6.7]
+    owner_team: T2 checker
+    evidence: "§6.5 p. 45; §A.11 p. 73 (the 3e-7 comparison allowance)"
+    open_questions: "none"
+
+  - id: eq-6.24
+    kind: equation
+    title: "The forbidden two-clique configuration"
+    paper_locator: "§6.6, eq. (6.24), p. 47"
+    one_line_statement: >-
+      Configuration (6.24): there exist disjoint sets A, B of retained-ball labels with |A| = |B| = 6,
+      A and B both O-cliques, and A x B contained in E(U). Two further MUBs would force it; Stage C
+      excludes it.
+    hypotheses:
+      - "the O and U graphs on the retained vector balls, with the twelve distinct labels of Lemma 6.5"
+    status: M
+    status_parts: "M: immediate from orthogonality within a basis and unbiasedness across bases. The exclusion of (6.24) is Lemma 6.8, which is S"
+    depends_on: [lem-6.5]
+    owner_team: T2 checker
+    evidence: "§6.6 p. 46; §6 intro p. 40"
+    open_questions: >-
+      (6.24) is a necessary condition, so excluding it is sound but potentially weak: a record could pass
+      all tests and still not be extendible. The paper only needs the negative direction, which is why this
+      suffices.
+
+  # ------------------------------------------------------------------ 7
+  - id: thm-7.1
+    kind: theorem
+    title: "Finite-execution certificate"
+    paper_locator: "§7.4, Theorem 7.1, p. 52; proof pp. 52-53"
+    one_line_statement: >-
+      Use the seven specified source files and the arithmetic conditions of Appendix A, and suppose the
+      invocations of §7.2 meet all of its terminal conditions with the record provenance and batch checks
+      stated there. Then there do not exist four pairwise mutually unbiased orthonormal bases of C^6.
+    hypotheses:
+      - "the five terminal conditions of §7.2 (p. 51)"
+      - "the arithmetic conditions of Appendix A, including the one code-generation condition on covout.cpp (pow(.,2) lowered to multiplication)"
+      - "the coverage propositions 2.10, 4.16, 5.7/5.8 and the exclusion proposition 6.9"
+    status: C
+    status_parts: "M: the composition proof p. 52-53 (each coverage implication plus the count/hash chain). S: the seven routines. C: the run of §7.5 met the terminal conditions. E: Table 1"
+    depends_on: [prop-2.10, prop-4.16, prop-5.7, cor-5.8, prop-6.9, flow-7.2, prem-arith, lem-a.1, lem-a.2, lem-a.3, margin-a.12]
+    owner_team: T8 paper
+    evidence: "§7.4 pp. 52-53; §7.5 pp. 53-54; Table 1 p. 53"
+    open_questions: >-
+      The proof's phrase 'counts and hashes establish the identity and completeness of the finite chain,
+      not those inequalities in isolation' is the honest statement of what the run certifies. T8 must not
+      compress it into 'a computer checked the inequalities'.
+
+  - id: flow-7.2
+    kind: execution
+    title: "Specified finite control flow and its terminal conditions"
+    paper_locator: "§7.1-§7.2, pp. 2-51; terminal conditions p. 51"
+    one_line_statement: >-
+      The pipeline consists of one cover invocation, four A shards (part i processes the centre indices
+      congruent to i mod 4), two sequential B refinements, one initial C invocation per batch named by the
+      completed-batches marker, one B fallback over all nonempty C bad files, and four final C modulo-4
+      shards; and the run is accepted only if all five terminal conditions hold: (1) successful builds and
+      a complete centre file; (2) four A exits 0, all centres processed, terminal failedBalls = 0, four
+      empty bad text files; (3) both B exits 0, all parents processed, logged and saved counts agree,
+      zero-count bad files; (4) every initial C batch processed exactly once with consistent exit, done
+      count, bad count and saved records; (5) every initial C bad record included in fallback, fallback
+      exit 0 with all parents processed and zero saved failures, four final C exits 0 with total done equal
+      to the fallback count and zero saved failures.
+    hypotheses:
+      - "C numeric locale, fresh output paths, atomic batch renames, immutable insertion order"
+    status: E
+    status_parts: "E: this is the observed control flow of the documented run. M: the argument (proof of Theorem 7.1) that these conditions suffice to carry the exact solution's record through every stage"
+    depends_on: [prem-arith]
+    owner_team: T8 paper
+    evidence: "§7.2 pp. 50-51; §7.5 pp. 53-54 (all 100 invocations accounted for; the fifteen initial C exits 1 resolved by the fallback chain)"
+    open_questions: >-
+      The sufficiency of these five conditions is a bookkeeping lemma that is only proved inside Theorem
+      7.1's proof (p. 52). T4 should extract it: 'if a record enters every stage and no stage fails, the
+      record survives' is a finite combinatorial statement over file lists, and it is the right thing to
+      formalise separately from the geometry.
+
+  - id: bounds-7.3
+    kind: execution
+    title: "Finite bounds and conservative stopping"
+    paper_locator: "§7.3, pp. 2-52"
+    one_line_statement: >-
+      For every stage the paper states an explicit finite bound: at most C(116,5) = 160,389,488
+      five-bin x-lists and C(115,4) = 6,913,340 tails per shared bin before filtering; A retains nonfinal
+      grids only through 32 and grid 64 has at most 64^4/8 = 2,097,152 cells per seed with a 1,000,000
+      extra-node cap and deepest grid 512; k <= 10; atlas and record caps 2,000,000, concatenated inputs
+      8,000,000; B has L <= 1262, axis indices <= 2524, grid product checked against 50,000,000, depth <= 6;
+      C retains <= 2,000,000 bins, 12^5 = 248,832 first-grid cells, <= 32 children per retained bin later,
+      <= 2048 clusters, 32 words of 64 bits per adjacency set, <= 14 joint-test rows, graph cap 5,000,000;
+      and every cap exhaustion sets a give-up flag rather than returning a negative certificate.
+    hypotheses:
+      - "the parameters of §7.2"
+    status: M
+    status_parts: "M: every arithmetic identity above reproduces exactly (results/code-audit.md §4). S: that each cap is enforced where the text says, and that a cap never yields a negative certificate"
+    depends_on: [flow-7.2]
+    owner_team: T5 parameters
+    evidence: "§7.3 pp. 51-52; results/code-audit.md §4 reproduces all counts; F3 records that k <= 10 is unreachable at the stated widths (k <= 5 in passes 1-2, k <= 7 in pass 3)"
+    open_questions: >-
+      Two audit findings live here: F3 (the k <= 10 allowance is unused, and a k = 6 record in mid.bin would
+      have failed the parent outright) and F5 (from grid 64 a seed is never enumerated exhaustively, so
+      Stage A's completeness at depth >= 4 rests on coverage, not enumeration). Both belong in T8's text
+      as stated limitations.
+
+  - id: run-7.5
+    kind: execution
+    title: "Table 1: the completed execution"
+    paper_locator: "§7.5, Table 1, p. 53"
+    one_line_statement: >-
+      Observed on 4 October 2026 (UTC), 03:10:26 to 04:24:56: the seed cover processed 151,744,086 pairs
+      and wrote 249,878 centres (retaining 22,829 five-bin x lists); A0-A3 processed 62,470/62,470/62,469/62,469
+      centres and emitted 764/774/757/788 coarse records; B mid 3083 -> 600; B fine 600 -> 22,379 in 88
+      batches (87*256 + 107); initial C 22,379 records with 163 unresolved (all graph caps, in fifteen
+      named bad files); B fallback 163 -> 1127; final C 282 + 282 + 282 + 281 = 1127; zero unresolved
+      records at the end and nine categorically zero failure classes.
+    hypotheses:
+      - "the run as documented; the archive is not in the packet"
+    status: E
+    status_parts: "E: all of it. The arithmetic consistency of the counts is checked in results/code-audit.md §4 and reproduces exactly, which is evidence of bookkeeping discipline, not of correctness"
+    depends_on: [flow-7.2, bounds-7.3]
+    owner_team: T8 paper
+    evidence: "§7.5 pp. 53-54; wall times 621.59 s (cover), 2020.32 s (A), 1071.49 s and 407.45 s (B mid, fine), 300.23 s, 8.12 s, 36.27 s (initial C, fallback, final C), 4470.33 s total"
+    open_questions: >-
+      Node counts, cell counts, box counts, cluster counts and the k histogram are not reported anywhere
+      (results/code-audit.md F6). A run whose conclusion is 'no region survived' should report the
+      quantities that came closest to their caps.
+
+  - id: hashes-7.5
+    kind: execution
+    title: "Table 2: SHA-256 digests of the principal data files"
+    paper_locator: "§7.5, Table 2, p. 54"
+    one_line_statement: >-
+      Eight SHA-256 digests are printed for centers.txt, coarse0-3.bin, mid.bin, fine.bin and fb1.bin, with
+      the claim that full per-file inventories accompany the computation archive.
+    hypotheses:
+      - "the archive referenced as verification/computation/README.md"
+    status: E
+    status_parts: "E: an observed datum, and unverifiable here -- the archive is not in the packet, so no digest can be recomputed"
+    depends_on: [run-7.5]
+    owner_team: T8 paper
+    evidence: "§7.5 p. 53; results/code-audit.md §0 (only the PDF was supplied; no embedded files, no archive)"
+    open_questions: >-
+      The digests bind nothing that a reader can obtain. T8 should either drop Table 2 or state plainly
+      that the archive is not part of the published artefact.
+
+  - id: prem-arith
+    kind: assumption
+    title: "Arithmetic and compiler premises"
+    paper_locator: "§7.1, pp. 2-50; Appendix A, pp. 55-58"
+    one_line_statement: >-
+      Premise: binary64, round-to-nearest, separate operations without contraction or fast-math
+      reassociation, correctly rounded binary64 square root, masked floating-point exceptions, neither
+      flush-to-zero nor denormals-are-zero; plus one code-generation condition (both pow(.,2) expressions
+      in coverSeeds::run lowered to binary64 multiplications, checked in the saved disassembly of the
+      recorded binary).
+    hypotheses:
+      - "the recorded platform: x86-64, Intel Xeon Platinum 8573C, GCC 13.3.0, glibc 2.39, MXCSR 0x1f80"
+    status: E
+    status_parts: "E: the probes and the disassembly check are observations. The semantics of primitive operations remain ASSUMPTIONS -- the paper says so at p. 50"
+    depends_on: []
+    owner_team: T2 checker
+    evidence: "§7.1 pp. 49-50; §A.1 pp. 55-57 (u = 2^-53, gamma_m = 2.1e-16 (m+1)); results/code-audit.md §0"
+    open_questions: >-
+      This is the premise the whole 20-page budget rests on. T2's plan (P2.3, exact/interval arithmetic)
+      removes it for the NEW pipeline; it cannot repair the old run. The final paper must say which of the
+      two it is using.
+
+  # ------------------------------------------------------------------ A
+  - id: app-a4-a11
+    kind: assumption
+    title: "The per-quantity arithmetic budgets of §§A.3-A.11"
+    paper_locator: "§A.3-§A.11, pp. 2-73; summary table p. 74"
+    one_line_statement: >-
+      For each computed quantity the paper derives a bound on its total error: seed filtering and seed-ball
+      reuse (A.3), frames and A exclusion tests (A.4), Root certificates and normal-displacement constants
+      (A.5), integer lifts and sphere distances (A.6), candidate conversion and ellipsoidal coverage (A.7),
+      spectral and inverse-quadratic-form bounds (A.8), refinement relations and tangent grids (A.9),
+      single-vector filters and vector-ball construction (A.10), pair edges and the joint directional test
+      (A.11), and the preservation of inconclusive cases (A.12).
+    hypotheses:
+      - "the arithmetic premises of prem-arith"
+      - "the routines behave as described in §§2-6"
+    status: S
+    status_parts: "S: each budget is a statement about what a computed quantity is. M: the inequalities themselves are elementary (triangle inequality, gamma_m accumulation). The difficult part is that they must match the code operation by operation, which cannot be checked without the source"
+    depends_on: [prem-arith, lem-a.1, lem-a.2, lem-a.3]
+    owner_team: T2 checker
+    evidence: "§A.3-§A.11 pp. 58-73; results/code-audit.md §4 records that every pairing it could check has the margin one to three orders of magnitude above the error it covers"
+    open_questions: >-
+      Twenty pages of budgets exist to serve ~30 S-claims. If T2's interval arithmetic replaces them, the
+      paper drops from 76 pp to the planned <= 45. T1's recommendation: do not re-derive these; replace them.
+
+  - id: lem-a.1
+    kind: lemma
+    title: "Accumulation and norm bounds"
+    paper_locator: "§A.1, Lemma A.1, p. 56, eqs. (A.3)-(A.4)"
+    one_line_statement: >-
+      For m <= 2000, a dot product on exact stored inputs formed as separate products and successive
+      additions satisfies |fl(sum a_i b_i) - sum a_i b_i| <= gamma_m sum |a_i b_i| + 4(m+1) tau with
+      gamma_m = 2.1e-16 (m+1); and for the square-sum/square-root norms used here,
+      |fl(||a||) - ||a||| <= 2.2e-16 (m+2) ||a|| + 1e-140.
+    hypotheses:
+      - "the arithmetic premises of prem-arith (in particular no contraction)"
+      - "m <= 2000"
+    status: S
+    status_parts: "S: a statement about an arithmetic model, not about mathematics. It is the standard Higham-type accumulation bound and its constants are checkable by hand, but its applicability depends on the code performing exactly those operations"
+    depends_on: [prem-arith]
+    owner_team: T2 checker
+    evidence: "§A.1 pp. 55-57; §A.2 p. 57 on u and the additive underflow allowance"
+    open_questions: "If T2 uses interval arithmetic this lemma disappears; if it re-uses binary64 it must re-derive it for its own operation order."
+
+  - id: lem-a.2
+    kind: lemma
+    title: "Unit-exponential error"
+    paper_locator: "§A.2, Lemma A.2, p. 57, eq. (A.10)"
+    one_line_statement: >-
+      At a finite stored x with |x| <= 16, the routine expair differs from e(x) = exp(2 pi i x) in complex
+      modulus by less than 2e-14; consequently the common bound eps_exp = 6e-14 is valid for all its uses
+      in the certificate, including argument formation. Separately, |pi_hat - pi| < 1.225e-16 for the
+      stored pi, by Machin's identity, alternating-series bounds and exact rational arithmetic.
+    hypotheses:
+      - "|x| <= 16 (all arguments in the certificate satisfy |P| <= 4, |v| <= 2, differences <= 6)"
+      - "the arithmetic premises of prem-arith"
+    status: S
+    status_parts: "S: the expair bound is a statement about the routine's implementation (guarded range, reduced argument, polynomial). M: the pi bound is a genuine certified inequality, checkable without a computer algebra system"
+    depends_on: [prem-arith, lem-a.1]
+    owner_team: T5 parameters
+    evidence: "§A.2 pp. 57-58"
+    open_questions: >-
+      eps_exp = 6e-14 is one of the three different objects the paper calls epsilon; see notation.tex.
+      The pi part is worth keeping in the final paper even if everything else is replaced -- it is three
+      lines and completely checkable.
+
+  - id: lem-a.3
+    kind: lemma
+    title: "The stored spectral upper bound"
+    paper_locator: "§A.8, Lemma A.3, p. 65"
+    one_line_statement: >-
+      For every exact stored symmetric k-by-k matrix G with k <= 10 and |G_ij| <= 10, the routine
+      spectralUpper returns an upper bound for the operator norm ||G||; and
+      sig = sqrt(spectralUpper(G) + 1e-7 + 1e-8) is then an upper bound for the perturbed spectral
+      quantity it is used for.
+    hypotheses:
+      - "k <= 10, |G_ij| <= 10"
+      - "the arithmetic premises of prem-arith"
+    status: S
+    status_parts: "S: a statement about what spectralUpper returns. The row-sum and fourth-norm bounds it takes the minimum of are elementary"
+    depends_on: [prem-arith, lem-a.1]
+    owner_team: T2 checker
+    evidence: "§A.8 pp. 65-68; §A.9 p. 68 (the sig formula and sig < 4.6 from the absolute-row bound)"
+    open_questions: "none"
+
+  - id: margin-a.12
+    kind: assumption
+    title: "Summary of the comparison margins"
+    paper_locator: "§A.12, table 'Summary of the comparison margins', p. 74"
+    one_line_statement: >-
+      For each of twenty certificate paths the paper lists an established adverse error and an explicit
+      comparison margin: seed gap/direct support 1e-14, 1e-11 -> 1e-8; shared-coordinate numerator
+      < 3.5e-11 -> 1e-7; endpoints 1e-7 -> 1e-5; seed dual support 1e-4 -> .01; A flat norm 1e-6 -> 1e-5;
+      A directional < 4e-6 -> .0001; Root identity Frobenius < 5e-8 -> 2e-6; Root orthogonal/horizontal
+      1e-10, 1e-11 -> 1e-8; tensor row bound 1e-6 -> .0002; Candidate direct support 2e-6 -> .0001;
+      Candidate external tangent .00012 rad -> .00015 rad; G entry 1e-11, 1e-9 -> 1e-7 I; spectral
+      3e-13, 1e-10 -> 1e-10, 2e-7; bootstrap 1e-12 -> 1e-8; B normal/local 5e-11, 1e-13 -> 1e-8;
+      B cross-Gram 2e-9 -> 1e-7; C direct/directional 1e-9 -> 2e-7; C joint support 1e-8 -> 3e-7.
+    hypotheses:
+      - "each margin is used at the place proved earlier in Appendix A"
+    status: S
+    status_parts: "S: the table is an index into statements about the code. Every pairing checked has the margin above the error it covers (results/code-audit.md §4), but no margin can be checked against the code"
+    depends_on: [app-a4-a11, lem-a.1, lem-a.2, lem-a.3]
+    owner_team: T2 checker
+    evidence: "§A.12 p. 74; results/code-audit.md §4 (no case found where a margin is smaller than the error it must cover)"
+    open_questions: >-
+      The margins are the paper's real trust base: 20 numbers, each of which must exceed an accumulated error.
+      T5 should turn this table into the 'constant -> inequality -> slack -> cost' table of plan P5.1, and T2's
+      checker should evaluate the inequality rather than trust the margin.

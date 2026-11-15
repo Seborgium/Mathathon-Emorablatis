@@ -1,0 +1,117 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\key}[1]{\par\medskip\noindent{\normalsize\bfseries #1}\par\nobreak\vspace{-1pt}}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+
+\title{\bfseries Step 1 of 5: from a continuum to finitely many balls\\[5pt]
+\large\normalfont Companion to \texttt{mub-outline.pdf}, Figure 1;
+preprint \S2 (Lemmas 2.2--2.9, Proposition 2.10)}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+\textbf{What this step receives.} Every dephased complex Hadamard matrix $H$ --- $25$ free phases
+modulo the symmetries of Lemma 2.2 --- together with no hypothesis on $H$ whatsoever.
+
+\par\medskip\noindent\textbf{What it must produce.} A \emph{finite} list of centres $u^{(1)},\dots,u^{(m)}$ such
+that every exact $H$ has its nine seed phases within $R_s=2\pi(0.0320001)$ radians of one of them, and
+such that the list is short enough to visit.
+
+\key{1.\ Spend the symmetries before cutting anything}
+
+Eleven of the $36$ phases are pure gauge: permute rows and columns and multiply them by unit scalars
+until the first row and first column are $1$. Two more symmetries matter later --- transposition and
+entrywise conjugation --- and one of them is \emph{needed} to make the next step work. The point is
+economy: the smaller the quotient, the fewer boxes.
+
+\key{2.\ Arrange canonically, and only then bin}
+
+Lemma 2.4 is the step that makes the search finite, and it is the one worth teaching. Among all pairs
+of rows and all pairs of columns, take a pair whose six phase differences have the smallest
+\emph{gap} (the largest circular arc containing none of the six points). Transpose if it is a column
+pair, permute rows so it is the first two, order the six phases around the circle starting just after
+a largest gap, and reverse the direction if the orientation condition $x_1\le x_5-x_4$ fails. The
+result is
+\[
+0\le x_1\le\dots\le x_5\le 1,\qquad g_x=1-x_5,\qquad x_1\le x_5-x_4 ,
+\]
+and similarly for a second column, sharing one entry $\xi$ with that row. Now a box in the nine seed
+phases is a \emph{multiset} of bin indices, so the count collapses:
+\[
+112^9=2.8\times10^{18}\quad\longrightarrow\quad\binom{116}{5}=1.6\times10^{8}.
+\]
+Canonical form first, bins second: the other order is unaffordable by ten orders of magnitude.
+
+\key{3.\ Bin the circle, and remember what a box is}
+
+Bins $I_b=[b/N,(b{+}1)/N]$ with $N=112$ are \emph{closed}, so the cover misses no phase; a boundary
+phase belongs to two boxes, which is harmless. A box is a product of intervals --- the only kind of
+region for which estimates are cheap --- and its midpoint $u$ is a rational point that need not be a
+Hadamard matrix. The circumradius of a nine-dimensional box of side $w$ is $\tfrac32w=0.0134$, which is
+why a box can fit inside a ball of radius $0.032$.
+
+\key{4.\ Four necessary tests, each with a margin}
+
+A test may discard a box only if every exact matrix in that box fails it. That is why each test is
+proved for the \emph{centre} and then widened by the box half-width:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Gaps.} Lemma 2.5 says a gap computed from phases is Lipschitz in those phases with a
+constant of order $2$; so a gap comparison true at the centre with room to spare is true on the box.
+Lemma 2.8's direction conditions sharpen this into $g_{x,\mathrm{mid}}\le1-\frac{l-1}{N}$ and
+$g_{y,\mathrm{mid}}\ge1-\frac{l+2}{N}$, integer inequalities that most boxes fail.
+\item \emph{Vanishing sums.} Two rows are orthogonal exactly when $1+\sum_je(x_j)=0$. Write the
+midpoint residual as a real two-vector $c$, its $2\times5$ linearisation as $J$, and use
+$1+\sum_je(u_j+\Delta_j)=0$ with $\abs{\Delta_j}\le w/2$ to get
+\[
+\norm{c+J\Delta}\le \tfrac{5\pi w^2}{4}=3.1\times10^{-4}.
+\]
+A box whose data cannot be repaired by any displacement of size $w/2$ is discarded. The tolerance is
+quadratic in $w$ because the linear term is exactly what $J$ accounts for.
+\item \emph{Supports.} To test that no $\Delta$ works, the code proposes a vector $v$ and evaluates the
+dual inequality; validity does not depend on how $v$ was found, so a heuristic solve cannot spoil it.
+\item \emph{Reuse.} A box whose feasible part already lies in a previously retained ball is discarded,
+certified by $\norm{k+h}^2\le\norm{k}^2+\tfrac94+2k\cdot h$ with $k=N(u-u')$ an integer bin
+displacement. This is what keeps the list short; without it the cover would be correct and useless.
+\end{enumerate}
+
+\key{5.\ What comes out, and what it does not say}
+
+Proposition 2.10: the retained centres, each with its recorded selected position, cover the seed
+coordinates of every exact Hadamard matrix up to the equivalences of Lemma 2.2, by closed Euclidean
+balls of radius $0.032$. Note the shape of the claim. It says nothing about the lower-right block
+$D'$; that sixteen-phase problem is handed to Step 2 untouched. It is stated for \emph{exact}
+matrices, not for approximations. And it is a statement about a run: a box that fails a check is
+retained as \emph{unresolved}, never dropped, so the only way to lose a matrix is a bug or an
+arithmetic failure, both of which Appendix A bounds.
+
+\key{Where this step can fail, and why that is safe}
+
+Every failure mode here is harmless by construction. A test too weak to reject retains boxes and the
+search gets slower; a frame or rank check that fails retains a region as unresolved and the proof is
+merely not finished. No branch of this step can \emph{exclude} a region that contains a matrix, because
+each test is a necessary condition for existence. That asymmetry --- disjunction on the covering side,
+conjunction on the excluding side --- is the whole logical content of Stage 1.
+
+\medskip
+\noindent\textit{Exercise.} Show that $\binom{116}{5}$ counts the boxes of one list, and identify which
+fraction of them survives the orientation condition $a\le l-d+1$. (Exact answer: $0.53$.)
+
+\end{document}

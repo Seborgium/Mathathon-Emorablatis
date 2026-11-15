@@ -1,0 +1,15 @@
+{
+ "schema": "stage-b-source-parent-transport-v1",
+ "normalized_edges": 902,
+ "edges_referenced_by_boxes": 303,
+ "distinct_parent_maps": 12,
+ "accounting": {
+  "outside": 11480,
+  "covered": 3161,
+  "open": 0,
+  "grid": 14641
+ },
+ "smallest_selected_closure_margin": "139324447153519186597224764556346559344309082738262094460891583271152227/132513529858378824718747312555718888687061292265671421859120465096946483200000000",
+ "float_smallest_selected_closure_margin": 1.0513979010476847e-09,
+ "output": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/certdata/runs/h2-stageb/parent-bad10-0-source-transport.json"
+}

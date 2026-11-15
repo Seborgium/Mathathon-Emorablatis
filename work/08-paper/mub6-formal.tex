@@ -1,0 +1,563 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\op}{\mathrm{op}}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+
+\title{\bfseries Formalising the assembly of a computer-assisted proof\\[2pt]
+that no four mutually unbiased bases exist in dimension six}
+\author{}
+\date{14 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A preprint of 24 September 2026 reports a computer-assisted proof that $\C^6$ admits no four
+mutually unbiased orthonormal bases, which with the classical tensor construction gives $N(6)=3$.
+Its conclusion rests on three hypotheses: a binary64 arithmetic model, a completed execution of a
+100-process pipeline, and seven programs conforming to a written specification. We report on a
+Lean~4 formalisation of the part of that argument that can be separated from the execution: the
+reduction of the main theorem to six stage statements, and the assembly of those statements into
+the final result. The assembly is proved, and --- this is the substantive finding --- its
+formalisation shows that it is not the single implication the source presents but a factorisation
+into two obligations: an assembly over covers, and a driver whose bookkeeping realises them. We
+record what is proved, what is stated without proof, and what is not stated at all, and we separate
+those three categories explicitly. Along the way we settle a disputed lemma, correct two
+clause-level details of the source's statements, and report specification defects found while
+transcribing them. No new axioms are assumed; every result reported is checked by the Lean kernel,
+and we list the 23 remaining holes rather than summarising them away.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+
+\subsection{The result and its trust structure}
+
+Let $N(d)$ be the largest size of a family of pairwise mutually unbiased orthonormal bases of
+$\C^d$. The tensor construction gives $N(6)\ge 3$, and a preprint of 24 September 2026
+\cite{source} reports the matching upper bound. The claim is computer-assisted, and the source is
+explicit that it is conditional. Reduced to essentials, the conclusion rests on:
+\begin{enumerate}[label=(\Alph*)]
+\item a model of binary64 arithmetic, of the compiler, and of the C library's elementary functions;
+\item a completed execution of a pipeline of roughly one hundred processes, whose records are
+      archived and hash-identified;
+\item seven programs that conform to the specification written in the paper's Sections~2--6.
+\end{enumerate}
+None of these is a mathematical hypothesis, and a reader cannot check any of them by reading. That
+is the situation our formalisation addresses, on the part of the argument where it can be addressed:
+the \emph{assembly}, that is, the step from local statements about finitely many regions to the
+global conclusion.
+
+\subsection{What we formalised, and what we deliberately did not}
+
+The source's argument has two layers. The \emph{analytic} layer consists of necessary conditions
+and covering estimates: each stage produces a finite family of regions that covers the objects a
+counterexample would need, and each region carries a certificate that excludes it or contains it.
+The \emph{assembly} layer is the composition of those coverings. We formalised the assembly in full
+and the analytic layer only in the parts that are elementary and self-contained; the analytic middle
+(notably the refinement relations of the source's Section~5) we did not attempt, and we say so where
+it matters rather than implying completeness.
+
+The distinction is not a convenience. The assembly is where a wrong proof of this shape fails
+silently: an error in the induction over regions, in the quantifier order of a covering statement,
+or in the handling of the equivalence relation under which regions are compared, produces a proof
+that reads correctly and establishes nothing. Those are precisely the errors a machine catches.
+
+\subsection{Contributions}
+
+\begin{enumerate}[label=\textbf{C\arabic*.}]
+\item A formal statement of the source's main theorem as an \emph{equivalence} with six stage
+      statements together with seven terminal predicates, rather than as an implication
+      (Section~\ref{sec:assembly}). The equivalence is what makes the obligations visible.
+\item A proof of the assembly, and of the two inductions underneath it --- over subdivision depth,
+      and over the order of completed parents --- in a form that cannot assume what it proves
+      (Section~\ref{sec:assembly}).
+\item The finding that the source's Theorem~7.1 requires a \emph{driver} hypothesis it does not
+      state: the seven coverage facts are not consequences of the paper's bookkeeping conditions,
+      so the theorem is two steps where the paper presents one (Section~\ref{sec:findings}).
+\item Formal proofs of the fine-grained lemmas that the rest of the argument consumes, including
+      the double-centring projection in full, the stability of circular gaps, the operator
+      estimate behind the refinement stage, and the Gauss sums underlying the lower bound
+      (Section~\ref{sec:proved}).
+\item An adjudication of a lemma whose status was in dispute, with a counterexample that turns out
+      to violate its own hypothesis (Section~\ref{sec:l51}).
+\item A status table that separates proved, stated-without-proof, and not-stated
+      (Section~\ref{sec:status}), and a list of the specification defects found while preparing the
+      formal statements (Section~\ref{sec:spec}).
+\end{enumerate}
+
+\subsection{Relation to other work}
+
+An independent proof of the same theorem appeared on 4 November 2026 \cite{WT26}. It proceeds by a
+different route --- a connectedness theorem for order-six complex Hadamard matrices, followed by
+interval-arithmetic certification over overlapping phase balls --- and it also classifies all sets
+of mutually unbiased bases in dimension six. The two proofs have different trust bases: ours and the
+source's rest on a binary64 model and an execution, that one on directed-rounding interval
+arithmetic. Neither subsumes the other, and this paper takes no position on which should be
+preferred; we mention it because any statement of the source's status that omits it is now
+incomplete.
+
+\section{The source argument in brief}
+\label{sec:source}
+
+Fix a pair of mutually unbiased bases and send the first to the coordinate basis by a common
+unitary. The second is then $H/\sqrt 6$ for a complex Hadamard matrix $H$, that is, a matrix with
+entries of modulus one and $HH^*=6I$. The upper bound is the statement that no such $H$ extends to
+two further bases. The source's argument covers the second basis by finitely many balls and excludes
+extension uniformly on each:
+
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[Seed cover.] Row and column rephasings reduce $H$ to nine free phases, chosen through a
+  minimum circular gap among the phase-difference multisets of all row pairs and column pairs. Those
+  nine phases are covered by finitely many closed balls of radius $0.032$.
+\item[Completion.] Splitting $H$ into blocks of sizes $2+4$, the fixed seed determines two rank-two
+  kernels; compressing the unknown lower-right block between them yields a $2\times2$ matrix whose
+  polar factor is a unitary. A closed cover of $U(2)$ therefore accounts for every feasible
+  completion, and Taylor estimates turn each cell into either an exclusion or a certified ball.
+\item[Refinement.] Each certified ball is refined, using tangent coordinates and a certified
+  estimate of the normal displacement, into balls of a prescribed smaller radius.
+\item[Exclusion.] Inside a final ball, all vectors unbiased to the first two bases are covered by
+  small balls; two graphs record which pairs of balls can be orthogonal and which can be unbiased;
+  two further bases would require a specific pattern of two disjoint six-cliques with all cross
+  edges present, and a finite search excludes that pattern.
+\end{description}
+
+The assembly, the source's Theorem~7.1, is then: if the pipeline's terminal conditions hold, and
+each stage delivers its covering, no four bases exist. Our contribution concerns that last sentence.
+
+\begin{remark}
+The source's Lemma~5.1 is used at the hinge of the refinement stage, and its status was disputed
+within our project; Section~\ref{sec:l51} settles it. Its Lemma~3.1 carries a hypothesis
+$\abs S<4$ that a reader may take for a technicality; it is not (Section~\ref{sec:findings}).
+\end{remark}
+
+\section{The formal development}
+
+\subsection{Setup}
+
+The development is written in Lean~4 (version 4.33.1) against Mathlib. It introduces no axioms: every
+declaration reported as proved depends only on \texttt{propext}, \texttt{Classical.choice} and
+\texttt{Quot.sound}, and every hole is a \texttt{sorry} that we list explicitly, so that
+\texttt{sorryAx} appears in a declaration's axiom footprint exactly when that declaration is
+incomplete. The development is 16 modules with an acyclic import graph; reusable material (finite
+circular multisets, the double-centring projection, the Hadamard predicate, operator bounds for
+nearly-orthogonal frames) is separated from paper-specific assembly.
+
+Two conventions were fixed early, both of which matter for fidelity.
+
+\begin{definition}[Hadamard]
+A matrix $H\in \C^{6\times 6}$ is \emph{Hadamard} if every entry has squared modulus one and
+$HH^*=6I$. The condition $H^*H=6I$ is \emph{not} part of the definition.
+\end{definition}
+
+This is the source's Definition~2.1, and it is deliberately one-sided. For a square matrix the
+two-sided condition follows, but Mathlib's \texttt{Matrix.IsHadamard} is two-sided, and importing it
+would silently strengthen the hypothesis. A formalisation that did so would prove a true theorem
+about a different class of objects.
+
+The second convention concerns the equivalence under which regions are compared. Throughout, a
+stage does not cover a set of matrices but a set of \emph{equivalence classes} of matrices, the
+equivalence being generated by row and column permutations, rephasings, conjugation and
+transposition. We therefore model membership as membership of a class, not of a matrix. This is not
+a stylistic choice: it is what allows the ``up to equivalence'' clause of every stage to compose,
+and a formalisation that used set membership would need an additional compatibility lemma at each
+of the six junctions.
+
+\subsection{The interface}
+\label{sec:assembly}
+
+The assembly is stated over an abstract type of regions. Let $\mathtt{Pt}$ be a type of points,
+$\mathtt{emb}$ a relation on it intended as equivalence of phase matrices, \texttt{ext} a predicate
+intended as extendibility by two further bases, and \texttt{Cov emb A B} the assertion that every
+point of $A$ is equivalent to a point of $B$. Each stage statement then has the same shape:
+\begin{center}
+\texttt{Cov emb (input set) (output set)}.
+\end{center}
+The two inductions that the source performs in prose are captured by an inductive certificate type,
+which is what prevents circularity:
+\begin{description}[leftmargin=1.4em,style=nextline]
+\item[\texttt{empty}] the target and source sets are disjoint;
+\item[\texttt{excl}] a certificate that the region excludes every point of $S$;
+\item[\texttt{ball}] a certified ball $b$ of the region family with $S\subseteq\mathtt{mem}(b)$;
+\item[\texttt{union}] an exhaustive decomposition of $S$ into finitely many sub-regions.
+\end{description}
+and the elimination principle \texttt{Cert.covered} gives $\mathtt{Covered}\,(T\cap S)$ from a
+certificate. The blocker induction --- the step in which a completed parent is used to certify a
+later region, which is the one place where a proof of this shape can assume its own conclusion ---
+is a separate theorem \texttt{accumulate\_covered}, whose hypothesis is a certificate at the prefix
+$\ell \mathbin{+\!+} [p]$ of the region list rather than at the whole list.
+
+\begin{theorem}[assembly]\label{thm:assembly}
+Let $H$ be the set of Hadamard phase matrices, \texttt{ext} be invariant under $\mathtt{emb}$, and
+let $S_{\mathrm{seed}},S_{\mathrm{coarse}},S_{\mathrm{mid}},S_{\mathrm{fine}},
+S_{\mathrm{init}},S_{\mathrm{fallback}},S_{\mathrm{final}}$ be sets of regions. If
+\begin{align*}
+&\mathtt{Cov}\,H\,S_{\mathrm{seed}} &&\text{(seed cover)}\\
+&\mathtt{Cov}\,S_{\mathrm{seed}}\,S_{\mathrm{coarse}} &&\text{(completion)}\\
+&\mathtt{Cov}\,S_{\mathrm{coarse}}\,S_{\mathrm{mid}},\quad
+ \mathtt{Cov}\,S_{\mathrm{mid}}\,S_{\mathrm{fine}} &&\text{(refinement)}\\
+&\mathtt{Cov}\,S_{\mathrm{fine}}\,S_{\mathrm{init}},\quad
+ \mathtt{Cov}\,S_{\mathrm{init}}\,S_{\mathrm{fallback}},\quad
+ \mathtt{Cov}\,S_{\mathrm{fallback}}\,S_{\mathrm{final}} &&\text{(exclusion)}\\
+&\textstyle\bigwedge_{x\in S_{\mathrm{final}}}\neg\,\mathtt{ext}(x) &&\text{(no extension)}\\
+\end{align*}
+then $\neg\,\mathtt{ext}(x)$ for every $x\in H$.
+\end{theorem}
+
+The proof is transitivity of \texttt{Cov} composed seven times, followed by
+\texttt{Cov.excludes}. It is short, and that is the point: all the difficulty is in the seven
+hypotheses, and the theorem's formal statement forces them to be named.
+
+\begin{proposition}[the assembly is an equivalence]\label{prop:iff}
+The source's main theorem is equivalent to the seven covering statements of
+Theorem~\ref{thm:assembly} together with the seven terminal predicates of its Section~7.2.
+\end{proposition}
+
+Proposition~\ref{prop:iff} is the formal counterpart of the observation that motivates the paper.
+The source presents one theorem; there are in fact two kinds of obligation in it, and separating
+them is what makes the second one (Section~\ref{sec:findings}) visible.
+
+\section{What formalisation found}
+\label{sec:findings}
+
+\subsection{Theorem 7.1 needs a driver}
+
+The hypothesis list of Theorem~\ref{thm:assembly} is exactly the seven coverage facts and the
+terminal exclusion. It contains \emph{no} bookkeeping condition. But the source's Theorem~7.1 is
+stated under its Section~7.2, which requires builds to succeed, specified exit codes, empty failure
+files, batch counts to agree, and the fallback partition to be exhaustive. Those conditions are
+neither hypotheses nor consequences of the coverage facts: they are what makes the coverage facts
+\emph{true of the records the run produced}.
+
+The formal version therefore factors the source's single theorem into
+\begin{enumerate}[label=(\roman*)]
+\item the assembly (Theorem~\ref{thm:assembly}), which is mathematics; and
+\item a driver lemma --- call it \emph{bookkeeping identifies records} --- which says that a
+      pipeline whose control flow and record counts satisfy Section~7.2 produces a region list on
+      which each of the seven covering statements holds.
+\end{enumerate}
+The source's proof of Theorem~7.1 implicitly uses (ii) and never states it. This is the most
+consequential finding of the formalisation, because (ii) is exactly the step where a silently
+dropped region would invalidate the conclusion, and it is the step that a checker for the
+certificate would have to implement.
+
+\subsection{Two clause-level corrections}
+
+\textbf{The `up to equivalence' clause must be class membership.} Six of the seven covering
+statements in the source are qualified by ``up to the equivalences of Lemma~2.2''. If these are read
+as set inclusions, the composition fails: the output of one stage is not a set of matrices but a set
+of classes. Read as class membership, they compose, and the extendibility-invariance of the
+equivalence (a separate lemma, proved) supplies the only compatibility that is needed. The source
+never states the joint lemma; its proof of Theorem~7.1 uses it at every junction.
+
+\textbf{Both cliques in the exclusion pattern are orthogonality cliques.} The configuration that
+two further bases would force is two disjoint sets $A,B$ of ball labels, each of six labels, each a
+clique in the orthogonality graph, with every cross pair joined in the unbiasedness graph. In the
+source this is one displayed formula, and it is easy to read the second condition as a
+unbiasedness clique on $B$; it is not, and the search is stated for the correct condition. During
+formalisation we wrote it the wrong way first, which is evidence of how much work that single
+formula is doing.
+
+\subsection{The hypothesis of Lemma 3.1 is load-bearing}
+
+The source's Lemma~3.1 states that the squared singular values of $M=(1\ \ p)$ are $4\pm\abs S$,
+where $S=\sum_j p_j$, \emph{if} $\abs S<4$, and constructs a $4\times2$ orthonormal frame $K$ whose
+range is $\ker M^*$. At $\abs S=4$ one has $p=3\cdot\mathbf 1$, so $M$ has rank one, the singular
+values are $8$ and $0$, and $\ker M^*$ is three-dimensional --- no $4\times 2$ frame can have that
+range. The hypothesis is therefore not a convenience but the condition under which the dimension
+count works, and the completion stage's frame construction fails silently without it.
+
+\subsection{Definition 2.1 must stay one-sided}
+Formalising with a two-sided Hadamard predicate would be unsound bookkeeping even though the two
+conditions are equivalent for square matrices: the source's hypothesis is $HH^*=6I$, and the
+equivalence itself is a (small) theorem that should not be assumed.
+
+\section{The disputed lemma}
+\label{sec:l51}
+
+The refinement stage rests on the following.
+
+\begin{lemma}[source, Lemma 5.1]\label{lem:51}
+Let $T:\R^k\to\R^{36}$ satisfy $\norm{T^*T-I}\le o$, put $A=I-TT^*$, and for $x\in\R^{36}$ write
+$\zeta=T^*x$. Then $\norm T\le\sqrt{1+o}$, $\norm A\le 1+o$, and
+\begin{equation}\label{eq:51}
+\norm{x}^2\le (1+o)\norm{\zeta}^2+\norm{Ax}^2 .
+\end{equation}
+No horizontality of $x$ or of the columns of $T$ is required.
+\end{lemma}
+
+Within the project this lemma was reported to be false, with the witness $T=\varepsilon P$ for a
+rank-one projection $P$, $o=0$, and $x=e$. The witness violates the hypothesis: $o=0$ forces
+$\norm{T^*T-I}=0$, hence $\varepsilon=1$, and then \eqref{eq:51} holds with equality. The lemma is
+true, and here is the derivation:
+\begin{align*}
+\norm{x-T\zeta}^2
+&=\norm x^2-2\inner{x}{T\zeta}+\norm{T\zeta}^2
+ =\norm x^2-2\norm\zeta^2+\norm{T\zeta}^2,
+\end{align*}
+using $\inner{x}{T\zeta}=\inner{T^*x}{\zeta}=\norm\zeta^2$, and $\norm{T\zeta}^2\ge(1-o)\norm\zeta^2$
+by the hypothesis. Hence
+$\norm{x-T\zeta}^2\ge\norm x^2-(1+o)\norm\zeta^2$, which is \eqref{eq:51} since $x-T\zeta=Ax$.
+The formal development proves both the two-sided Gram consequence
+$(\forall y)(1-o)\norm y^2\le\norm{Ty}^2$ and \eqref{eq:51} from the hypothesis alone, with no
+additional binder. Two lessons: a near-isometry hypothesis is two-sided, and a counterexample to a
+lemma must be checked against the lemma's hypothesis before it is reported.
+
+\section{What is proved}
+\label{sec:proved}
+
+We distinguish three categories, and keep them separate on purpose: a statement is \emph{proved}
+(kernel-checked, no holes), \emph{stated} (transcribed faithfully, with a named hole), or
+\emph{absent} (not attempted). Conflating the last two is how a formalisation report overstates.
+
+\begin{description}[leftmargin=1.2em,style=nextline]
+\item[Proved, in full.] The assembly of Theorem~\ref{thm:assembly} and Proposition~\ref{prop:iff};
+  the certificate algebra and \texttt{accumulate\_covered}; the double-centring projection
+  $\Pi$ --- idempotence, range equal to the horizontal subspace, the decomposition of $z-\Pi z$
+  into a row-constant plus a column-constant part with explicit witnesses, the Frobenius
+  contraction, and the packaged rephasing $e(P+\Pi(Q-P))$ as a product of row and column phases;
+  the stability of circular gaps, in three forms (arc transfer, gap-bound transfer, and the literal
+  $\pm2\delta$ statement); Lemma~\ref{lem:51} and its Gram consequence; the Gauss sums underlying
+  the lower bound, namely $\sum_{x<3}\omega^{x^2+tx}\in\{1+2\omega,\,2+\omega^2\}$ with
+  $\omega=e^{2\pi i/3}$, each of squared modulus three; the exclusion-side lemmas on distinct labels
+  and on the graph pattern; and the norm-exclusion inequality of the completion stage.
+\item[Stated, with named holes.] The six clauses of the source's Lemma~2.2 and their packaged form;
+  the frame lemma beyond its operator statement; the directional-exclusion inequality of the
+  completion stage; the ellipsoid containment and offset bounds in their remaining goals; the
+  identity that the cross-product entries of the lower bound have squared modulus $1/3$; and the
+  existence of three mutually unbiased bases.
+\item[Absent.] The source's Section~5 in its entirety --- the certified relations between two
+  centres, the distance iteration, and the tangent grid. This is the largest gap in the development
+  and is a deliberate consequence of the scope we set: the analytic middle is where the floating
+  point enters, and formalising it without a decision about the arithmetic model would have
+  produced statements that could not be discharged.
+\end{description}
+
+\begin{remark}
+The existence of three bases is the one part of the main theorem that is not computer-assisted, and
+it is the part a reader can check by hand. It is worth finishing in the formal development precisely
+because it is unconditional: it would give a kernel-checked $N(6)\ge 3$ next to a conditional
+$N(6)\le 3$, and the asymmetry between the two is the paper's real content.
+\end{remark}
+
+\section{Status of the development}
+\label{sec:status}
+
+Table~\ref{tab:status} records the hole inventory. Sixteen modules elaborate; twenty-three
+declarations carry a hole, distributed over seven of them. The nine modules that carry none fall
+into three groups that must not be confused. \texttt{Interface} and \texttt{AssemblyCover} are
+hole-free because the assembly is complete. \texttt{Basic}, \texttt{Gap}, \texttt{Hypotheses} and
+\texttt{AxiomCheck} are hole-free because their content is finished and elementary. And \texttt{Completion}, \texttt{Refine} and \texttt{Assembly} are \emph{stubs} that
+assert nothing at all. A reader scanning a hole count will read those zeros as finished stages;
+they are not, and we list them separately for that reason.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}llp{7.4cm}@{}}
+\toprule
+module & holes & content \\
+\midrule
+\texttt{Basic} & 0 & horizontal projection $\Pi$, rephasing, integer shifts \\
+\texttt{Hadamard} & 7 & Lemma 2.2's six clauses and their packaged form \\
+\texttt{Seed} & 1 & stability of circular gaps (a second copy; see below) \\
+\texttt{ThreeMUB} & 2 & Gauss sums; existence of three bases \\
+\texttt{Frames} & 7 & Lemma 3.1 beyond the operator statement \\
+\texttt{Exclusion} & 1 & directional exclusion (the source's \texttt{eq} layout) \\
+\texttt{Ellipsoid} & 4 & offset ellipsoid bound, remaining goals \\
+\texttt{Exclude} & 1 & bin displacement of the vector cover (Lemma 6.1) \\
+\texttt{Interface}, \texttt{AssemblyCover} & 0 & assembly: \emph{proved} \\
+\texttt{Completion}, \texttt{Refine}, \texttt{Assembly} & 0 & \emph{stubs: assert nothing} \\
+\midrule
+total & 23 & of which 3 modules are stubs \\
+\bottomrule
+\end{tabular}
+\caption{Declared holes. A hole is a \texttt{sorry}; \texttt{sorryAx} then appears in the axiom
+footprint of exactly the incomplete declarations.}
+\label{tab:status}
+\end{table}
+
+Two bookkeeping defects in the development itself are worth recording, since they affect how the
+table should be read. Lemma~2.5 is proved in one module and simultaneously present as a hole in
+another, so the count is pessimistic where the proof already exists. And the codebase contains
+three stub modules that elaborate with no holes for the trivial reason that they state nothing;
+they are placeholders for the refinement stage, not evidence about it.
+
+\section{Specification defects found while transcribing}
+\label{sec:spec}
+
+Preparing faithful formal statements requires reading the specification more closely than a reader
+does, and this produced findings about the source's parameters and prose. None of them affects the
+truth of the source's conclusion; all of them affect what the paper should say. We report them
+because a source that is to be verified should be unambiguous, and because several are the kind of
+statement a reader would take on trust.
+
+\textbf{The bin count.} The source fixes $N=112$ in one sentence and offers one reason: that
+$\binom{116}{5}$ is below the signed 32-bit limit. That reason is inert --- the same paragraph says
+the traversal uses 64-bit counters --- and it is not binding: the largest $N$ it permits is 189. The
+constraints the source's own mechanism imposes are sharper. Each uncovered bin must fit in a ball
+of radius $R=0.032$, giving $N\ge 47$. The five-coordinate bin differences are stored in a signed
+eight-bit type, giving $N\le 128$. The reuse test can be guaranteed to succeed only when
+$\norm k\le NR-\tfrac32$, which first admits two-step offsets at $N\ge110$; $112$ is the smallest
+multiple of $16$ above that threshold. And the reuse threshold is written with $112$ hardwired where
+$N$ belongs, so the pipeline \emph{as printed} is sound only for $N\ge112$. The value is therefore
+defensible --- it is the left endpoint of the window it is itself consistent with --- but not for
+the reason printed.
+
+\textbf{The refinement widths.} The base grid of the refinement stage has $(2L+1)^k$ cells with
+$L=\lceil E/w+\tfrac12\rceil$, capped at $5\cdot10^7$. At the three specified widths the admissible
+root dimension is $k\le5,5,7$, not the stated $k\le10$; a record with $k=6$ entering the second
+pass cannot be refined at all. Since the run reports no failed parent, every record must satisfy
+$k\le5$, and the stated allowance is half unused.
+
+\textbf{A clustering cutoff that does no work.} The vector stage's clustering accepts a candidate
+centre when its effective radius reaches the spacing of bin midpoints, which requires $M\ge51$; the
+three coarser grids are $12,24,48$. On those grids the cutoff cannot admit any merge, whatever the
+sign convention, and the clustering stage is a no-op.
+
+\textbf{A sentinel inside its own range.} One routine signals failure by returning $100$, while the
+same appendix proves the quantity being bounded is at most $100.1$. The sentinel is therefore not
+distinguishable from a legitimate value, and safety comes from a later unit conversion rather than
+from the value itself.
+
+\textbf{An undefined count.} Table~1 of the source reports $151{,}744{,}086$ ``pairs''. Three
+independent replays agree that no reading of the stated filters produces that number: the
+five-coordinate enumeration admits $85{,}349{,}292$ lists, and after the shared-displacement
+intersection the tail side admits at most $112{,}160{,}350$ pairs. One replay reproduces the
+source's retained count of $22{,}829$ lists exactly, which localises the discrepancy to the meaning
+of the word ``pairs'' rather than to any filter. The paper should say which product it is counting.
+
+\section{Discussion}
+
+\subsection{What this establishes, and what it does not}
+
+We have formalised the assembly of the source's argument and the elementary lemmas it consumes. We
+have \emph{not} formalised the analytic middle, and we have \emph{not} verified the source's
+execution. Consequently this paper does not, by itself, establish that $N(6)=3$; it establishes that
+the source's conclusion follows from seven explicitly stated covering facts plus a driver lemma,
+that the source's own presentation of that step is missing one of the two, and that the lemmas on
+which the covering facts rest are correct where we formalised them.
+
+That is a real gain in a specific sense: the residual trust is now located. After this work, a
+reader who doubts the conclusion can direct attention to (i) the driver lemma, which is finite
+combinatorics over records and is the natural target for a checker, and (ii) the analytic middle,
+which is where the arithmetic model enters. Before this work the two were fused into a single
+computer-assisted claim.
+
+\subsection{The arithmetic question}
+
+The source converts a binary64 execution into a theorem by proving one-sided error bounds for every
+certificate evaluation, roughly twenty pages of them. Those bounds are correct as far as we can
+check, and they are fragile in a specific way: they are tied to an evaluation order and to a
+compiler, and one of them required inspecting a disassembly to confirm that two power expressions
+were lowered to multiplications. We did not attempt to formalise them. The alternative --- evaluating
+certificates in directed-rounding interval arithmetic, so that ``the stored number is an upper
+bound'' becomes a theorem of a library rather than of a page of case analysis --- would reduce the
+arithmetic appendix to a few pages and remove the compiler dependency. The independent proof
+\cite{WT26} takes exactly that route, which suggests the replacement is practical.
+
+\subsection{Threats to the fidelity of this report}
+
+The statements we formalised were transcribed by hand from the source's text, and the report's
+fidelity claim is therefore limited by that transcription. In the course of the work, four
+formula-level claims about the source were circulated within the project and then withdrawn: all
+four concerned radicals and bracket extents, and all four were artefacts of text extraction rather
+than defects in the source. The lesson is general and worth stating: no claim about a displayed
+formula should be made from an extracted text; radicals, overlines and superscript placement must be
+checked on a rendered page. Every formula-level claim in this paper has been checked that way.
+
+\section{Conclusion}
+
+The assembly of the source's argument is formalised, and its formalisation shows that the assembly
+is not the single step the source presents: it is an assembly over covers plus a driver that
+realises the covers from a run, and only the first is mathematics. The elementary lemmas are
+correct where formalised; one disputed lemma is settled in the source's favour; two clause-level
+details need correction; and five specification defects are recorded. The analytic middle and the
+execution remain unverified here, and the honest summary of the source's status is that it is
+conditional on three hypotheses, one of which --- the arithmetic model --- has an alternative that
+has since been implemented by an independent proof of the same theorem.
+
+\begin{thebibliography}{99}
+\bibitem{source} OpenAI. \emph{The maximum number of mutually unbiased bases in dimension six.}
+  Preprint, 24 September 2026.
+\bibitem{WT26} M.~C\'ardenes Wuttig and J.~Tindall. \emph{Using topology to reveal all mutually
+  unbiased bases in dimension six.} arXiv:2611.06917 [quant-ph], 4 November 2026.
+\bibitem{Zauner} G.~Zauner. \emph{Quantendesigns: Grundz\"uge einer nichtkommutativen
+  Designtheorie.} PhD thesis, Universit\"at Wien, 1999.
+\bibitem{KR} A.~Klappenecker and M.~R\"otteler. \emph{Constructions of mutually unbiased bases.}
+  Finite Fields and Applications, LNCS 2948, 2004.
+\bibitem{JMMSW} P.~Jaming, M.~Matolcsi, P.~M\'ora, F.~Sz\"oll\H{o}si and M.~Weiner.
+  \emph{A generalized Pauli problem and an infinite family of MUB-triplets in dimension 6.}
+  J. Phys. A 42 (2009).
+\bibitem{Grassl} M.~Grassl. \emph{On SIC-POVMs and MUBs in dimension 6.} arXiv:quant-ph/0406175,
+  2004.
+\bibitem{BH} P.~Butterley and W.~Hall. \emph{Numerical evidence for the maximum number of mutually
+  unbiased bases in dimension six.} Phys. Lett. A 369 (2007).
+\bibitem{BW} S.~Brierley and S.~Weigert. \emph{Constructing mutually unbiased bases in dimension
+  six.} Phys. Rev. A 79 (2009).
+\bibitem{Bengtsson} I.~Bengtsson et al. \emph{Mutually unbiased bases and Hadamard matrices of order
+  six.} J. Math. Phys. 48 (2007).
+\bibitem{BSTW} P.~O.~Boykin, M.~Sitharam, P.~H.~Tiep and P.~Wocjan. \emph{Mutually unbiased bases
+  and orthogonal decompositions of Lie algebras.} arXiv:quant-ph/0506089, 2005.
+\bibitem{Lean} L.~de Moura and S.~Ullrich. \emph{The Lean 4 theorem prover and programming
+  language.} CADE-28, 2021.
+\bibitem{Mathlib} The Mathlib Community. \emph{The Lean mathematical library.} CPP 2020.
+\end{thebibliography}
+
+\appendix
+
+\section{Selected Lean signatures}
+\label{app:sig}
+
+The following are transcribed from the development, with notation lightened and hypotheses
+elided where they are not the point.
+
+\begin{quote}\ttfamily\small
+theorem Cov.trans : Cov emb A B $\to$ Cov emb B C $\to$ Cov emb A C\\[3pt]
+theorem Cert.covered : Cert mem B T S $\to$ Covered (T $\cap$ S)\\[3pt]
+theorem accumulate\_covered :\\
+\ \ (h : $\forall$ p $\in$ ps, Cert mem B T (mem p)) $\to$ Covered (T $\cap$ $\bigcup$ ps)\\[3pt]
+theorem theorem\_7\_1 (emb) (htrans) (ext) (hinv)\\
+\ \ (H Sseed Scoarse Smid Sfine Sinit Sfallback Sfinal)\\
+\ \ (h2\_10 : Cov emb H Sseed) (hA : Cov emb Sseed Scoarse)\\
+\ \ (hBmid : Cov emb Scoarse Smid) (hBfine : Cov emb Smid Sfine)\\
+\ \ (hinitC : Cov emb Sfine Sinit) (hfallback : Cov emb Sinit Sfallback)\\
+\ \ (hfinal : Cov emb Sfallback Sfinal)\\
+\ \ (hCneg : $\forall$ y $\in$ Sfinal, $\neg$ ext y) :\\
+\ \ $\forall$ x $\in$ H, $\neg$ ext x\\[3pt]
+theorem lemma51\_third (T) (o) (h : GramNear T o) (x) :\\
+\ \ $\norm{x}^2 \le (1+o) * \norm{T^* x}^2 + \norm{x - T(T^* x)}^2$
+\end{quote}
+
+\begin{remark}
+The signature of \texttt{theorem\_7\_1} is the evidence for the paper's main finding: it takes
+exactly the seven coverage hypotheses and the terminal exclusion, and nothing else. The source's
+Section~7.2 conditions appear nowhere in it.
+\end{remark}
+
+\end{document}

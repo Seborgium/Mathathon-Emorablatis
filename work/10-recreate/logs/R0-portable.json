@@ -1,0 +1,141 @@
+{
+  "checks": {
+    "failures": 0,
+    "faithful": {
+      "arun": "pass",
+      "build": "pass"
+    },
+    "fixture": {
+      "format": "pass"
+    },
+    "leg": {
+      "g__": {
+        "arun_bad": "pass",
+        "arun_records": "pass",
+        "arun_stdout": "pass",
+        "build": "pass",
+        "no_march_native": "pass",
+        "preflight": "pass",
+        "probe": "pass",
+        "programs": "pass"
+      }
+    },
+    "reference": {
+      "records": "pass"
+    },
+    "total": 12
+  },
+  "duration_ms": 45640,
+  "faithful": {
+    "exit": 0,
+    "log": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/build-base-20261114T200140Z.json",
+    "out": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-base"
+  },
+  "finished_utc": "2026-11-14T20:02:26Z",
+  "fixture": {
+    "bytes": 5622,
+    "generated_from": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/data/centers.txt",
+    "lines": 201,
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/fixtures/centres-200.txt",
+    "sha256": "1e5a82a9693cb669a47e1c0d32863f78cd78212cb516180651e680cf32d65d1a"
+  },
+  "leg": {
+    "clang": {
+      "compiler": "clang --driver-mode=g++",
+      "compiler_present": true,
+      "preflight_exit": 1,
+      "reason": "preflight failed: /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/hello-clang-20261114T200140Z.cpp:1:10: fatal error: 'cstdio' file not found     1 | #include <cstdio>       |          ^~~~~~~~ 1 error generated. ",
+      "status": "skipped"
+    },
+    "g__": {
+      "artefacts": {
+        "arun": {
+          "bytes": 82960,
+          "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z/arun",
+          "sha256": "bfd19882aada7f2fdb80e846610fb5ff6a55dec3f216716625c5c72fbb35f184"
+        },
+        "brun": {
+          "bytes": 99640,
+          "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z/brun",
+          "sha256": "eb0b5f422b6ec952fadedd95bceb08b23b5b5b187fddd79f4d87a4d5f815b5a6"
+        },
+        "covrun": {
+          "bytes": 35352,
+          "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z/covrun",
+          "sha256": "ab0bc4116e8afe651f4b23c5eed0cd18be523ebb30210958a30258750339103e"
+        },
+        "crun": {
+          "bytes": 87784,
+          "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z/crun",
+          "sha256": "7a9671f952c57af2ad9c73bfd6613e1d6de1b7e75f5ee6d9c0f7080f8d205ecd"
+        }
+      },
+      "arun_bad": {
+        "bytes": 0,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/arun-g__-20261114T200140Z/bad.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "arun_exit": 0,
+      "arun_records": {
+        "bytes": 40724,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/arun-g__-20261114T200140Z/records.bin",
+        "sha256": "1d357c69d00ccc9db60398df92953c3e8ef2c08f95bda34b83b44fbdfdf6f1ec"
+      },
+      "arun_stdout": "N16 8192.0 739.4 0.0 0.0\nN32 11829.8 1072.4 1072.4 682.6\nN64 10922.3 3636.8 3636.8 1416.1\ntotal done200 candidates283228 patches6179 global27 failedBalls0 ",
+      "build_exit": 0,
+      "build_log": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/portable-g__-20261114T200140Z.log",
+      "compiler": "g++",
+      "compiler_present": true,
+      "covrun_vex_instructions": 0,
+      "faithful_vex_instructions": 1320,
+      "preflight_exit": 0,
+      "probe": {
+        "build_exit": 0,
+        "exit": 0,
+        "stdout": "arithmetic/ABI checks passed"
+      },
+      "programs": 4,
+      "status": "ran",
+      "warnings": 35
+    }
+  },
+  "legs": {
+    "skipped": 1
+  },
+  "log": {
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/R0-portable.json"
+  },
+  "pass": false,
+  "reference": {
+    "bad": {
+      "bytes": 0,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/arun-faithful-20261114T200140Z/bad.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "exit": 0,
+    "records": {
+      "bytes": 40724,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/tmp/arun-faithful-20261114T200140Z/records.bin",
+      "sha256": "1d357c69d00ccc9db60398df92953c3e8ef2c08f95bda34b83b44fbdfdf6f1ec"
+    },
+    "stdout": "N16 8192.0 739.4 0.0 0.0\nN32 11829.8 1072.4 1072.4 682.6\nN64 10922.3 3636.8 3636.8 1416.1\ntotal done200 candidates283228 patches6179 global27 failedBalls0 "
+  },
+  "script": "./work/10-recreate/harness/build/portable.sh",
+  "spec": {
+    "requirement": "portable = -O2, no -march=native, gcc and clang, held to structural equality and to the checker (spec \u00a71)"
+  },
+  "src": {
+    "dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream"
+  },
+  "stamp": "20261114T200140Z",
+  "started_utc": "2026-11-14T20:01:40Z",
+  "status": "incomplete",
+  "toolchain": {
+    "cpu": {
+      "model": "AMD EPYC Processor",
+      "online": 4
+    },
+    "glibc": "ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43"
+  },
+  "unit": "R0-portable"
+}

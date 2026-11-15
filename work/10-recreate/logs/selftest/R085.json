@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 85,
+ "command": "C.batch79",
+ "stage": "C.initial",
+ "run_order": 85,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "1",
+  "batches/bad79.bin",
+  "batches/f79.bin"
+ ],
+ "inputs": [
+  "batches/f79.bin"
+ ],
+ "outputs": [
+  "batches/bad79.bin"
+ ],
+ "declared_outputs": [
+  "batches/bad79.bin"
+ ],
+ "input_sources": {
+  "batches/f79.bin": "replayed"
+ },
+ "rc_expected": 1,
+ "rc_got": 1,
+ "artefacts": [
+  {
+   "path": "batches/bad79.bin",
+   "declared": true,
+   "bytes_expected": 21120,
+   "sha256_expected": "e08bd9097eda09b458b1cd7d1f9305e2c7c4d8d65ef5ff36f93ea5dd9ed37039",
+   "bytes_got": 21120,
+   "sha256_got": "e08bd9097eda09b458b1cd7d1f9305e2c7c4d8d65ef5ff36f93ea5dd9ed37039",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 21120 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 1, got 1"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.batch79.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "1206ee1f815f7fcfc2291f00a280bb03ecb731e07324935040c88f884b9b35ed",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

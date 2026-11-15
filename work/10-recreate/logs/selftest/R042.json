@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 42,
+ "command": "C.batch4",
+ "stage": "C.initial",
+ "run_order": 42,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "1",
+  "batches/bad4.bin",
+  "batches/f4.bin"
+ ],
+ "inputs": [
+  "batches/f4.bin"
+ ],
+ "outputs": [
+  "batches/bad4.bin"
+ ],
+ "declared_outputs": [
+  "batches/bad4.bin"
+ ],
+ "input_sources": {
+  "batches/f4.bin": "replayed"
+ },
+ "rc_expected": 1,
+ "rc_got": 1,
+ "artefacts": [
+  {
+   "path": "batches/bad4.bin",
+   "declared": true,
+   "bytes_expected": 6040,
+   "sha256_expected": "001bbc234c9604da2b07044db2adbef9fae135552755d47698d7ea05c81ba884",
+   "bytes_got": 6040,
+   "sha256_got": "001bbc234c9604da2b07044db2adbef9fae135552755d47698d7ea05c81ba884",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 6040 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 1, got 1"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.batch4.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "ccf0c7b36859f99be176f42054724ff340ddf9283cb49286fa21323fe2da6907",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

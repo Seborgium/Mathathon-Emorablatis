@@ -1,0 +1,265 @@
+{
+  "artefacts": {
+    "abi_fp_probe_abc": {
+      "bytes": 16872,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/abi-fp-probe-abc",
+      "sha256": "7f615ef1ed35c1e600c0992c3d8775ec2a3b26164dd2f5b197aa04c9733a5007"
+    },
+    "abi_fp_probe_covrun": {
+      "bytes": 16872,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/abi-fp-probe-covrun",
+      "sha256": "7f615ef1ed35c1e600c0992c3d8775ec2a3b26164dd2f5b197aa04c9733a5007"
+    },
+    "arun": {
+      "bytes": 160544,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/arun",
+      "sha256": "b005a7ae8ce0c2a311af3de9f72c268276bdfd68a9e5bc7ca8ef13208f8a7322"
+    },
+    "brun": {
+      "bytes": 171672,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/brun",
+      "sha256": "4b2fdae5b3b08ef7ae079fd27ffcf65a4ffbe1ca158f4cbe654994f17862a353"
+    },
+    "cover_square_probe": {
+      "bytes": 16896,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/cover-square-probe",
+      "sha256": "9e4e8e75766a16091f73974423febd8454943f55ae0de57a380958b121253c9d"
+    },
+    "covrun": {
+      "bytes": 43160,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/covrun",
+      "sha256": "4da2812163e6ca6d7898b913f160bc656e7c135c06542786cb11ec12fc9785af"
+    },
+    "covrun_disassembly_txt": {
+      "bytes": 364703,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/covrun.disassembly.txt",
+      "sha256": "e6d50053ad2bd3483b99ee5e32bcadae59dd3ead2ed2e4221621d383c58dc2c6"
+    },
+    "covrun_dynamic_symbols_txt": {
+      "bytes": 1059,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/covrun.dynamic-symbols.txt",
+      "sha256": "dd1ceef995cc2e64e9b5c9466ee8e35ca0e5cf14bdd8906304d5387c7ea3f4c0"
+    },
+    "crun": {
+      "bytes": 210176,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/crun",
+      "sha256": "b72a67b5aaad94db5419aad16e46c4231ac8b31d88b9d0389f60e360ede6d29c"
+    },
+    "programs_built": 4
+  },
+  "builds": {
+    "abi-fp-probe-abc": {
+      "argv": "g++ -std=gnu++17 -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/abi-fp-probe.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/abi-fp-probe-abc",
+      "ms": 143,
+      "status": 0,
+      "warnings": 0
+    },
+    "abi-fp-probe-covrun": {
+      "argv": "g++ -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/abi-fp-probe.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/abi-fp-probe-covrun",
+      "ms": 163,
+      "status": 0,
+      "warnings": 0
+    },
+    "arun": {
+      "argv": "g++ -std=gnu++17 -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/atlas.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/arun",
+      "ms": 3417,
+      "status": 0,
+      "warnings": 0
+    },
+    "brun": {
+      "argv": "g++ -std=gnu++17 -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/stageB.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/brun",
+      "ms": 3277,
+      "status": 0,
+      "warnings": 0
+    },
+    "cover-square-probe": {
+      "argv": "g++ -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/probe/cover-square-probe.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/cover-square-probe",
+      "ms": 171,
+      "status": 0,
+      "warnings": 0
+    },
+    "covrun": {
+      "argv": "g++ -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/covout.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/covrun",
+      "ms": 1343,
+      "status": 0,
+      "warnings": 0
+    },
+    "crun": {
+      "argv": "g++ -std=gnu++17 -O3 -march=native -ffp-contract=off /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/stageC.cpp -o /workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z/crun",
+      "ms": 4348,
+      "status": 0,
+      "warnings": 0
+    }
+  },
+  "checks": {
+    "artefacts": {
+      "all_programs": "pass"
+    },
+    "build": {
+      "abi-fp-probe-abc": "pass",
+      "abi-fp-probe-covrun": "pass",
+      "arun": "pass",
+      "brun": "pass",
+      "cover-square-probe": "pass",
+      "covrun": "pass",
+      "crun": "pass"
+    },
+    "chain": {
+      "atlas_cpp": "pass",
+      "covout_cpp": "pass",
+      "patchx_cpp": "pass",
+      "seed_cpp": "pass",
+      "stageB_cpp": "pass",
+      "stageC_cpp": "pass",
+      "ub_cpp": "pass"
+    },
+    "failures": 0,
+    "pow": {
+      "call_shape": "pass",
+      "equivalence": "pass",
+      "source_sites": "pass"
+    },
+    "probe": {
+      "abi_probe_abc": "pass",
+      "abi_probe_covrun": "pass"
+    },
+    "src": {
+      "present": "pass"
+    },
+    "total": 25,
+    "tunit": {
+      "arun": "pass",
+      "brun": "pass",
+      "covrun": "pass",
+      "crun": "pass"
+    }
+  },
+  "duration_ms": 13667,
+  "finished_utc": "2026-11-14T20:15:43Z",
+  "log": {
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/build-20261114T201529Z.json"
+  },
+  "out": {
+    "dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/faithful-20261114T201529Z"
+  },
+  "pass": true,
+  "pow": {
+    "calls_in_covrun": 2,
+    "equivalence_exit": 0,
+    "equivalence_stdout": "mismatch source=sweep bits=5c6ca64cad798b28 gap=1\nmismatch source=sweep bits=27140d7ca69d96aa gap=1\nmismatch source=sweep bits=c00594bfc089200e gap=1\nmismatch source=sweep bits=bd48f7bba2d01719 gap=1\nmismatch source=sweep bits=acba80467e26b875 gap=1\ncover-square rn2_libm=0x1.9b09e12a51e33p+3 rn2_mul=0x1.9b09e12a51e33p+3 T_libm=0x1.9d8cf5d94ea5ap+4 T_mul=0x1.9d8cf5d94ea5ap+4\nsweep checked=8000026 mismatches=3564 max_ulp_gap=1 rate=4.454986e-04\nworst_arg bits=5c6ca64cad798b28\npow-equals-multiply at_cover_arguments=yes universally=no\nRESULT cover-square pass=yes",
+    "folded_to_multiply": false,
+    "imports_libm": true,
+    "probe_libm_imports": 1,
+    "source_sites": 2,
+    "sweep_mismatches": 3564
+  },
+  "probe": {
+    "abi_probe_abc": {
+      "exit": 0,
+      "stdout": "arithmetic/ABI checks passed"
+    },
+    "abi_probe_covrun": {
+      "exit": 0,
+      "stdout": "arithmetic/ABI checks passed"
+    },
+    "enabled": true
+  },
+  "script": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/build/faithful.sh",
+  "src": {
+    "dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream",
+    "files": {
+      "abi_fp_probe_cpp": {
+        "bytes": 2496,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/abi-fp-probe.cpp",
+        "sha256": "1589fe5b4365a3eb1a94818c3801cfcc1509f7c88da23d06175503a4934b4c3c"
+      },
+      "atlas_cpp": {
+        "bytes": 8821,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/atlas.cpp",
+        "sha256": "dcbf2dbe1054c01f9a7551094c1ac5f495e8c360a5ab5187ba2de30861909c5f"
+      },
+      "covout_cpp": {
+        "bytes": 5286,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/covout.cpp",
+        "sha256": "2a7e6bf5ca4857653d0083144a1a1e815b5109df418d7f6f3bf98c4b974fe52c"
+      },
+      "patchx_cpp": {
+        "bytes": 16137,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/patchx.cpp",
+        "sha256": "a78a1ab171d8c7f11490f83f4fc6896f0b135a1648563c970c584210b192095a"
+      },
+      "seed_cpp": {
+        "bytes": 3514,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/seed.cpp",
+        "sha256": "3c6c7a7092230de231fdb23b6d1782de0dd9ef6689095763b875d90ce5ddeb44"
+      },
+      "stageB_cpp": {
+        "bytes": 12030,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/stageB.cpp",
+        "sha256": "7e609a2f282d519a73479e6adb4f18e13202844e3ca8325135a444981e1b0c0a"
+      },
+      "stageC_cpp": {
+        "bytes": 17471,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/stageC.cpp",
+        "sha256": "60a1b10091852809f523d4f5cc70abb28ebe8d7ed691843e7a2d73e9bbd7caae"
+      },
+      "ub_cpp": {
+        "bytes": 11557,
+        "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/ub.cpp",
+        "sha256": "bb031282340012e6fea15eadc073cf79a9e5a75fa0d558ccc5e1ef541e2b1e77"
+      }
+    },
+    "origin": "published-cache"
+  },
+  "stamp": "20261114T201529Z",
+  "started_utc": "2026-11-14T20:15:29Z",
+  "toolchain": {
+    "compiler": {
+      "dumpversion": "16.2.0",
+      "full_version": "g++ (conda-forge gcc 16.2.0-7) 16.2.0;Copyright (C) 2026 Free Software Foundation, Inc.;This is free software; see the source for copying conditions.  There is NO;warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+      "libstdcxx": "(conda-forge gcc 16.2.0-7) 16.2.0",
+      "path": "/opt/math/bin/g++",
+      "search_path": " /opt/math/include  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/x86_64-conda-linux-gnu  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include/c++/backward  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include  /opt/math/bin/../lib/gcc/x86_64-conda-linux-gnu/16.2.0/include-fixed  /opt/math/bin/../x86_64-conda-linux-gnu/sysroot/usr/include ",
+      "target": "x86_64-conda-linux-gnu",
+      "version": "g++ (conda-forge gcc 16.2.0-7) 16.2.0"
+    },
+    "cpu": {
+      "family": "23",
+      "flags": "fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl xtopology cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ibpb vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 clzero xsaveerptr arat npt nrip_save",
+      "hypervisor": "KVM",
+      "march_native": "znver1",
+      "model": "AMD EPYC Processor",
+      "model_no": "1",
+      "online": 4,
+      "stepping": "2"
+    },
+    "distro": "Ubuntu 26.04.1 LTS",
+    "flags": {
+      "faithful": "-O3 -march=native -ffp-contract=off",
+      "faithful_gnu17": "-std=gnu++17 -O3 -march=native -ffp-contract=off"
+    },
+    "fp_options": "-ffp-contract=[off|on|fast] \t\tfast; -fmath-errno                \t\t[enabled]; -frounding-math             \t\t[disabled]; -ftrapping-math             \t\t[enabled]; -funsafe-math-optimizations \t\t[disabled]; ",
+    "glibc": "ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43",
+    "kernel": "Linux 7.0.0-31-generic",
+    "probe_requirements": "x86-64 GNU/Linux; GNU GCC (not clang); no -ffast-math; binary64; 8-bit bytes; 32-bit int; 64-bit uint64_t==unsigned long; FLT_EVAL_METHOD==0; FE_TONEAREST; gradual underflow; masked exceptions; FTZ/DAZ clear"
+  },
+  "tunit": {
+    "arun": {
+      "main_definitions": 1,
+      "top_file": "atlas.cpp"
+    },
+    "brun": {
+      "main_definitions": 1,
+      "top_file": "stageB.cpp"
+    },
+    "covrun": {
+      "main_definitions": 1,
+      "top_file": "covout.cpp"
+    },
+    "crun": {
+      "main_definitions": 1,
+      "top_file": "stageC.cpp"
+    }
+  },
+  "unit": "R0-build"
+}

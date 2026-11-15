@@ -1,0 +1,76 @@
+  N_u      h        theta(max)  ||V-U||   sqrt6*h   ratio    ||rem||   (sqrt42/2)h^2  ratio   worst ||V-U||  worst ||rem||
+    8  0.39270  3.93e-01  5.23e-01  9.62e-01   0.544  1.47e-01  5.00e-01   0.294  5.91e-01  1.64e-01
+   16  0.19635  1.96e-01  2.61e-01  4.81e-01   0.543  3.63e-02  1.25e-01   0.290  3.04e-01  4.32e-02
+   32  0.09817  9.82e-02  1.30e-01  2.40e-01   0.541  8.99e-03  3.12e-02   0.288  1.50e-01  1.06e-02
+   64  0.04909  4.91e-02  6.49e-02  1.20e-01   0.539  2.24e-03  7.81e-03   0.287  7.62e-02  2.72e-03
+  128  0.02454  2.45e-02  3.24e-02  6.01e-02   0.539  5.58e-04  1.95e-03   0.286  3.71e-02  6.34e-04
+  256  0.01227  1.23e-02  1.62e-02  3.01e-02   0.538  1.39e-04  4.88e-04   0.286  1.88e-02  1.64e-04
+s3.V.unitary          4.635184535e-16                ||V^*V - I||_max
+s3.V.det              1                              |det V|
+s3.chart.A            2.775557562e-17                radians
+s3.chart.B            5.759586532                    
+s3.chart.C            1.570796327                    
+s3.chart.T            0.7853981634                   
+s3.chart.cycles       [4.417437057588218e-18, 0.9166666666666666, 0.25000000000000006, 0.125] same, in cycles
+s3.chart.reconstruct  7.021666937e-16                
+s3.N8.h               0.3926990817                   
+s3.N8.theta_max       0.3926990817                   
+s3.N8.lin             0.5234862629                   
+s3.N8.lin_bound       0.9619123726                   sqrt(6) h
+s3.N8.rem             0.1468304139                   
+s3.N8.rem_bound       0.4997058353                   (sqrt42/2) h^2
+s3.N8.worst_lin       0.5912939433                   max over 4000 points of the cell
+s3.N8.worst_rem       0.1643729632                   
+s3.N16.h              0.1963495408                   
+s3.N16.theta_max      0.1963495408                   
+s3.N16.lin            0.2611096549                   
+s3.N16.lin_bound      0.4809561863                   sqrt(6) h
+s3.N16.rem            0.03627626961                  
+s3.N16.rem_bound      0.1249264588                   (sqrt42/2) h^2
+s3.N16.worst_lin      0.3035778512                   max over 4000 points of the cell
+s3.N16.worst_rem      0.04317674489                  
+s3.N32.h              0.09817477042                  
+s3.N32.theta_max      0.09817477042                  
+s3.N32.lin            0.1300635405                   
+s3.N32.lin_bound      0.2404780932                   sqrt(6) h
+s3.N32.rem            0.008994659599                 
+s3.N32.rem_bound      0.03123161471                  (sqrt42/2) h^2
+s3.N32.worst_lin      0.1504364897                   max over 4000 points of the cell
+s3.N32.worst_rem      0.01058529848                  
+s3.N64.h              0.04908738521                  
+s3.N64.theta_max      0.04908738521                  
+s3.N64.lin            0.06486833681                  
+s3.N64.lin_bound      0.1202390466                   sqrt(6) h
+s3.N64.rem            0.00223811051                  
+s3.N64.rem_bound      0.007807903677                 (sqrt42/2) h^2
+s3.N64.worst_lin      0.07620254579                  max over 4000 points of the cell
+s3.N64.worst_rem      0.002720415513                 
+s3.N128.h             0.02454369261                  
+s3.N128.theta_max     0.02454369261                  
+s3.N128.lin           0.03238831136                  
+s3.N128.lin_bound     0.06011952329                  sqrt(6) h
+s3.N128.rem           0.0005581310232                
+s3.N128.rem_bound     0.001951975919                 (sqrt42/2) h^2
+s3.N128.worst_lin     0.03706363207                  max over 4000 points of the cell
+s3.N128.worst_rem     0.0006339529409                
+s3.N256.h             0.0122718463                   
+s3.N256.theta_max     0.0122718463                   
+s3.N256.lin           0.01618207191                  
+s3.N256.lin_bound     0.03005976164                  sqrt(6) h
+s3.N256.rem           0.0001393533837                
+s3.N256.rem_bound     0.0004879939798                (sqrt42/2) h^2
+s3.N256.worst_lin     0.01883610106                  max over 4000 points of the cell
+s3.N256.worst_rem     0.000163724671                 
+s3.const.c1           1.580878422                    measured sup ||V-U||_F / h
+s3.const.c1.quoted    2.449489743                    the paper's constant sqrt(6)
+s3.const.c2           1.161231473                    measured sup ||V-U-dU||_F / h^2
+s3.const.c2.quoted    3.240370349                    the paper's constant sqrt(42)/2
+s3.Nstar.lin.0.03     257                            smallest N with sqrt6 h <= 0.03
+s3.Nstar.quad.0.03    33                             smallest N with (sqrt42/2)h^2 <= 0.03
+s3.Nstar.lin.0.001    7696                           smallest N with sqrt6 h <= 0.001
+s3.Nstar.quad.0.001   179                            smallest N with (sqrt42/2)h^2 <= 0.001
+s3.Nstar.lin.1e-06    7695299                        smallest N with sqrt6 h <= 1e-06
+s3.Nstar.quad.1e-06   5656                           smallest N with (sqrt42/2)h^2 <= 1e-06
+s3.inflate.mu0.01     34                             smallest N with c2 h^2 < 0.01 (c2 = measured)
+s3.inflate.mu0.001    108                            smallest N with c2 h^2 < 0.001 (c2 = measured)
+s3.inflate.mu0.0001   339                            smallest N with c2 h^2 < 0.0001 (c2 = measured)

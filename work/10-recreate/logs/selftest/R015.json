@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 15,
+ "command": "C.batch15",
+ "stage": "C.initial",
+ "run_order": 15,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "1",
+  "batches/bad15.bin",
+  "batches/f15.bin"
+ ],
+ "inputs": [
+  "batches/f15.bin"
+ ],
+ "outputs": [
+  "batches/bad15.bin"
+ ],
+ "declared_outputs": [
+  "batches/bad15.bin"
+ ],
+ "input_sources": {
+  "batches/f15.bin": "replayed"
+ },
+ "rc_expected": 0,
+ "rc_got": 0,
+ "artefacts": [
+  {
+   "path": "batches/bad15.bin",
+   "declared": true,
+   "bytes_expected": 8,
+   "sha256_expected": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "bytes_got": 8,
+   "sha256_got": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 8 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 0, got 0"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.batch15.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "9f3da91ea65e9d95ed48552148e904d622585407b7ccd536a729bc42762f631a",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

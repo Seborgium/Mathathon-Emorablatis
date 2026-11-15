@@ -1,0 +1,88 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}\usepackage{lmodern}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}\usepackage{microtype}\usepackage{booktabs}\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{3pt}\setlength{\belowdisplayskip}{3pt}
+\title{\bfseries Step 1 in plain terms: the four tests, and how much they throw away}
+\author{}\date{}
+\begin{document}\maketitle\vspace{-2.9em}
+
+\noindent
+\textbf{The object.} Step 1 does not look at matrices directly. It looks at \emph{boxes}: a box is nine
+integers between $0$ and $111$ --- five describing the row list, four describing the column tail --- and
+it stands for a small cube of phases. There are about $1.6\times10^{8}$ row boxes and
+$6.9\times10^{6}$ column boxes, so the product is far too big to visit. The four tests below are
+\emph{necessary conditions}: a real matrix always passes all four, so failing one proves the box is
+empty. That is the only direction they may be used in.
+
+\noindent
+\textbf{The control.} Our test matrix from \texttt{mub-step1-example.pdf} has row bins
+$(18,37,56,74,93)$ and column bins $(56,0,0,56,56)$, and it passes all four tests. That is the sanity
+check: if a filter rejected it, the filter would be wrong.
+
+\key{Test 1 --- gaps (two-sided)}
+\emph{Plain: the phase points in a list must be spread out, but not too evenly.} Compute the largest
+circular gap between consecutive bins. For the row list it must be at most $1-(l-1)/112$, where $l$ is
+the last row bin; for the column list it must be at least $1-(l+2)/112$. The second is the surprising
+one: a \emph{large} gap is demanded, and it fails when the column points are too evenly spread.
+\emph{On our box:} row gap $0.1696\le0.1786$ (pass), column gap $0.5045\ge0.1518$ (pass).
+\emph{A box it kills:} row bins $(14,33,52,70,92)$ have a gap of $0.1964>0.1875$.
+
+\key{Test 2 --- the vanishing sum}
+\emph{Plain: the five phase points must almost cancel, because the inner product of two rows is
+zero.} Add the five unit vectors and see how far the total is from $-1$. The test asks whether the
+total could be repaired by moving each phase by at most half a bin. If not, the box is empty. The
+margin is $\tfrac{5\pi w^2}{4}=3.1\times10^{-4}$, quadratic in the bin width, which is why refining a
+box helps.
+\emph{On our box:} the residual is $0.32$ of the allowed slack (rows) and $0.20$ (columns).
+\emph{A box it kills:} $(14,33,52,70,89)$ passes Test 1 but its residual is $2.27$ times the slack.
+
+\key{Test 3 --- agreement about the shared entry}
+\emph{Plain: one number belongs to both lists --- the entry $\xi$ whose bin is $56$ --- so both lists
+must be compatible with the \emph{same} displacement of it.} Each list, on its own, confines that
+displacement to an interval; if the two intervals do not meet, no matrix fits both.
+\emph{On our box:} the row list allows $h\in[-0.55,1.55]$ grid units and the column list allows
+$h\in[-1.54,2.54]$; they overlap, as they must.
+
+\key{Test 4 --- reuse}
+\emph{Plain: if a box is already inside a ball we have kept, we need not keep it again.} The distance
+from its centre to the kept centre, plus the box's circumradius $1.5/112=0.0134$, must not exceed the
+retention radius $0.032$.
+\emph{On our box:} moving the last row bin from $93$ to $94$ gives a centre $0.0089$ away, and
+$0.0089+0.0134=0.0223\le0.032$, so that neighbouring box is absorbed and never enumerated separately.
+
+\key{How much is thrown away}
+The companion program \texttt{step1\_filter.cpp} runs these tests; \texttt{./step1\_filter survey M}
+samples $M$ random boxes.
+
+\begin{center}\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+& survive & killed at this stage\\
+\midrule
+random row boxes passing the orientation restriction & $54.28\%$ & $45.7\%$\\
+\ \ + row gap filter & $10.04\%$ & $81.5\%$ of the above\\
+\ \ + row sum filter & $0.017\%$ & $99.8\%$ of the above\\
+\midrule
+random full boxes passing all four tests & $0.00002\%$ & ---\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Twenty million random boxes were sampled in about six seconds: $45.7\%$ die immediately on the
+orientation restriction, another $90.3\%$ of the remainder on the gap filters, another $99.9996\%$ of
+\emph{those} on the sum test. Only four boxes in twenty million survive all four. So Step 1 removes
+something like $99.98\%$ of the row boxes and $99.9999\%$ of the full boxes --- four to five orders of
+magnitude --- and the two gap tests do most of the work, with the sum test finishing off nearly
+everything that slips through.
+
+\emph{Two honest caveats.} These are \emph{my} readings of the tests, implemented from the statements
+(2.7)--(2.14); the preprint's own bookkeeping reports $249{,}878$ retained centres out of
+$151{,}744{,}086$ bin pairs, i.e.\ $99.83\%$ removed, about ten times less aggressive than my row-side
+figure, so the two accountings differ somewhere. And random boxes are not the same population as the
+boxes a real matrix produces: the percentages measure the filters, not the difficulty of the problem.
+
+\end{document}

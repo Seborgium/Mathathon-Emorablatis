@@ -1,0 +1,10 @@
+# Scratch space and swarm working directories: caches, regenerated per session.
+.scratch/
+.ultramath/
+__pycache__/
+*.pyc
+
+# Files GitHub refuses (100 MB per-file hard limit) or live temp artefacts.
+zilC6xW5
+emorablatis-full-tree.zip
+certdata/runs/h1-seed-emission/seed.wit

@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\dd}{\mathrm{d}}
+\DeclareMathOperator{\gap}{gap}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=3pt}
+
+\title{\bfseries Why $112$ cuts\\[6pt]
+\large\normalfont Notes on a parameter of OpenAI, \emph{The maximum number of\\[1pt]
+mutually unbiased bases in dimension six}, \S2.2}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.2em}
+
+\noindent
+The preprint fixes one constant early and never justifies it: the circle of phases is cut into
+$N=112$ closed bins of width $w=1/112$. These notes explain what that cut is for and which
+inequalities constrain such a number. The short answer: $112$ is a \emph{budget}, not a theorem. The
+proof needs a width small enough that a box fits the ball the next stage certifies, and a box count
+small enough to enumerate; $112$ is a point inside that window, and nothing in the logic depends on
+which point.
+
+\section*{1.\ The cut, and why it comes last}
+
+After dephasing and the symmetry arrangement of the preprint's Lemma 2.4, a Hadamard matrix is
+described by nine phases: five sorted phases $0\le x_1\le\dots\le x_5\le 1$ of a row, four sorted
+phases $0\le y_2\le\dots\le y_5\le1$ of a column, and the entry $\xi$ that the two lists share. The
+nine live on a torus $\T^9$, which is continuous and therefore unsearchable, so the proof covers it
+by boxes
+\[
+I_b=\Bigl[\tfrac{b}{N},\tfrac{b+1}{N}\Bigr],\qquad 0\le b<N,\qquad b\in\mathbb Z,
+\]
+closed, of width $w=1/N$. Boxes are the right shape because they are products of intervals: an
+estimate proved on an interval --- a Taylor remainder, say --- then holds on the whole box at once.
+The bins are closed because the cover must be exact: a boundary phase belongs to two bins, which is
+harmless, whereas a missing endpoint would silently drop a matrix.
+
+The order of the two operations is not a matter of taste: cutting first gives
+$112^9=2.77\times 10^{18}$ boxes, which no one can search. Sorting first turns a box into a
+\emph{multiset} of bin indices --- five nondecreasing integers $0\le a\le b\le c\le d\le l<N$ ---
+of which there are
+\begin{equation}\label{eq:count}
+\binom{N+4}{5}=\binom{116}{5}=160{,}389{,}488 ,
+\end{equation}
+and only one representative of each ordering is visited. The sorting buys a factor of
+$1.7\times10^{10}$; that, not the value $112$, is what makes the first stage affordable.
+
+\section*{2.\ Three inequalities that constrain $N$}
+
+\paragraph{(A) The box must fit in the ball.} A box of side $w$ in nine coordinates has circumradius
+$\tfrac32 w$, and the covering statement of the preprint (Proposition 2.10) certifies balls of radius
+$R_s=0.032$. If a box is wider than that ball, no ball can ever absorb it, the reuse step of Lemma
+2.9 never fires, and the list of centres cannot be compacted. Hence
+\[
+\tfrac32\cdot\tfrac1N\le R_s
+\qquad\Longrightarrow\qquad
+N\ge \frac{3}{2R_s}=46.875 ,
+\qquad\text{so}\qquad
+N\ge 47 . \tag{A}
+\]
+This is a hard floor, and it is low: at $N=48$ the circumradius is $0.03125$, only $2\%$ below
+$R_s$, leaving no room for the displacements the next stage adds. The useful floor is therefore
+somewhat higher than (A).
+
+\paragraph{(B) The enumeration must be runnable.} The count \eqref{eq:count} grows like $N^5/120$:
+
+\begin{center}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+$N$ & $w=1/N$ & $\tfrac32w$ & $\binom{N+4}{5}$ \\
+\midrule
+47  & $0.0213$ & $0.0319$ & $2.35\times10^{6}$\\
+\textbf{112} & $\mathbf{0.0089}$ & $\mathbf{0.0134}$ & $\mathbf{1.60\times10^{8}}$\\
+160 & $0.0063$ & $0.0094$ & $9.30\times10^{8}$\\
+224 & $0.0045$ & $0.0067$ & $4.91\times10^{9}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+A few hundred million boxes is a long but feasible loop; a few billion is not. So
+\[
+N\lesssim150 . \tag{B}
+\]
+Together, (A) and (B) leave the window $47\le N\lesssim150$: the parameter is confined to a factor of
+three, and inside that factor the proof does not care where it sits. $N=112$ is in the upper part of
+the window, where the enumeration is still $1.6\times10^{8}$ boxes and a box is $42\%$ of the
+retention radius.
+
+\paragraph{(C) Finer bins buy sharper arithmetic.} Every filter is a necessary condition with a margin, and
+the margins are second order in $w$ because they come from Taylor's formula with a quadratic
+remainder. The cleanest case is the preprint's Lemma 2.7,
+\[
+\Bigl|1+\sum_{j=0}^{4}e(u_j+\Delta_j)\Bigr|=0,\quad \abs{\Delta_j}\le \tfrac w2
+\qquad\Longrightarrow\qquad
+\norm{c+J\Delta}\le \frac{5\pi w^2}{4},
+\]
+where $c$ and $J$ are computed at the bin midpoints. At $N=112$ the tolerated residual is
+$\frac{5\pi w^2}{4}=3.1\times10^{-4}$, which is small enough that a box whose midpoint data cannot be
+repaired by any displacement of size $w/2$ is rejected outright. Shrinking $w$ by a factor of two
+shrinks this tolerance by four. That is the force pulling $N$ \emph{up} against (B).
+
+The pull is weak, though. A codimension-two condition tested to second order is passed only by boxes
+within $O(w^2)$ of the constraint set, so the survivors number about $1/w=N$ while the boxes number
+about $N^5$: halving $w$ multiplies the work by $32$ and the survivors by $2$. Enumeration dominates,
+so resolution is bought only until the survivors are small balls the next stage can certify.
+
+\section*{3.\ What the cut must not break}
+
+Three cautions, all of them consequences of cutting after quotienting rather than before. First, the
+cut is not invariant under the symmetries: rephasing a column rotates the phases of six cells and
+sends a canonical box to one that is not canonical, so the symmetries must be spent \emph{before} the
+bins, in Lemma 2.4. Second, a box is not a ball: it contains its circumscribed ball of radius
+$\tfrac32w$ but wastes the corners, which is why $R_s$ is quoted for balls and $w$ for boxes. Third,
+the nine coordinates are not independent --- the entry $\xi$ keeps the same bin index in both lists
+--- so the two enumerations are sequential rather than a product (the second list alone has
+$\binom{115}{4}=6.9\times10^{6}$ boxes), and a filter proved for one list constrains the other through
+the shared index.
+
+\medskip
+\noindent
+The moral is that ``$112$'' is arithmetic, not mathematics. Change it to $96$ and the same proof runs
+once the constants of Appendix A are recomputed: the circumradius becomes $0.0156$, still under
+$R_s$, and the enumeration grows to $7.6\times10^{7}$. What is not permitted is to leave the window
+--- below $47$ no box fits the retention ball, above roughly $150$ the first stage cannot be
+enumerated. Inside it the proof is parameter-free, which is what one wants from a certified
+computation: the constant is a resource to be budgeted, and the logic never mentions it.
+
+\end{document}

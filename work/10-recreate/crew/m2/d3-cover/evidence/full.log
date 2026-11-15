@@ -1,0 +1,27 @@
+seeds xs22829 ys829306 build0.09
+N112 r0.0320 dual2 K4 m28 checked151744086 centers249878 visit29769262282 near3341641851 cheap45648766 lp3134060273
+extra lpok105845442 dropgap108445934 dropiv38448534 covered151494208
+time 797.96
+	Command being timed: "./build/c-harness --load run/seeds-n112.bin --out run/mine-centers.txt --stats run/full.json"
+	User time (seconds): 391.97
+	System time (seconds): 0.72
+	Percent of CPU this job got: 49%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 13:17.97
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 178860
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 65134
+	Voluntary context switches: 2
+	Involuntary context switches: 162840
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 14352
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

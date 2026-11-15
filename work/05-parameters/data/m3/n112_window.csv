@@ -1,0 +1,12 @@
+quantity,value,note
+pairs_witness,160389488,"C(116,5)"
+tails_witness,6913340,"C(115,4)"
+N_min_packing,47,1.5/N < R
+N_max_int32,189,"C(N+4,5)<2^31"
+N_max_int8,128,N-1 <= 127
+N_two_step_reach,110,NR-1.5 >= 2
+gap_filter_ratio,3,"3w/w, N-free"
+retention_obs,0.00164671,Table 1
+c_pair_us,4.0963,cover seconds per pair
+c_seed_ms,8.0852,A seconds per seed
+kappa,0.21132,reuse model calibration

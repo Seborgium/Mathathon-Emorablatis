@@ -1,0 +1,116 @@
+{
+ "summary": {
+  "commands": 92,
+  "records": 23506,
+  "groups": {
+   "all": {
+    "records": 23506,
+    "pairs": 639025953,
+    "O_plus_U": 368119692,
+    "nonedge_reason_slots": 270906261,
+    "adjacency_bytes": 358650336,
+    "steps": 3747019119
+   },
+   "initial": {
+    "records": 22379,
+    "pairs": 617899097,
+    "O_plus_U": 355443918,
+    "nonedge_reason_slots": 262455179,
+    "adjacency_bytes": 346581744,
+    "steps": 3534273715
+   },
+   "final": {
+    "records": 1127,
+    "pairs": 21126856,
+    "O_plus_U": 12675774,
+    "nonedge_reason_slots": 8451082,
+    "adjacency_bytes": 12068592,
+    "steps": 212745404
+   },
+   "completed_negatives": {
+    "records": 23343,
+    "pairs": 622704036,
+    "O_plus_U": 357191053,
+    "nonedge_reason_slots": 265512983,
+    "adjacency_bytes": 350022800,
+    "steps": 2932018956
+   },
+   "capped": {
+    "records": 163,
+    "pairs": 16321917,
+    "O_plus_U": 10928639,
+    "nonedge_reason_slots": 5393278,
+    "adjacency_bytes": 8627536,
+    "steps": 815000163
+   }
+  },
+  "categories": {
+   "cap": 163,
+   "nopattern": 23343
+  },
+  "graph_records": 23506,
+  "balls": {
+   "n": 23506,
+   "min": 49,
+   "median": 205.0,
+   "mean": 224.3,
+   "p95": 319,
+   "max": 1089,
+   "total": 5272329
+  },
+  "O_edges": {
+   "n": 23506,
+   "min": 0,
+   "median": 2437.5,
+   "mean": 3249.43,
+   "p95": 7415,
+   "max": 85679,
+   "total": 76381177
+  },
+  "U_edges": {
+   "n": 23506,
+   "min": 378,
+   "median": 9326.0,
+   "mean": 12411.24,
+   "p95": 24085,
+   "max": 317014,
+   "total": 291738515
+  },
+  "steps_nopattern": {
+   "n": 23343,
+   "min": 76,
+   "median": 38453,
+   "mean": 125605.92,
+   "p95": 526566,
+   "max": 4986110,
+   "total": 2932018956
+  },
+  "steps_cap": {
+   "n": 163,
+   "min": 5000001,
+   "median": 5000001,
+   "mean": 5000001,
+   "p95": 5000001,
+   "max": 5000001,
+   "total": 815000163
+  },
+  "bins_final_layer": {
+   "n": 23506,
+   "min": 1398,
+   "median": 18705.0,
+   "mean": 20658.54,
+   "p95": 30616,
+   "max": 113460,
+   "total": 485599722
+  },
+  "stdout_wall_seconds_total": 9696.47
+ },
+ "saved_log_totals": {
+  "done": 23506,
+  "bad": 163,
+  "graph": 0,
+  "cap": 163,
+  "over": 0,
+  "cluster": 0
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 4,
+ "command": "A3",
+ "stage": "A",
+ "run_order": 5,
+ "argv": [
+  "./build/arun",
+  "centers.txt",
+  "3",
+  "4",
+  "coarse3.bin",
+  "bad3.txt"
+ ],
+ "inputs": [
+  "centers.txt"
+ ],
+ "outputs": [
+  "bad3.txt",
+  "coarse3.bin"
+ ],
+ "declared_outputs": [
+  "coarse3.bin",
+  "bad3.txt"
+ ],
+ "input_sources": {
+  "centers.txt": "replayed"
+ },
+ "rc_expected": 0,
+ "rc_got": 0,
+ "artefacts": [
+  {
+   "path": "bad3.txt",
+   "declared": true,
+   "bytes_expected": 0,
+   "sha256_expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "bytes_got": 0,
+   "sha256_got": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "byte_identical": true
+  },
+  {
+   "path": "coarse3.bin",
+   "declared": true,
+   "bytes_expected": 1187160,
+   "sha256_expected": "8c23427e63e31cd18abbb80838e3289e646fd108fa850687ca7b857471376535",
+   "bytes_got": 1187160,
+   "sha256_got": "8c23427e63e31cd18abbb80838e3289e646fd108fa850687ca7b857471376535",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 2 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "2 files, 1187160 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 0, got 0"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/A3.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "07fe7e8f51b9c0324daed4dd15b305d09dbf03dffad70304fd1fd35df7e4fd01",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

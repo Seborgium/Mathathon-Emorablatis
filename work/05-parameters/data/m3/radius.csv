@@ -1,0 +1,36 @@
+constant_or_quantity,value,note
+R,0.032,
+2*pi*R (radians),0.201062,A.4 threshold: Rs < .203
+2*pi*0.0320001,0.201063,still < .203
+slack of Rs < .203,1.00964,0.964% headroom
+R upper bound from Rs<.203,0.032308,R < .203/(2*pi)
+q at R=.032,0.30377,A.4 threshold q < .32
+slack of q < .32,1.0534,5.34% headroom
+R upper bound from q<.32,0.032844,
+R lower bound 1.5/N at N=112,0.013393,Prop 2.10 packing; R must exceed it
+R / (1.5/N),2.3893,downward slack 2.39x
+(1.5/N) / R,0.4185,the fresh-centre radius as a fraction of R
+R window at N=112,"[0.013393, 0.032308)",
+R=1/32 exact?,0.0312500,2*pi/32 = .196350 = pi/16 = h at Nu=16 (2.4% below .032)
+excess of .0320001 over .032,1.0e-07,must absorb the 9-phase binary conversion
+conversion error bound (A.3),1e-14,nine rounding-rounded phases
+slack ratio,1e+07,"harmless, 7 orders of magnitude of slack"
+.032 * 112,3.584000,
+(.032*112)^2,12.845056000,
+RN^2 = that - 1e-4,12.844956000,
+sqrt(RN^2),3.583986049,= largest certified distance in grid units
+implied phase radius,0.031999875,vs R = .032
+radius given up to the 1e-4,1.246e-07,relative 3.89e-06
+needed to be safe (binary64),1e-12,A.3: total possible error before subtraction
+slack of the 1e-4,1e+08,8 orders: any 1e-4 >= 1e-12 works
+cost of the conservatism,0.99996 of a lattice step,reuse lost only if NR-1.5 lands within 1.4e-5 of an integer
+local target .103 < atlas cap .125,0.0220,headroom 17.6%
+atlas cap .125 < B validate .126,0.0010,headroom 0.79%
+window for the atlas cap,"(0.103, 0.126)",.103 < cap < .126
+observed A output records,3083,Table 1: all radii <= .125 by the cap
+local .103 at half (.0515),Roots x2^5 = 32 per cell,"A wall time x32 = 18 h; 3083 -> 98,656 records (< 2e6 cap)"
+local .103 at double (.206),> .125,Atlas::add cannot insert: every A record aborts -> A fails
+atlas .125 at half (.0625),< .103,no local record fits the cap -> A fails at once
+atlas .125 at double (.25),> .126,B validate rejects every input -> B fails
+crude cell phase extent (A.4),0.1592 cycles,"E < 1 rad; exceeds .103 -> .103 is empirical, not derived"
+seed-cell angular match,1.0240,2*pi*R vs h = pi/16 at Nu = 16

@@ -1,0 +1,7 @@
+constant,where,inequality,value,slack,at_half,at_double,verdict
+.64 eigenvalue split,Prop. 4.6 (buildH::patch),"at most 10 of 25 eigenvalues may be < .64, else failure",0.64,no stated spectrum; k<=5 observed vs k<=10 allowed,".32: more T columns, k>10 -> failure","1.28: fewer T columns, missed directions -> coverage loss",arbitrary-but-harmless
+1e4 supdual entry cap,section 2.4 / A.3,2*4*v_max*3e-11 < 2.5e-6,10000.0,"1.04x (derived, not free)","5e3: half the budget, tighter proposals",2e4: 4.8e-6 > the stated 2.5e-6 sub-budget,justified
+1e10 initial support,section 2.4 / A.3,must exceed (NR)^2 = 12.845,1e10,7.8e8x larger than the trivial 999; 7.8e8x the threshold,5e9: no change,2e10: no change,arbitrary-but-harmless
+.249 / .23 alignment cuts,section 5.1 / 5.6,cut < .25 (quarter cell); total = R + d_q < .377,.249 / .23,0.001 absolute; .377-total = 0.001998,.1245: more relations declined (more work),".5: total > .377, local estimates invalid",justified (upper one) / arbitrary-but-harmless (.23)
+1e-7 atlas find margin,section 4.7 / A.6,projection error < 1e-11,1e-7,1e4x,5e-8: still 5000x,2e-7: 2e4x,arbitrary-but-harmless
+2e-8 atlas cap margin,section 4.7,addition/comparison rounding ~1e-16,2e-8,1e8x,1e-8: 1e8x,4e-8: 4e8x,arbitrary-but-harmless

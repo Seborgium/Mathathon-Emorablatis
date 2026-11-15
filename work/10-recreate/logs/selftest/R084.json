@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 84,
+ "command": "C.batch78",
+ "stage": "C.initial",
+ "run_order": 84,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "1",
+  "batches/bad78.bin",
+  "batches/f78.bin"
+ ],
+ "inputs": [
+  "batches/f78.bin"
+ ],
+ "outputs": [
+  "batches/bad78.bin"
+ ],
+ "declared_outputs": [
+  "batches/bad78.bin"
+ ],
+ "input_sources": {
+  "batches/f78.bin": "replayed"
+ },
+ "rc_expected": 1,
+ "rc_got": 1,
+ "artefacts": [
+  {
+   "path": "batches/bad78.bin",
+   "declared": true,
+   "bytes_expected": 3024,
+   "sha256_expected": "aaeb2a985529acc7abc167b5fa88dd1afbdff9a7f4a237246e2c49db2e23c571",
+   "bytes_got": 3024,
+   "sha256_got": "aaeb2a985529acc7abc167b5fa88dd1afbdff9a7f4a237246e2c49db2e23c571",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 3024 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 1, got 1"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.batch78.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "467fade5c466a108c760044441a0db93d3ef161c61e35e0aee840ee8c0e0d14d",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

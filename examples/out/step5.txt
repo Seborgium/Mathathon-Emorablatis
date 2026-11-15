@@ -1,0 +1,30 @@
+s5.records                         23506                          records in the pass
+s5.category.cap.n                  163                            records
+s5.category.cap.steps              {'min': 5000001, 'median': 5000001, 'max': 5000001, 'total': 815000163} 
+s5.category.nopattern.n            23343                          records
+s5.category.nopattern.steps        {'min': 76, 'median': 38453, 'max': 4986110, 'total': 2932018956} 
+s5.categories                      {'cap': 163, 'nopattern': 23343} 
+s5.balls                           {'min': 49, 'median': 205.0, 'max': 1089, 'total': 5272329} 
+s5.miniatures                      [{'command': 'final0', 'index': 230, 'category': 'nopattern', 'bins': 1535, 'balls': 52, 'O': 122, 'U': 384, 'steps': 76}, {'command': 'batch9', 'index': 140, 'category': 'nopattern', 'bins': 25034, 'balls': 268, 'O': 2981, 'U': 15981, 'steps': 38852}, {'command': 'batch10', 'index': 43, 'category': 'cap', 'bins': 31852, 'balls': 318, 'O': 10399, 'U': 19178, 'steps': 5000001}] 
+s5.identity.records                23506                          
+s5.identity.nopattern_plus_cap     23506                          
+s5.identity.balances               True                           
+s5.identity.unresolved             163                            records with no completed verdict
+s5.log.totals                      {'done': 23506, 'bad': 163, 'graph': 0, 'cap': 163, 'over': 0, 'cluster': 0} the run's own counters for this pass
+s5.log.done_equals_bad_plus_good   True                           
+s5.log.graph_is_not_searches       0                              0, while 23506 graph searches ran: it counts completed searches that FOUND a pattern
+s5.log.over_and_cluster            [0, 0]                         both 0: no overflow, no clustering failure
+s5.margin.units                    5*pi*w^2/4 at w = 1/112        
+s5.margin.exact.times_pi           [5, 50176]                     5/50176
+s5.margin.exact                    0.00031305730365               
+s5.margin.float64                  0.00031305730365               binary64
+s5.margin.ulp                      0                              in ulps
+s5.margin.outward.rel              5.55111512313e-16              k=5 roundings, relative
+s5.margin.outward.abs              1.7378171327e-19               absolute width of the outward interval
+s5.margin.relative_to_value        5.55111512313e-16              
+s5.margin.code_slack               2e-07                          the absolute slack in the pair tests (stageC.cpp)
+s5.margin.code_slack.over_outward  1.15086907729e+12              how many outward intervals fit in the code's own slack
+s5.support.value                   0.0350624180088                1.25*pi/112
+s5.support.outward.abs             1.94635518862e-17              
+s5.steps.total                     3747019119                     graph steps in the pass
+s5.O_plus_U.total                  368119692                      edges built

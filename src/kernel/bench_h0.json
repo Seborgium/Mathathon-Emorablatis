@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "pairs": 151744086,
+    "covrun_seconds_this_vm": 401.82,
+    "microseconds_per_pair": 2.6480109412633057
+  },
+  "python_version": "3.12.14",
+  "gmpy2": "2.3.1",
+  "mpmath": "1.3.0",
+  "double_gap_per_pair_us": 0.07863300015742425,
+  "double_gap_per_pair_us_extrapolated_cpu_hours_for_all_pairs": 0.003314470205090611,
+  "gmpy2_mpq_gap_per_pair_us": 0.6809115002397448,
+  "gmpy2_mpq_gap_per_pair_us_extrapolated_cpu_hours_for_all_pairs": 0.028701192569658016,
+  "python_Fraction_gap_per_pair_us": 2.150708001863677,
+  "python_Fraction_gap_per_pair_us_extrapolated_cpu_hours_for_all_pairs": 0.09065478333213611,
+  "gmpy2_mpfr100_cos_per_eval_us": 0.9237033251944619,
+  "mpmath_dps40_cos_per_eval_us": 14.913126675916526
+}

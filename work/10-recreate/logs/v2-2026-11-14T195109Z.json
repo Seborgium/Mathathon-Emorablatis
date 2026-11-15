@@ -1,0 +1,783 @@
+{
+ "unit": "W1 / work unit 10 (independent record checker)",
+ "date_utc": "2026-11-14T195109Z",
+ "execution_dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/m1/gh/preprints/The-maximum-number-of-mutually-unbiased-bases-in-dimension-six-September-24-2026/verification/saved-run/execution",
+ "checker": "work/10-recreate/harness/check_records_indep.py",
+ "published_checker": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/upstream/check_records.py",
+ "pristine": {
+  "independent": {
+   "rc": 0,
+   "elapsed_s": 2.005,
+   "result": "PASS",
+   "checks": 677,
+   "summary": {
+    "centers": 249878,
+    "record_files": 190,
+    "records": 49731
+   },
+   "stderr": ""
+  },
+  "published": {
+   "rc": 0,
+   "elapsed_s": 4.018,
+   "out_head": [
+    "{",
+    "  \"result\": \"PASS within numerical consistency scope\","
+   ],
+   "stderr": ""
+  }
+ },
+ "cases": [
+  {
+   "id": "count_too_large",
+   "description": "count field one too large: a record is read past end of file",
+   "mutation": "batches/f10.bin count 256 -> 257",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch10]",
+     "C.subseq[C.batch10]"
+    ],
+    "elapsed_s": 2.304
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.537
+   }
+  },
+  {
+   "id": "count_too_small",
+   "description": "count field one too small: one record's bytes are left trailing",
+   "mutation": "batches/f10.bin count 256 -> 255",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch10]",
+     "C.subseq[C.batch10]"
+    ],
+    "elapsed_s": 2.149
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.573
+   }
+  },
+  {
+   "id": "k_bounds_high",
+   "description": "record k = 11, above maxK",
+   "mutation": "batches/f0.bin record 0 k 4 -> 11 (record bytes unchanged)",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 3,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch0]"
+    ],
+    "elapsed_s": 2.929
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.47
+   }
+  },
+  {
+   "id": "k_bounds_negative",
+   "description": "record k = -1, below 0",
+   "mutation": "batches/f0.bin record 0 k 4 -> -1 (record bytes unchanged)",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 3,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch0]"
+    ],
+    "elapsed_s": 2.474
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.815
+   }
+  },
+  {
+   "id": "k_shrink_unresized",
+   "description": "record k 4 -> 0 without shrinking the record: the stream loses alignment",
+   "mutation": "batches/f0.bin record 0 k 4 -> 0 (record bytes unchanged)",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 3,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch0]"
+    ],
+    "elapsed_s": 3.488
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.745
+   }
+  },
+  {
+   "id": "truncate_mid_record",
+   "description": "last 4 bytes of a batch removed",
+   "mutation": "batches/f52.bin truncated by 4 bytes (386056 -> 386052)",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "recordfiles.parse",
+     "B.batches[files]",
+     "C.index[C.batch52]",
+     "C.subseq[C.batch52]"
+    ],
+    "elapsed_s": 3.856
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 4.58
+   }
+  },
+  {
+   "id": "truncate_at_boundary",
+   "description": "last record of a batch dropped and count decremented: parses, but is no longer the first piece of the fine.bin partition",
+   "mutation": "batches/f0.bin: last record dropped and count set to 255 (self-consistent file)",
+   "expect_check": [
+    "B.batches[partition]",
+    "B.batches[size]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "B.batches[partition]",
+     "B.batches[size]",
+     "B.batches[emitted]",
+     "C.index[C.batch0]"
+    ],
+    "elapsed_s": 3.741
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 3.219
+   }
+  },
+  {
+   "id": "append_one_byte",
+   "description": "one byte appended to an unresolved-record file",
+   "mutation": "batches/bad3.bin: 1 byte(s) appended (3024 -> 3025)",
+   "expect_check": [
+    "recordfiles.parse"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "recordfiles.parse",
+     "C.bad[C.batch3]",
+     "C.fallback_inputs",
+     "B.parents[C.fallback]"
+    ],
+    "elapsed_s": 4.103
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 3.749
+   }
+  },
+  {
+   "id": "swap_two_tails",
+   "description": "id and ort exchanged in one record: both stay inside the format's bounds",
+   "mutation": "batches/f0.bin record 3: id (2.000000057912541e-06) <-> ort (1.0000008430173982e-08)",
+   "expect_check": [
+    "B.rec[batch0].constants",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.rec[batch0].constants"
+    ],
+    "elapsed_s": 3.395
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.502
+   }
+  },
+  {
+   "id": "wrong_radius_batch",
+   "description": "batch radius 0.016 -> 0.0159; brun emit() forces every batch radius to the target",
+   "mutation": "batches/f0.bin record 5 radius := 0.0159",
+   "expect_check": [
+    "B.rec[batch0].radius_is_target",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "B.rec[batch0].radius_is_target"
+    ],
+    "elapsed_s": 3.264
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.551
+   }
+  },
+  {
+   "id": "wrong_radius_fine",
+   "description": "fine.bin radius set above the .016 target",
+   "mutation": "fine.bin record 100 radius := 0.02",
+   "expect_check": [
+    "B.rec[Bfine].bounds",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "B.rec[Bfine].bounds"
+    ],
+    "elapsed_s": 3.25
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.99
+   }
+  },
+  {
+   "id": "radius_above_global",
+   "description": "radius 0.13, above the .126 cap of validate",
+   "mutation": "mid.bin record 0 radius := 0.13",
+   "expect_check": [
+    "B.rec[Bmid].bounds"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "B.rec[Bmid].bounds"
+    ],
+    "elapsed_s": 3.309
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.778
+   }
+  },
+  {
+   "id": "C_out_of_range",
+   "description": "C = 20.5, the format requires C < 20",
+   "mutation": "batches/f0.bin record 1 C := 20.5",
+   "expect_check": [
+    "B.rec[batch0].bounds",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.rec[batch0].bounds"
+    ],
+    "elapsed_s": 3.47
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.201
+   }
+  },
+  {
+   "id": "nan_in_p",
+   "description": "one p entry replaced by NaN",
+   "mutation": "batches/f0.bin record 2 p[7] := nan",
+   "expect_check": [
+    "B.rec[batch0].finite",
+    "B.rec[batch0].bounds",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.rec[batch0].finite"
+    ],
+    "elapsed_s": 3.198
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.565
+   }
+  },
+  {
+   "id": "p_above_four",
+   "description": "|p| = 4.5, above the 4 cap",
+   "mutation": "batches/f0.bin record 3 p[0] := 4.5",
+   "expect_check": [
+    "B.rec[batch0].bounds",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.rec[batch0].bounds"
+    ],
+    "elapsed_s": 3.259
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.297
+   }
+  },
+  {
+   "id": "T_above_1_01",
+   "description": "|T| = 1.02, above the 1.01 cap",
+   "mutation": "batches/f0.bin record 0 T[0][5] := 1.02",
+   "expect_check": [
+    "B.rec[batch0].bounds",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.rec[batch0].bounds"
+    ],
+    "elapsed_s": 3.265
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.279
+   }
+  },
+  {
+   "id": "batch_count_wrong",
+   "description": "done.txt claims 87 batches while 88 exist",
+   "mutation": "batches/fdone.txt: '88 22379' -> '87 22379'",
+   "expect_check": [
+    "B.batches[emitted]",
+    "files.declared",
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 2,
+    "fired": [
+     "B.batches[partition]",
+     "B.batches[emitted]"
+    ],
+    "elapsed_s": 3.022
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.244
+   }
+  },
+  {
+   "id": "non_partition_duplicate",
+   "description": "a record duplicated in a batch: 257 records, so the partition is broken",
+   "mutation": "batches/f10.bin: record 0 appended, count 256 -> 257",
+   "expect_check": [
+    "B.batches[size]",
+    "B.batches[partition]",
+    "C.index[C.batch10]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 4,
+    "fired": [
+     "B.batches[partition]",
+     "B.batches[size]",
+     "B.batches[emitted]",
+     "C.index[C.batch10]"
+    ],
+    "elapsed_s": 3.066
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.317
+   }
+  },
+  {
+   "id": "non_partition_order",
+   "description": "two records of a batch exchanged",
+   "mutation": "batches/f10.bin: records 0 and 1 exchanged (same bytes, different order)",
+   "expect_check": [
+    "B.batches[partition]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "B.batches[partition]"
+    ],
+    "elapsed_s": 2.33
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.238
+   }
+  },
+  {
+   "id": "missing_fallback_input",
+   "description": "a non-empty C failure file is not fed to the fallback",
+   "mutation": "commands.json C.Bfallback argv ['./build/brun', '.011', '.0038', 'fb1.bin', 'fb1bad.bin', '-', 'batches/bad10.bin', 'batches/bad3.bin', 'batches/bad4.bin', 'batches/bad5.bin', 'batches/bad52.bin', 'batches/bad53.bin', 'batches/bad55.bin', 'batches/bad56.bin', 'batches/bad6.bin', 'batches/bad7.bin', 'batches/bad78.bin', 'batches/bad79.bin', 'batches/bad8.bin', 'batches/bad80.bin', 'batches/bad84.bin'] -> ['./build/brun', '.011', '.0038', 'fb1.bin', 'fb1bad.bin', '-', 'batches/bad10.bin', 'batches/bad3.bin', 'batches/bad4.bin', 'batches/bad5.bin', 'batches/bad52.bin', 'batches/bad55.bin', 'batches/bad56.bin', 'batches/bad6.bin', 'batches/bad7.bin', 'batches/bad78.bin', 'batches/bad79.bin', 'batches/bad8.bin', 'batches/bad80.bin', 'batches/bad84.bin']",
+   "expect_check": [
+    "C.fallback_inputs"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "C.fallback_inputs"
+    ],
+    "elapsed_s": 2.735
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 3.642
+   }
+  },
+  {
+   "id": "unordered_fallback_input",
+   "description": "fallback inputs in the wrong order (bad4 before bad3)",
+   "mutation": "commands.json C.Bfallback argv ['./build/brun', '.011', '.0038', 'fb1.bin', 'fb1bad.bin', '-', 'batches/bad10.bin', 'batches/bad3.bin', 'batches/bad4.bin', 'batches/bad5.bin', 'batches/bad52.bin', 'batches/bad53.bin', 'batches/bad55.bin', 'batches/bad56.bin', 'batches/bad6.bin', 'batches/bad7.bin', 'batches/bad78.bin', 'batches/bad79.bin', 'batches/bad8.bin', 'batches/bad80.bin', 'batches/bad84.bin'] -> ['./build/brun', '.011', '.0038', 'fb1.bin', 'fb1bad.bin', '-', 'batches/bad10.bin', 'batches/bad4.bin', 'batches/bad3.bin', 'batches/bad5.bin', 'batches/bad52.bin', 'batches/bad53.bin', 'batches/bad55.bin', 'batches/bad56.bin', 'batches/bad6.bin', 'batches/bad7.bin', 'batches/bad78.bin', 'batches/bad79.bin', 'batches/bad8.bin', 'batches/bad80.bin', 'batches/bad84.bin']",
+   "expect_check": [
+    "C.fallback_inputs"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "C.fallback_inputs"
+    ],
+    "elapsed_s": 3.364
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 6.38
+   }
+  },
+  {
+   "id": "returncode_wrong",
+   "description": "return code 0 -> 1 for a batch with no unresolved record",
+   "mutation": "commands.json C.batch0 returncode 0 -> 1",
+   "expect_check": [
+    "C.bad[C.batch0]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "C.bad[C.batch0]"
+    ],
+    "elapsed_s": 3.154
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 2.978
+   }
+  },
+  {
+   "id": "a_shard_missing",
+   "description": "A part 3 relabelled part 2: shard 3 is never produced",
+   "mutation": "commands.json A3 argv ['./build/arun', 'centers.txt', '3', '4', 'coarse3.bin', 'bad3.txt'] -> ['./build/arun', 'centers.txt', '2', '4', 'coarse3.bin', 'bad3.txt']",
+   "expect_check": [
+    "A.partition"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "A.partition"
+    ],
+    "elapsed_s": 3.127
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 1.196
+   }
+  },
+  {
+   "id": "final_bad_absent",
+   "description": "one of the four final bad files deleted",
+   "mutation": "fb1cbad2.bin deleted",
+   "expect_check": [
+    "files.declared",
+    "C.final_bad[C.final2]",
+    "C.final_bytes[C.final2]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 3,
+    "fired": [
+     "files.declared",
+     "C.final_bad[C.final2]",
+     "C.final_bytes[C.final2]"
+    ],
+    "elapsed_s": 1.986
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 5.596
+   }
+  },
+  {
+   "id": "results_counter_wrong",
+   "description": "the recorded stdout counter disagrees with the batch size",
+   "mutation": "C.batch10.txt: 'result done256 bad1' -> 'result done255 bad1'",
+   "expect_check": [
+    "C.index[C.batch10]"
+   ],
+   "expect_miss": false,
+   "independent": {
+    "rc": 1,
+    "caught": true,
+    "expected_check_fired": true,
+    "checks_failed": 1,
+    "fired": [
+     "C.index[C.batch10]"
+    ],
+    "elapsed_s": 2.818
+   },
+   "published": {
+    "rc": 1,
+    "caught": true,
+    "note": "NOT ESTABLISHED",
+    "elapsed_s": 4.77
+   }
+  },
+  {
+   "id": "silent_coarse_p",
+   "description": "coarse0.bin p[0] += 0.001 (|p| <= 4): the A shards are only counted downstream",
+   "mutation": "coarse0.bin record 0 p[0] 0.4980903125999696 -> 0.4990903125999696 (inside the |p|<=4 bound)",
+   "expect_check": [],
+   "expect_miss": true,
+   "independent": {
+    "rc": 0,
+    "caught": false,
+    "expected_check_fired": true,
+    "checks_failed": 0,
+    "fired": [],
+    "elapsed_s": 3.648
+   },
+   "published": {
+    "rc": 0,
+    "caught": false,
+    "note": "PASS within numerical consistency scope",
+    "elapsed_s": 4.999
+   }
+  },
+  {
+   "id": "silent_mid_p",
+   "description": "mid.bin p[7] += 0.001: mid is the parent of fine.bin, whose records are recomputed, not copied",
+   "mutation": "mid.bin record 0 p[7] -0.008898275910912015 -> -0.007898275910912016 (inside the |p|<=4 bound)",
+   "expect_check": [],
+   "expect_miss": true,
+   "independent": {
+    "rc": 0,
+    "caught": false,
+    "expected_check_fired": true,
+    "checks_failed": 0,
+    "fired": [],
+    "elapsed_s": 1.702
+   },
+   "published": {
+    "rc": 0,
+    "caught": false,
+    "note": "PASS within numerical consistency scope",
+    "elapsed_s": 4.348
+   }
+  },
+  {
+   "id": "silent_fb1_p",
+   "description": "fb1.bin p[3] += 0.001: the four final C runs leave empty files, so nothing compares fb1",
+   "mutation": "fb1.bin record 0 p[3] 0.2981445111587642 -> 0.2991445111587642 (inside the |p|<=4 bound)",
+   "expect_check": [],
+   "expect_miss": true,
+   "independent": {
+    "rc": 0,
+    "caught": false,
+    "expected_check_fired": true,
+    "checks_failed": 0,
+    "fired": [],
+    "elapsed_s": 2.921
+   },
+   "published": {
+    "rc": 0,
+    "caught": false,
+    "note": "PASS within numerical consistency scope",
+    "elapsed_s": 4.606
+   }
+  }
+ ],
+ "totals": {
+  "cases": 28,
+  "independent_caught": 25,
+  "independent_expected_check_fired": 28,
+  "published_checked": 25,
+  "published_caught": 25,
+  "published_missed": [
+   "silent_coarse_p",
+   "silent_mid_p",
+   "silent_fb1_p"
+  ],
+  "pristine_files": 298,
+  "expected_misses": 3,
+  "expected_misses_confirmed": 3
+ },
+ "verdict": "FAIL"
+}

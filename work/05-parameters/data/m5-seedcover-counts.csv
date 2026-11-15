@@ -1,0 +1,7 @@
+quantity,value
+"C(N+4,5) all X tuples",160389488
+X tuples satisfying (2.7),85349292
+X tuples satisfying (2.7)+(2.8),16197157
+Table 1 pairs,151744086
+"C(N+3,4) tails per shared bin",6913340
+"N*C(N+3,4) tail tests",774294080

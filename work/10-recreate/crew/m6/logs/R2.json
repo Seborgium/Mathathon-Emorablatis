@@ -1,0 +1,18 @@
+{
+  "rung": "R2",
+  "program": "covrun",
+  "mode": "prefix",
+  "stop_t": "4",
+  "src": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.ultramath/smwgt1mbm/m6/harness/../candidate",
+  "compiler": "g++ (conda-forge gcc 16.2.0-7) 16.2.0",
+  "flags": "-O3 -march=native -ffp-contract=off -DCOVRUN_STOP_T=4",
+  "build_seconds": 1.505,
+  "run_seconds": 13.239,
+  "bytes": 347,
+  "lines": 13,
+  "sha256_ours": "1606b8077978b4e7e905f26c33b283d0dccbba17ce7f21428b8bb1aac744898b",
+  "sha256_ref": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789",
+  "identical": false,
+  "determinism": "ok",
+  "abi_probe": "run"
+}

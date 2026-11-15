@@ -1,0 +1,1730 @@
+[
+ {
+  "file": "coarse0.bin",
+  "index": 547,
+  "k": 0,
+  "radius": 2.013104686336962e-05,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.871324842971351e-08,
+  "k_agree": true,
+  "resid": 7.445499327225567e-15,
+  "beta": 1.000000495510216e-08,
+  "row": 0.2962962962968015,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 1.0000001418698412e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2963646667920395e-08,
+   "id": 2.000000116457173e-06
+  },
+  "timing": {
+   "froot": 0.015665531158447266,
+   "M_proposal": 0.07124686241149902,
+   "residual": 0.09940981864929199,
+   "total": 0.659125566482544
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 678,
+  "k": 4,
+  "radius": 0.10152363251942167,
+  "root": "FAIL",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": false
+  },
+  "mnorm_rel": -3.8253281426379517e-08,
+  "k_agree": true,
+  "resid": 2.722421002210887e-12,
+  "beta": 1.000000746671736e-08,
+  "row": 0.3838333883450334,
+  "slack": {
+   "ort": 1.0000000027913614e-08,
+   "hor": 1.0000000029130641e-08,
+   "froot": 1.0000000668583676e-09,
+   "n0": 9.999999999999999e-10,
+   "mnorm": 2.166120047244668e-08,
+   "id": 1.999997347404514e-06
+  },
+  "timing": {
+   "froot": 0.008280515670776367,
+   "M_proposal": 0.022884130477905273,
+   "residual": 0.06632637977600098,
+   "total": 0.39546632766723633
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 737,
+  "k": 4,
+  "radius": 0.10282533518714347,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.9708093820137213e-08,
+  "k_agree": true,
+  "resid": 1.1860478654625035e-11,
+  "beta": 1.0000006580561855e-08,
+  "row": 0.2653714234888973,
+  "slack": {
+   "ort": 9.999999765080528e-09,
+   "hor": 1.000000004814464e-08,
+   "froot": 9.999999516193585e-10,
+   "n0": 1e-09,
+   "mnorm": 2.3087475174173154e-08,
+   "id": 1.999988200926521e-06
+  },
+  "timing": {
+   "froot": 0.008466243743896484,
+   "M_proposal": 0.02435755729675293,
+   "residual": 0.061049461364746094,
+   "total": 0.4087369441986084
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 576,
+  "k": 4,
+  "radius": 0.12498582471464276,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.603409199367774e-08,
+  "k_agree": true,
+  "resid": 2.8403934198062478e-14,
+  "beta": 1.0000006302316186e-08,
+  "row": 0.30210345651552767,
+  "slack": {
+   "ort": 1.000000011120713e-08,
+   "hor": 1.0000000043434945e-08,
+   "froot": 9.99999951324449e-10,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.2629253784129172e-08,
+   "id": 2.000000026358067e-06
+  },
+  "timing": {
+   "froot": 0.011290311813354492,
+   "M_proposal": 0.026522159576416016,
+   "residual": 0.0702815055847168,
+   "total": 0.4220263957977295
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 595,
+  "k": 4,
+  "radius": 0.12499540840282151,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -5.422081970508704e-08,
+  "k_agree": true,
+  "resid": 2.6228563763924077e-14,
+  "beta": 1.000000673786289e-08,
+  "row": 0.267533102121853,
+  "slack": {
+   "ort": 1.000000007676136e-08,
+   "hor": 1.0000000012850676e-08,
+   "froot": 1.0000000126609405e-09,
+   "n0": 1e-09,
+   "mnorm": 2.3645747657038938e-08,
+   "id": 2.000000025156926e-06
+  },
+  "timing": {
+   "froot": 0.007954835891723633,
+   "M_proposal": 0.023259401321411133,
+   "residual": 0.08475470542907715,
+   "total": 0.5259110927581787
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 464,
+  "k": 4,
+  "radius": 0.12499850155534348,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.983869296652778e-08,
+  "k_agree": true,
+  "resid": 2.6382532704468524e-12,
+  "beta": 1.0000007254443366e-08,
+  "row": 0.3410492072782381,
+  "slack": {
+   "ort": 9.999999979116079e-09,
+   "hor": 1.0000000031608745e-08,
+   "froot": 9.999999710278459e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1856752251845003e-08,
+   "id": 1.9999974338208455e-06
+  },
+  "timing": {
+   "froot": 0.008425474166870117,
+   "M_proposal": 0.029178857803344727,
+   "residual": 0.0616297721862793,
+   "total": 0.41190552711486816
+  }
+ },
+ {
+  "file": "coarse0.bin",
+  "index": 165,
+  "k": 4,
+  "radius": 0.12499990459684936,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.234894466453352e-08,
+  "k_agree": true,
+  "resid": 4.2738627640862323e-14,
+  "beta": 1.0000006886707078e-08,
+  "row": 0.33554177809734903,
+  "slack": {
+   "ort": 1.0000000173955577e-08,
+   "hor": 1.0000000035433637e-08,
+   "froot": 9.999999764602913e-10,
+   "n0": 1e-09,
+   "mnorm": 2.2168858224315413e-08,
+   "id": 2.0000000192718227e-06
+  },
+  "timing": {
+   "froot": 0.008682012557983398,
+   "M_proposal": 0.026684284210205078,
+   "residual": 0.06014585494995117,
+   "total": 0.4440927505493164
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 542,
+  "k": 0,
+  "radius": 2.013104701918423e-05,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.8713251726864355e-08,
+  "k_agree": true,
+  "resid": 6.596981508058245e-15,
+  "beta": 1.0000005065142053e-08,
+  "row": 0.2962962962969153,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 9.999999903782902e-10,
+   "n0": 1e-09,
+   "mnorm": 2.2963648238972707e-08,
+   "id": 2.000000125289454e-06
+  },
+  "timing": {
+   "froot": 0.008081197738647461,
+   "M_proposal": 0.03159523010253906,
+   "residual": 0.04995369911193848,
+   "total": 0.46021294593811035
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 641,
+  "k": 4,
+  "radius": 0.10277008321827473,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.7477166903037335e-08,
+  "k_agree": true,
+  "resid": 1.3113120957844478e-11,
+  "beta": 1.000000737008788e-08,
+  "row": 0.3775731573072484,
+  "slack": {
+   "ort": 1.0000000105918767e-08,
+   "hor": 1.0000000038045316e-08,
+   "froot": 9.9999998646301e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1566138929547546e-08,
+   "id": 1.999986965574724e-06
+  },
+  "timing": {
+   "froot": 0.024076461791992188,
+   "M_proposal": 0.04763960838317871,
+   "residual": 0.12668800354003906,
+   "total": 0.6268880367279053
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 734,
+  "k": 4,
+  "radius": 0.10280690854896098,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.913783901680741e-08,
+  "k_agree": true,
+  "resid": 2.4673485131199033e-14,
+  "beta": 1.0000005819984181e-08,
+  "row": 0.36266100945140145,
+  "slack": {
+   "ort": 9.99999988507376e-09,
+   "hor": 1.0000000050609615e-08,
+   "froot": 9.999999294840884e-10,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.177011036832348e-08,
+   "id": 2.0000000360316215e-06
+  },
+  "timing": {
+   "froot": 0.00810551643371582,
+   "M_proposal": 0.023417234420776367,
+   "residual": 0.06082582473754883,
+   "total": 0.5313155651092529
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 298,
+  "k": 4,
+  "radius": 0.12498303969749255,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -5.109754009846735e-08,
+  "k_agree": true,
+  "resid": 1.0573495239805897e-11,
+  "beta": 1.000000695979946e-08,
+  "row": 0.27740503564446967,
+  "slack": {
+   "ort": 1.000000009732214e-08,
+   "hor": 1.0000000048173226e-08,
+   "froot": 9.999999567820934e-10,
+   "n0": 1e-09,
+   "mnorm": 2.3260027906411333e-08,
+   "id": 1.9999894692831594e-06
+  },
+  "timing": {
+   "froot": 0.008764982223510742,
+   "M_proposal": 0.030147314071655273,
+   "residual": 0.07219862937927246,
+   "total": 0.5430121421813965
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 386,
+  "k": 4,
+  "radius": 0.12499503800659581,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.6703187322926124e-08,
+  "k_agree": true,
+  "resid": 2.4313103448813507e-14,
+  "beta": 1.0000008447203071e-08,
+  "row": 0.28659106202822937,
+  "slack": {
+   "ort": 9.999999995695086e-09,
+   "hor": 1.0000000024175674e-08,
+   "froot": 1.0000000036445734e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2712846571464248e-08,
+   "id": 2.000000041750406e-06
+  },
+  "timing": {
+   "froot": 0.008114337921142578,
+   "M_proposal": 0.02306532859802246,
+   "residual": 0.05806565284729004,
+   "total": 0.37898874282836914
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 40,
+  "k": 4,
+  "radius": 0.12499859450841272,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.863574896530108e-08,
+  "k_agree": true,
+  "resid": 3.054835915420671e-14,
+  "beta": 1.0000006174668582e-08,
+  "row": 0.3830120591711467,
+  "slack": {
+   "ort": 1.0000000210539888e-08,
+   "hor": 1.0000000036723284e-08,
+   "froot": 9.999999657707894e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1708223447782773e-08,
+   "id": 2.000000029054012e-06
+  },
+  "timing": {
+   "froot": 0.008237123489379883,
+   "M_proposal": 0.023482084274291992,
+   "residual": 0.06335568428039551,
+   "total": 0.3865363597869873
+  }
+ },
+ {
+  "file": "coarse1.bin",
+  "index": 5,
+  "k": 4,
+  "radius": 0.12499990924573616,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.7363254449419625e-08,
+  "k_agree": true,
+  "resid": 6.501330084713385e-14,
+  "beta": 1.0000007187029276e-08,
+  "row": 0.37164683861696596,
+  "slack": {
+   "ort": 1.0000000089471306e-08,
+   "hor": 1.0000000032078672e-08,
+   "froot": 9.999999853472416e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1552229823856528e-08,
+   "id": 2.000000028773568e-06
+  },
+  "timing": {
+   "froot": 0.008344411849975586,
+   "M_proposal": 0.028881549835205078,
+   "residual": 0.07164716720581055,
+   "total": 0.4104485511779785
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 576,
+  "k": 0,
+  "radius": 2.0131047483714495e-05,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.871324890072277e-08,
+  "k_agree": true,
+  "resid": 6.781594258697578e-15,
+  "beta": 1.0000005029036706e-08,
+  "row": 0.2962962962967665,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 1.0000000593844388e-09,
+   "n0": 9.999999999999999e-10,
+   "mnorm": 2.2963646893802896e-08,
+   "id": 2.0000001235917694e-06
+  },
+  "timing": {
+   "froot": 0.008193492889404297,
+   "M_proposal": 0.038931846618652344,
+   "residual": 0.050991058349609375,
+   "total": 0.4734537601470947
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 731,
+  "k": 4,
+  "radius": 0.10273374700643942,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.833563807925126e-08,
+  "k_agree": true,
+  "resid": 6.455485528664007e-12,
+  "beta": 1.000000615105305e-08,
+  "row": 0.35691120110132335,
+  "slack": {
+   "ort": 1.000000012095117e-08,
+   "hor": 1.0000000026306979e-08,
+   "froot": 1.0000000193905732e-09,
+   "n0": 1e-09,
+   "mnorm": 2.167131988611135e-08,
+   "id": 1.9999936233800626e-06
+  },
+  "timing": {
+   "froot": 0.02003788948059082,
+   "M_proposal": 0.04300212860107422,
+   "residual": 0.05900287628173828,
+   "total": 0.4101543426513672
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 618,
+  "k": 4,
+  "radius": 0.10663365487438028,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.769434151570861e-08,
+  "k_agree": true,
+  "resid": 1.3404996391415407e-11,
+  "beta": 1.0000005954742067e-08,
+  "row": 0.36521360586832224,
+  "slack": {
+   "ort": 9.999999946473512e-09,
+   "hor": 1.0000000070666518e-08,
+   "froot": 1.0000000063765145e-09,
+   "n0": 1e-09,
+   "mnorm": 2.1592685067545106e-08,
+   "id": 1.9999866752648972e-06
+  },
+  "timing": {
+   "froot": 0.00854635238647461,
+   "M_proposal": 0.023533344268798828,
+   "residual": 0.059409141540527344,
+   "total": 0.374164342880249
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 682,
+  "k": 4,
+  "radius": 0.12498561000462002,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -5.317932139489378e-08,
+  "k_agree": true,
+  "resid": 2.399084837510444e-14,
+  "beta": 1.0000006388787981e-08,
+  "row": 0.26753765252698875,
+  "slack": {
+   "ort": 1.0000000087792571e-08,
+   "hor": 1.0000000052859521e-08,
+   "froot": 9.999999962211328e-10,
+   "n0": 9.999999999999999e-10,
+   "mnorm": 2.3517487385746508e-08,
+   "id": 2.0000000144918404e-06
+  },
+  "timing": {
+   "froot": 0.008528470993041992,
+   "M_proposal": 0.023279428482055664,
+   "residual": 0.07146906852722168,
+   "total": 0.3769207000732422
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 299,
+  "k": 4,
+  "radius": 0.12499559228231091,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.795266069400614e-08,
+  "k_agree": true,
+  "resid": 3.2782114892730444e-11,
+  "beta": 1.0000006204714899e-08,
+  "row": 0.2884608286137832,
+  "slack": {
+   "ort": 9.999999994325281e-09,
+   "hor": 1.0000000036064848e-08,
+   "froot": 9.999999723428536e-10,
+   "n0": 1e-09,
+   "mnorm": 2.2868817703676197e-08,
+   "id": 1.999967287685489e-06
+  },
+  "timing": {
+   "froot": 0.008118391036987305,
+   "M_proposal": 0.023115158081054688,
+   "residual": 0.05796098709106445,
+   "total": 0.3641500473022461
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 749,
+  "k": 4,
+  "radius": 0.12499852532777717,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -5.4255712957394253e-08,
+  "k_agree": true,
+  "resid": 2.5117665512810544e-14,
+  "beta": 1.0000006380826407e-08,
+  "row": 0.26332437627008015,
+  "slack": {
+   "ort": 9.999999901633695e-09,
+   "hor": 1.0000000043788131e-08,
+   "froot": 1.0000000312643501e-09,
+   "n0": 1e-09,
+   "mnorm": 2.365003907430722e-08,
+   "id": 2.000000025116858e-06
+  },
+  "timing": {
+   "froot": 0.007905006408691406,
+   "M_proposal": 0.024690628051757812,
+   "residual": 0.05713081359863281,
+   "total": 0.3632831573486328
+  }
+ },
+ {
+  "file": "coarse2.bin",
+  "index": 30,
+  "k": 4,
+  "radius": 0.12499990231228283,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.8791115209728044e-08,
+  "k_agree": true,
+  "resid": 4.55652134949763e-12,
+  "beta": 1.0000006884515147e-08,
+  "row": 0.3639658634678843,
+  "slack": {
+   "ort": 9.999999939711995e-09,
+   "hor": 1.0000000040158021e-08,
+   "froot": 1.0000000101123492e-09,
+   "n0": 1e-09,
+   "mnorm": 2.1727355579628726e-08,
+   "id": 1.9999955046495075e-06
+  },
+  "timing": {
+   "froot": 0.008164405822753906,
+   "M_proposal": 0.023090600967407227,
+   "residual": 0.05800986289978027,
+   "total": 0.3879659175872803
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 590,
+  "k": 0,
+  "radius": 2.01310690313058e-05,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.8713233352961606e-08,
+  "k_agree": true,
+  "resid": 6.6838458480500746e-15,
+  "beta": 1.0000006092829969e-08,
+  "row": 0.2962962963100439,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 9.999999804010351e-10,
+   "n0": 1e-09,
+   "mnorm": 2.2963639571964444e-08,
+   "id": 2.0000001002183272e-06
+  },
+  "timing": {
+   "froot": 0.00816798210144043,
+   "M_proposal": 0.03244948387145996,
+   "residual": 0.04650163650512695,
+   "total": 0.3732151985168457
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 740,
+  "k": 4,
+  "radius": 0.11114853987742579,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.770387527767571e-08,
+  "k_agree": true,
+  "resid": 3.2903663821805245e-14,
+  "beta": 1.000000580122944e-08,
+  "row": 0.27671838291021844,
+  "slack": {
+   "ort": 9.999999841573236e-09,
+   "hor": 1.0000000033691975e-08,
+   "froot": 1.0000000422325326e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2837779118733682e-08,
+   "id": 2.0000000340047805e-06
+  },
+  "timing": {
+   "froot": 0.008856773376464844,
+   "M_proposal": 0.023589611053466797,
+   "residual": 0.058826446533203125,
+   "total": 0.3822774887084961
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 721,
+  "k": 4,
+  "radius": 0.11219697907519349,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.615186190742336e-08,
+  "k_agree": true,
+  "resid": 1.3899244575485558e-11,
+  "beta": 1.0000006711106024e-08,
+  "row": 0.29113649465404556,
+  "slack": {
+   "ort": 1.0000000234396308e-08,
+   "hor": 1.0000000052706362e-08,
+   "froot": 9.99999926555956e-10,
+   "n0": 1e-09,
+   "mnorm": 2.264396861082111e-08,
+   "id": 1.99998615780766e-06
+  },
+  "timing": {
+   "froot": 0.008219242095947266,
+   "M_proposal": 0.027132034301757812,
+   "residual": 0.059886932373046875,
+   "total": 0.38152122497558594
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 81,
+  "k": 4,
+  "radius": 0.12498272243863073,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.898663314168291e-08,
+  "k_agree": true,
+  "resid": 3.738203457116617e-11,
+  "beta": 1.0000007239196254e-08,
+  "row": 0.36052416637545787,
+  "slack": {
+   "ort": 9.999999743726817e-09,
+   "hor": 1.0000000034706404e-08,
+   "froot": 1.0000000128696842e-09,
+   "n0": 1e-09,
+   "mnorm": 2.1751456063192457e-08,
+   "id": 1.9999626760240875e-06
+  },
+  "timing": {
+   "froot": 0.008639335632324219,
+   "M_proposal": 0.024044275283813477,
+   "residual": 0.06319642066955566,
+   "total": 0.38901424407958984
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 192,
+  "k": 4,
+  "radius": 0.12499542627835734,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.831598210413872e-08,
+  "k_agree": true,
+  "resid": 2.7484049512891395e-12,
+  "beta": 1.0000006921562475e-08,
+  "row": 0.3571729878271902,
+  "slack": {
+   "ort": 1.0000000176389261e-08,
+   "hor": 1.0000000059904002e-08,
+   "froot": 1.0000000294383233e-09,
+   "n0": 1e-09,
+   "mnorm": 2.166890315990351e-08,
+   "id": 1.9999973274468514e-06
+  },
+  "timing": {
+   "froot": 0.00827932357788086,
+   "M_proposal": 0.02294182777404785,
+   "residual": 0.0641636848449707,
+   "total": 0.3820312023162842
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 33,
+  "k": 4,
+  "radius": 0.12499851141284718,
+  "root": "FAIL",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": false
+  },
+  "mnorm_rel": -3.766601313505763e-08,
+  "k_agree": true,
+  "resid": 6.109037112169683e-12,
+  "beta": 1.0000006964493261e-08,
+  "row": 0.40309083501381104,
+  "slack": {
+   "ort": 1.0000000210153743e-08,
+   "hor": 1.0000000056047029e-08,
+   "froot": 9.999999717338464e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1589221320271628e-08,
+   "id": 1.9999939675246024e-06
+  },
+  "timing": {
+   "froot": 0.008259057998657227,
+   "M_proposal": 0.023909568786621094,
+   "residual": 0.061109304428100586,
+   "total": 0.37571024894714355
+  }
+ },
+ {
+  "file": "coarse3.bin",
+  "index": 611,
+  "k": 4,
+  "radius": 0.12499990699937989,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -5.058188179419059e-08,
+  "k_agree": true,
+  "resid": 8.089279481114763e-12,
+  "beta": 1.0000006118525465e-08,
+  "row": 0.2760446806267211,
+  "slack": {
+   "ort": 9.999999871722419e-09,
+   "hor": 1.0000000017711555e-08,
+   "froot": 9.999999955313923e-10,
+   "n0": 1e-09,
+   "mnorm": 2.3196051077847984e-08,
+   "id": 1.999991965185462e-06
+  },
+  "timing": {
+   "froot": 0.008237600326538086,
+   "M_proposal": 0.024118900299072266,
+   "residual": 0.06228828430175781,
+   "total": 0.3683745861053467
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 599,
+  "k": 0,
+  "radius": 7.8751337427055e-08,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.871323405950314e-08,
+  "k_agree": true,
+  "resid": 6.6838458480500746e-15,
+  "beta": 1.0000006092829969e-08,
+  "row": 0.2962962963100439,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 9.999999902088443e-10,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.296363990503135e-08,
+   "id": 2.000000097839903e-06
+  },
+  "timing": {
+   "froot": 0.008631706237792969,
+   "M_proposal": 0.03577733039855957,
+   "residual": 0.047316551208496094,
+   "total": 0.36910176277160645
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 585,
+  "k": 4,
+  "radius": 0.05418877642176635,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.86603430662562e-08,
+  "k_agree": true,
+  "resid": 3.3765746080179888e-12,
+  "beta": 1.0000006233917324e-08,
+  "row": 0.353427680187659,
+  "slack": {
+   "ort": 9.999999946557282e-09,
+   "hor": 1.0000000030329692e-08,
+   "froot": 9.9999999805557e-10,
+   "n0": 1e-09,
+   "mnorm": 2.1711257293395098e-08,
+   "id": 1.9999966931765243e-06
+  },
+  "timing": {
+   "froot": 0.008172988891601562,
+   "M_proposal": 0.023410558700561523,
+   "residual": 0.05804324150085449,
+   "total": 0.36951422691345215
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 580,
+  "k": 4,
+  "radius": 0.05432175625312475,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.832478851832738e-08,
+  "k_agree": true,
+  "resid": 3.5215376248307735e-12,
+  "beta": 1.0000006655926306e-08,
+  "row": 0.36167753724249396,
+  "slack": {
+   "ort": 1.0000000130916074e-08,
+   "hor": 1.0000000026374568e-08,
+   "froot": 1.0000000442018004e-09,
+   "n0": 1e-09,
+   "mnorm": 2.1669983128960587e-08,
+   "id": 1.9999965385415626e-06
+  },
+  "timing": {
+   "froot": 0.0077533721923828125,
+   "M_proposal": 0.02244400978088379,
+   "residual": 0.057990312576293945,
+   "total": 0.3350088596343994
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 521,
+  "k": 4,
+  "radius": 0.06998727104961905,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.031857539619301e-08,
+  "k_agree": true,
+  "resid": 4.9100233513592054e-14,
+  "beta": 1.0000007404401983e-08,
+  "row": 0.3380662059057927,
+  "slack": {
+   "ort": 1.0000000269219108e-08,
+   "hor": 1.0000000043341333e-08,
+   "froot": 1.000000042273747e-09,
+   "n0": 1e-09,
+   "mnorm": 2.191622426737983e-08,
+   "id": 1.9999999989000404e-06
+  },
+  "timing": {
+   "froot": 0.008231639862060547,
+   "M_proposal": 0.023332834243774414,
+   "residual": 0.05982375144958496,
+   "total": 0.33627891540527344
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 221,
+  "k": 4,
+  "radius": 0.06999717686632859,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.500040246663947e-08,
+  "k_agree": true,
+  "resid": 1.1993856505217222e-11,
+  "beta": 1.0000006926855812e-08,
+  "row": 0.30354115515552926,
+  "slack": {
+   "ort": 9.999999903927057e-09,
+   "hor": 1.0000000024197e-08,
+   "froot": 1.0000000318790605e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2500054870931456e-08,
+   "id": 1.999988058122606e-06
+  },
+  "timing": {
+   "froot": 0.008048772811889648,
+   "M_proposal": 0.023128271102905273,
+   "residual": 0.059061288833618164,
+   "total": 0.35927748680114746
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 295,
+  "k": 4,
+  "radius": 0.06999927706825643,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.962293993075243e-08,
+  "k_agree": true,
+  "resid": 1.913440217277498e-14,
+  "beta": 1.0000007516026622e-08,
+  "row": 0.3417159775252377,
+  "slack": {
+   "ort": 9.999999791403542e-09,
+   "hor": 1.0000000028760642e-08,
+   "froot": 1.000000021424407e-09,
+   "n0": 1e-09,
+   "mnorm": 2.183004971218294e-08,
+   "id": 2.000000039264714e-06
+  },
+  "timing": {
+   "froot": 0.00826406478881836,
+   "M_proposal": 0.0226287841796875,
+   "residual": 0.05739760398864746,
+   "total": 0.34101271629333496
+  }
+ },
+ {
+  "file": "mid.bin",
+  "index": 533,
+  "k": 4,
+  "radius": 0.06999990763131414,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.402281229278584e-08,
+  "k_agree": true,
+  "resid": 2.9111917929242866e-11,
+  "beta": 1.0000006129541729e-08,
+  "row": 0.30251989992692874,
+  "slack": {
+   "ort": 1.0000000031159657e-08,
+   "hor": 1.000000003521239e-08,
+   "froot": 1.0000000139038558e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2377868007079446e-08,
+   "id": 1.9999709450136096e-06
+  },
+  "timing": {
+   "froot": 0.009095191955566406,
+   "M_proposal": 0.02747368812561035,
+   "residual": 0.06577682495117188,
+   "total": 0.35248732566833496
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 22378,
+  "k": 0,
+  "radius": 7.773430893866114e-08,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": false
+  },
+  "mnorm_rel": -4.871323405950314e-08,
+  "k_agree": true,
+  "resid": 6.6838458480500746e-15,
+  "beta": 1.0000006092829969e-08,
+  "row": 0.2962962963100439,
+  "slack": {
+   "ort": 1e-08,
+   "hor": 1e-08,
+   "froot": 9.999999902088443e-10,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.296363990503135e-08,
+   "id": 2.000000097839903e-06
+  },
+  "timing": {
+   "froot": 0.007919073104858398,
+   "M_proposal": 0.0323948860168457,
+   "residual": 0.046405792236328125,
+   "total": 0.36826395988464355
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 21632,
+  "k": 4,
+  "radius": 0.0064903561022749984,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.801900602078303e-08,
+  "k_agree": true,
+  "resid": 2.3318027660525104e-14,
+  "beta": 1.0000005873493499e-08,
+  "row": 0.27478854868440444,
+  "slack": {
+   "ort": 9.999999936236584e-09,
+   "hor": 1.0000000034472368e-08,
+   "froot": 9.999999815805e-10,
+   "n0": 1e-09,
+   "mnorm": 2.2877089683644916e-08,
+   "id": 2.0000000282826113e-06
+  },
+  "timing": {
+   "froot": 0.008116722106933594,
+   "M_proposal": 0.0264739990234375,
+   "residual": 0.06920266151428223,
+   "total": 0.484149694442749
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 21633,
+  "k": 4,
+  "radius": 0.006672392304677479,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -5.053957972401561e-08,
+  "k_agree": true,
+  "resid": 2.7119294160144484e-14,
+  "beta": 1.0000006330750132e-08,
+  "row": 0.26700109659373555,
+  "slack": {
+   "ort": 9.999999939751058e-09,
+   "hor": 1.0000000032465421e-08,
+   "froot": 9.999999883395195e-10,
+   "n0": 9.999999999999999e-10,
+   "mnorm": 2.3190797786068866e-08,
+   "id": 2.0000000274128317e-06
+  },
+  "timing": {
+   "froot": 0.008406877517700195,
+   "M_proposal": 0.0233151912689209,
+   "residual": 0.061215877532958984,
+   "total": 0.37253236770629883
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 14388,
+  "k": 4,
+  "radius": 0.015983825192054327,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.73498808149615e-08,
+  "k_agree": true,
+  "resid": 2.5975463533957275e-14,
+  "beta": 1.0000006747110992e-08,
+  "row": 0.36997302245804115,
+  "slack": {
+   "ort": 1.0000000062640181e-08,
+   "hor": 1.0000000021748711e-08,
+   "froot": 1.0000000002187341e-09,
+   "n0": 1e-09,
+   "mnorm": 2.155059719962103e-08,
+   "id": 2.000000060978438e-06
+  },
+  "timing": {
+   "froot": 0.007793426513671875,
+   "M_proposal": 0.02320075035095215,
+   "residual": 0.08156824111938477,
+   "total": 0.5061180591583252
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 15378,
+  "k": 4,
+  "radius": 0.015994468512896657,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -5.085210727237158e-08,
+  "k_agree": true,
+  "resid": 7.11588128627849e-11,
+  "beta": 1.0000006535872322e-08,
+  "row": 0.2746382167285297,
+  "slack": {
+   "ort": 1.0000000227862706e-08,
+   "hor": 1.0000000030508863e-08,
+   "froot": 1.0000000172917827e-09,
+   "n0": 1e-09,
+   "mnorm": 2.3229585802590148e-08,
+   "id": 1.9999288888958833e-06
+  },
+  "timing": {
+   "froot": 0.015655994415283203,
+   "M_proposal": 0.0924825668334961,
+   "residual": 0.05977487564086914,
+   "total": 0.4674513339996338
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 2435,
+  "k": 4,
+  "radius": 0.015997881170639005,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": true,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.8625251133042245e-08,
+  "k_agree": true,
+  "resid": 2.078136555300095e-14,
+  "beta": 1.0000006972111668e-08,
+  "row": 0.28594990944119614,
+  "slack": {
+   "ort": 9.999999981664409e-09,
+   "hor": 1.0000000010832126e-08,
+   "froot": 1.000000089583425e-09,
+   "n0": 1e-09,
+   "mnorm": 2.2952669088987386e-08,
+   "id": 2.0000000135727928e-06
+  },
+  "timing": {
+   "froot": 0.01310873031616211,
+   "M_proposal": 0.023044109344482422,
+   "residual": 0.06084179878234863,
+   "total": 0.42700719833374023
+  }
+ },
+ {
+  "file": "fine.bin",
+  "index": 6361,
+  "k": 4,
+  "radius": 0.015999905811574015,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.237286171649431e-08,
+  "k_agree": true,
+  "resid": 4.0931373609390986e-14,
+  "beta": 1.0000007080906613e-08,
+  "row": 0.3436264995503539,
+  "slack": {
+   "ort": 1.0000000206112822e-08,
+   "hor": 1.000000003025194e-08,
+   "froot": 9.999999972767825e-10,
+   "n0": 1e-09,
+   "mnorm": 2.217183999790605e-08,
+   "id": 2.00000002402229e-06
+  },
+  "timing": {
+   "froot": 0.00994253158569336,
+   "M_proposal": 0.03804922103881836,
+   "residual": 0.12417268753051758,
+   "total": 0.602391242980957
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 980,
+  "k": 4,
+  "radius": 0.0038419284681657086,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.73209700057931e-08,
+  "k_agree": true,
+  "resid": 2.082755196310866e-14,
+  "beta": 1.0000007558459507e-08,
+  "row": 0.37036445427869025,
+  "slack": {
+   "ort": 1.0000000024321908e-08,
+   "hor": 1.0000000029628867e-08,
+   "froot": 1.0000000659914008e-09,
+   "n0": 9.999999999999999e-10,
+   "mnorm": 2.1547078028625312e-08,
+   "id": 2.000000082697874e-06
+  },
+  "timing": {
+   "froot": 0.008079051971435547,
+   "M_proposal": 0.04509139060974121,
+   "residual": 0.12261009216308594,
+   "total": 0.5373866558074951
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 916,
+  "k": 4,
+  "radius": 0.0038484213293420925,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.988417703275839e-08,
+  "k_agree": true,
+  "resid": 3.45816163679927e-14,
+  "beta": 1.0000006604395992e-08,
+  "row": 0.33913331671637836,
+  "slack": {
+   "ort": 1.0000000074985435e-08,
+   "hor": 1.0000000037967144e-08,
+   "froot": 9.999999658726714e-10,
+   "n0": 1e-09,
+   "mnorm": 2.186238636513077e-08,
+   "id": 2.0000000309610514e-06
+  },
+  "timing": {
+   "froot": 0.00815129280090332,
+   "M_proposal": 0.0237576961517334,
+   "residual": 0.06378912925720215,
+   "total": 0.5768775939941406
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 126,
+  "k": 4,
+  "radius": 0.010953955847586218,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.067076781477354e-08,
+  "k_agree": true,
+  "resid": 4.8267761855664655e-14,
+  "beta": 1.0000006193325098e-08,
+  "row": 0.3309463362466337,
+  "slack": {
+   "ort": 1.0000000128889607e-08,
+   "hor": 1.0000000037964252e-08,
+   "froot": 1.000000024744842e-09,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.195994432074453e-08,
+   "id": 2.000000014048868e-06
+  },
+  "timing": {
+   "froot": 0.008095026016235352,
+   "M_proposal": 0.023857831954956055,
+   "residual": 0.06902456283569336,
+   "total": 0.4095432758331299
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 114,
+  "k": 4,
+  "radius": 0.010989115202786615,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -4.0168988956597384e-08,
+  "k_agree": true,
+  "resid": 2.9612948011145846e-14,
+  "beta": 1.0000006845730138e-08,
+  "row": 0.33612989553600026,
+  "slack": {
+   "ort": 9.999999896203666e-09,
+   "hor": 1.0000000042809161e-08,
+   "froot": 1.000000060877896e-09,
+   "n0": 1e-09,
+   "mnorm": 2.189767806637697e-08,
+   "id": 2.0000000367163074e-06
+  },
+  "timing": {
+   "froot": 0.010464668273925781,
+   "M_proposal": 0.05107283592224121,
+   "residual": 0.12375426292419434,
+   "total": 0.6694633960723877
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 462,
+  "k": 4,
+  "radius": 0.010996632973691476,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.8581059846656284e-08,
+  "k_agree": true,
+  "resid": 5.1845319926048195e-14,
+  "beta": 1.000000768210716e-08,
+  "row": 0.354057869699354,
+  "slack": {
+   "ort": 1.0000000049707649e-08,
+   "hor": 1.0000000054658244e-08,
+   "froot": 9.999999997973112e-10,
+   "n0": 1.0000000000000003e-09,
+   "mnorm": 2.1701493371440986e-08,
+   "id": 2.000000016867922e-06
+  },
+  "timing": {
+   "froot": 0.017546653747558594,
+   "M_proposal": 0.051484107971191406,
+   "residual": 0.12653374671936035,
+   "total": 0.7521829605102539
+  }
+ },
+ {
+  "file": "fb1.bin",
+  "index": 337,
+  "k": 4,
+  "radius": 0.010999811083611326,
+  "root": "pass",
+  "verdicts": {
+   "ort": true,
+   "hor": true,
+   "froot": true,
+   "n0": true,
+   "mnorm": true,
+   "id": true,
+   "C_base": false,
+   "C_tensor": true
+  },
+  "mnorm_rel": -3.795263826286547e-08,
+  "k_agree": true,
+  "resid": 2.879863012967581e-14,
+  "beta": 1.0000005863428216e-08,
+  "row": 0.36216654348644217,
+  "slack": {
+   "ort": 9.99999983596652e-09,
+   "hor": 1.0000000028992416e-08,
+   "froot": 1.0000000087281348e-09,
+   "n0": 1e-09,
+   "mnorm": 2.1624316140816846e-08,
+   "id": 2.000000037478209e-06
+  },
+  "timing": {
+   "froot": 0.015539407730102539,
+   "M_proposal": 0.04872870445251465,
+   "residual": 0.07499265670776367,
+   "total": 0.47249507904052734
+  }
+ }
+]

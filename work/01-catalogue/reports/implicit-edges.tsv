@@ -1,0 +1,86 @@
+from	to	where_used	what_is_used	inference
+2.1	2.2	l326 §2.1	definition of extendibility being shown invariant	named
+2.1	2.4	l375 §2.2	H is the object arranged	implicit-by-content
+2.1	2.10	l603 §2.4	the exact H being covered	implicit-by-content
+2.2	2.4	l610 §2.4	equivalences used to arrange x,y	named
+2.2	2.10	l603 §2.4	cover is up to Lemma 2.2 equivalence	named
+2.2	3.11	l1120 §3.7	completions counted up to equivalence	implicit-by-content
+2.2	4.7	l1383 §4.3	extendibility preserved by the same operations	named
+2.3	4.1	l1188 §4.1	Pi in the Root assertions	implicit-by-content
+2.3	4.9	l1486 §4.4	horizontal decomposition of the phase displacement	implicit-by-content
+2.4	2.6	l449 §2.2	the arranged lists whose midpoints are filtered	named
+2.4	2.10	l603 §2.4	the arrangement whose existence is used in the induction	named
+2.5	2.6	l449 §2.2	gap stability under midpoint shift	named
+2.6	2.10	l613 §2.4	necessary filters survive	named
+2.7	2.10	l613 §2.4	sumok necessary test survives	named
+2.8	2.10	l613 §2.4	shared-interval test survives	named
+2.9	2.10	l616 §2.4	reuse bound certifies the whole bin	named
+2.10	4.16	l1755 §4.7	seed cover is the input of the A stage	implicit-by-content
+2.10	7.1	l2880 §7.4	first link of the finite-execution chain	named
+3.1	3.2	l731 §3.2	the frames GB,GC,KB,KC exist and are fixed	named
+3.1	3.5	l866 §3.4	existence of the fixed comparison block	named
+3.1	3.6	l919 §3.4	same frames	named
+3.2	3.5	l959 §3.5	(3.18) uses Y and its polar factor	named
+3.2	3.11	l1128 §3.7	every feasible completion gives a V in U(2)	named
+3.3	3.11	l1128 §3.7	the cell cover of U(2)	named
+3.4	3.5	l959 §3.5	p + sqrt6 h in (3.19); the unitary Taylor bound is quoted, not named	implicit-stated
+3.4	3.7	l972 §3.5	sqrt6*sqrt42/2 h^2 in the third space	implicit-stated
+3.5	3.7	l972 §3.5	the three orthogonal pieces and their bounds	named
+3.6	3.7	l995 §3.5	the L+A0 operator bound on the two linear pieces	named
+3.7	4.9	l1486 §4.4	||Z-J(s,theta)||<=Er enters (4.24)	implicit-stated
+3.8	3.10	l1103 §3.6	first exclusion test	named
+3.9	3.10	l1103 §3.6	second exclusion test	named
+3.10	3.11	l1120 §3.7	every final cell is excluded or covered	named
+3.11	4.16	l1755 §4.7	all completions of the seed are covered	named
+4.1	4.5	l1325 §4.2	the Root assertions being sufficient	named
+4.1	4.13	l1682 §4.6	nP in the update (4.38)	implicit-by-content
+4.1	5.1	l1800 §5.1	the chains in (5.4) use o_P	named
+4.1	5.2	l1825 §5.1	(4.5) and (4.7) applied at two centres	named
+4.1	6.2	l2240 §6.2	(6.1)-(6.2) are the Root interface at Stage C	implicit-by-content
+4.3	4.5	l1329 §4.2	F(P+x) expansion in the Taylor identity	named
+4.4	4.5	l1334 §4.2	a certified C	named
+4.4	4.6	l1365 §4.2	both C candidates	named
+4.5	4.6	l1380 §4.2	'Proposition 4.5 therefore applies'	named
+4.6	4.16	l1755 §4.7	every retained cell carries a certified Root	implicit-by-content
+4.7	4.15	l1716 §4.7	transport of the Root assertions under Phi	named
+4.7	4.16	l1765 §4.7	coverage up to extendibility-preserving equivalence	named
+4.7	5.6	l2060 §5.4	the pulled-back Root keeps its constants	named
+4.8	4.9	l1486 §4.4	arc, weighted, qd used in (4.22)-(4.24)	named
+4.8	4.10	l1549 §4.5	weighted support S2 (4.28)	named
+4.9	4.10	l1549 §4.5	u = X + eD + esin in (4.26)	named
+4.10	3.11	l1120 §3.7	the covered-cell branch of the induction	implicit-by-content
+4.10	4.13	l1682 §4.6	s0, t0 fed to the bootstrap	named
+4.11	4.12	l1625 §4.5	the ellipsoid containment whose norm is then bounded	named
+4.12	4.13	l1682 §4.6	t0 from (4.35)-(4.36)	implicit-by-content
+4.13	4.16	l1755 §4.7	local::test's coverage is the bootstrap	implicit-by-content
+4.14	4.15	l1716 §4.7	solution set of a Record	named
+4.14	5.7	l2077 §5.5	S(P,R) sets	named
+4.14	6.1	l2200 §6.1	the Record Stage C consumes	implicit-by-content
+4.15	4.16	l1755 §4.7	merges preserve solution sets	named
+4.16	7.1	l2881 §7.4	second link of the chain	named
+5.1	5.2	l1825 §5.1	(5.4) applied to h'	named
+5.2	5.3	l1891 §5.2	the iteration bounds	named
+5.3	5.4	l1931 §5.2	(5.17) at a stored trial	named
+5.3	5.5	l1997 §5.3	D-hat(tB)<=r	named
+5.5	5.7	l2096 §5.5	box coverage in the parent induction	named
+5.6	5.7	l2077 §5.5	assignment/insertion covers the box	named
+5.7	5.8	l2132 §5.6	bad union empty	named
+5.7	7.1	l2884 §7.4	third link	named
+5.8	7.1	l2884 §7.4	batch spheres at radius tau	named
+6.1	6.3	l2317 §6.2	X_M, L_M, I_M in (6.10)	named
+6.1	6.4	l2424 §6.3	X_M in the assigned radius	named
+6.2	6.3	l2394 §6.2	the direct tests (6.7) precede the weighted ones	named
+6.2	6.9	l2663 §6.6	a retained bin path	implicit-by-content
+6.3	6.7	l2555 §6.5	E_t^ball is (6.10) at X=s_t	named
+6.3	6.9	l2663 §6.6	bin tests are necessary	implicit-by-content
+6.4	6.5	l2459 §6.3	the balls on which distinct labels are proved	named
+6.4	6.9	l2663 §6.6	clustering covers all retained bins	named
+6.5	6.9	l2663 §6.6	twelve distinct labels	named
+6.6	6.7	l2555 §6.5	E_O,E_U,q_O,q_U,D_O,D_U	named
+6.7	6.9	l2663 §6.6	(6.23) retains the required edge	named
+6.8	6.9	l2663 §6.6	a completed negative search	named
+6.9	7.1	l2888 §7.4	fourth and fifth links	named
+A.16	4.6	l1352 §4.2	the six inequalities patch certifies	implicit-by-content
+A.1	A.16	l3028 §A.1	the accumulation model behind every budget	implicit-by-content
+A.2	A.16	l3121 §A.2	eps_exp in every exponential error	implicit-by-content
+A.3	5.2	l1825 §5.1	(5.8) sigma via spectralUpper	implicit-by-content

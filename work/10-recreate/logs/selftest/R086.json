@@ -1,0 +1,73 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 86,
+ "command": "C.batch8",
+ "stage": "C.initial",
+ "run_order": 86,
+ "argv": [
+  "./build/crun",
+  "12",
+  "4",
+  "1",
+  ".042",
+  "1",
+  "1",
+  "5000000",
+  "0",
+  "1",
+  "batches/bad8.bin",
+  "batches/f8.bin"
+ ],
+ "inputs": [
+  "batches/f8.bin"
+ ],
+ "outputs": [
+  "batches/bad8.bin"
+ ],
+ "declared_outputs": [
+  "batches/bad8.bin"
+ ],
+ "input_sources": {
+  "batches/f8.bin": "replayed"
+ },
+ "rc_expected": 1,
+ "rc_got": 1,
+ "artefacts": [
+  {
+   "path": "batches/bad8.bin",
+   "declared": true,
+   "bytes_expected": 6040,
+   "sha256_expected": "8f6f03217cac3db787710ad06cebd55fdae400e5c3171547bc87f331da087c3c",
+   "bytes_got": 6040,
+   "sha256_got": "8f6f03217cac3db787710ad06cebd55fdae400e5c3171547bc87f331da087c3c",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 1 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "1 files, 6040 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 1, got 1"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.batch8.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "b6e6abd69a9ba0b69d29cc7b74e3104c5c08685a8d3490c2d2c53dea4e10db50",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

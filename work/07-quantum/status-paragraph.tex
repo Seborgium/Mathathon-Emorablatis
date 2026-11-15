@@ -1,0 +1,54 @@
+%=====================================================================
+% status-paragraph.tex  --  T7 / swarm member m1
+%
+% Two paste-ready statements of the conditionality of Theorem 1.1.
+% The text below each rule is live LaTeX: copy it verbatim.
+%
+% HOW TO USE
+%  * Block (1) replaces the status sentence of the abstract.
+%  * Block (2) closes the introduction (after \S1.1, before \S1.2).
+%  * Section numbers are literal, as in the 24 Sep 2026 preprint; if the
+%    rebuilt document renumbers, replace them by \ref{} (labels:
+%    sec:programs = 7.1, sec:cover = 2, sec:exclude = 6, sec:run = 7.5,
+%    sec:control = 7.2, app:arith = Appendix A).
+%  * Neither block uses \ref, \cite or any macro beyond \S, so both drop
+%    into a plain LaTeX file with no preamble support.
+%  * Do not lengthen either one. Each is already at the limit of what can
+%    be said without hedging into vagueness; anything further belongs in
+%    part (b) of the framing section, not here.
+%=====================================================================
+
+%---------------------------------------------------------------------
+% (1) ABSTRACT -- paste the four lines below
+%---------------------------------------------------------------------
+The upper bound is computer-assisted, and it is conditional. It is an
+implication whose antecedent is a statement about a finite computation: if the
+seven programs of \S7.1 implement the specification of \S\S2--6, and if the
+execution recorded in \S7.5 ran to completion with the terminal conditions of
+\S7.2 under the binary64 arithmetic and compiler contract of Appendix~A, then
+no four pairwise mutually unbiased bases exist in $\mathbb{C}^6$ --- for
+arbitrary complex Hadamard matrices, not only for previously studied families.
+The lower bound of three is elementary and unconditional. We therefore call the
+result a proof under a stated arithmetic and execution contract: not a formal
+verification, and not yet an argument that can be checked by reading alone.
+
+%---------------------------------------------------------------------
+% (2) INTRODUCTION -- paste the paragraph below
+%---------------------------------------------------------------------
+Two features of Theorem~1.1 belong in the same breath as the theorem. The
+lower bound $N(6)\ge 3$ of Lemma~1.2 is elementary and unconditional. The upper
+bound is conditional on three items of different kinds: an arithmetic model
+(IEEE binary64 with the rounding, contraction and exception behaviour fixed in
+Appendix~A, together with the stated compiler and platform); a finite execution
+(the run of \S7.5, whose terminal conditions in \S7.2 --- every record accounted
+for, no unresolved record --- must hold); and an implementation claim (that the
+seven programs of \S7.1 do what \S\S2--6 say they do). The mathematics --- an
+exhaustive cover of all second bases, certified exclusions inside that cover,
+and a finite case analysis --- is proved, not computed; the computation supplies
+the fact that the finite antecedent of Theorem~7.1 was met. This is therefore
+not a formal verification, and it does not carry the status that a referee gives
+a written proof which can be checked by reading. What it does carry is a plainly
+falsifiable claim: an explicit quartet of pairwise mutually unbiased bases in
+$\mathbb{C}^6$ would refute it outright. The programs, the numerical records and
+a record-consistency checker accompany this paper; they should be checked rather
+than trusted, and they are what makes the claim auditable at all.

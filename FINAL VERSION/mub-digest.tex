@@ -1,0 +1,1045 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=.82in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,longtable,array}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage[colorlinks=true,linkcolor=blue!45!black,citecolor=blue!45!black,urlcolor=blue!45!black]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\newcommand{\e}{\mathrm{e}}
+\DeclareMathOperator{\tr}{tr}
+\setlength{\parskip}{2pt}
+\setlength{\tabcolsep}{5pt}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\file}[1]{\texttt{\small #1}}
+\newcommand{\status}[1]{\textsf{\small #1}}
+% ---------------------------------------------------------------- title block
+% The submission rules ask that names, affiliation and the repository link
+% appear in the title block and nowhere else in the body.
+\newcommand{\repoblurb}{Submission by ZIP archive; the working tree is described in \S\ref{sec:inv}.}
+\title{\bfseries The dimension-six programme, digested\\[4pt]
+\large A record of what was revised, verified, recreated and formalised\\
+\large around the preprint claiming $N(6)=3$}
+\author{Team \textbf{Emorablatis}\\[4pt]
+Jovian Soejono\quad Yian Xu\quad Raymond Feng\quad Amirlan Amanzholov\\[2pt]
+Massachusetts Institute of Technology --- undergraduate programme\\[2pt]
+\small\repoblurb}
+\date{15 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+\noindent
+This is the record of a four-person team's work on one claim: that $\C^6$ admits no four mutually
+unbiased orthonormal bases, so that $N(6)=3$, as argued in a $76$-page preprint of 24 September 2026
+\cite{ope26}. We did not prove that claim, and we do not claim to have verified it end to end. What we
+have is narrower and, we think, more useful: fifteen corrections to the source's statements and to
+earlier readings of its evidence, six mathematical notes, eleven computations, a byte-identical
+reproduction of its covering stage, an independent check layer, a scoped Lean formalisation, and a set
+of certificate objects whose checks are recorded. We separate these by what actually backs them --- a
+written proof, a named program with its artefact, an outward re-check of a necessary condition at a
+stated population, or nothing but an assumption --- because the distance between those categories is
+the substance of the work. Section~\ref{sec:claims} states every main claim with its support and the
+place to check it; Section~\ref{sec:ai} says which AI tools produced what, and how each output was
+checked; the bibliography credits every source we used. The load-bearing revision is that the source's
+Theorem~7.1 silently assumes a driver that its formal statement omits; the two interface defects an
+independent decoder caught are a composition block addressing $149$ of $163$ wrong parents and a graph
+dump valid under eight permutations rather than one. The boundary is stated without softening: one
+Stage-B parent closed of $163$, four Stage-C records certified of $23{,}506$, $515{,}243$ cells closed
+by counter rather than by certificate, $23$ declared Lean holes, and no human gate. The value on offer
+is not a new theorem but a redistribution of trust: decisions that once required believing a single
+binary64 execution are now small arithmetic facts with artefacts, and the residue is stated as an
+obligation rather than a result.
+\end{abstract}
+
+
+\begin{tcolorbox}[colback=blue!3,colframe=blue!40!black,boxrule=.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt]
+\textbf{What this document is.} The official record of our work on the research programme around the
+OpenAI preprint of 24 September 2026 \cite{ope26} claiming $N(6)=3$, the dimension-six case of
+Zauner's conjecture \cite{zauner99}. The programme produced explanatory notes, an independent
+verification layer, a certificate programme, a code-recreation effort, a Lean formalisation, several
+mathematical extension notes, and a large body of run data. Where the text says \emph{the folder} it
+means the supplementary archive submitted with this report; \S\ref{sec:inv} lists it file by file. The report
+records \emph{status} as well as content: a number is only as good as the artefact that holds it, and
+an artefact is only as good as the check that was run on it.
+
+\textbf{What it is not.} It is not a peer review and not a human gate: no result recorded here has been
+refereed, and the source preprint's theorem remains conditional on an execution and on seven programs,
+with no complete instantiation of that condition in our archive. We say so again in \S\ref{sec:bound}.
+\end{tcolorbox}
+\section{The main claims, and what supports each one}\label{sec:claims}
+
+Every claim we want judged is in Table~\ref{tab:claims}, with the kind of support behind it and the
+section where the record of that support sits. A claim that is not in this table is not claimed. The
+status words are defined after the table; they are used consistently throughout the report, and a
+reader who disagrees with a classification can go straight to the evidence column and re-run it.
+
+{\small
+\begin{longtable}{@{}L{0.045\linewidth}L{0.315\linewidth}L{0.105\linewidth}L{0.455\linewidth}@{}}
+\caption{Every main claim, its support, and where to check it.}\label{tab:claims}\\
+\toprule
+\# & claim & status & evidence, and how it was checked \\
+\midrule
+\endfirsthead
+\toprule
+\# & claim & status & evidence, and how it was checked \\
+\midrule
+\endhead
+C1 & The source's Theorem~7.1 needs a driver hypothesis its formal statement omits. &
+\status{proved} &
+The Lean statement \file{theorem\_7\_1} takes seven \texttt{Cov} facts and \texttt{hCneg} and no
+\texttt{TerminalConditions}; the implication as printed is not what is formalised. Machine-checked
+statement, read against the prose of \S7.1 of the source \cite{ope26}. \S\ref{sec:rev}, \S\ref{sec:formal}. \\
+C2 & The composition block addressed $149$ of $163$ parents wrongly, and is now repaired. &
+\status{measured} &
+Its \file{fine\_index} held \texttt{256*batch+batch\_index}; only $14$ of $163$ parents matched the
+independent capped set. Rebuilt by a (batch, ordinal) join against the manifest: $163/163$,
+$1{,}127$ children, $11{,}838$ incidences preserved; old and new sha256 recorded. \S\ref{sec:rev}, \S\ref{sec:cert}. \\
+C3 & The graph dump denotes the record's $O/U$ relation, but only up to eight ball permutations. &
+\status{measured} &
+Decoded big-endian and compared with the record: eight valid permutations (three interchangeable
+pairs) preserve $O$ and $U$ on all $44{,}732$ ordered pairs, $357{,}856$ checks; the earlier claim of
+a unique labelling was a bit-order defect. \S\ref{sec:rev}, \S\ref{sec:cert}. \\
+C4 & The covering stage reproduces byte for byte. &
+\status{measured} &
+\file{verify\_R2.sh -{}-src src} exits $0$: \file{centers.txt} $7{,}339{,}546$~B, sha256
+\texttt{c48bc9a2\ldots a5789}, $400.8$~s against the published $401.8$~s, all five counters identical;
+two further builds (upstream binary, portable \texttt{-O2}) reproduce it as well. \S\ref{sec:seedcover}. \\
+C5 & One Stage-B parent is closed, with a measured margin. &
+\status{certified} &
+Parent \file{bad10.bin\#0}: $14{,}641$ boxes $=11{,}480$ outside $+3{,}161$ covered $+0$ open;
+chosen-witness minimum closure margin $\ell^2-t_B^2=1.0513979\ldots\times10^{-9}$; the transported
+relation holds on all $902$ edges. Necessary condition re-checked outward, independently of the
+producer's path. \S\ref{sec:stageb}. \\
+C6 & The $163$ capped Stage-C records are unresolved, not negative, and the cap is the pipeline's one
+real inefficiency. &
+\status{measured} &
+All $163$ terminate negative at $5\cdot10^7$ steps (median $9.9\cdot10^6$, max $39{,}038{,}705$,
+zero candidates), so their exclusions come from the fallback pass. Raising the cap to $10^8$ costs
+$\approx48$~s and deletes the whole fallback round. \S\ref{sec:stagec}. \\
+C7 & Stage A has one real directional exclusion and twenty exact directional certificates, each with
+$360$ controls. &
+\status{certified} &
+Exact rational arithmetic over the directional form; $360$ controls all pass; the tree is a subdivision
+rather than a schematic. Retained tree and the analytic implication remain open. \S\ref{sec:stagea}. \\
+C8 & The Lean development proves $\mu(6)\le5$ and nothing stronger. &
+\status{proved} &
+$19$ Lean~4 modules, $23$ declared holes over $7$ of them; the assembly is conditional on seven \texttt{Cov}
+facts and \texttt{hCneg}. Checked with \file{lean} against Mathlib \cite{lean4}. The main result is
+\emph{not} formalised. \S\ref{sec:formal}. \\
+C9 & The approximate problem has $\varepsilon_6^*\le0.030224240773$, and the product class has optimum
+exactly $1/18$. &
+\status{certified} &
+Exact rational arithmetic throughout, with an independent checker ($677$ checks, $2.0$~s) and
+$25/28$ seeded corruptions rejected by both checkers. \S\ref{sec:approx}. \\
+C10 & In the order-three stratum unbiasedness becomes an equality case, and no quartet exists there
+numerically. &
+\status{proved} &
+Lemma~A, Theorem~B and Corollary~C are written proofs; the gap $\Delta=0.0422687212\ldots$ over $500$
+restarts is \status{measured}. Symmetry propagation is the single open statement. \S\ref{sec:order3}. \\
+C11 & The largest partial fourth basis has $k_{\max}=0$ for the triples decided. &
+\status{measured} &
+$48$ rays, $16$ sextuples, none unbiased to all three bases; in $\C^4$ the analogous count is $4$, so
+$N(6)=3$ would not imply $k=0$. Partly rests on arXiv:2611.06917 \cite{wuttig26}, which we did not
+verify in-session. \S\ref{sec:fourth}. \\
+C12 & Dyadic constants make the arithmetic exact at no cost. &
+\status{measured} &
+$N=128$, $w=2^{-7}$, $R=1/32$: the cover test becomes the integer inequality $s+a+9/4<16$; centres
+$249{,}878\to229{,}979$, covering $402\to517$~s, end to end $\approx-46$~s ($\approx-1\%$). \S\ref{sec:const}. \\
+C13 & The monodromy route to an elegant proof is dead. &
+\status{proved} &
+If $\Sigma\ne X$ and $\Sigma$ has empty interior, no proper closed $\Delta\subsetneq X$ works, since
+$X\setminus\Sigma$ is open with $n\equiv0$. Stated as a refutation, not a conjecture. \S\ref{sec:elegant}. \\
+C14 & That this work proves $N(6)=3$, certifies the whole run, or has been approved by a person. &
+\status{withdrawn} &
+Not claimed, and withdrawn wherever it was suggested. The source's theorem stays conditional on one
+execution and seven programs; \S\ref{sec:bound} lists the boundary clause by clause. \\
+\bottomrule
+\end{longtable}
+}
+
+\subsection*{Status vocabulary used throughout}
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.13\linewidth}p{0.79\linewidth}@{}}
+\toprule
+\status{proved} & a complete mathematical argument is written down in the folder; no computation is trusted \\
+\status{measured} & a named program produced a number, and the artefact holding it is in the folder \\
+\status{certified} & a \emph{${}$necessary condition} was re-checked outward (exact rational or directed
+MPFR) at a stated population, independently of the producer's path \\
+\status{conditional} & true if an unproved analytic lemma, an unverified program, or a specific execution behaves as stated \\
+\status{superseded} & retained for the record, but a later file in this folder overrides it \\
+\status{withdrawn} & asserted once and retracted; must not be cited \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{AI tools, and how their output was checked}\label{sec:ai}
+
+The whole programme was run inside AI systems, at our direction; saying exactly which, and what was
+done to their output, is part of the record.
+
+\begin{center}
+\small
+\begin{tabular}{@{}L{0.22\linewidth}L{0.36\linewidth}L{0.38\linewidth}@{}}
+\toprule
+tool, model & what it did & what we did to check it \\
+\midrule
+Open Math OS \cite{omos}, models \texttt{deepseek-v4.1-flash} and
+\texttt{kimi-k3.1-pro} &
+Most of the mathematical computation: the independent checkers behind \S\ref{sec:comp}--\S\ref{sec:cert}, the certificate audits,
+the code recreation and its comparison with the published binary, the Lean development, and the notes
+this report digests. Several agents worked the same question in parallel and reported to a
+coordinating agent, which accepted or rejected each report against the files it cited. &
+Every number quoted here is either a written argument we read, or an artefact in the archive with the
+command that regenerates it (\S\ref{sec:repro}). Where two agents disagreed the disagreement is recorded rather
+than resolved silently; rejected reports keep their reasons (\S\ref{sec:rev}); the headline
+counts that did not survive their own tables are reported as failures (\S\ref{sec:comp}, \S\ref{sec:stagec}). \\
+ChatGPT (Astra) \cite{astra} & Brainstorming: framing of the question, exposition, objections to draft
+arguments. & Used for questions and critique only. No number, lemma or citation in this report comes
+from it unaccompanied by an independent check. \\
+Claude Opus \cite{opus} & Brainstorming: alternative routes, presentation, reading of the mathematical
+literature. & Same standard. A route it suggested that turned out to be closed is recorded as closed
+(\S\ref{sec:elegant}) rather than dropped. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Three rules governed the use of these tools, and a reader may hold us to them. First, \emph{no AI
+output counts as a proof}: an argument produced by a model is a draft until it is either written down
+as a proof a reader can check line by line, or backed by an artefact that can be re-run. Second,
+\emph{no number enters this report without provenance}: every table entry of the form ``$x$'' has a
+named program and a stored output behind it, and where we could not establish provenance we say so
+(one example is the record's $4$ October execution, \S\ref{sec:bound}). Third, \emph{no gate was ever approved by a
+model}: the decision log is a log of proposals, and \S\ref{sec:bound} records that no human gate exists.
+
+The reverse direction matters as much. Fifteen revisions of the source's statements and of our own earlier
+readings are tabulated in \S\ref{sec:rev}, four of them withdrawals; two of the source's own
+printed statements fail as printed (Lemma~1.2's phases, Lemma~2.2's transpose clause). A tool that is
+allowed to make mistakes is useful only if the mistakes are logged, and the log is the part of the
+archive we would defend first.
+
+\section{The folder in one page}\label{sec:folder}
+
+The material divides into six layers, which are best read in this order.
+
+
+
+Two conventions matter for reading anything in the folder. First, \emph{radii are measured in cycles}
+on the torus $\R^{36}/\Z^{36}$ unless radians are named; the seed radius $0.032$ cycles is $0.201$ rad,
+while the Stage-B refinement target $r\le0.03$ is a Euclidean tangent-ball radius. Conflating the two
+is the most common error in the notes. Second, \emph{unresolved is never negative}: a cap hit, an
+undecided interval, a missing witness or an incomplete cover is an obligation, not an exclusion. The
+whole certificate architecture is built to keep that distinction visible.
+
+{\small
+\begin{longtable}{@{}L{0.19\linewidth}L{0.46\linewidth}L{0.27\linewidth}@{}}
+\caption{The six layers of the folder, in reading order.}\label{tab:layers}\\
+\toprule
+layer & principal files & what it gives a reader \\
+\midrule
+\endfirsthead
+\toprule
+layer & principal files & what it gives a reader \\
+\midrule
+\endhead
+Source and its reading & \file{results/\allowbreak{}proof-\allowbreak{}summary.md}, \file{results/\allowbreak{}proof-\allowbreak{}claims.md},
+\file{results/\allowbreak{}improvements.md} & the 76-page preprint restated claim by claim, with the evidence
+kind behind each (proof, program, execution, datum) \\
+Explanatory notes & \file{mub-\allowbreak{}outline.tex} (13 pp.), \file{mub-\allowbreak{}step1..5.tex}, \file{mub-\allowbreak{}terms.tex},
+\file{mub-\allowbreak{}step*-\allowbreak{}example.tex}, \file{mub-\allowbreak{}cuts}, \file{mub-\allowbreak{}radius}, \file{mub-\allowbreak{}cover-\allowbreak{}to-\allowbreak{}bases},
+\file{mub-\allowbreak{}constants} & the pipeline explained at a fixed level of detail, with worked examples and
+one constant experiment \\
+Independent verification & \file{mub6-\allowbreak{}verification.tex} (10 pp.), \file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}MANIFEST.md},
+\file{results/\allowbreak{}matrix.md}, \file{results/\allowbreak{}evidence-\allowbreak{}audit-\allowbreak{}review.md} & which parts of the evidence survive
+an independent re-derivation, and exactly where the boundary lies \\
+Certificate programme & \file{work/\allowbreak{}02-\allowbreak{}checker/\allowbreak{}}, \file{certdata/\allowbreak{}runs/\allowbreak{}}, \file{results/\allowbreak{}certificate-\allowbreak{}plan.md} &
+record formats, checkers, and the run objects (seed cover, composition block, Stage-B transport) \\
+Code recreation & \file{mub6-\allowbreak{}recreate/\allowbreak{}} (74 files), \file{work/\allowbreak{}10-\allowbreak{}recreate/\allowbreak{}} & an independent build
+that reproduces the published covering step byte for byte, and an audit of the published apparatus \\
+Formalisation and extensions & \file{work/\allowbreak{}04-\allowbreak{}lean/\allowbreak{}}, \file{work/\allowbreak{}08-\allowbreak{}paper/\allowbreak{}mub6-\allowbreak{}formal.tex} (11 pp.);
+\file{results/\allowbreak{}order3-\allowbreak{}stratum.md}, \file{order3-\allowbreak{}twist.md}, \file{approx-\allowbreak{}mub6.md},
+\file{exclusion/\allowbreak{}report.md}, \file{symmetric-\allowbreak{}obstruction-\allowbreak{}audit.md}, \file{elegant-\allowbreak{}proof-\allowbreak{}routes.md} &
+a Lean-checked conditional assembly, and six pieces of new mathematics around the problem \\
+\bottomrule
+\end{longtable}
+}
+
+\paragraph{Where the source itself is.} The preprint is in the folder: five byte-identical copies of the
+$76$-page file ($817{,}737$~B) under \file{attachments/*/}. One is enough; the others are the same bytes.
+Do not confuse it with \file{attachments/this-latex-pdf-contains-7ysh/unbiased-bases-start.pdf}: same title,
+$15$~MB, produced by ``Microsoft: Print To PDF'', and only $15$ pages of the $76$. A reader who quotes a
+page number from that file will be quoting the wrong page.
+
+\section{The source argument, compressed}\label{sec:source}
+
+One unitary fixes the first basis. The second becomes the columns of $H/\sqrt6$ with $H$ a complex
+Hadamard matrix; two further bases are then columns of $H_3/\sqrt6,H_4/\sqrt6$ with every cross ratio
+$H_i^*H_j/\sqrt6$ Hadamard. The source proves the upper bound by a five-layer cover.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.06\linewidth}p{0.17\linewidth}p{0.47\linewidth}p{0.20\linewidth}@{}}
+\toprule
+\S & stage & mechanism & finite object \\
+\midrule
+2 & seed cover & dephase, take the minimum circular gap, sort; nine seed phases; $N=112$ bins;
+midpoint and vanishing-sum filters; dual (support) reuse bound & $151{,}744{,}086$ bin pairs
+$\to249{,}878$ centres, radius $0.032$ (Prop.~2.10) \\
+3 & Stage A & $2+4$ block split; rank-2 kernels; $Y=K_C^*D'K_B$ has $6I-Y^*Y\succeq0$ and trace
+defect $q<0.32$, so a polar factor $V\in U(2)$ exists; cells of $U(2)$; norm and dual tests &
+subdivision tree per seed, cells at $N_u=16,\dots,512$ (Prop.~3.11) \\
+4 & Root and atlas & Root certificate: centre, tangent frame ($k\le10$), six constants; difference
+bound between centres; direct and ellipsoidal displacement bounds; bootstrap & atlas balls of
+radius $\approx0.125$ (Prop.~4.16) \\
+5 & Stage B & refine a parent ball into a union of children in tangent coordinates; relation between
+two Root certificates; monotone upper-bound iteration; blocker induction & three passes
+$(\tau,w)=(0.07,0.013)$, $(0.016,0.005)$, $(0.011,0.0038)$ (Prop.~5.7, Cor.~5.8) \\
+6 & Stage C & vectors unbiased to the first basis are $e(\beta)/\sqrt6$; bins refined
+$12\to24\to48\to96$ and clustered into vector balls; graphs $O$ (orthogonality not excluded) and $U$
+(unbiasedness not excluded) & two disjoint $O$-six-cliques with all $36$ cross edges in $U$ must
+not exist (Prop.~6.9) \\
+7 & driver & terminal conditions, record provenance, batch checks & Theorem~7.1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The mathematical content is the necessity lemmas plus their numerical remainders. \emph{Sufficiency}
+--- that the search actually closes --- is not proved; it is observed in one execution, and that is
+the gap every later layer of this folder addresses. Appendix~A of the source is about twenty pages of
+one-sided binary64 \cite{ieee754} error budgets, tied to a specific evaluation order and build.
+
+\section{Proof revisions}\label{sec:rev}
+
+This is the part of the folder with the most durable value: places where the source's statements,
+or an earlier reading of them inside this programme, had to be corrected. Table~\ref{tab:rev} lists
+them in order of how much they matter to a reader of the theorem. ``Effect'' distinguishes a
+\emph{statement} defect (the printed claim is not what is proved), an \emph{evidence-interface}
+defect (the certificate does not denote what it says), and an \emph{exposition} defect (true but
+misleading).
+
+\begin{longtable}{@{}L{0.035\linewidth}L{0.235\linewidth}L{0.315\linewidth}L{0.20\linewidth}L{0.135\linewidth}@{}}
+\caption{Revision ledger. Each row names the file where the finding is recorded.}\label{tab:rev}\\
+\toprule
+\# & source statement & what was found & evidence & effect \\
+\midrule
+\endfirsthead
+\toprule
+\# & source statement & what was found & evidence & effect \\
+\midrule
+\endhead
+R1 & Thm.~7.1: terminal conditions of the invocation script $\Rightarrow$ no four MUBs &
+The Lean statement \file{theorem\_7\_1} takes seven \texttt{Cov} facts and \texttt{hCneg} and
+\emph{no} \texttt{TerminalConditions}. The theorem is a factorisation into (i) an assembly over covers
+and (ii) a driver whose bookkeeping realises them; only (i) is formal. &
+\file{work/\allowbreak{}00-\allowbreak{}lead/\allowbreak{}gates.md} (G4 verdict, repair 1); \file{mub6-\allowbreak{}verification.tex} \S7.1 &
+statement \\
+R2 & Lemma~1.2: $B_2=DF$ with $D=\mathrm{diag}(1,\omega,\omega^2)$ &
+As printed, $(F^*DF)_{jk}$ has modulus $0$ or $1$ --- it is a permutation matrix --- so $DF$ is not
+unbiased to $F$; the displayed sum $\frac13\sum_x\omega^{x^2+(k-j)x}$ is the formula for
+$D=\mathrm{diag}(1,\omega,\omega)$, with which every entry has modulus $1/\sqrt3$. (Remark~2.1 of
+\file{mub-outline.tex} states the conclusion correctly but quotes the modulus as $1/\sqrt3$ instead of
+$1$; recomputed here.) With
+that $D$ every entry has squared modulus $1/3$. Either a typo or a different normalisation of $F$. &
+\file{mub-\allowbreak{}outline.tex}, Remark~2.1 (\file{rem:typo}) &
+statement (lower bound is classical; no effect on the theorem) \\
+R3 & Lemma~2.2: six invariance clauses incl.\ transpose &
+The transpose clause is invalid as printed; repairable by monomial transport. Recorded as a Lean hole,
+not as a false lemma. & \file{gates.md} G4 table (\file{Hadamard.lean}, 7 holes) & exposition \\
+R4 & Lemma~2.5: gap stability for an arbitrary matching &
+Proved for the matching used, open for an arbitrary one; the Lean development has the proved version
+in \file{Gap.lean} and a residual \texttt{sorry} in \file{Seed.lean} (\texttt{gap\_stability}). &
+\file{gates.md} G4 repair 2 & exposition \\
+R5 & Root frame dimension $k\le10$ &
+Unreachable under the specified $50{,}000{,}000$-box cap, which allows only $k\le5,5,7$. A $k=6$
+record would fail its parent while the run still reports zero bad parents. &
+\file{results/\allowbreak{}code-\allowbreak{}audit.md} F3 & statement (certificate schema) \\
+R6 & Stage-C clustering cutoff $(\cdot-1.11w)^2$ &
+The base is negative for $M<26$, so the merge radius is non-monotone
+($.0505,.0042,.0189,.0304$ at $M=12,24,48,96$) and the layer is inert for $M\le50$. Not a soundness
+issue: merging is a heuristic that only costs time. & \file{code-\allowbreak{}audit.md} F2 & exposition \\
+R7 & invalid sentinel $\ell=100$ &
+$100$ lies inside the legitimate range: A.8 certifies the spectral bound $\le100.1$, so a failed
+return is indistinguishable from a valid value. & \file{code-\allowbreak{}audit.md} F4 & evidence interface \\
+R8 & $N=112$ ``chosen for the slack $3/N$'' &
+The printed reason does not determine $N$. Coverage alone gives $N\ge47$; the \texttt{int8\_t}
+representation gives $N\le128$; the $|k|=2$ reuse shell opens at $N\ge110$; and \texttt{testBucket}
+is hardwired to $112$. So $112$ is defensible, but by those four constraints, not by the stated one. &
+\file{code-\allowbreak{}audit.md} F11 & exposition \\
+R9 & (2.8) first inequality and A.3 &
+The first inequality of (2.8) cannot reject on well-formed tuples, and the live filter has zero
+analytic slack; A.3's $RN^2$ hard-codes $112$, so changing $N$ would silently certify $2R$. &
+\file{code-\allowbreak{}audit.md} F12 & evidence interface \\
+R10 & Table~1, ``pairs'' &
+\file{checked} is a pair count (\file{covout.cpp:124}): $151{,}744{,}086=45{,}648{,}766$ cheap
+$+105{,}845{,}442$ LP $+249{,}878$ accepted, against $298{,}638{,}554$ candidate pairs. An earlier
+audit reading of that row was withdrawn, but the decision log still carries a bound (the
+$Y$ side ``admits at most $112{,}160{,}350$ pairs''), which \file{results/neat-constants.md} \S6 calls a
+misreading of the filters; the certified ledger supersedes it. & \file{work/\allowbreak{}10-\allowbreak{}recreate/\allowbreak{}}; \file{results/\allowbreak{}matrix.md} &
+exposition \\
+R11 & composition block, \texttt{fine\_index} &
+The recovered map stored $256\cdot\text{batch}+\text{batch\_index}$, so $149$ of $163$ parent addresses
+did not denote capped records. Rebuilt from a $(batch,ordinal)$ join; now $163/163$ addresses match the
+byte-derived capped set, with counters, children and incidences unchanged. Spec \S3.6 also lacked
+\texttt{pass\_id}. & \file{certdata/\allowbreak{}runs/\allowbreak{}h1-\allowbreak{}coverage/\allowbreak{}composition-\allowbreak{}v1.bin} (sha \texttt{fd61d257\ldots});
+\file{composition-\allowbreak{}v1.patch.json} & evidence interface (repaired) \\
+R12 & \texttt{g0.txt} is the record's adjacency, byte-identically &
+Decoded big-endian it \emph{is} the O/U relation, but under \emph{eight} valid ball permutations
+(three interchangeable pairs), not one. All eight preserve O and U on all $44{,}732$ ordered pairs
+($357{,}856$ checks). Spec \S8's ``unique''/``byte-identical'' assertions were corrected. &
+\file{results/\allowbreak{}evidence-\allowbreak{}audit-\allowbreak{}review.md}; \file{work/\allowbreak{}02-\allowbreak{}checker/\allowbreak{}spec/\allowbreak{}cert-\allowbreak{}format-\allowbreak{}stageC.md} \S8 &
+evidence interface \\
+R13 & shipped \file{check\_records.py} is a checker &
+It is a \emph{derived} checker: it verifies record-to-record consistency and does not execute any
+archived program or verify source, binary or original execution provenance. It also accepts an
+in-bounds alteration of a parent record, because nothing compares a parent's bytes with its children. &
+\file{mub6-\allowbreak{}recreate/\allowbreak{}} paper, \S1; \file{results/\allowbreak{}recreate-\allowbreak{}code-\allowbreak{}plan.md} & exposition \\
+R14 & two \texttt{pow(v,2)} cover-square sites &
+The published binary calls \texttt{pow@plt} rather than strength-reducing. At those arguments
+\texttt{pow(v,2)} equals \texttt{v*v} bit for bit, but differs by $1$~ulp on about $4.5\times10^{-4}$
+of random doubles --- so the build detail is load-bearing only through the recorded build, and the
+interface item now says so. & \file{work/\allowbreak{}10-\allowbreak{}recreate/\allowbreak{}spec/\allowbreak{}interfaces.md}, item 10 &
+evidence interface \\
+R15 & \texttt{seed.cpp} error term &
+The term is $\pi(w^2/4)\cdot5$ in \texttt{sumok} but $\pi(w/4)\cdot5$ in \texttt{extend}. A
+re-implementation that normalises the two silently changes bytes. &
+\file{work/\allowbreak{}10-\allowbreak{}recreate/\allowbreak{}spec/\allowbreak{}interfaces.md} & exposition (byte identity) \\
+\bottomrule
+\end{longtable}
+
+\paragraph{The load-bearing revision (R1).} The source presents one implication; the formalisation
+shows two obligations. A run can satisfy every local inequality it evaluates yet fail to evaluate some
+region, and no local certificate covers that region. The Lean statement makes the missing premise a
+binder, and the verification paper states it as Theorem~7.1's second half. This is the only revision in
+the table that changes what a reader is entitled to conclude from the source's Theorem~7.1 as printed.
+
+\paragraph{The repair that mattered most in practice (R11).} The composition block is the only object
+in the run that records \emph{which} unresolved parent each fallback child serves. With the wrong index
+space it certified nothing about the capped records while looking well formed: 163 counters, 1,127
+children, 11,838 incidences, all internally consistent, all addressing the wrong rows. The repair is
+identifier-only --- counters, children and incidence order are unchanged --- and the patch record pins
+both emissions (\texttt{699bbc40\ldots} $\to$ \texttt{fd61d257\ldots}), so the difference is itself
+auditable. The lesson generalises: a hash-stable object can be semantically wrong, and only an
+independent decoder finds it.
+
+\paragraph{Withdrawn claims.} Four claims were asserted inside this programme and retracted; they are
+listed so that they are not reintroduced. (i) ``The modular TU split costs $1.9\times$'' --- an artefact
+of CPU contention (thirteen agents on four CPUs), retracted by its author; no timing taken while
+swarms were live is usable. (ii) ``Lemma~5.1 is false'' --- it is true, with two independent proofs
+(the Lean file and a direct derivation from $\norm{x-Tz}^2$). (iii) ``The \texttt{g0} permutation is
+unique'' --- eight permutations. (iv) ``The exclusion margin is $1.968\times10^{-9}$'' --- that figure
+was taken over the initially open boxes only; the transport margin over the chosen witnesses is
+$1.0514\times10^{-9}$.
+
+\section{Proof extensions}\label{sec:ext}
+
+Six pieces of new mathematics sit around the source. They divide sharply into proved statements and
+measured ones, and none of them proves $N(6)=3$.
+
+\subsection{The order-three stratum}\label{sec:order3}
+\file{results/\allowbreak{}order3-\allowbreak{}stratum.md}, \file{results/\allowbreak{}order3-\allowbreak{}twist.md}
+
+Every MUB triple in $\C^6$ is order-three symmetric (this is the content of the topological
+classification, arXiv:2611.06917 \cite{wuttig26}). The note asks what that symmetry forces on a \emph{fourth} basis.
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item \textbf{Lemma A} (proved): an order-3 symmetry of a flat basis in $\C^6$ has eigenvalue
+multiplicities $(2,2,2)$ and acts in two 3-cycles.
+\item \textbf{Theorem B} (proved): two order-3 symmetric flat bases are unbiased iff twelve explicit
+real algebraic equations of Parseval type hold; verified to machine precision.
+\item \textbf{Corollary C} (proved): inside the stratum the ``modulus blindness'' that defeats every
+global relaxation disappears --- unbiasedness becomes an equality case.
+\item \textbf{Measured}: the stratum contains no 4-tuple; the sharp gap is $\Delta=0.0422687212\dots$
+over 500 restarts, attained at a three-level overlap pattern.
+\item \textbf{Conjecture}: the gap is exact and certifiable by elimination over $\mathbb{Q}(\omega)$.
+\end{itemize}
+The second note pushes the reduction further. A \emph{twist lemma} shows that two bases whose frames
+differ by scalar twists are unbiased only if the relative twist has vanishing cyclic correlation
+(a chirp or constant twist cannot work) --- which is exactly the Fourier triple's behaviour. In the
+twisted class (a codimension-3 sub-family with a common flat frame) the pair condition becomes three
+explicit trigonometric equations (A),(B1),(B2), and a quartet becomes \emph{ten real variables and
+fifteen equations} with no group action and no gauge left. Numerically: 280 isolated twisted pairs
+exist; 400 random starts on the three-pair system give a residual floor of $0.386$ (and $0.1096$ in
+the overlap form), i.e.\ no quartet, with a wide margin. \emph{Not proved}: the infeasibility. Two
+explicit proof shapes are named in \file{order3-\allowbreak{}twist.md} \S4; the common-frame hypothesis is a real
+gap, and the general stratum needs one more parameter per basis.
+
+\subsection{Approximate MUBs}\label{sec:approx}
+\file{results/\allowbreak{}approx-\allowbreak{}mub6.md} (9 pp.), \file{approx-\allowbreak{}mub6.tex}, \file{work/\allowbreak{}11-\allowbreak{}approx-\allowbreak{}mub/\allowbreak{}}
+
+The source proves $\varepsilon_6^*>0$ and says nothing about its size, where
+$\varepsilon_6^*$ is the least achievable maximum deviation of the $36$ pairwise overlaps from $1/6$
+over four orthonormal bases. The report brackets it:
+\[
+0<\varepsilon_6^*\le 0.030224240773 .
+\]
+The upper bound is \emph{certified} in exact rational arithmetic (a Cayley certificate plus an
+explicit perturbation lemma); the best numerical value is $0.0302242407724$, so the certified bound is
+within $10^{-12}$ of the search. Four structural results accompany it: the product class
+$A\otimes B$ has optimum \emph{exactly} $1/18$ (five independent derivations, and it is far from
+optimal); every pair of \emph{real} bases has deviation $\ge1/18$; $\mu_6$-Butson bases obey the same
+bound with $1/12$ sharp in the $F_6$ orbit; and no inequality that is a function of the normalised
+Gram matrix alone can give a positive lower bound --- it is saturated in $d=6$ by $d=4$ extremal data.
+The cyclic slice gives $0.053981857147$ certified. An independent suite, \file{verify/\allowbreak{}verify\_all.py},
+re-derives the computational claims from scratch (it imports nothing from the report or from the
+member directories).
+
+\subsection{Stronger exclusion inequalities}\label{sec:excl}
+\file{results/\allowbreak{}exclusion/\allowbreak{}report.md}, \file{work/\allowbreak{}05-\allowbreak{}parameters/\allowbreak{}}, \file{src/\allowbreak{}exclusion/\allowbreak{}}
+
+This note treats the source's inequality (3.29) as a standalone object on cells rebuilt from the
+paper's own definitions (the authors' 249,878-centre dataset is in a different encoding and was not
+decoded).
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item \textbf{Theorem A2/A3}: the direction functional is the support function of an explicit compact
+convex \emph{cell body} $K$; the optimal margin with Euclidean normalisation is $\mathrm{dist}_2(c,K)$,
+attained at the unique $y^*=c-\mathrm{Proj}_K(c)$, with unnormalised margin $\norm{y^*}^2$. The set of
+excluding directions is an open convex cone, i.e.\ a second-order-cone programme.
+\item \textbf{Theorem B1}: replacing the source's separate error terms by the reverse-triangle
+information $\abs{Z_{ij}}\ge\abs{\abs{D_{ij}}-1}$ lowers the right-hand side for every direction with
+positive flat weight. Measured: median margin gain $+13.8\%$ (best $+50.7\%$) over $32$ cells --- but
+the gain vanishes exactly at cells nearest a completion, so it does not move the exclusion boundary.
+\item \textbf{Theorem C1}: a second-order certificate cannot pay for itself: the linearisation
+remainder caps the gain at $\tfrac12Y_{\max}E_r^2=6\times10^{-3}$ to $2.4\times10^{-2}$, while the
+measured curvature gain is $3\times10^{-3}$.
+\item \textbf{Refinement floor}: the right-hand side of (3.29) does not go to zero as $h\to0$; on the
+completion's own cell the margin converges to about $-0.48$ and the cell is excluded at no level. That
+is what the phase-ball coverage of \S4 is for.
+\item \textbf{Calibration}: exact optimisation beats a faithful re-implementation of the paper's
+proposer style by $9.3$--$17.7\%$ median margin. All $32$ benchmark cells are excluded by both
+methods, so the table measures margin strength, not reach.
+\end{itemize}
+
+\subsection{The symmetric obstruction, audited}\label{sec:sym}
+\file{results/\allowbreak{}symmetric-\allowbreak{}obstruction-\allowbreak{}audit.md}, \file{results/\allowbreak{}verify-\allowbreak{}symmetric-\allowbreak{}obstruction.py}
+
+An external note proposed a threefold-symmetry obstruction. The verdict: the conditional theorem is
+correct, short and machine-free, with sharp constants ($1/\sqrt2$ in the lemma, not improvable; a
+genuine $1/108$ gap in its \S8, attained), and an explicit realisation of its hypothesis. But it is
+\emph{not} a gap-filler: the same conclusion is already in the literature (Sun, arXiv:2610.12180 \cite{sun26}, for
+exactly this invariant-ray hypothesis; and Jaming--Matolcsi--M\'ora--Sz\"oll\H{o}si--Weiner,
+arXiv:0902.0882 \cite{jmmsw09}, for the whole two-parameter family), and the technique does not generalise --- the
+$3\times3$ sign lemma is \emph{false} at four blocks, so $1/\sqrt2$ is $d=6$ numerology. It covers only
+MUB-triple slices that were already known, and advances no open step.
+
+\subsection{The largest partial fourth basis}\label{sec:fourth}
+\file{mub-\allowbreak{}triple-\allowbreak{}maximal.tex} (2 pp.), \file{results/\allowbreak{}}
+
+For a fixed triple, call a unit vector \emph{admissible} if it is unbiased to all three bases, and let
+$k$ be the largest number of pairwise orthogonal admissible vectors. The claim is $k=0$ --- strong
+unextendibility, far stronger than ``no fourth basis'' --- for every triple that has been decided.
+The mechanism is a count: after dephasing, the ten vectors of the last two groups carry $45$ free
+phases against $45$ unbiasedness conditions, so the triple is critical; adjoining one vector adds $5$
+phases but $10$ conditions, so $\{5,5,5,1\}_6$ is overdetermined by five, and every further vector
+costs five more. For the standard $+$ Fourier pair there are exactly $48$ rays unbiased to both, with
+$300$ unbiased pairs and $16$ orthonormal sextuples, none of which any ray completes (Grassl's theorem,
+reproduced). Product triples and Weyl triples are theorems; the passage to \emph{all} triples is
+quoted from the classification and the Sun note, not verified in this folder. The contrast that keeps
+the statement honest is $d=4$: the $Z_4$-Weyl triple has $k=0$ (defect $3/16$ exactly) while a triple
+drawn from the five MUBs of $\C^4$ has $k=4$. So $N(6)=3$ does not imply $k=0$, and the stronger claim
+needs its own argument.
+
+\subsection{Is there an elegant proof?}\label{sec:elegant}
+\file{results/\allowbreak{}elegant-\allowbreak{}proof-\allowbreak{}routes.md}, \file{mub-\allowbreak{}why-\allowbreak{}no-\allowbreak{}elegant-\allowbreak{}proof.tex} (2 pp.)
+
+Seven routes were examined; none closes. Three abstractions are proved unable to finish the job, and
+the most attractive one is dead: \emph{monodromy} (route R7, local constancy of the completion count
+off a discriminant) cannot work, because if the singular set has empty interior and is not everything,
+the complement is open with completion count $0$ --- there is no proper closed discriminant to
+continue around. What survives is a sharply reduced target: extendability forces $E_{23}=\omega$,
+$E_{33}=\omega^2$ in the dephased corner, i.e.\ the extendible set lies in the orbit of a $2$-torus
+$T_0$; plus the exhaustiveness of the $48$ CAZAC lines in the Fourier chart. That is a finite
+classification, not a conceptual proof, and the note says so.
+
+\section{Computations}\label{sec:comp}
+
+Eleven computations carry weight in the folder. Table~\ref{tab:comp} gives scale and margin; the
+subsections give the one thing each establishes and the one thing it does not.
+
+\begin{center}
+\small
+\begin{longtable}{@{}L{0.16\linewidth}L{0.30\linewidth}L{0.30\linewidth}L{0.16\linewidth}@{}}
+\caption{Computations with their scale, their tightest margin and their artefact.}\label{tab:comp}\\
+\toprule
+computation & scale & tightest measured margin & artefact \\
+\midrule
+\endfirsthead
+\toprule
+computation & scale & tightest measured margin & artefact \\
+\midrule
+\endhead
+Seed cover (H1) & $151{,}744{,}086$ pairs; $22{,}829$ X tuples; $105{,}845{,}442$ dual comparisons &
+dual interval excess $-1.113\times10^{-8}$; midpoint radius $3/224<0.032$ &
+\file{certdata/\allowbreak{}runs/\allowbreak{}h1-\allowbreak{}seed-\allowbreak{}emission/\allowbreak{}} \\
+Stage-C replay (H0) & $92$ commands; $23{,}506$ records; $2{,}932{,}018{,}956$ steps &
+$163$ capped at exactly $5{,}000{,}001$ steps & \file{certdata/\allowbreak{}runs/\allowbreak{}h0-\allowbreak{}stagec-\allowbreak{}probe.json} \\
+Cap policy & $163$ records rerun at $2\times10^8$ & max $39{,}968{,}282$ steps; headroom $31{,}718$
+at $4\times10^7$ & \file{certdata/\allowbreak{}runs/\allowbreak{}h1-\allowbreak{}coverage/\allowbreak{}cap-\allowbreak{}policy.json} \\
+Stage-A tree & $113$ nodes ($7$ \texttt{PASS}, $72$ norm, $20$ dual, $14$ covered); $145$-node and
+$1$-node controls & $20/20$ duals, min margin $0.0206374$ ($206\times$ pad) & \file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}stage-\allowbreak{}a-\allowbreak{}root.log} \\
+Stage-B cover & $11^4=14{,}641$ boxes; $902$ relations, $303$ used & $1.0514\times10^{-9}$ closure
+margin & \file{certdata/\allowbreak{}runs/\allowbreak{}h2-\allowbreak{}stageb/\allowbreak{}parent-\allowbreak{}bad10-\allowbreak{}0-\allowbreak{}source-\allowbreak{}transport.json} \\
+Stage-C basic & $97{,}888$ pairs, four rules, on $4$ records & certified $3.60\times10^{-7}$; closest
+retained $3.57\times10^{-7}$ & \file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}seed-\allowbreak{}and-\allowbreak{}basic.log} \\
+Stage-C joint & $61{,}832$ comparisons; $10{,}293$ rejections & $7.786\times10^{-7}$ &
+\file{.ultramath/\allowbreak{}smwh95wl3/\allowbreak{}m3/\allowbreak{}runs/\allowbreak{}} \\
+Stage-C graphs & $212$--$272$ balls per record; $44{,}732$ ordered pairs in the decoded dump &
+$\omega(O)=3$ on $f_0\#0$; $\le1$ common $U$-partner on the three non-vacuous dumps &
+\file{results/\allowbreak{}evidence-\allowbreak{}audit-\allowbreak{}review.md} \\
+Root witnesses & $43$ anomalous records; $2$ former tensor-$C$ failures & $34$ pass; tensor-$C$
+$4.7\times10^{-7}$; projector $7.4\times10^{-14}$ & \file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}root43.json} \\
+Recreation & $2{,}265$ lines; $100$ commands; $82.3$ MB of records & byte identity; interval slack
+$1.043\times10^{-9}$ over $4.74\times10^{9}$ trials & \file{mub6-\allowbreak{}recreate/\allowbreak{}} \\
+Constants & $N=128$; $22{,}829\to32{,}018$ X tuples & cover $402\to517$ s; end-to-end $-46$ s
+($\approx-1\%$) & \file{results/\allowbreak{}neat-\allowbreak{}constants.md} \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\subsection{Seed cover: the one computation reproduced end to end}\label{sec:seedcover}
+The covering step is the only stage that has been rebuilt from the published sources and checked
+against the recorded bytes. \file{mub6-\allowbreak{}recreate/\allowbreak{}src/\allowbreak{}unit0304} reproduces \file{centers.txt} exactly:
+$7{,}339{,}546$ bytes, sha256 \texttt{c48bc9a2\ldots a5789}, $400.8$~s against the published
+$401.8$~s, with all five counters identical ($151{,}744{,}086$ pair tests, $29{,}769{,}262{,}282$
+bucket visits, $3{,}134{,}060{,}273$ linear programs). Two further builds agree --- the authors' published code \cite{upstream},
+\file{covrun}, and a \texttt{-O2} build without \texttt{-march=native} --- so byte identity is not an
+\texttt{-O3 -march=native} artefact. The clean-room reconstruction from the manuscript alone recovers
+the seed \emph{set} ($22{,}829$) but not its \emph{order}: of the $120$ loop nestings exactly one
+reproduces the record, the natural reading permutes $5{,}497$ of the $249{,}878$ lines, and the
+quoted count is blind to the difference. That is a property of the prose, not of the programs.
+
+\subsection{The seed certificate (H1)}\label{sec:h1}
+The certificate is a $5.7$~GiB witness stream (sha \texttt{de0d0790\ldots}) plus the archived
+\file{centers.txt}. The ledger is
+\[
+151{,}744{,}086=249{,}878_{\text{fresh}}+45{,}648{,}766_{\text{cheap}}+105{,}845{,}442_{\text{dual}}
+=151{,}742{,}926_{\text{mandatory}}+1{,}160_{\text{disjoint}} ,
+\]
+with zero missing mandatory pairs, zero duplicates, zero invalid $Y$ records and zero gap-rule
+violations; all $105{,}845{,}442$ dual comparisons are proved in $128$-bit outward MPFR \cite{mpfr} with zero
+failures and zero undecided. A $158$-pair prefix was rechecked by a second, Python dyadic checker; a
+$62$-case mutation suite was refused $62/62$ after byte-span validation. What this does \emph{not}
+establish: it certifies the finite arithmetic and membership obligations, not the analytic covering
+lemma, and it is conditional on the source's arrangement and normal-form lemmas. The binary-midpoint
+enlargement from $0.032$ to $0.0320001$ is a separate interface, outside the claim.
+
+\paragraph{A provenance caveat on the emitter.} The witness bytes are intact; the program that produced
+them is not fully pinned. \file{certdata/runs/h1-seed-emission/binary.sha256} records
+\file{src/emit/covrun-emit} as \texttt{8c8d703c\ldots}, but the file now hashes to
+\texttt{36ce806f\ldots} and is dated eight minutes after the run. The emitter is also the repo's own
+variant (\file{covout.cpp} \texttt{16475aeb\ldots}), not the upstream file (\texttt{2a7e6bf5\ldots}) that
+the source-hash check certifies. Re-emission from the recorded binary is therefore not established;
+what is established is that the archived stream checks out against the archived centres.
+
+\subsection{The Stage-C replay and what a cap means}\label{sec:stagec}
+The recorded run is fully reproducible here: $92$ commands, $23{,}506$ records, $2{,}932{,}018{,}956$
+completed-negative steps, and the $163$ capped records at exactly $5{,}000{,}001$ steps each
+($815{,}000{,}163$ in total). Two facts about the counters are worth more than the totals.
+\emph{First}, \file{graph} counts \texttt{stats.positive}, not searches performed: ``graph 0'' does not
+say graphs were absent, it says no completed search ended ``pattern possible''. \emph{Second},
+Proposition~6.9 has exactly two negative paths, an empty completed bin layer or a completed negative
+graph search; a capped search is unresolved and flows to the fallback chain. So the exclusions a
+certificate must justify never include a capped search --- and the $163$ capped records' exclusions come
+from the fallback pass, which is why the composition block matters (R11) and why raising the cap is not
+a free repair.
+
+That repair is now quantified. Rerunning the $163$ records at $2\times10^8$ steps needs
+$1{,}925{,}134{,}199$ steps, max $39{,}968{,}282$ (headroom $31{,}718$ at $4\times10^7$), with zero
+candidates found. It costs $39.3$~s of extra search, removes the $126.2$~s fallback pass, nets
+$-91.8$~s, shrinks the certificate by $14{,}056{,}421$ bytes and $964$ records, and deletes five
+invocations and five Table-1 rows. The measured constant is $\tau=\max(0,R-X_M)$ with
+$s\le R+1.001\times10^{-9}$.
+
+\subsection{Stage A: a real tree, not a schematic}\label{sec:stagea}
+For seed $0$, cell $(7,2,11,11)$, an instrumented but byte-identical replay of \file{patchx} yields a
+real $113$-node tree ($7$ \texttt{PASS}, $72$ \texttt{PRUNE\_NORM}, $20$ \texttt{PRUNE\_DUAL},
+$14$ \texttt{COVERED}). At every internal node the closed children are the sixteen rational half-cells;
+their volumes sum to the parent volume, and the leaf volumes sum to $1/65536$. A second tree has $145$
+nodes and a one-node tree checks the degenerate no-witness case. All $113/113$ node sums and $b.z$
+values agree bit for bit with the accepted tree across two builds (\texttt{-O2} versus
+\texttt{-O3 -march=native}), $72/72$ norm and $20/20$ dual predicates reproduce, and every one of the
+twenty dual-pruned leaves carries the full \file{trial::certificate} payload with an exact margin
+between $0.0206374$ and $0.2937102$. All $360$ controls behave: a margin of $5\times10^{-5}$ fails,
+$2\times10^{-4}$ passes, rescaling $y$ is invariant, and $y\to-y$, $y\to0$ and altered data are
+rejected or declared unresolved. The replay driver does not implement the covering test, so it labels
+the $14$ covered leaves \texttt{PASS} rather than \texttt{COVERED}; the claim is about sums and $b.z$,
+not labels, and the mismatch count ($14$) matches the covered leaves exactly. What is not proved: the
+implication ``dual inequality $\Rightarrow$ empty cell'' (the source's (3.26)) and the analytic
+majorisation behind each bound field.
+
+\subsection{Stage B: a local cover, not a chain}\label{sec:stageb}
+For the fallback parent \texttt{bad10.bin\#0} the entire $11^4$ grid closes:
+\[
+14{,}641=11{,}480_{\text{outside}}+3{,}161_{\text{covered}}+0_{\text{open}} ,
+\]
+via $902$ exact relations of which $303$ are used, over $158$ children and $12$ signed row/column
+maps. All edges are rebuilt in exact rational arithmetic, and the source-directed bridge proves
+$\mathrm{Relation}(P,R,\Phi Q)=\mathrm{Relation}(\Phi^{-1}P,R,Q)$ on all $902$ edges. The direction
+matters: signed permutations are not generally involutions, so using $\Phi$ instead of $\Phi^{-1}$
+reproduces the relation only on the $620$ involutive edges, fails on $282$, and $135$ of those $282$
+still pass the radius test --- a plausible-looking false certificate. The twelve maps form a group
+isomorphic to $D_6\cong Z_2\times S_3$ (order profile $1,2^7,3^2,6^2$), the action law
+$\Phi_b\Phi_a=\Phi_{a\circ b}$ was checked on $22{,}896$ triples, and the action is free on all
+$1{,}290$ available records. \emph{Not} a chain: $0$ of $1{,}896$ transported children matches a stored
+parent, so no parent$\to$child$\to$Stage-C instance exists, and the other $162$ parents are open.
+
+\subsection{Stage C: predicates and the one local exclusion}\label{sec:stagecx}
+On four complete records, the basic rules (6.16)$_O$, (6.16)$_U$, (6.20), (6.21) yield $133{,}944$
+certified exclusions over $97{,}888$ pairs in outward $200$-bit MPFR from the exact binary64
+centres, with no undecided interval, no disagreement between the code's firing and the exact verdict,
+and no retained edge certified excluded. The joint rule (6.23) adds $61{,}832$ comparisons,
+$10{,}293$ exact rejections ($3{,}503$ orthogonal, $6{,}790$ unbiased) and \emph{zero} of the
+$51{,}539$ retained decisions certified by the producer's stored direction --- the direction is a
+witness, and its proposal is never trusted. For $f_0\#0$ the graphs on $212$ balls have
+$\omega(O)=3$, $\omega(U)=7$, so no $O$-six-clique exists and the forbidden configuration is absent.
+Three other dumps are non-vacuous and more informative: $\omega(O)=6$ with $1{,}997$, $326$ and
+$1{,}344$ six-cliques, and the largest common-$U$ partner set has size at most one, so the forbidden
+configuration fails by at least five partners. Planted controls recover a full configuration; deleting
+one cross edge leaves exactly five partners and is retained. These are exact finite graph decisions;
+what remains conditional is that the $212$ balls \emph{cover} every admissible vector, which is the
+ball/cluster coverage still to be certified.
+
+\paragraph{A headline count that does not survive its own table.} The verification paper quotes
+$269{,}403$ basic-predicate evaluations. The four-record table supports $97{,}888$ pairs and
+$133{,}944$ certified exclusions, and
+\[269{,}403=2\cdot97{,}888+4{,}656+7{,}139+61{,}832\]
+exactly: two evaluations per pair, the \emph{firing} counts of (6.20) and (6.21) rather than their
+denominators, and the $61{,}832$ joint rows. The figure is therefore a sum of four heterogeneous
+counts, not an evaluation total; the per-rule columns and the exclusion total are the traceable
+numbers. This is an exposition defect in the verification paper, not in the arithmetic beneath it.
+
+\subsection{Root witnesses}\label{sec:root}
+Of the $43$ records whose tensor branch previously did not reproduce the stored $C$ by naive
+reconstruction, $34$ now have explicit witnesses passing all three clauses (explicit $M$, rational
+congruences $U_A,U_M$, the tensor-$C$ bound), all $9$ failures are R7-only, and the two former
+stored-tensor-$C$ failures pass at exact signed-permutation images with tensor-$C$ margins about
+$4.7\times10^{-7}$ and $TT^*$ projector discrepancies $7.39\times10^{-14}$ and
+$6.35\times10^{-14}$ against a $2\times10^{-6}$ residual budget. These are \emph{existential}
+statements: a witness exists at the image, not that it is the source's matrix, and not that the
+pre-canonical centre is recovered.
+
+\subsection{The constants experiment}\label{sec:const}
+Making every constant dyadic ($N=128=2^7$, $w=2^{-7}$, $R=1/32$, forced by \texttt{int8\_t} $N\le128$
+and by exact-midpoint representability) turns the cover test into the integer inequality
+$s+a+9/4<16$. X tuples grow $22{,}829\to32{,}018$, pairs to $267{,}628{,}436$, but centres fall
+$249{,}878\to229{,}979$; the cover costs $517$~s instead of $402$~s and the run ends about $46$~s
+cheaper ($\approx-1\%$ of $4{,}470$~s). The experiment's real output is the new tightest constant:
+$h=\pi/N_u=0.19635<0.197$ ($0.33\%$). Stages A/B/C were not re-run at the new constants, so this is a
+cover-stage result only.
+
+\section{Certificates}\label{sec:cert}
+
+A certificate in this programme is not a proof of the theorem; it is an object that makes one
+necessary condition checkable without executing the producer. Table~\ref{tab:cert} lists the objects
+that exist, with the check that was actually run on them.
+
+\begin{center}
+\small
+\begin{longtable}{@{}L{0.20\linewidth}L{0.34\linewidth}L{0.16\linewidth}L{0.22\linewidth}@{}}
+\caption{Certificate objects and their checks. ``Re-run'' means executed in the 15 November
+verification window; ``quoted'' means read from an archived run of an earlier window.}\label{tab:cert}\\
+\toprule
+object & content & check & digest / artefact \\
+\midrule
+\endfirsthead
+\toprule
+object & content & check & digest / artefact \\
+\midrule
+\endhead
+Seed witness & $5.7$ GiB stream, $151{,}744{,}086$ pair records, $22{,}829$ X tuples & re-run:
+digests, report regeneration, prefix cross-check; $62/62$ mutations refused & \texttt{de0d0790\ldots}
+\file{certdata/\allowbreak{}runs/\allowbreak{}h1-\allowbreak{}seed-\allowbreak{}emission/\allowbreak{}seed.wit} \\
+Centres & $249{,}878$ rational midpoints, $7{,}339{,}546$ B & re-run by rebuilt \file{covrun}, byte
+identical & \texttt{c48bc9a2\ldots} \file{centers.txt} \\
+Composition block & $163$ parents, $1{,}127$ children, $11{,}838$ incidences, $57{,}104$ B & re-run:
+rebuild + \file{cmp}; $47/47$ schema mutations refused & \texttt{fd61d257\ldots}
+\file{composition-\allowbreak{}v1.bin} \\
+Cover map & $(batch,ordinal)\to$\file{fine\_index}, $163$ rows & re-run: matches byte-derived capped
+set on $163/163$ & \texttt{83516ece\ldots} \file{composition-\allowbreak{}cover-\allowbreak{}map.json} \\
+Stage-B transport & $902$ relations, $14{,}641$-box ledger & re-run: exact rational rebuild, graph
+self-tests & \texttt{f487a4bf\ldots} \file{parent-\allowbreak{}bad10-\allowbreak{}0-\allowbreak{}source-\allowbreak{}transport.json} \\
+Two tensor-$C$ transports & exact image $q$, rescaled $M$ & re-run: independent transport check &
+\texttt{63944ad5\ldots} \file{two-\allowbreak{}tensor-\allowbreak{}transport-\allowbreak{}check.json} \\
+\texttt{g0} adjacency & $13{,}568$ B dump, $44{,}732$ ordered pairs & re-run: big-endian decode, eight
+permutations, $357{,}856$ checks & \texttt{6571b3ae\ldots} (one explicit map) \\
+Stage-A trees & $113$ and $145$ nodes; payload dump & re-run: \file{treecheck} $26$ checks, $9$
+mutations per tree caught, fidelity exact & \file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}stage-\allowbreak{}a-\allowbreak{}root.log} \\
+Root witnesses & $34+2$ explicit $M$ with congruences & re-run: \file{verify\_all.py} &
+\file{root43.json}, \texttt{fb2b41b9\ldots} \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\paragraph{There is no unified certificate.} What exists is a set of objects and checkers, not one
+certificate object: \file{certdata/cert/}, \file{certdata/controls/} and \file{certdata/mutations/} are
+empty, the record schema is a v0 draft, and no single checker consumes the run end to end. The target
+written in \file{cert/spec/statement.md} is therefore unmet, and that is consistent with the object-level
+reading above: each row of Table~\ref{tab:cert} is checkable on its own, and no row composes with the
+next without a further obligation.
+
+\subsection{The audit matrix}\label{sec:matrix}
+The machine-generated matrix \file{results/\allowbreak{}matrix.md} is the single best index of what is and is not
+supported: \textbf{55 claims --- 42 certified, 4 contradicted, 9 unsupported; all 26 controls pass}.
+``Certified'' there means the audit re-derived the quantity at the claim's own population, not that the
+surrounding lemma is proved. The four contradicted rows are all historical byte or layout claims that
+have been retired: the old composition header order, the byte-identity of \texttt{g0} with the record,
+the identity of the archived composition with the producer's original, and a naive cap-delta
+definition. The current objects are not corrupted by those rows; the rows record that the older
+statements were false.
+
+The nine unsupported rows are the honest boundary, and they cluster in one place: \emph{coverage}.
+\begin{itemize}[leftmargin=1.2em,itemsep=1pt]
+\item \file{comp.percell}: the $515{,}243$ inside cells of the composition block are closed by a
+counter, not by a per-cell relation or snap (\texttt{COUNTER\_ONLY}, $0/515{,}243$).
+\item \file{cap.capped\_covered}: $0/163$ capped records are individually shown to be covered by the
+fallback layer; only the counter and the identifier map are checked.
+\item \file{seed.semantic}: $0/151{,}742{,}926$ mandatory pairs have a per-pair semantic proof object;
+the stream is certified, the interpretation of each pair is not.
+\item \file{stageb.clearance\_1709}: clearance is measured on $66$ of $1{,}709$ relation-covered boxes;
+the min/median/max statistics have no stored per-box functional.
+\item \file{root.semantic}: the $48$ sampled Root verifications are not archived with their bases.
+\end{itemize}
+This is the right place to be unsupported. Identifiers and counters are cheap and were exactly where
+the two real defects (R11, R12) lived; geometry is expensive and is where the remaining work is.
+
+\subsection{The three-valued discipline}
+Every record ends in one of \texttt{NEG}, \texttt{EMPTY\_BINS}, \texttt{POS}, \texttt{CAP},
+\texttt{OVERFLOW}, \texttt{CLUSTER\_FAIL}, \texttt{INTERNAL}; only the first two are exclusions. The
+discipline is enforced in the audit by refusing to let a capped record be represented as negative, and
+in the Lean development by making the terminal predicate a binder. It is the single most important
+invariant in the folder: it is what allows a heuristic generator to feed a certified checker, and it is
+what makes ``$163$ capped records'' a statement about work remaining rather than about mathematics.
+
+\section{Formalisation}\label{sec:formal}
+
+\file{work/\allowbreak{}04-\allowbreak{}lean/\allowbreak{}Mub6/\allowbreak{}} holds $19$ Lean~4 modules against Mathlib \cite{lean4}. The audited count (gate G4) is
+$23$ declared holes over $7$ files, each named in the status tables; a current grep finds $27$
+textual occurrences of \texttt{sorry} in $8$ of the $19$ modules. The two counts are different measurements --- declared
+obligations against lines of text, some in commentary --- and neither is a proof of absence.
+The three verification modules \file{StageCNecessity.lean}, \file{StageCGraph.lean} and
+\file{AssemblyScoped.lean} contain none, and their chain lemmas depend only on the standard axioms.
+Eleven of the $19$ modules contain no \texttt{sorry} at all; among them \file{Completion.lean},
+\file{Refine.lean} and \file{Assembly.lean} are claim-free stubs that assert nothing.
+
+What the formalisation establishes is an \emph{assembly interface}: if the seed cover is valid, the
+Stage-A tree and Stage-B ledger cover the regions up to the prescribed equivalences, the Stage-C
+records are terminal negative, and the driver's terminal conditions hold, then no point of the initial
+set is extendible by two further bases. Both finite inductions (over subdivision depth and over
+completed parent records) are formal. What it does not establish is any instance of those hypotheses in
+the recorded run --- and, per R1, the source's Theorem~7.1 as printed does not even state the driver
+obligation that the formal version binds.
+
+Three further limitations are recorded rather than repaired: \S5.1--5.6 (the Stage-B relations) are
+not stated at all; Lemma~6.1's \texttt{bin\_displacement} is the only Stage-C hole; and the paper's
+Lemma~2.2 transpose clause is invalid as printed. The companion preprint \file{work/\allowbreak{}08-\allowbreak{}paper/\allowbreak{}mub6-\allowbreak{}formal.pdf}
+(11 pp.) reports exactly this scope, with the $23$ holes listed rather than summarised. The sentence a
+reader must not take away from it is ``the main result was formalised'': the development contains
+conditional implications, and the arithmetic and execution premises are binders, not theorems.
+
+\section{The boundary}\label{sec:bound}
+
+What the folder does not contain, stated once and plainly:
+\begin{enumerate}[label=(\alph*),leftmargin=1.8em,itemsep=1pt]
+\item \textbf{No proof of $N(6)=3$ produced here.} The source's theorem is conditional on an execution
+and on seven programs implementing the specification; the folder verifies local fragments of that
+evidence, not the theorem.
+\item \textbf{No complete instantiation of the certificate.} One parent out of $163$ has a closed
+Stage-B ledger; four Stage-C records out of $23{,}506$ have certified predicates; one record has a
+local graph exclusion; $515{,}243$ inside cells are counter-only.
+\item \textbf{No human gate.} No person has approved any result. The decision log's H0 entries authorise a
+one-hour feasibility phase, not the programme --- and its identifiers collide (D6--D10 each appear
+twice), so cite it by title, not by number. The six certificate gates H0--H5 are at most ``ready for a
+decision''.
+\item \textbf{No peer review.} Nothing here has been refereed. The independent proof of the same
+theorem (Wuttig--Tindall, arXiv:2611.06917, 4 November 2026) is cited but was not verified in-session,
+and one extension (the $k=0$ claim for all triples) leans on it.
+\item \textbf{No authenticated run.} The source's $4$~October execution is attested by its archive;
+the $7$~September run is described by the paper itself as unauthenticated; the record's provenance is
+not independently established here.
+\item \textbf{No portable arithmetic.} The source's binary64-plus-margins model, its
+\texttt{-march=native} build and its two \texttt{pow} sites are load-bearing for one documented run.
+The folder's own checks are exact or outward where they matter, but they do not cover the whole run.
+\end{enumerate}
+
+Conversely, what the folder does contain that a reader can use without believing any of the above:
+a byte-reproducible covering stage; a $5.7$~GiB witness stream with a five-term ledger and zero
+missing pairs; a repaired and independently decoded composition block; a closed local Stage-B cover
+with exact composition algebra; twenty exact directional certificates with $360$ controls; a
+certificate checker for four Stage-C rules with no undecided intervals; $34$ explicit Root witnesses;
+a Lean-checked assembly with its hypotheses written down; and a measured upper bound
+$\varepsilon_6^*\le0.030224240773$ for the approximate version of the problem.
+
+\section{Inventory of documents}\label{sec:inv}
+
+\begin{center}
+\small
+\begin{longtable}{@{}L{0.30\linewidth}L{0.08\linewidth}L{0.52\linewidth}@{}}
+\toprule
+file & pages & content \\
+\midrule
+\endfirsthead
+\toprule
+file & pages & content \\
+\midrule
+\endhead
+\file{attachments/*/} & 76 & the source preprint itself: five byte-identical copies, $817{,}737$~B \\
+\file{attachments/this-latex-pdf-\allowbreak{}contains-\allowbreak{}7ysh/} & 15 & a print-to-PDF extract of the same paper; \emph{not} the preprint \\
+\file{mub-\allowbreak{}outline.tex/\allowbreak{}.pdf} & 13 & the pipeline, \S1--\S3.3 of the source only; TikZ figure; the
+Lemma~1.2 correction in Remark~2.1 \\
+\file{mub-\allowbreak{}step1.tex} \dots \file{mub-\allowbreak{}step5.tex} & 2--4 each & one note per pipeline stage, at a fixed level
+of detail \\
+\file{mub-\allowbreak{}step*-\allowbreak{}example.tex} & 2--3 each & worked examples with runnable code in \file{examples/\allowbreak{}};
+\file{run\_all.sh} exits $0$ \\
+\file{mub-\allowbreak{}terms.tex} & 2 & 50-term glossary; still lacks a ``Phase'' entry \\
+\file{mub-\allowbreak{}cuts.tex}, \file{mub-\allowbreak{}radius.tex} & 2 each & the two constants a reader most often gets wrong \\
+\file{mub-\allowbreak{}cover-\allowbreak{}to-\allowbreak{}bases.tex} & 4 & how the $U(2)$ cover decides extendibility (unasked companion) \\
+\file{mub-\allowbreak{}constants.tex} & 5 & the dyadic-constant experiment \\
+\file{mub-\allowbreak{}why-\allowbreak{}no-\allowbreak{}elegant-\allowbreak{}proof.tex} & 2 & the route map without appendices \\
+\file{mub-\allowbreak{}triple-\allowbreak{}maximal.tex} & 2 & strong unextendibility: $k=0$ for decided triples \\
+\file{mub6-\allowbreak{}verification.tex} & 10 & the independent certificate checks and the trust boundary \\
+\file{mub6-\allowbreak{}recreate/\allowbreak{}paper} & 11 & byte-identical covering stage; audit of the published apparatus \\
+\file{work/\allowbreak{}08-\allowbreak{}paper/\allowbreak{}mub6-\allowbreak{}formal.tex} & 11 & the Lean formalisation, with $23$ holes listed \\
+\file{approx-\allowbreak{}mub6.tex} & 9 & $\varepsilon_6^*$ upper bound and the product-class theorem \\
+\file{results/\allowbreak{}matrix.md} & --- & the $55$-row claims-to-evidence matrix \\
+\file{results/\allowbreak{}preprint-\allowbreak{}verification/\allowbreak{}MANIFEST.md} & --- & what was executed on 15 November, row by row \\
+\bottomrule
+\end{longtable}
+\end{center}
+
+\section{Open items, in the order the evidence suggests}\label{sec:open}
+
+\begin{enumerate}[label=\textbf{O\arabic*.},leftmargin=2.2em,itemsep=1pt]
+\item \textbf{Ball and cluster coverage for Stage C.} The predicates are about balls; the missing
+premise is that every admissible bin lies in one of them. This is the single prerequisite for turning
+Propositions~5.2--5.3 into a local exclusion, and it should be done outward on the same four records
+before any graph claim.
+\item \textbf{One fully certified Stage-A seed.} Twenty directional certificates exist; the analytic
+implication (3.26) and a complete retained tree do not. The right target is one tiny seed, complete,
+not a production run.
+\item \textbf{A real Stage-B chain.} No parent$\to$child$\to$Stage-C instance exists among $1{,}896$
+candidates. The acceptable next object is one parent whose own ledger, transformed child ledger and
+terminal Stage-C record are all present and checked.
+\item \textbf{The nine Root witnesses.} Either explicit $M$-witnesses at the same standard as the
+$34$, or a rigorous obstruction. A failed search is not an obstruction.
+\item \textbf{Predicates at scale.} Run the basic and joint checkers over all completed-negative and
+fallback records before assembling graph evidence; keep the two vacuous records distinguished.
+\item \textbf{Instantiate the Lean assembly.} Connect every \texttt{Cov} and terminal premise to a
+decoded certificate; until then the formal and numerical branches do not meet.
+\item \textbf{Finish the code-recreation gates.} G-R1 passed (byte identity); G-R2--G-R5 pending
+(\file{coarse*.bin}, \file{mid.bin}, \file{fine.bin}, the $100$-command replay, handover).
+\item \textbf{The analytic extension programme.} The order-three twist system (ten variables, fifteen
+equations) has a numerical floor and no proof; the common-frame hypothesis of \file{order3-\allowbreak{}twist.md}
+\S2 is a real gap; the $k=0$ claim for all triples awaits an independent check of arXiv:2611.06917 \cite{wuttig26}.
+\item \textbf{A human review and a decision.} No gate is approved. The next move that is not
+mechanical is a person reading the arithmetic contracts, running the checkers on fresh copies, and
+deciding whether the trusted base is acceptable.
+\end{enumerate}
+
+\appendix
+\section{Reproduction commands}\label{sec:repro}
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.36\linewidth}p{0.58\linewidth}@{}}
+\toprule
+what & command (from the repository root) \\
+\midrule
+covering stage, byte identity & \file{cd mub6-\allowbreak{}recreate \&\& ./\allowbreak{}verify\_R2.sh -\allowbreak{}-\allowbreak{}src src} \\
+full verification suite of the approximate bound & \file{python3 verify/\allowbreak{}verify\_all.py} \\
+evidence matrix & \file{cd .ultramath/\allowbreak{}smwh5efk8/\allowbreak{}m4 \&\& python3 audit/\allowbreak{}run\_audit.py -\allowbreak{}-\allowbreak{}out results-\allowbreak{}verified} \\
+composition rebuild & \file{python3 work/\allowbreak{}02-\allowbreak{}checker/\allowbreak{}src/\allowbreak{}make\_composition\_fixed.py \ldots} \\
+Stage-A tree + duals & \file{.ultramath/\allowbreak{}smwh7pmn0/\allowbreak{}m5/\allowbreak{}reproduce.sh} \\
+Root witnesses & \file{python3 .ultramath/\allowbreak{}smwh7pmn0/\allowbreak{}m1/\allowbreak{}src/\allowbreak{}verify\_all.py} \\
+Lean module check & \file{lean work/\allowbreak{}04-\allowbreak{}lean/\allowbreak{}Mub6/\allowbreak{}AssemblyScoped.lean} \\
+example suite & \file{cd examples \&\& ./\allowbreak{}run\_all.sh} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\emph{Conventions.} Build LaTeX with \file{latexmk -pdf} on the \file{.tex} alone; it needs no other file. Validate Lean with
+\file{lean <file>} on the preset \texttt{LEAN\_PATH}; never \file{lake build} against the root-owned
+Mathlib. Timings taken while swarms were running are not usable and one such claim was withdrawn.
+
+
+\renewcommand{\refname}{Sources credited}
+\noindent Every external source we use is listed below, with what it supports. Two entries carry a
+warning we do not want a reader to miss: the source preprint is not peer reviewed, and arXiv:2611.06917
+is credited on the strength of its identifier alone, with its content unverified by us.
+
+\begin{thebibliography}{99}\small
+\setlength{\itemsep}{1pt}
+
+\bibitem[Ope26]{ope26}
+OpenAI. \emph{Preprint of 24 September 2026}, 76~pp., claiming $N(6)=3$ by a computer-assisted
+argument (Stages A--C and a driver theorem). Five byte-identical copies, $817{,}737$~B, are in the
+supplementary archive under \file{attachments/}. Not peer reviewed; cited throughout as \emph{the
+source}.
+
+\bibitem[Zau99]{zauner99}
+G.~Zauner. \emph{Quantendesigns: Grundz\"uge einer nichtkommutativen Designtheorie}. Dissertation,
+Universit\"at Wien, 1999. English translation: \emph{Int.\ J.\ Quantum Inf.}\ 9 (2011), 445--507.
+The origin of the conjecture $N(d)=d+1$ for $d\ge2$ and of the dimension-six expectation $N(6)=3$.
+
+\bibitem[Wut26]{wuttig26}
+Wuttig and Tindall. \emph{arXiv:2611.06917} [quant-ph], 4 November 2026. An independent proof of
+$N(6)=3$ and a classification of the $d=6$ triples, including the order-three symmetry we use in
+\S\ref{sec:order3}. \textbf{Cited but not verified in-session}: our one extension that leans on it
+(C11) is marked accordingly.
+
+\bibitem[Sun26]{sun26}
+Sun. \emph{arXiv:2610.12180}. The invariant-ray obstruction to a fourth basis; the source of the
+hypothesis audited in \S\ref{sec:sym}.
+
+\bibitem[JMMSW09]{jmmsw09}
+Jaming, Matolcsi, M\'ora, Sz\"oll\H{o}si and Weiner. \emph{arXiv:0902.0882}. An infinite family of
+MUB triplets in dimension six; the two-parameter family that already covered the symmetric
+obstruction audited in \S\ref{sec:sym}.
+
+\bibitem[Cod26]{upstream}
+The authors' code release accompanying \cite{ope26}: seven C++ sources under Apache-2.0, upstream
+commit \texttt{42907c9e} of 26 October 2026. The only stage we reproduce from it is the covering
+step (\S\ref{sec:seedcover}); the seven sources are not redistributed in our archive.
+
+\bibitem[Lea]{lean4}
+The Lean~4 theorem prover and its mathematical library Mathlib, version 4.33.1 in the environment
+used here. \url{https://lean-lang.org}, \url{https://leanprover-community.github.io/mathlib4/}.
+Used for the scoped formalisation of \S\ref{sec:formal}.
+
+\bibitem[MPFR]{mpfr}
+L.~Fousse, G.~Hanrot, V.~Lef\`evre, P.~P\'elissier and P.~Zimmermann. MPFR: a multiple-precision
+binary floating-point library with correct rounding. \emph{ACM Trans.\ Math.\ Softw.}\ 33 (2007),
+13. The directed-rounding arithmetic of the outward checks in \S\ref{sec:cert}.
+
+\bibitem[IEE19]{ieee754}
+IEEE Std 754-2019, \emph{IEEE Standard for Floating-Point Arithmetic}. The binary64 model the
+source's Appendix~A budgets against and the semantics our portable build is compared to.
+
+\bibitem[OMO26]{omos}
+Open Math OS: the agent environment in which the computations of \S\ref{sec:comp}--\S\ref{sec:cert},
+the recreation of \S\ref{sec:seedcover} and the Lean development were run, with the models
+\texttt{deepseek-v4.1-flash} and \texttt{kimi-k3.1-pro}. Use and checks are described in
+\S\ref{sec:ai}.
+
+\bibitem[Astr26]{astra}
+ChatGPT, model ``Astra'' (OpenAI). Brainstorming only; see \S\ref{sec:ai}.
+
+\bibitem[Opus26]{opus}
+Claude Opus (Anthropic). Brainstorming only; see \S\ref{sec:ai}.
+
+\end{thebibliography}
+
+\end{document}

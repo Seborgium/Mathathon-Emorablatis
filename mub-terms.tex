@@ -1,0 +1,171 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\U}{U}
+\newcommand{\grp}[1]{\par\medskip\noindent{\normalsize\bfseries #1}\par\nobreak\vspace{-1pt}}
+\setlist[description]{leftmargin=1.2em,labelindent=0pt,itemsep=1.5pt,parsep=0pt,topsep=2pt,font=\normalfont\bfseries}
+
+\title{\bfseries Key terms\\[4pt]
+\large\normalfont A glossary for OpenAI, \emph{The maximum number of mutually unbiased bases in dimension six}}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+\footnotesize
+
+\grp{1.\ The problem}
+
+\begin{description}
+\item[Inner product] $\inner{u}{v}=\sum_j\overline{u_j}\,v_j=u^*v$: conjugate-linear in the first
+slot, linear in the second --- the preprint's convention. So $\abs{\inner{u}{v}}$ is symmetric in its
+two arguments, and $\{\inner{b_i}{c_j}\}$ is exactly the matrix $B^*C$ of the two bases.
+\item[Orthonormal basis] A list $b_1,\dots,b_d$ of unit vectors in $\C^d$ with $\inner{b_i}{b_j}=0$ for
+$i\ne j$. All bases below are orthonormal.
+\item[Overlap matrix] For bases $\mathcal B,\mathcal C$, the matrix
+$P_{ij}=\abs{\inner{b_i}{c_j}}^2$. It is doubly stochastic: both row and column sums are $1$.
+\item[Mutually unbiased bases (MUBs)] $\mathcal B,\mathcal C$ with $P_{ij}=1/d$ for all $i,j$, i.e.\
+$P=\tfrac1d J$. Equivalently the change-of-basis matrix has every entry of modulus $1/\sqrt d$.
+\item[$N(d)$] The largest size of a family of pairwise mutually unbiased bases in $\C^d$. Known:
+$N(d)\le d+1$, $N(d)=d+1$ for prime powers, and the conjecture under discussion is $N(6)=3$.
+\item[Unbiased vector] A unit $w\in\C^6$ with $\abs{\inner{b}{w}}^2=1/6$ for every $b$ in a given
+basis. A further basis unbiased to two given ones consists of six mutually orthogonal such vectors.
+\item[Extension, extendible] A pair of MUBs is \emph{extended} by a third or fourth basis. A complex
+Hadamard matrix $H$ is \emph{extendible} if the standard basis and the columns of $H/\sqrt6$ lie in a
+family of \emph{four} MUBs.
+\end{description}
+
+\grp{2.\ Normal forms}
+
+\begin{description}
+\item[Complex Hadamard matrix] $H\in M_6(\C)$ with $\abs{H_{ij}}=1$ and $HH^*=6I$. It is the
+``flat'' unitary, scaled so that entries are on the unit circle. The second basis is the column set of
+$H/\sqrt6$, and extendibility is a property of $H$ up to the next two items.
+\item[Pure gauge] A coordinate whose change does not change the object. Multiplying $H$ by diagonal
+unitaries, $D_aHD_b$, acts by $6+6$ phases, but $(uI,u^{-1}I)$ acts trivially: the orbit has dimension
+$11$, so only $25$ phases are genuine data. Transposition and conjugation are \emph{not} gauge --- they
+give a different matrix, equivalent only for the theorem's purpose.
+\item[Dephasing] Fixing the gauge: divide row $i$ by $H_{i1}$, then column $j$ by the new $H_{1j}$, so
+that the first row and column become $1$. Well defined and idempotent, since $\abs{H_{ij}}=1$.
+\item[Equivalence (preprint Lemma 2.2)] Row/column permutations, row/column rephasing, entrywise
+conjugation and transposition. Each preserves extendibility, so the search may impose normal forms.
+\item[Horizontal (unwrapped) representative (Lemma 2.3)] A lift of the $25$ phases to a real vector,
+chosen so that Euclidean distances between representatives are meaningful.
+\item[Canonical arrangement (Lemma 2.4)] The normal form: the row or column pair with the smallest
+gap is placed first, its six phases are read around the circle from the start of a largest gap, an
+orientation condition fixes the direction, and one entry is shared with a second column.
+\item[Seed] The nine phases left after the arrangement: five sorted phases
+$0\le x_1\le\dots\le x_5\le1$, four sorted phases $0\le y_2\le\dots\le y_5\le1$ and the shared entry.
+The first stage covers these nine numbers and nothing else.
+\item[Selected position $s$, shared entry $\xi$] The index $s\in\{0,\dots,4\}$ of the row entry nearest
+phase $\tfrac12$ (first minimiser of $\abs{2b_s+1-N}$ on bin indices), and the phase $\xi$ it names,
+which belongs to both lists.
+\end{description}
+
+\grp{3.\ Making the search finite}
+
+\begin{description}
+\item[Bin, width] $I_b=[b/N,(b{+}1)/N]$ for $0\le b<N$, with $N=112$ bins of width $w=1/N$. Bins are
+closed so that the cover misses no phase.
+\item[Midpoint, centre] $u_b=(b+\tfrac12)/N$. A box's centre is the tuple of midpoints; it is a
+rational point that need \emph{not} be a Hadamard matrix.
+\item[Box] A product of nine bins, i.e.\ a box in $\T^9$; its \emph{feasible portion} is the part that
+satisfies the tests.
+\item[Seed ball] A closed Euclidean ball of radius $R_s$ about a retained centre, in the nine phase
+coordinates. Proposition 2.10 asserts that the retained centres' balls cover every exact seed.
+\item[$r_s$, $R_s$] The covering radius $r_s=0.0320001$ in cycles and $R_s=2\pi r_s=0.201$ in radians.
+$R_s$ is the error budget every later estimate pays: the chord bound gives
+$\norm{\Delta E}_F^2+\norm{\Delta B}_F^2+\norm{\Delta C}_F^2\le R_s^2$.
+\end{description}
+
+\grp{4.\ The tests that discard a box}
+
+\begin{description}
+\item[Gap] For a phase list, $g=1-x_5$: the length of the largest circular arc containing no listed
+point, in the canonical arrangement.
+\item[Vanishing sum] Orthogonality of two rows is $1+\sum_{j}e(x_j)=0$ (and likewise for two columns).
+Its midpoint residual is $c=(1+\sum_je(u_j))/(2\pi i)\in\R^2$, with $J$ the $2\times5$ array of the
+unit vectors $e(u_j)$. A first-order model gives $c+J\Delta\approx0$ with a quadratic remainder
+$\tfrac{5\pi w^2}{4}$; a box is discarded when no displacement of size $w/2$ can satisfy it.
+\item[Support bound (supdual)] A certificate that the residual cannot be cancelled, produced by
+proposing a vector $v$ and evaluating the dual inequality; validity does not depend on how $v$ was
+found, and only finitely many components of size $\le10^4$ are used.
+\item[Reuse (absorption)] A new box is discarded when a previously retained centre provably already
+covers its feasible portion: $\norm{k+h}^2\le\norm{k}^2+\tfrac94+2k\cdot h$ with $k=N(u-u')$ the
+(integer) bin displacement. The comparison threshold is lowered for safety.
+\item[Unresolved] The status of a seed or ball that was neither certified nor excluded --- for
+instance because a frame check failed. It is refined, never ignored: an unresolved record at the end
+means the proof is not finished.
+\end{description}
+
+\grp{5.\ Stage A and Stage B}
+
+\begin{description}
+\item[Seed blocks] The $2+2$--$2+4$ block form of a dephased matrix,
+$E'=\bigl(\begin{smallmatrix}1&1\\1&a\end{smallmatrix}\bigr)$, $B'$ ($2\times4$), $C'$ ($4\times2$),
+$D'$ ($4\times4$). The seed controls $E',B',C'$; only $D'$ is unknown.
+\item[Frame] An orthonormal $4\times2$ matrix $K$ spanning the kernel of $B'$ or of $C'^*$. Frames are
+computed at the seed \emph{centre} and then held fixed. Their conditioning is
+$m_B=\sigma_{\min}(B_0)$, $m_C=\sigma_{\min}(C_0)$, $m=\min(m_B,m_C)>0$.
+\item[Auxiliary constants] $A_0=\norm{E_0}_{\mathrm{op}}=\sqrt{2+\abs{1+a}}$ and
+$A_*=\min(2,A_0+R_s)$, the two bounds on $\norm{E'}_{\mathrm{op}}$ for exact matrices in the ball.
+\item[Compression] $Y=K_C^*D'K_B\in M_2(\C)$: the unknown block seen between the two frames. All
+orthogonality information about $D'$ that matters is carried by this $2\times2$ matrix.
+\item[Trace defect $q$] The number in $6I-Y^*Y\succeq0$, $\tr(6I-Y^*Y)\le q$. It measures how far the
+compressed block is from a rigid rotation.
+\item[Polar factor, distance $p$] $V=Y(Y^*Y)^{-1/2}\in\U(2)$ is the rotation part of $Y$, and
+$p=q/(\sqrt6+\sqrt{6-q})$ bounds $\norm{Y-\sqrt6\,V}_F$. So every completion yields a point of the
+four-dimensional compact group $\U(2)$, close to it in a quantitative sense.
+\item[Cell] A closed product of intervals in the four angular coordinates $(\alpha,t,\beta,\gamma)$ of
+$\U(2)$, with $0\le\alpha\le\tfrac12$, $0\le t\le\tfrac14$, $0\le\beta,\gamma\le1$: the analogue of a
+box, one stage down.
+\item[Taylor model, remainder] Inside a cell of half-width $h$, the exact rotation is within
+$\tfrac{\sqrt{42}}2h^2$ of the linear model $U+\mathrm dU[\theta]$; a check done on the model becomes
+true on the cell after inflating its tolerance by that remainder.
+\item[Tangent/normal split (Stage B)] Numerical approximations to the tangent directions of the
+Hadamard equations at a centre, plus a bound on the normal component of every exact displacement;
+covering the tangent coordinates gives smaller balls without parametrising a solution manifold.
+\end{description}
+
+\grp{6.\ Stage C and the execution}
+
+\begin{description}
+\item[Candidate vector, vector ball] A unit $w\in\C^6$ unbiased to the first two bases, covered by
+binning its $36$ entrywise phases and replacing each bin by a small Euclidean ball.
+\item[Graphs $O$ and $U$] Graphs on the set of vector balls: $O$-edges record ``possibly orthogonal'',
+$U$-edges ``possibly unbiased''. Both are \emph{necessary-condition} graphs --- they retain every true
+pair and may also retain false ones.
+\item[Six-clique pair] Two disjoint $6$-cliques in $O$ with all $36$ cross edges in $U$: the pattern a
+third and fourth basis would produce. Its absence refutes those bases; its presence proves nothing.
+\item[Record, states] Every seed, refined ball and candidate region carries a record whose state is
+\emph{excluded}, \emph{resolved} or \emph{unresolved}.
+\item[Completed execution] A run in which the traversal has visited every record and none is left
+unresolved. The theorem of \S7 is the implication ``completed execution $\Rightarrow$ no four MUBs''.
+\item[Arithmetic contract] The stated binary64 arithmetic and compiler behaviour under which every test
+is evaluated, with outward replacements and comparison margins proved in Appendix A; a hypothesis of
+the theorem, not an implementation detail.
+\item[Necessary condition] A test that every exact solution must pass; only such tests may discard a
+region, since discarding information can never make a refutation unsound.
+\item[Certified] A numerical object is certified only when a separately proved inequality accepts it. A
+floating-point centre need not be a Hadamard matrix and a computed eigenspace need not parametrise a
+component.
+\end{description}
+
+\end{document}

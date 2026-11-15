@@ -1,0 +1,41 @@
+== 1. upstream byte copies
+a78a1ab171d8c7f11490f83f4fc6896f0b135a1648563c970c584210b192095a  src/upstream/patchx.cpp
+3c6c7a7092230de231fdb23b6d1782de0dd9ef6689095763b875d90ce5ddeb44  src/upstream/seed.cpp
+bb031282340012e6fea15eadc073cf79a9e5a75fa0d558ccc5e1ef541e2b1e77  src/upstream/ub.cpp
+== 2. insertion-only instrumentation
+wrote src/patchx_emit.cpp 16137 -> 17227 bytes
+added lines: 24  removed lines: 0
+== 3. build
+== 4. independent parse probe vs upstream-recorded values
+count 764
+547 k=0 p0=-0x1.699c635e17d6ap-2 p1=-0x1.5ab80c243064bp-2 mnorm=0x1.e2b7df6a79123p-2 C=0x1.0c1524c953308p+2 radius=0x1.51be301b0730dp-16
+== 5. emit at the stored P, and scan the 401 mapH images
+== 6. pick the pre-image, emit there
+== coarse0.bin#678  stored C=4.714800269028562 mnorm=0.566257316817232
+   i=2 j=4 rot=2 trans=1 neg=0 relC=+1.420e-13 relmnorm=+1.314e-14 relid=+6.867e-09
+   i=2 j=4 rot=2 trans=1 neg=1 relC=+1.420e-13 relmnorm=+1.314e-14 relid=+6.867e-09
+   i=3 j=0 rot=3 trans=1 neg=0 relC=+1.422e-13 relmnorm=+1.765e-15 relid=+5.585e-09
+   wrote runs/q-coarse0.bin-678.txt
+== coarse3.bin#33  stored C=4.68316825735001 mnorm=0.5731751120610143
+   i=0 j=1 rot=0 trans=1 neg=0 relC=+3.266e-13 relmnorm=-2.131e-15 relid=-2.511e-09
+   i=0 j=1 rot=0 trans=1 neg=1 relC=+3.266e-13 relmnorm=-2.131e-15 relid=-2.511e-09
+   i=1 j=0 rot=0 trans=1 neg=0 relC=+3.266e-13 relmnorm=-2.324e-15 relid=-2.511e-09
+   wrote runs/q-coarse3.bin-33.txt
+== coarse0.bin#547  stored C=4.188790508848577 mnorm=0.47140454375609603
+   i=3 j=4 rot=1 trans=1 neg=0 relC=-4.241e-16 relmnorm=-2.355e-16 relid=-8.936e-10
+   i=3 j=4 rot=1 trans=1 neg=1 relC=-4.241e-16 relmnorm=-2.355e-16 relid=-8.936e-10
+   i=3 j=5 rot=1 trans=1 neg=0 relC=-4.241e-16 relmnorm=-3.533e-16 relid=-1.920e-09
+   wrote runs/q-coarse0.bin-547.txt
+== 7. certificate at the literal stored (P,T)
+== 8. witness at the pre-image, certificate at (q,T_q)
+== 9. arithmetic kernel gate
+mpmath 60-digit pi inside kernel enclosure: True  width 2.939e-39
+e2pii samples 648  worst interval width 1.087e-37  worst |mid-mpmath| 1.174e-38
+KERNEL SELFTEST: ok
+
+== VERDICTS
+coarse0#678 at stored (P,T), source M  root=body_pass_C_undecided    ort=PASS hor=PASS n0=PASS froot=PASS mnorm=PASS id=PASS C_base=FAIL C_tensor_at_P=FAIL C_tensor_at_q=FAIL
+coarse3#33  at stored (P,T), source M  root=body_pass_C_undecided    ort=PASS hor=PASS n0=PASS froot=PASS mnorm=PASS id=PASS C_base=FAIL C_tensor_at_P=FAIL C_tensor_at_q=FAIL
+coarse0#678 at q, witness (1-1e-7)     root=pass                     ort=PASS hor=PASS n0=PASS froot=PASS mnorm=PASS id=PASS C_base=FAIL C_tensor_at_P=PASS C_tensor_at_q=PASS
+coarse3#33  at q, witness (1-1e-7)     root=pass                     ort=PASS hor=PASS n0=PASS froot=PASS mnorm=PASS id=PASS C_base=FAIL C_tensor_at_P=PASS C_tensor_at_q=PASS
+coarse0#547 control (root=pass)        root=pass                     ort=PASS hor=PASS n0=PASS froot=PASS mnorm=PASS id=PASS C_base=PASS C_tensor_at_P=-- C_tensor_at_q=--

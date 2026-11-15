@@ -1,0 +1,146 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\key}[1]{\par\smallskip\noindent{\bfseries #1}\par\nobreak\vspace{-2pt}}
+\setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}
+\setlength{\abovedisplayshortskip}{2pt}\setlength{\belowdisplayshortskip}{2pt}
+
+\title{\bfseries Step 5 on one example\\[4pt]
+\large\normalfont reading one documented pass back: the three states, the ledger, and one margin}
+\author{}\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+Steps 1--4 are implications: a region maps to a smaller region, or to no solution. Step 5 is the
+statement about a \emph{run} --- that a documented execution visited every region and left none
+undecided --- and it is the step that makes the theorem conditional. Its tests are therefore not
+inequalities on matrices but three questions about a ledger: does every record end in exactly one of
+three states, is the list of unresolved records empty, and is every threshold comparison made with a
+margin that survives binary64?
+
+\smallskip
+\noindent
+The example input is a real one: the archived record census of a Stage-C pass of the documented run,
+$23{,}506$ graph records produced by $92$ commands. It is small enough to recount and rich enough to
+show all three states --- including the one that is not empty.
+
+\key{1.\ The three states, counted}
+Every object the earlier stages produce carries a record, and a record ends in exactly one of
+\emph{excluded} (a necessary condition failed, with the margin of Appendix~A), \emph{resolved} (its
+completions were transferred to a certified ball, later excluded), or \emph{unresolved} (neither).
+In this pass the census is
+\begin{center}\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+state & records & min steps & median steps & max steps & total steps\\
+\midrule
+excluded \ (\texttt{nopattern}: completed negative search) & $23{,}343$ & $76$ & $38{,}453$ & $4{,}986{,}110$ & $2{,}932{,}018{,}956$\\
+resolved \ (\texttt{positive}: a pattern found) & $0$ & --- & --- & --- & ---\\
+unresolved \ (\texttt{cap}: stopped at $5{,}000{,}001$) & $163$ & $5{,}000{,}001$ & $5{,}000{,}001$ & $5{,}000{,}001$ & $815{,}000{,}163$\\
+\midrule
+all records & $\mathbf{23{,}506}$ & $76$ & --- & $5{,}000{,}001$ & $\mathbf{3{,}747{,}019{,}119}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+Three things in that table are worth reading twice. Every completed search ended \emph{negative} ---
+$23{,}343$ exclusions and no pattern --- which is what a theorem of this shape predicts. The capped
+records stopped at exactly $5{,}000{,}001$ steps, one past the cap, so the cap is what stopped them and
+not the problem. And the largest completed search took $4{,}986{,}110$ steps, $99.7\%$ of the cap:
+the cap is not far above the hardest genuine search in this pass, which is the quantitative version of
+``the fallback matters''.
+
+\key{2.\ The ledger, and the one line that fails}
+The identity a completed execution must satisfy is
+\begin{equation}\label{eq:ledger}
+\text{records}=\text{excluded}+\text{resolved}+\text{unresolved},\qquad\text{unresolved}=0 .
+\end{equation}
+Recounted from the records rather than from the log:
+\[
+23{,}506=23{,}343+0+163 \quad\checkmark
+\qquad\text{but}\qquad
+\text{unresolved}=163\neq0 .
+\]
+The first half is the accounting: the three states partition the records, with nothing double-counted
+and nothing lost. The second half is the substantive condition, and it \emph{fails}. This pass is
+therefore not a completed execution, and no statement about four bases follows from it: $163$ regions
+are simply undecided and would have to be refined and reprocessed. That is exactly the right outcome
+for a pass whose cap was $5\cdot10^{6}$ steps, and saying so is the whole discipline of the step: a cap
+that runs out is an admission, never an exclusion.
+
+\key{3.\ Three records, as miniatures}
+A table of the extremes is enough to see what a record is:
+\begin{center}\small
+\begin{tabular}{@{}llrrrrr@{}}
+\toprule
+record & state & bins & balls & $O$ edges & $U$ edges & steps\\
+\midrule
+\texttt{final0/230} \ (fewest steps) & excluded & $1{,}535$ & $52$ & $122$ & $384$ & $76$\\
+\texttt{batch9/140} \ (median) & excluded & $25{,}034$ & $268$ & $2{,}981$ & $15{,}981$ & $38{,}852$\\
+\texttt{batch10/43} \ (capped) & unresolved & $31{,}852$ & $318$ & $10{,}399$ & $19{,}178$ & $5{,}000{,}001$\\
+\bottomrule
+\end{tabular}
+\end{center}
+The three columns before the step count are the sizes of the objects Step~4 built --- the final bin
+layer, the vector balls, and the two graphs --- so a record is a complete, checkable summary of one
+region: how it was cut, what was kept, and what the search concluded. Across the pass there were
+$5{,}272{,}329$ vector balls and $368{,}119{,}692$ edges.
+
+\key{4.\ One margin, computed}
+Each node of the decision tree carries an inequality, and each inequality is evaluated in binary64. The
+contract is that every threshold is compared with a margin larger than the rounding. Take the smallest
+constant in the proof, the vanishing-sum slack of Step~1, $5\pi w^2/4$ at $w=1/112$:
+\[
+\frac{5\pi}{4\cdot112^2}=\frac{5\pi}{50176}=3.13057303650130863\times10^{-4},
+\qquad
+\text{fl}\Bigl(\frac{5\pi}{50176}\Bigr)=0.00031305730365013086 .
+\]
+The binary64 value is wrong by $0$ ulps here; a five-rounding bound $k\,2^{-53}$ gives a relative
+width $5.6\times10^{-16}$ and an absolute width $1.7\times10^{-19}$. The code, by contrast, compares
+its thresholds with an absolute slack of $2\times10^{-7}$ --- larger than the outward interval by a
+factor $1.15\times10^{12}$. The same computation for the support bound $1.25\pi/N$ with $N=112$:
+$0.0350624180088$, outward width $1.9\times10^{-17}$.
+
+So on this example floating point is not where the risk is: the margins the implementation uses are
+twelve orders of magnitude larger than the arithmetic error they have to cover. The risk that remains
+is the other kind --- whether the \emph{constant} in a test is the right one --- and that is a
+mathematical question about the paper, not a numerical one about the machine.
+
+\key{5.\ The trap in the run's own log}
+The pass's log line reads
+\[
+\texttt{done}=23{,}506,\quad \texttt{bad}=163,\quad \texttt{graph}=0,\quad
+\texttt{cap}=163,\quad \texttt{over}=0,\quad \texttt{cluster}=0 .
+\]
+Read quickly, \texttt{graph}=0 says ``no graph search ran''. It is false: $23{,}506$ graph searches ran,
+with $3{,}747{,}019{,}119$ steps between them. The counter prints the number of searches that
+\emph{found a candidate pattern} --- the implementation's \texttt{positive} --- so $0$ means ``none
+found one'', which is the same statement as $\text{resolved}=0$ in \S1. It is the single easiest way to
+misread this run, and it is why the census above was recomputed from the records rather than taken from
+the log.
+
+\key{6.\ What this example does not say}
+It is one pass of one stage of the pipeline, and the pipeline has four stages; a completed execution
+needs every stage and every region, and the other passes are not recounted here. It does not verify the
+implementation: the numbers are read from records the programs wrote, and a record that was written
+wrongly would be counted wrongly. It says nothing about compiler or hardware behaviour beyond the one
+archived run. And the ledger checks that the records partition, not that each exclusion is correct ---
+that is the job of Steps 1--4, one inequality at a time.
+
+\medskip
+\noindent\footnotesize\textit{Provenance.} The three states, the condition \eqref{eq:ledger} and the
+arithmetic contract are Step~5's, in \texttt{mub-step5.pdf} and preprint \S7 and Appendix~A. The
+records are \texttt{certdata/runs/h0-stagec-probe.json}, the archive of the pass; the log line is
+\texttt{h0-stagec-probe-summary.json}. Every number above was recomputed by
+\texttt{examples/step5\_example.py}, which reads the archive and prints the table.
+
+\end{document}

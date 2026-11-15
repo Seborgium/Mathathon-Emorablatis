@@ -1,0 +1,9 @@
+STUB       naive     stdout    wrongfile   samefile       guarded   EXPECTED
+good       PASS      PASS      PASS        PASS/ok        PASS      PASS
+noop       PASS      FAIL      PASS        PASS/ok        FAIL(missing) FAIL
+abort      PASS      FAIL      PASS        PASS/ok        FAIL(rc=134) FAIL
+stdout     PASS      PASS      PASS        PASS/ok        FAIL(missing) FAIL
+trunc      FAIL      FAIL      PASS        PASS/DESTROYED FAIL(size) FAIL
+wrong      FAIL      FAIL      PASS        PASS/DESTROYED FAIL(size) FAIL
+
+REF sha256 c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789 size 7339546

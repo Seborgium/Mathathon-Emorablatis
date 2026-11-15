@@ -1,0 +1,99 @@
+{
+  "build": {
+    "covrun": {
+      "bytes": 35352,
+      "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z/covrun",
+      "sha256": "ab0bc4116e8afe651f4b23c5eed0cd18be523ebb30210958a30258750339103e"
+    },
+    "out_dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/portable-g__-20261114T200140Z"
+  },
+  "checks": {
+    "build": {
+      "covrun_present": "pass"
+    },
+    "counters": {
+      "centers": "pass",
+      "cheap": "pass",
+      "checked": "pass",
+      "lp": "pass",
+      "near": "pass",
+      "visit": "pass",
+      "vs_recorded_stdout": "pass",
+      "xs_line": "pass"
+    },
+    "failures": 0,
+    "fresh": {
+      "bytes": "pass",
+      "cmp": "pass",
+      "format": "pass",
+      "header": "pass",
+      "lines": "pass",
+      "sha256": "pass"
+    },
+    "recorded": {
+      "bytes": "pass",
+      "sha256": "pass"
+    },
+    "run": {
+      "exit": "pass"
+    },
+    "total": 18
+  },
+  "counters": {
+    "centers": 249878,
+    "cheap": 45648766,
+    "checked": 151744086,
+    "line": "N112 r0.0320 dual2 checked151744086 centers249878 visit29769262282 near3341641851 cheap45648766 lp3134060273",
+    "lp": 3134060273,
+    "near": 3341641851,
+    "visit": 29769262282,
+    "xs_line": 22829
+  },
+  "duration_ms": 623759,
+  "expected": {
+    "bytes": 7339546,
+    "count": 249878,
+    "header": "112 249878",
+    "sha256": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789"
+  },
+  "finished_utc": "2026-11-14T20:14:42Z",
+  "fresh": {
+    "bytes": 7339546,
+    "format": "lines=249878 bad=0",
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/repro-portable/centers.txt",
+    "sha256": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789"
+  },
+  "log": {
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/logs/R2-portable-gcc.json"
+  },
+  "pass": true,
+  "recorded": {
+    "bytes": 7339546,
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/data/centers.txt",
+    "sha256": "c48bc9a2be1eb2cdeea82ea1b030d7cb9f00a6c9563b63f0248dd115748a5789"
+  },
+  "recorded_log": {
+    "path": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/.scratch/gh/covrun.log"
+  },
+  "run": {
+    "exit": 0,
+    "ms": 623546,
+    "stderr": "",
+    "stdout": "xs22829 build19.64\n t0/22829 cells42 centers5\n t10000/22829 cells37490183 centers72679\n t20000/22829 cells119874659 centers205716\nN112 r0.0320 dual2 checked151744086 centers249878 visit29769262282 near3341641851 cheap45648766 lp3134060273\ntime 623.46"
+  },
+  "script": "./work/10-recreate/harness/reproduce.sh",
+  "stamp": "20261114T200419Z",
+  "started_utc": "2026-11-14T20:04:19Z",
+  "timeout_s": 3600,
+  "toolchain": {
+    "cpu": {
+      "model": "AMD EPYC Processor",
+      "online": 4
+    },
+    "glibc": "ldd (Ubuntu GLIBC 2.43-2ubuntu2.4) 2.43"
+  },
+  "unit": "R2",
+  "work": {
+    "dir": "/workspace/nucleus/work/projects/p-20d35e783d5d4092acb8bd94b19cf30b/repo/work/10-recreate/harness/out/repro-portable"
+  }
+}

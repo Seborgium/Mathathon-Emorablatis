@@ -1,0 +1,121 @@
+{
+ "schema": "mub-replay/1",
+ "mode": "selftest",
+ "index": 7,
+ "command": "C.Bfallback",
+ "stage": "C.fallback",
+ "run_order": 96,
+ "argv": [
+  "./build/brun",
+  ".011",
+  ".0038",
+  "fb1.bin",
+  "fb1bad.bin",
+  "-",
+  "batches/bad10.bin",
+  "batches/bad3.bin",
+  "batches/bad4.bin",
+  "batches/bad5.bin",
+  "batches/bad52.bin",
+  "batches/bad53.bin",
+  "batches/bad55.bin",
+  "batches/bad56.bin",
+  "batches/bad6.bin",
+  "batches/bad7.bin",
+  "batches/bad78.bin",
+  "batches/bad79.bin",
+  "batches/bad8.bin",
+  "batches/bad80.bin",
+  "batches/bad84.bin"
+ ],
+ "inputs": [
+  "batches/bad10.bin",
+  "batches/bad3.bin",
+  "batches/bad4.bin",
+  "batches/bad5.bin",
+  "batches/bad52.bin",
+  "batches/bad53.bin",
+  "batches/bad55.bin",
+  "batches/bad56.bin",
+  "batches/bad6.bin",
+  "batches/bad7.bin",
+  "batches/bad78.bin",
+  "batches/bad79.bin",
+  "batches/bad8.bin",
+  "batches/bad80.bin",
+  "batches/bad84.bin"
+ ],
+ "outputs": [
+  "fb1.bin",
+  "fb1bad.bin"
+ ],
+ "declared_outputs": [
+  "fb1.bin",
+  "fb1bad.bin"
+ ],
+ "input_sources": {
+  "batches/bad10.bin": "replayed",
+  "batches/bad3.bin": "replayed",
+  "batches/bad4.bin": "replayed",
+  "batches/bad5.bin": "replayed",
+  "batches/bad52.bin": "replayed",
+  "batches/bad53.bin": "replayed",
+  "batches/bad55.bin": "replayed",
+  "batches/bad56.bin": "replayed",
+  "batches/bad6.bin": "replayed",
+  "batches/bad7.bin": "replayed",
+  "batches/bad78.bin": "replayed",
+  "batches/bad79.bin": "replayed",
+  "batches/bad8.bin": "replayed",
+  "batches/bad80.bin": "replayed",
+  "batches/bad84.bin": "replayed"
+ },
+ "rc_expected": 0,
+ "rc_got": 0,
+ "artefacts": [
+  {
+   "path": "fb1.bin",
+   "declared": true,
+   "bytes_expected": 1699524,
+   "sha256_expected": "ef85ec73217ecb0c770d3c775396df88b60ca06918f77310df5dff2f6d9bf215",
+   "bytes_got": 1699524,
+   "sha256_got": "ef85ec73217ecb0c770d3c775396df88b60ca06918f77310df5dff2f6d9bf215",
+   "byte_identical": true
+  },
+  {
+   "path": "fb1bad.bin",
+   "declared": true,
+   "bytes_expected": 8,
+   "sha256_expected": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "bytes_got": 8,
+   "sha256_got": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+   "byte_identical": true
+  }
+ ],
+ "checks": {
+  "artefacts_present": {
+   "status": "PASS",
+   "detail": "all 2 produced"
+  },
+  "artefacts_byte_identical": {
+   "status": "PASS",
+   "detail": "2 files, 1699532 bytes compared byte for byte"
+  },
+  "return_code": {
+   "status": "PASS",
+   "detail": "expected 0, got 0"
+  },
+  "stderr_empty": {
+   "status": "SKIP",
+   "detail": "no process executed in selftest"
+  },
+  "stdout_informational": {
+   "status": "SKIP",
+   "detail": "not gated (spec 2). results/C.Bfallback.txt digit sequence is a subsequence of stdout: yes"
+  }
+ },
+ "elapsed_ms": 0.0,
+ "stdout_sha256": "6cad9fb3a1def1753e22968bb7b6db5c935c2130595934a77a85eec0b78296a0",
+ "stderr_bytes": 0,
+ "verdict": "PASS"
+}

@@ -1,0 +1,102 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{U}
+\newcommand{\key}[1]{\par\medskip\noindent{\normalsize\bfseries #1}\par\nobreak\vspace{-1pt}}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+
+\title{\bfseries Step 5 of 5: one completed execution\\[5pt]
+\large\normalfont Companion to \texttt{mub-outline.pdf}, Figure 1; preprint \S7 and Appendix A}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+\textbf{What this step receives.} Four stages of machinery: a finite seed cover, a reduction of each
+completion to a point of $\U(2)$, certified cells and balls, and a graph criterion for the last two
+bases. Each is an implication from ``a region'' to ``a smaller region'' or to ``no solution''.
+
+\par\medskip\noindent\textbf{What it must produce.} Not another estimate, but a statement about a \emph{run}: that
+a documented execution of the whole pipeline visits every region and leaves none undecided. That is
+the last thing the proof needs, and it is the one that makes the theorem conditional.
+
+\key{1.\ Records, and the three states}
+
+Every object the earlier stages produce --- a seed box, a retained ball, a refined cell, a vector ball
+--- carries a \emph{record} in a finite control flow. A record ends in exactly one of three states:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{excluded}: a necessary condition failed, with the margin of Appendix A;
+\item \emph{resolved}: its completions were transferred to a certified ball which was later excluded;
+\item \emph{unresolved}: neither, for instance because a frame check failed or a refinement cap ran out.
+\end{enumerate}
+The third state is not an error; it is the honest name for ``this region has not been dealt with''. The
+difference between a finished proof and an unfinished one is that the list of unresolved records is
+empty.
+
+\key{2.\ The implication that is the theorem}
+
+The paper's main statement has the form
+\[
+\underbrace{\text{a complete execution}}_{\text{a fact about a run}}\ \Longrightarrow\
+\underbrace{\text{no four mutually unbiased bases in }\C^6}_{\text{a fact about matrices}} .
+\]
+Everything a mathematician can check is the implication; the run is the evidence for its hypothesis.
+This is worth separating carefully, because two different kinds of claim are being made and they have
+different failure modes. A gap in the implication is a mathematical error. A doubt about the run is an
+empirical doubt: it would be settled by replaying the pipeline, not by finding a better proof.
+
+\key{3.\ The arithmetic contract}
+
+Each node of the decision tree carries an inequality, and each inequality is evaluated in binary64
+floating point. Appendix A is therefore part of the theorem, not an appendix in the editorial sense: it
+states the arithmetic and compiler behaviour assumed, provides outward replacements for every operation
+used, and proves a comparison margin for every threshold. Without those margins a test that ``passes''
+could pass because of rounding, and the exclusion would be worthless. The contract is where the
+constants of Steps 1--4 (the $5\pi w^2/4$ of the vanishing sum, the $1.25\pi/N$ of the support bound,
+the lowered threshold of the reuse test) are finally converted into statements that survive
+floating point.
+
+\key{4.\ The fallback, and why it cannot be skipped}
+
+An unresolved record must be refined: split the region, reprocess the pieces, and try again. The
+completed execution is defined as the state in which no record remains unresolved, and the fallback is
+what makes that state reachable rather than assumed. Two disciplines go with it. First, refinement has to
+control the growth of radii, or the union of retained regions slowly stops containing the solutions it
+is supposed to contain. Second, running out of a cap must never be turned into an exclusion --- the
+sound move is always to retain the region and admit it.
+
+\key{5.\ What the run is, and what it is not}
+
+The claim is computer-assisted and conditional, and it should be quoted that way. It holds for one
+documented execution, under stated binary64 arithmetic and compiler conditions, with the associated
+archives identified in the paper's verification directory. The independent checker accompanying the
+work does not run the C++ programs, so it does not certify the implementation, and it says nothing
+about compiler or hardware behaviour. No specialist peer review of the main claim has been published.
+A companion paper proves the weaker bound $N(6)\le5$ by exact arithmetic, and reports of formalisation
+concern that weaker bound, not the exclusion of four bases. Nothing above should be read as saying the
+upper bound of three has been formalised.
+
+\key{6.\ The shape of the whole argument, in one sentence}
+
+Cut the space into finitely many boxes, map each completion inside a box to a point of a small compact
+group, cover that group by cells whose remainders are bounded, cover the last two bases by vector balls,
+exclude the clique pattern, and account for every box; then the truth of the accounting, not the truth
+of any single estimate, is what closes the problem.
+
+\medskip
+\noindent\textit{Note on sources.} The attached excerpt ends in \S3.3. This step is described from the
+preprint's \S1.2 summary of the complete execution and from its abstract's statement of Theorem 1.1;
+\S7 and Appendix A hold the details.
+
+\end{document}

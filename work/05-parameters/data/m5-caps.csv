@@ -1,0 +1,10 @@
+cap,value,scope,binding_in_recorded_run,largest_reached
+Stage A extra nodes,1000000,per seed,no (0 unresolved),not reported
+Stage B boxes,50000000,per parent,no (0 bad parents),"<= 28,629,151 at k=5, pass 2"
+Atlas Roots,2000000,per seed,no (0 failed seeds),not reported
+C bins,2000000,per record,no,"<= 250,000 by the 8e6 cap"
+clusters,2048,per record,no (no clustering failures),not reported
+graph steps,5000000,per record,YES (163 records),"5,000,000 x163"
+records per file,2000000,per file,no,256 (batch writer)
+concatenated inputs,8000000,per invocation,no,3083 (B mid)
+depth,6,per box,no,not reported

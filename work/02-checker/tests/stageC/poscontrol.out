@@ -1,0 +1,12 @@
+RANDOM tested400 (pattern 200 / no-pattern 200, skipped 0) mismatches 0
+PLANT M12 ok, last steps60
+PLANT M64 ok, last steps223
+PLANT M128 ok, last steps1039
+PLANT M256 ok, last steps6071
+PLANT M512 ok, last steps78110
+PLANT M1024 ok, last steps3244842
+PLANTED runs54 misses0 worst_steps3244842
+SELFLOOP brute0 search_mode1=1  (search YES + definition NO => the search's disjointness relies on U having no self-loops)
+CAP cap200 returned1 gaveup1 steps201 -> classification unresolved(cap)
+CAP cap5000 returned1 gaveup1 steps5001 -> classification unresolved(cap)
+CAP cap100000 returned1 gaveup1 steps100001 -> classification unresolved(cap)

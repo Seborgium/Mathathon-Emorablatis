@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.95in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black]{hyperref}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\U}{U}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\Frob}{\mathrm{F}}
+\newcommand{\key}[1]{\par\medskip\noindent{\normalsize\bfseries #1}\par\nobreak\vspace{-1pt}}
+\setlist[enumerate]{leftmargin=1.5em,itemsep=3pt,topsep=3pt}
+
+\title{\bfseries Step 3 of 5: certified cells inside $\U(2)$\\[5pt]
+\large\normalfont Companion to \texttt{mub-outline.pdf}, Figure 1; preprint \S3.3--3.4 and \S4--5}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-2.6em}
+
+\noindent
+\textbf{What this step receives.} For each seed ball: a guarantee that every completion gives a point
+$V\in\U(2)$ within $p\lesssim0.09$ of $\sqrt6$ times the compressed block, and nothing else.
+
+\par\medskip\noindent\textbf{What it must produce.} A finite cover of $\U(2)$, and for each cell either a proof
+that it holds no completion or a smaller certified region still containing all of them.
+
+\key{1.\ Parametrise the group, then cut it}
+
+Every $V\in\U(2)$ is $e(\alpha)$ times an element of $\SU(2)$, and every element of $\SU(2)$ is
+$\bigl(\begin{smallmatrix}z&w\\-\bar w&\bar z\end{smallmatrix}\bigr)$ with $\abs z^2+\abs w^2=1$. Writing
+$\abs z=\cos2\pi t$, $\abs w=\sin2\pi t$ and putting the two phases in $\beta,\gamma$ gives a
+four-parameter chart
+\[
+V=e(\alpha)\begin{pmatrix} e(\beta)\cos(2\pi t) & e(\gamma)\sin(2\pi t)\\
+-e(-\gamma)\sin(2\pi t) & e(-\beta)\cos(2\pi t)\end{pmatrix},
+\qquad
+0\le\alpha\le\tfrac12,\quad 0\le t\le\tfrac14,\quad 0\le\beta,\gamma\le1 .
+\]
+The chart's domain is a product of intervals, so it can be cut into closed \emph{cells} exactly as the
+phase circle was cut into bins. A cell has a centre $U$ and a displacement $\theta$ in the four
+angular coordinates, with $\abs{\theta_j}\le h=\pi/N_u$.
+
+\key{2.\ Taylor with an honest remainder}
+
+Two bounds make the grid usable, both uniform on the cell:
+\[
+\norm{V-U}_{\Frob}\le\sqrt6\,h,
+\qquad
+\norm{V-U-\mathrm dU[\theta]}_{\Frob}\le\frac{\sqrt{42}}{2}h^2 .
+\]
+The second is the useful one: inside a cell, the exact rotations are within $O(h^2)$ of a
+\emph{linear} model, with a constant obtained by differentiating the four entries above.
+
+\key{3.\ Certify, then inflate: the one pattern to take away}
+
+Here is the pattern the whole proof runs on, and it is worth stating without symbols.
+
+\emph{A check is designed for a point and is run on a model.} Suppose a test at the cell centre proves
+that some quantity exceeds a threshold by a margin $\mu>0$. If the quantity moves by at most $c\,h^2$
+across the cell, and $\mu>c\,h^2$, the test is true on the whole cell. So a test for exact points
+becomes a test for regions, provided the remainder is bounded and the margin exceeds it. The computer
+proposes the model; the inequality is what certifies; the fixed grid is what makes the remainder
+uniform.
+
+\key{4.\ Stage B: shrink the balls without losing a solution}
+
+A cell cover is honest but coarse. Stage B refines it using the equations rather than the group:
+
+\begin{enumerate}[label=(\alph*)]
+\item at a retained ball's centre, compute numerical directions approximating the tangent space of
+the Hadamard equations;
+\item prove a \emph{residual identity} saying that every exact solution's displacement is within a
+stated error of its projection onto those directions --- so the normal component is bounded by the
+tangential coordinates;
+\item cover the tangential coordinates by a grid, and inflate each cell by the normal bound.
+\end{enumerate}
+
+The result covers exactly the same exact solutions with smaller regions. Note what is \emph{not} done:
+no manifold is parametrised, no component is classified, no dimension is assumed. A curved piece of
+surface is covered by flat patches of known thickness, and that is all.
+
+\key{5.\ Atlas and refinement}
+
+Two bookkeeping steps complete the machinery. Section 4 collects certified phase balls from different
+seeds into a single \emph{atlas}, so that a region already proved empty is not reproved; Section 5
+handles the case where a ball is neither excluded nor resolved, by splitting it and reprocessing the
+pieces, with a bound on how much the radii may grow in the process. Growth matters: if each split
+inflated the region, the union could slowly stop containing the solutions it is supposed to contain.
+
+\key{Where this step can fail, and why that is safe}
+
+Refinement must terminate. If the grid is too coarse, a cell survives that should not; the fallback is
+to split it again, and the proof is unfinished until the cell dies. If a cap on refinement is
+exhausted, the region stays \emph{unresolved} --- a fact about the run, not about Hadamard matrices.
+Nothing in Stages A or B can exclude a region it has not certified, so again the failure mode is
+slow, not unsound.
+
+\medskip
+\noindent\textit{Note on sources.} The attached excerpt of the preprint ends in \S3.3, so the
+parametrisation and the two Taylor bounds above are read from the paper, while the shape of Stage B and
+of the atlas is taken from its \S1.2 summary. The reader with the full text should check \S4--5 for the
+exact residual identity and the radius-growth statement.
+
+\end{document}

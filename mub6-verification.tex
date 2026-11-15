@@ -1,0 +1,377 @@
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\inner}[2]{\langle #1,#2\rangle}
+\DeclareMathOperator{\tr}{tr}
+\title{\bfseries Independent Certificate Checks for the Dimension-Six\\[2pt]
+MUB Exclusion: A Verified Core and Its Boundary}
+\author{Open Math OS verification programme}
+\date{15 November 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}A 24 September 2026 preprint claims that $\C^6$ admits no four mutually unbiased orthonormal bases and hence that $N(6)=3$. The claim is computer-assisted: it depends on a particular binary64 execution of a long pipeline and on a written specification of seven programs. We report an independent reconstruction of parts of that evidence and a precise account of the boundary between what has been certified and what has not. The completed core consists of (i) a seed-cover certificate with $151{,}744{,}086$ pair records, $151{,}742{,}926$ mandatory covers, zero missing pairs and zero undecided dual comparisons; (ii) exact/outward certification of all basic and joint Stage-C pair predicates on four complete batch records, comprising $269{,}403$ basic-predicate evaluations and $61{,}832$ joint comparisons, with $10{,}293$ joint exclusions and no retained-pair violation; (iii) a complete local Stage-B transported-frame cover of one parent, verified by two arithmetic routes; (iv) exact subdivision trees and twenty directional Stage-A certificates on real cells; (v) explicit Root witnesses for $34$ previously anomalous records and for the two former stored-tensor-$C$ failures, all existential under the source's lemmas; and (vi) a Lean-checked conditional assembly of the six stage interfaces. We do \emph{not} claim that the source's global execution has been certified or that $N(6)=3$ has been proved here. The central methodological point is that unresolved is never negative: caps, missing witnesses, undecided intervals and incomplete covers remain obligations. The verified fragments are useful independently: they turn several formerly opaque binary64 decisions into small, checkable arithmetic facts, identify defects in the original evidence interface, and isolate the remaining analytic and coverage work. We discuss the significance of this trust architecture and give a concrete sequence of next steps toward a complete certificate.
+\end{abstract}
+
+\section{Introduction}
+
+Let $N(d)$ denote the largest cardinality of a set of pairwise mutually unbiased orthonormal bases of $\C^d$. The tensor construction gives $N(6)\ge 3$. The preprint \cite{source} reports the reverse inequality by a computer-assisted argument: after fixing two bases and reducing the second to a complex Hadamard matrix, a finite covering and refinement pipeline excludes the existence of two more bases. The argument is conditional on a binary64 arithmetic model, on a completed execution of the recorded programs, and on those programs implementing the paper's stated inequalities. These are not mathematical hypotheses that a reader can inspect in a proof; they are properties of an execution and of code.
+
+This paper asks a narrower question: which parts of the reported evidence survive an independent re-derivation, and what exactly remains missing? We do not claim to have proved $N(6)=3$. We claim to have made a substantial part of the evidence independently checkable, and to have identified the boundary sharply enough that further work can be scheduled by mathematical obligation rather than by program size.
+
+\subsection{Result and trust structure}
+
+The source pipeline has four mathematical layers followed by a combinatorial exclusion. A seed-cover stage reduces a complex Hadamard matrix to finitely many nine-phase balls. A completion stage converts every retained unitary cell into a certified phase ball, with an analytic radius and a Root certificate. A refinement stage replaces a parent phase ball by a union of smaller certified balls; the Stage-B local relation compares two phase centres and proves that a tangent box is contained in a child sphere. Finally, inside each small record a finite cluster of vector balls is built and two graphs, $O$ and $U$, over those balls are searched for the configuration of two further bases. The source's final theorem composes these stages through a terminal condition and a driver.
+
+The present work separates four notions that are easily conflated:
+\begin{enumerate}[label=(\roman*)]
+\item an execution produced numbers;
+\item a proposed certificate schema describes those numbers;
+\item a small independent checker certifies a necessary inequality or a cover;
+\item a formal proof assembles certified local facts into the global theorem.
+\end{enumerate}
+The evidence here establishes substantial items of type (iii) and a scoped formal skeleton of type (iv). It does not promote an execution, a schema, or a partial cover to the global result.
+
+\subsection{Contributions}
+
+\begin{enumerate}[label=\textbf{C\arabic*.},leftmargin=2.2em]
+\item A seed-cover object with an explicit per-pair witness stream and independent exact/outward checks (Section~\ref{sec:seed}).
+\item Exact and outward certification of the Stage-C pair predicates on four complete records, including the previously uncertified joint rule (Section~\ref{sec:stagec}).
+\item A local Stage-B transported-frame cover and an exact composition algebra for its twelve maps, with explicit limits on what may be chained (Section~\ref{sec:stageb}).
+\item Real Stage-A cell trees, twenty directional exclusions with full payloads, and the first audited Root witnesses for all formerly unresolved tensor-$C$ cases in the sampled Root set (Section~\ref{sec:stagea-root}).
+\item A Lean-checked conditional assembly whose hypotheses are explicit, together with a machine-readable verification manifest separating proved, conditional and open claims (Section~\ref{sec:assembly}).
+\end{enumerate}
+
+The contribution is therefore not a new numerical run of the source. It is a trust reduction: several decisions that formerly required trusting one binary64 execution are now statements about explicit rational input data which can be checked without executing the producer.
+
+\section{The Source Argument and Certificate Vocabulary}
+\label{sec:source}
+
+\subsection{Mutually unbiased bases and Hadamard matrices}
+
+Two orthonormal bases $(u_i)$ and $(v_j)$ of $\C^d$ are mutually unbiased if $\abs{\inner{u_i}{v_j}}^2=1/d$ for every $i,j$. After a unitary change of coordinates fixing the first basis, the second is the set of columns of $H/\sqrt d$, where $H$ is a complex Hadamard matrix: $\abs{H_{ij}}=1$ and $HH^*=dI$. In dimension six, the source reduces the extension problem to nine free phases after row and column rephasings.
+
+We use the following one-sided convention throughout. A \emph{Hadamard} matrix satisfies the displayed conditions in this order; a theorem that silently assumes both $HH^*=6I$ and $H^*H=6I$ is a theorem about a different class unless the equivalence is proved. This convention matters in formal verification even though it is routine in prose.
+
+\subsection{Certificates and the three-valued discipline}
+
+A \emph{phase ball} is a closed Euclidean ball $B(P,r)$ in the $36$-dimensional torus of real $6\times6$ phase matrices. Its radius is measured in cycles, not radians. A \emph{record} stores a centre $P$, a tangent frame $T$, a radius $r$, and a list of scalar certificate constants. A \emph{terminal outcome} for a record is one of
+\begin{center}
+\texttt{NEG}, \texttt{EMPTY\_BINS}, \texttt{POS}, \texttt{CAP}, \texttt{OVERFLOW}, \texttt{CLUSTER\_FAIL}, \texttt{INTERNAL}.
+\end{center}
+Only the first two are exclusions. A cap hit, overflow, clustering failure, undecided interval or missing witness is \emph{unresolved}; it is never counted as a negative result. This discipline is the most important invariant of the present work.
+
+\begin{definition}[Checkable inequality]
+Let $a(x),b(x)$ be real-valued quantities computed from explicit rational or dyadic input data by a stated finite formula. A certificate for $a(x)>b(x)$ on a region $R$ is an inclusion of $a$ in a lower interval $[a_L,a_U]$ and $b$ in an upper interval $[b_L,b_U]$ such that $a_L>b_U$ for every $x\in R$. The direction of every rounding must be outward.
+\end{definition}
+
+An \emph{existential} Root witness is different from a rerun: the record stores constants, and the certificate obligation asks whether there exists an auxiliary matrix $M$ satisfying the bounds. A witness that fails is an unresolved reconstructed witness, not a refutation of the record unless the stored constants themselves are shown inconsistent by exact arithmetic.
+
+\section{Verification Method}
+
+The checks reported below were run on the project's Linux VM with the cached upstream verification tree. The upstream source files are identified by SHA-256 against the published manifest \cite{source}; the replay and local checkers use those files as read-only inputs. The seed witness and the large record streams are identified by their own digests. All new code writes into project-owned work directories and never overwrites the upstream tree.
+
+Three arithmetic regimes are distinguished.
+\begin{description}[leftmargin=1.2em]
+\item[Exact rational] Every input is a binary64 number converted to the exact rational it denotes, and every comparison is an exact integer or rational comparison. Square roots are enclosed from above by integer arithmetic when needed.
+\item[Outward interval] Endpoints are binary rationals or MPFR numbers with directed rounding. Elementary functions are enclosed with endpoint rules and explicit critical-point handling; an interval that straddles the decision boundary gives \texttt{UNRESOLVED}, never a positive certificate.
+\item[Binary64 replay] The producer's own arithmetic is rerun as a provenance and transcription check. A binary64 agreement is not evidence of an exact inequality unless the certificate is separately rechecked.
+\end{description}
+
+Every certificate suite includes negative controls: altered signs, scaled radii, removed terms, malformed records and near-threshold perturbations. Controls are required to move a row from \texttt{CERTIFIED} to \texttt{CONTRADICTED} or to \texttt{UNSUPPORTED}. The controls test the checker, not the mathematics: a checker that accepts a corrupted witness is not a substitute for the source inequality.
+
+\section{The Seed-Cover Certificate}
+\label{sec:seed}
+
+\subsection{Object and counts}
+
+The seed-cover witness is a $5.7$ GiB binary stream whose SHA-256 is
+\[
+\texttt{de0d0790\ldots c06ae87}.
+\]
+Its header fixes $N=112$ and the independently enumerated X set of size $22{,}829$. The stream contains seven-byte X records, nine-byte pair records, and outcome records for fresh, cheap and dual reuses. The archived \texttt{centers.txt} has $249{,}878$ centres and SHA-256
+\[
+\texttt{c48bc9a2\ldots a5789}.
+\]
+The complete pair ledger is
+\begin{equation}\label{eq:seedcounts}
+151{,}744{,}086
+=249{,}878_R+45{,}648{,}766_C+105{,}845{,}442_D.
+\end{equation}
+The filtered assembly separates the mandatory set from additional disjoint pairs:
+\begin{equation}\label{eq:seedfilter}
+151{,}744{,}086=151{,}742{,}926_{\text{mandatory}}+1{,}160_{\text{exactly disjoint}}.
+\end{equation}
+Every mandatory pair is covered; the extra $1{,}160$ pairs have disjoint shared-displacement intervals and therefore need no cover. The canonical iteration reports zero missing mandatory pairs, zero duplicate pairs, zero invalid Y records, and zero gap-rule violations.
+
+\begin{proposition}[Seed certificate, conditional on the displayed lemmas]\label{prop:seed}
+Subject to the source's arrangement and normal-form lemmas, the finite seed phases are covered by the $249{,}878$ retained closed balls of radius $0.032$. The certificate checks every one of the $151{,}742{,}926$ mandatory pairs and has no unresolved pair.
+\end{proposition}
+
+\begin{proof}[Verification outline]
+The X and Y survivor sets are recomputed by an independent fixed-point enumerator. The X side gives $160{,}389{,}488$ weak tuples, then $85{,}349{,}292$ orientation candidates, then $16{,}197{,}157$ tuples passing the first gap inequality, and finally $22{,}829$ survivors of the six-direction necessary vanishing-sum test. The Y side gives $774{,}294{,}080$ tuples and $829{,}306$ survivors. Both accept sets agree with the upstream sets and have no unresolved members. The full pair stream checks predecessor indices and selected positions. Cheap reuses satisfy an exact integer inequality. Dual reuses are checked in $128$-bit outward MPFR; all $105{,}845{,}442$ are proved, with zero failures and zero undecided comparisons. The largest upward interval excess is $-1.11316\times10^{-8}$, so even the least favourable certified dual has negative excess. The midpoint radius is $3/(2N)=3/224<0.032$; the source's binary-midpoint enlargement to $0.0320001$ is a separate interface and is not included in this claim.
+\end{proof}
+
+A prefix of $158$ pairs was rechecked independently by both a Python dyadic interval checker and the MPFR checker. The prefix contains $9$ fresh, $136$ cheap and $13$ dual outcomes, all agreeing; its smallest excess is $-0.0690517$. A mutation suite of $62$ cases was accepted only after byte-span validation of each mutation, including altered predecessor indices, non-finite components, malformed tags and truncated streams.
+
+\subsection{What the seed certificate does not establish}
+
+It does not certify a Stage-A cell tree, a Root atlas, a Stage-B refinement, a Stage-C graph exclusion, or the final theorem. It also does not re-derive the analytic covering lemma: it certifies the finite arithmetic and membership obligations of the cover. This distinction is deliberate. Counting $151{,}742{,}926$ covered pairs without saying which lemma each pair uses would repeat the evidential error the certificate is meant to remove.
+
+\section{Stage-C: From Pair Inequalities to a Local Exclusion}
+\label{sec:stagec}
+
+\subsection{Records and the repaired composition block}
+
+The Stage-C schema is maintained as a versioned draft in \texttt{work/02-checker/spec/cert-format-stageC.md}. It separates a record's stage-B payload, its ball family, its non-edge evidence and its verdict. A mandatory composition block records the many-to-many covering relation between unresolved parents and fallback children. The recorded run has $163$ parents, $1{,}127$ children and $11{,}838$ incidences, of which $10{,}711$ are inherited from children created for another parent.
+
+During verification an index-space defect was found and corrected: the recovered map labelled a bad-file ordinal as a fine index, and $149$ of $163$ parent addresses did not denote capped records. The repaired block, with SHA-256
+\[
+\texttt{fd61d257\ldots e0f819},
+\]
+has $163/163$ independently derived capped addresses, unchanged counters, $1{,}127$ children, and $11{,}838$ ordered incidences. Its $28$-byte header is magic, version, \texttt{pass\_id}, then $n_{\rm parents},n_{\rm children},n_{\rm links}$; there is no reserved word after the counts. The schema mutation suite refuses $47/47$ malformed variants. This repairs the container, not the geometric cover: the $515{,}243$ inside cells remain per-cell obligations.
+
+\subsection{Basic pair predicates}
+
+For two vector balls with centres $u,v$, radii $s_u,s_v$, and $r_e=s_u+s_v$, put $Q_j=e(u_j-v_j)$, $S=\sum_jQ_j$, and
+\[
+(D_U)_j=\frac{\Re(S)(-\Im Q_j)+\Im(S)\Re Q_j}{6}.
+\]
+The four necessary conditions certified here are
+\begin{align}
+\text{(6.16)}_O:&\quad \frac{\abs S}{2\pi\sqrt6}>r_e,\label{eq:16o}\\
+\text{(6.16)}_U:&\quad \frac{\abs{\abs S/\sqrt6-1}}{2\pi}>r_e,\label{eq:16u}\\
+\text{(6.20)}:&\quad \frac{\abs S^2}{2\pi}>6r_e\norm{D_U}+\pi r_e^2\abs S,\label{eq:20}\\
+\text{(6.21)}:&\quad \abs{q_U}>r_e\norm{D_U}+\pi r_e^2(1+\abs S/6),\qquad q_U=\frac{\abs S^2/6-1}{4\pi}.\label{eq:21}
+\end{align}
+The expressions on both sides are evaluated in outward $200$-bit MPFR from the exact binary64 centres and radii. The code's guards use $1e-10$ on the pair radius, $2e-8$ on the error term and $2e-7$ on the comparison; the certified side is the exact real inequality, so none of those allowances is needed for validity.
+
+\begin{proposition}[Basic-predicate certificate]\label{prop:basic}
+On the four records $f_0\#0,\ldots,f_0\#3$, every firing of \eqref{eq:16o}--\eqref{eq:21} is reproved as a strict inequality in outward arithmetic. There are $269{,}403$ evaluated basic rules and $133{,}944$ certified exclusions; no interval is undecided, no code firing disagrees with the exact verdict, and no retained graph edge is certified excluded.
+\end{proposition}
+
+The four-record table is:
+\begin{center}
+\begin{tabular}{lrrrrrr}
+\toprule
+record & balls & pairs & (6.16)O & (6.16)U & (6.20) & (6.21)\\
+\midrule
+$f_0\#0$ & 212 & 22{,}366 & 18{,}606 & 9{,}254 & 1{,}032 & 1{,}619\\
+$f_0\#1$ & 234 & 27{,}261 & 22{,}708 & 11{,}337 & 1{,}262 & 2{,}031\\
+$f_0\#2$ & 229 & 26{,}106 & 21{,}504 & 11{,}227 & 1{,}307 & 1{,}900\\
+$f_0\#3$ & 211 & 22{,}155 & 18{,}408 & 9{,}105 & 1{,}055 & 1{,}589\\
+\midrule
+total & 886 & 97{,}888 & 81{,}226 & 40{,}923 & 4{,}656 & 7{,}139\\
+\bottomrule
+\end{tabular}
+\end{center}
+The tightest certified basic margin over all four records is $3.60\times10^{-7}$; the closest retained pair is at least $3.57\times10^{-7}$ from the boundary. The observed producer-versus-exact gap is at most $2.9\times10^{-16}$ on the stored values. The constant and sign controls include swapping the radius for its maximum, dropping the $1/6$, halving or doubling $E_O$, changing the phase unit and flipping $D_U$; the last is correctly identified as invisible to these sign-insensitive norms.
+
+\subsection{The joint predicate}
+
+For two vectors from the balls and a common Hadamard displacement $\delta$ with $\norm{\delta}\le r_H$ and tangent displacement $\eta=T^*\delta$ bounded by $r_H$, the joint necessary inequality has the form
+\begin{equation}\label{eq:joint}
+\abs{c\cdot y}\le \sum_{t=0}^1\left(s_t\norm{(J^t)^*y_t+(-1)^tD_E^*y_e}+E_t^{\rm ball}(y_t)\right)
++r_H\norm{(B^0)^*y_0+(B^1)^*y_1}+E_E\norm{y_e}.
+\end{equation}
+Here $m=12+k$ ($k=1$ for the unbiasedness branch and $k=2$ for orthogonality), the vector-ball terms are formed from the six-dimensional pair data, and the $H$-box contribution is kept explicitly. A strict failure for one stored $y$ excludes the pair; convergence of the solver that proposed $y$ is not assumed.
+
+\begin{proposition}[Joint-predicate certificate]\label{prop:joint}
+On the same four records, all $10{,}293$ joint rejections have a strict outward certificate at the producer's final stored direction, while none of the $51{,}539$ retained joint decisions is certified by that direction. The gate bits and the independent verdict agree on $61{,}832/61{,}832$ rows. The common $H$ terms are present; $TT^*$ agreed to $4.94\times10^{-15}$ against the stored $\omega=10^{-8}$ and the $K$ premise holds.
+\end{proposition}
+
+The tightest certified joint margin is $7.786\times10^{-7}$ on $f_0\#1$ pair $(188,46)$. A headline orthogonality pair is $f_0\#0$ $(188,173)$ with
+\[
+\abs{c\cdot y}=0.15323322954992958,\qquad
+\operatorname{RHS}(y)=0.08806125884794263,\qquad
+\text{margin}=0.0651719707.
+\]
+The rational arithmetic path agrees in sign and within its explicit rational pad; the pair passes the basic orthogonality tests, so the joint rule is the rule that actually excludes it.
+
+\subsection{Combinatorial local exclusion}
+
+For $f_0\#0$ the two graphs on $212$ balls have $\omega(O)=3$ and $\omega(U)=7$; the exact uncapped search finds no $O$-six-clique and therefore no configuration of two orthogonal six-cliques with all cross-$U$ edges. Three other real dumps ($250$, $260$ and $272$ balls) are non-vacuous: their $O$ clique numbers are $6$, with $1{,}997$, $326$ and $1{,}344$ six-cliques respectively, and the largest common-$U$ partner set has size at most one, so the forbidden configuration is absent by a margin of at least five partners. Planted controls recover a full configuration; deleting one cross edge leaves exactly five partners and is retained. These are exact finite graph decisions, not floating-point heuristics.
+
+\begin{proposition}[Conditional local Stage-C exclusion for $f_0\#0$]\label{prop:localc}
+Assume the $212$ emitted balls cover every admissible vector for the record, that the stored Root bounds cover the common Hadamard displacement, and that the pair predicates are necessary conditions. Then the phase ball of $f_0\#0$ admits no pair of further mutually unbiased bases.
+\end{proposition}
+
+\begin{proof}[Why the graph search suffices, conditional on the hypotheses]
+Every pair of vectors that could belong to two further bases either lies in a pair of balls with all the necessary inequalities satisfied or violates one; the basic and joint checks certify every violation. The surviving pairs form the two graphs. Two further bases would require six mutually orthogonal vectors in each group, all unbiased across the groups, hence two $O$-six-cliques with all $36$ cross pairs in $U$. On $f_0\#0$ the $O$ graph has clique number $3$, so such a configuration cannot exist. The statement remains conditional because ball coverage and the analytic interpretation of the pair inequalities are not re-proved here.
+\end{proof}
+
+\section{Stage B, Stage A, and Root Witnesses}
+\label{sec:stageb}
+
+\subsection{A local transported-frame cover}
+
+For the fallback parent \texttt{bad10.bin\#0}, the independently rebuilt Stage-B ledger closes the entire $11^4=14{,}641$ grid:
+\[
+14{,}641=11{,}480_{\text{outside}}+3{,}161_{\text{covered}}+0_{\text{open}}.
+\]
+There are $902$ exact relations, of which $303$ are used, over $158$ children and $12$ signed row/column maps. All edges are rebuilt in exact rational arithmetic; the smallest closure margin over the selected witness is $1.0514\times10^{-9}$. The source-directed bridge additionally proves
+\[
+\operatorname{Relation}(P,R,\Phi Q)=\operatorname{Relation}(\Phi^{-1}P,R,Q)
+\]
+on $\eta,\norm{dq},n_q,total,\nu_0,\lambda,e,\beta,\sigma$ and $D(\ell)$ for all $902$ edges. Signed permutation maps are not generally involutions; using $\Phi$ instead of $\Phi^{-1}$ reproduces the relation only on the $620$ involutive edges and fails on the other $282$, of which $135$ still pass the radius test. This is why the direction must be carried explicitly.
+
+The twelve maps form a group isomorphic to $D_6\cong Z_2\times S_3$ of order $12$, with order profile $1,2^7,3^2,6^2$. The action law $\Phi_b\Phi_a=\Phi_{a\circ b}$ was checked on $22{,}896$ triples of $159$ real records, the action is free on all $1{,}290$ available records, and the two-sided relation identities hold on $720/720$ sampled pairs and on $902/902$ edges for two full sweeps. There are $2{,}410$ exact same-child composition links.
+
+This is a local cover, not a chain: no transported child equals a stored parent among the $1{,}896$ checked candidates. The other $162$ parents and the child-specific Stage-C assemblies remain obligations. The source's Proposition~5.7 uses certified spheres up to the permitted equivalences; no separate ``ledger'' at the transformed centre is required by that proposition, but every later exclusion still requires the corresponding Stage-C evidence.
+
+\subsection{Stage-A subdivision and directional certificates}
+\label{sec:stagea-root}
+
+For seed $0$, level-zero cell $(7,2,11,11)$, an instrumented but byte-identical upstream Stage-A \texttt{patchx} replay produces a real $113$-node tree: $7$ internal PASS nodes, $14$ covered leaves, $72$ norm-pruned leaves, $20$ dual-pruned leaves and one Root. The closed children at every internal node are exactly the sixteen rational half-cells; their volumes sum to the parent volume, and the leaf volumes sum to $1/65536$. A second tree has $145$ nodes, and a one-node tree checks the degenerate no-witness case. All $113/113$ node sums and $b.z$ values agree bit-for-bit with the accepted tree; $72/72$ norm predicates and $20/20$ dual predicates reproduce. The replay driver itself does not implement the covering test, so it labels the $14$ covered leaves PASS rather than COVERED; the sum and $b.z$ comparisons hold on those leaves too, which is why the labelled verdict counts are not the object of the check.
+
+For every one of the twenty dual-pruned leaves, the public final direction $y$ and the full \texttt{trial::certificate} payload were emitted. The certificate has the form
+\[
+y\cdot c>\lVert g\rVert_1 R_s+\lVert g_{9:12}\rVert_1 h+\frac{z^2}{2}\max(0,-y)+\cdots+10^{-4},
+\]
+where the displayed ellipsis denotes the two remaining bounded terms of the source. Exact evaluation gives a minimum strict margin $0.0206374$ and a maximum $0.2937102$, between $206$ and $2{,}937$ times the pad. All $360$ controls behave: a perturbation to a margin of $5\times10^{-5}$ fails, a margin of $2\times10^{-4}$ passes, homogeneous rescaling of $y$ leaves the normalized comparison unchanged, and $y\to-y$, $y\to0$, altered centre data and altered bound scales are rejected or declared unresolved.
+
+The certificate implication ``dual inequality $\Rightarrow$ empty cell'' is the source's (3.26) and is not reproved. Likewise the analytic majorisation behind each bound field is a quoted source lemma; what is checked is its arithmetic realization and outward direction. Thus these twenty are genuine, independently checkable certificate inequalities, but not a twenty-cell proof of the Stage-A exclusion without those lemma hypotheses.
+
+\subsection{Root witnesses}
+
+Root certificates control the displacement of exact solutions from a stored approximate centre. The record constants include $\omega$ for the tangent-frame orthogonality, $\nu_0,\iota,\Gamma$ for the normal displacement, $\mu$ for the residual scale, and $C$ for the quadratic remainder. A witness consists of an explicit matrix $M$ and rational congruences $U_A,U_M$; the checker verifies
+\[
+\norm M_2\le\mu,\qquad
+\norm{\Pi-TT^*-ML_P\Pi}_F\le\iota,\qquad
+C\ge\pi\min(\sqrt8\,\mu,\sqrt6\,\lambda_{\max}(A))
+\]
+where $A$ is the sign-weighted row Gram of $M$. The congruences supply the spectral bounds by exact rational algebra; no eigensolver is trusted, and the modular matrix $M$ is separately checked to disappear in the residual.
+
+For the $43$ records whose tensor branch previously did not reproduce the stored $C$ by a naive reconstruction, $34$ now have explicit witnesses passing all three clauses; $9$ remain undecided because the local search did not find a sufficient $M$. This is an existential statement, not a recovery of the source's matrices. The two original sample rows with \texttt{root != pass} are treated separately: at exact signed-permutation images they admit rescaled witnesses that pass all basic bounds, the residual and the tensor-$C$ clause, with tensor-$C$ margins about $4.7\times10^{-7}$. The exact image maps back to the stored phases, and the measured $TT^*$ projector discrepancy is bounded by $7.39\times10^{-14}$ and $6.35\times10^{-14}$, well below the $2\times10^{-6}$ residual budget. These results are conditional on Lemmas~4.4 and~4.7 of the source and do not recover the original pre-canonical centre or original $M$.
+
+\section{Conditional Assembly and the Boundary of the Result}
+\label{sec:assembly}
+
+\subsection{The Lean skeleton}
+
+The assembly was formalised in Lean~4 against Mathlib~\cite{Lean,Mathlib}. The conditional theorem has the following shape: if the seed cover is valid, the stage-A cell tree and stage-B ledger cover the appropriate regions up to the prescribed equivalence, the stage-C records have terminal negative verdicts, and the driver's terminal conditions hold, then no point of the initial set is extendible by two further bases. The proof uses two finite inductions, one over subdivision depth and one over completed parent records. The files \texttt{StageCNecessity.lean}, \texttt{StageCGraph.lean} and \texttt{AssemblyScoped.lean} elaborate without \texttt{sorry} or \texttt{native\_decide}; the chain lemmas depend only on the standard Lean axioms. The theorem is an assembly interface, not an instantiation of the source execution.
+
+The key structural finding is that the source's terminal theorem needs a driver hypothesis that its prose does not state. The coverage implications alone do not imply that a particular run has traversed every required branch, consumed every cap, and produced no unresolved record. In the Lean statement that obligation is explicit. This is not a cosmetic difference: a run can satisfy every local inequality it evaluates yet fail to evaluate some region, and no local certificate then covers that region.
+
+\begin{theorem}[Scoped assembly]\label{thm:assembly}
+Suppose every point of the initial phase set is equivalent to a point covered by the seed certificate; every retained seed is covered by a certified Stage-A/B/C tree; every terminal Stage-C record is certified negative; and the terminal driver conditions hold. Then no point of the initial set is extendible by a second pair of mutually unbiased bases. The Lean proof establishes the logical implication with each of these assumptions as an explicit binder.
+\end{theorem}
+
+\subsection{What has not been established}
+
+Table~\ref{tab:status} is the honest boundary. A row marked ``certified'' means that the stated arithmetic or finite assertion was independently recomputed at the stated population. It does not mean that the surrounding analytic lemma or the full stage has been proved.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{p{0.25\linewidth}p{0.26\linewidth}p{0.34\linewidth}}
+\toprule
+Obligation & Evidence obtained here & Remaining gap \\
+\midrule
+Seed covering (Proposition 2.10) & $151{,}742{,}926$ mandatory pairs; all exact/MPFR checks pass; $62/62$ mutations refused & Only conditional on arrangement/normal-form lemmas and the $0.0321$ binary interface \\
+Stage-A cell trees & Real $113$- and $145$-node trees; exact subdivision and Root-link arithmetic & Analytic norm/dual majorisation and all other cells/caps \\
+Stage-A directional certificates & $20$ exact dual inequalities, margins $>200\times$ pad, $360$ controls & The implication from the certificate to cell emptiness (source 3.26) \\
+Stage-B local cover & $14{,}641=11{,}480+3{,}161+0$ for one parent; $902$ exact transported edges; composition algebra & No real two-level chain; $162$ other parents; child-specific later evidence \\
+Stage-C basic pairs & $269{,}403$ evaluations, $133{,}944$ exclusions, no undecided & Ball/cluster cover and the other $23{,}339$ records \\
+Stage-C joint pairs & $61{,}832$ comparisons, $10{,}293$ exact exclusions, no retained violation & Same ball/cluster and run-wide coverage \\
+Root witnesses & $34/43$ different-$U$ anomalies plus $2/2$ former tensor-$C$ samples, with explicit $M$ and controls & Nine open witnesses; primitive-frame/other-root clauses; full corpus \\
+Final driver and theorem & Lean assembly skeleton with explicit hypotheses & Complete instantiation, all missing local witnesses, human gate, and the actual binary64/compiler trust model \\
+\bottomrule
+\end{tabular}
+\caption{Status of the certificate programme. No row by itself proves $N(6)=3$.}
+\label{tab:status}
+\end{table}
+
+In particular, the source's 92-command Stage-C replay is a provenance result: all archives were reproduced byte-for-byte in the recorded run, but byte identity is not a proof of the predicates. The local predicate work reported here verifies the predicates on four records; it does not turn the replay into a global exact certificate. Similarly, the $163$ capped records remain unresolved in the recorded run and are covered only through the fallback chain; their exclusions cannot be attributed to the original capped graph search.
+
+\section{Significance and Next Steps}
+\label{sec:significance}
+
+\subsection{Why a verified boundary is significant}
+
+Computer-assisted exclusions of this size are often reported as a list of counters: records processed, caps hit, graphs searched, bytes reproduced. Those counters establish reproducibility but not implication. The present work replaces several high-risk links with small statements that have a clear truth value: a finite pair stream covers every mandatory pair; a set of sixteen half-cells partitions its parent; a rule such as (6.20) holds outward for every evaluated pair; a twelve-element map set is closed under composition; a rescaled matrix exists that satisfies the Root clauses. Such statements can be checked by a reader-written program and are largely independent of the producer's numerical path.
+
+This has three consequences. First, failures of evidence can be separated from failures of mathematics. A failed witness, a capped search and an unresolved interval are different verdicts. Second, repairs become auditable: the composition parent-index bug and the byte-versus-permutation defect in the graph dump were caught because the evidence had to survive an independent decoder, not because a hash changed. Third, the remaining proof obligations become a finite engineering plan rather than a narrative about a large run.
+
+The result is also scientifically useful without the final theorem. It supplies a reproducible seed-cover object, a local Stage-C predicate checker, a valid local Stage-B cover, and a formal statement of the assembly. These are reusable infrastructure for the source proof, for any reimplementation, and for the independent interval-arithmetic proof of the same theorem~\cite{WT26}. They do not, however, replace a peer-reviewed proof or the source's full binary64 analysis.
+
+\subsection{Priorities}
+
+\begin{enumerate}[label=\textbf{N\arabic*.}]
+\item \textbf{Certify the ball/cluster cover.} The Stage-C predicates are statements about balls. The remaining missing premise is that every admissible bin in each record lies in one of those balls. This should be checked outward in the same four-record pilot before any global graph claim.
+\item \textbf{Complete Stage-A locally.} The twenty directional certificates need the analytic implication and a complete cell tree. The next target should be one tiny seed whose entire retained tree is certified, not a full production run.
+\item \textbf{Transport Stage-B as a chain.} The local cover is complete for one parent, but no real two-level parent/child instance exists in the stored data. The next acceptable object is a parent sphere whose own ledger, transformed child ledger and terminal Stage-C record are all present and independently checked.
+\item \textbf{Resolve the nine Root witnesses.} Either find exact $M$-witnesses at the same standard as the thirty-four, or prove a rigorous obstruction. A failed search is not an obstruction.
+\item \textbf{Repeat the predicates at scale.} The basic/joint implementation should be run over all completed-negative records and all fallback records before the graph-search evidence is assembled. The two graph records with $\omega(O)=3$ must remain distinguished as vacuous cases.
+\item \textbf{Instantiate the Lean assembly.} The assembly theorem is only a skeleton until every \texttt{Cov} and terminal premise is connected to a decoded certificate. This is the point at which the formal and numerical branches meet.
+\item \textbf{Commission an independent human review.} No result in this report is a human gate. A reviewer must read the arithmetic contracts, run the checkers on fresh copies, and decide whether the trusted base is acceptable.
+\end{enumerate}
+
+The first two items are prerequisites for claiming a certified local Stage-C exclusion; the third is a prerequisite for a global Stage-B cover; the fourth and fifth are prerequisites for the full analytic exclusion; the sixth is the formal assembly. Until all are complete, the correct statement is: a substantial verified core exists, and the original global claim remains conditional.
+
+\section{Reproduction and Evidence Map}
+
+The verification jobs and their machine-readable summaries are in \texttt{results/preprint-verification/}. The principal artefacts are:
+\begin{itemize}[leftmargin=1.4em]
+\item seed stream and summaries: \texttt{certdata/runs/h1-seed-emission/};
+\item Stage-C composition and repaired map: \texttt{certdata/runs/h1-coverage/};
+\item Stage-B local witness and source bridge: \texttt{certdata/runs/h2-stageb/};
+\item real Step-A trees: \texttt{.ultramath/smwh7pmn0/m5/runs/};
+\item basic/joint Stage-C checkers and logs: \texttt{.ultramath/smwh7pmn0/m6/} and \texttt{.ultramath/smwh95wl3/m3/};
+\item Root witnesses: \texttt{.ultramath/smwh7pmn0/m1/runs/} and \texttt{certdata/runs/h1-root-interval/};
+\item Lean assembly: \texttt{work/04-lean/Mub6/}.
+\end{itemize}
+The exact commands, source hashes and results are recorded in the accompanying verification manifest, \texttt{results/\allowbreak preprint-verification/\allowbreak MANIFEST.md}, which separates checks rerun for this article from results quoted from earlier reports. The seed certificate is reproducible from the witness stream with \texttt{src/qcheck/\allowbreak seed\_stream\_audit.cpp} and \texttt{seed\_dual\_mpfr.cpp}; the Stage-C pair work with the checkers and mutation scripts cited in the respective directories; the Root witness work with \texttt{verify\_all.py}; and the Stage-A tree with \texttt{reproduce.sh}. The 92-command replay is cited from its archived log and was not rerun in the one-hour preparation of this article.
+
+\begin{thebibliography}{9}
+\bibitem{source} OpenAI. \emph{The maximum number of mutually unbiased bases in dimension six.} Preprint, 24 September 2026.
+\bibitem{WT26} M.~C\'ardenes Wuttig and J.~Tindall. \emph{Using topology to reveal all mutually unbiased bases in dimension six.} arXiv:2611.06917 [quant-ph], 4 November 2026.
+\bibitem{Zauner} G.~Zauner. \emph{Quantendesigns: Grundz\"uge einer nichtkommutativen Designtheorie.} PhD thesis, Universit\"at Wien, 1999.
+\bibitem{Lean} L.~de Moura and S.~Ullrich. \emph{The Lean~4 theorem prover and programming language.} CADE-28, 2021.
+\bibitem{Mathlib} The Mathlib Community. \emph{The Lean mathematical library.} CPP 2020.
+\bibitem{MPFR} The MPFR Team. \emph{GNU MPFR: a multiple-precision binary floating-point library with correct rounding.} GNU MPFR 4.2 manual.
+\end{thebibliography}
+
+\appendix
+\section{The verification discipline in one table}
+
+\begin{center}
+\footnotesize
+\begin{tabular}{p{0.22\linewidth}p{0.24\linewidth}p{0.40\linewidth}}
+\toprule
+statement & arithmetic & failure mode if weakened\\
+\midrule
+seed pair covered & exact integer / outward MPFR & half-open boundaries or undecided dual become gaps\\
+basic pair excluded & outward MPFR from dyadic centres & a retained edge becomes a false exclusion\\
+joint pair excluded & outward MPFR from final $y$ & dropping $H$ or $y_e$ makes the bound unsound\\
+cell children cover parent & exact rational volumes & a missing child loses a feasible region\\
+$TT^*$ frame transport & exact rational projector & a wrong basis comparison is not a Root proof\\
+Stage-B relation & exact rational dephasing & wrong map direction produces a false relation\\
+assembly & Lean kernel & a missing terminal/driver premise leaves a region unaccounted\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{remark}
+The table is also a checklist for readers: a reported certificate should state which input data it consumes, which arithmetic decides each comparison, which direction is outward, and which failures are unresolved rather than negative. A count of successful program exits is not a substitute for those four items.
+\end{remark}
+
+\end{document}

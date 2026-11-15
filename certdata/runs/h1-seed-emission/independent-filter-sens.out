@@ -1,0 +1,4 @@
+(2.8a) exact_pass=29536175 fp_pass=29536175 disagreements=0  (2.7)+exact=16197157
+(2.11) accepted=22829  near-tie |margin|<1e-6: 24 (see logs/x_near.txt)
+sumok-passing multisets=169194  |Y|=829306
+pairs=178259964648  (2.8b) exact_pass=54566832593 fp_pass=54566832593 disagreements=0

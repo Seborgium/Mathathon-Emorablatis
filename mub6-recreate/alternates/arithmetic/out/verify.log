@@ -1,0 +1,75 @@
+== 0. the oracle copy is the published file, byte for byte
+   test/seed_orig.cpp sha256 3c6c7a7092230de231fdb23b6d1782de0dd9ef6689095763b875d90ce5ddeb44
+PASS  seed_orig.cpp is the published seed.cpp (sha256 3c6c7a70...)
+== 1. build
+PASS  build oracle_probe (published seed.cpp, published flags)
+PASS  build mine_dump (modular arith unit + test scaffold)
+PASS  build unit_tests (-O2 -march=native -ffp-contract=off)
+== 2. dumps (each ~20 s; run concurrently)
+   oracle_probe 73.35 s   rc=0
+   mine_dump    69.19 s   rc=0
+PASS  both dumps ran to completion
+   oracle.dump 7fb12e3b75f64d97b528f922d81c23686ec7707754c356b913f7b585d125a0f5  66204081 B
+   mine.dump   7fb12e3b75f64d97b528f922d81c23686ec7707754c356b913f7b585d125a0f5  66204081 B
+== 3. R2-style gate of this unit: the two dumps are the same bytes
+PASS  cmp oracle.dump mine.dump (pi, n, w, 112 tab entries, 22829 xs, all ys)
+== 4. independent unit tests (no expected value comes from our own code)
+pi = 0x1.921fb54442d18p+1, bits 0x400921fb54442d18, (double)acosl(-1) = 0x1.921fb54442d18p+1
+T1 pi literal == (double)acosl(-1.0L)                      PASS
+T1 pi bits == 0x400921FB54442D18                           PASS
+T1b FLT_EVAL_METHOD == 0                                   PASS
+T1b double significand is 53 bits                          PASS
+T2 environment() -> FE_TONEAREST from every rounding mode  PASS
+     1/10 upward 0x1.999999999999ap-4 downward 0x1.9999999999999p-4 nearest 0x1.999999999999ap-4
+T2b the rounding mode is observable (1/10 up != down)      PASS
+T3 expair(0) == (1,0) exactly                              PASS
+T3 expair(1/4) == (0,1) exactly                            PASS
+T3 expair(1/2) == (-1,0) exactly                           PASS
+T3 expair(3/4) == (0,-1) exactly                           PASS
+T3 expair(16.0000001) is NaN,NaN                           PASS
+T3 expair(1e300) is NaN,NaN                                PASS
+T3 expair(-16.0000001) is NaN,NaN                          PASS
+T3 expair(16) is in range                                  PASS
+     worst |expair - (cos,sin)(2 pi x)| over 200001 x in [0,1): 5.000 x 2^-53 at x=0x1.4d527e5215769p-1
+T3 expair is within 8 x 2^-53 of the long-double exponential PASS
+     worst tab-grid error: 5.000 x 2^-53
+T3b tab grid is within 8 x 2^-53 of cos/sin                PASS
+T4 hp(3,4) == 5 exactly                                    PASS
+T4 hp(0,0) == 0 exactly                                    PASS
+T4 hp(-3,-4) == 5 exactly                                  PASS
+     err = 0x1.4843ae1860576p-12   (5*pi/(4*112*112) = 0x1.4843ae1860577p-12, delta 1 ulp)
+T5 err == 0x1.4843ae1860576p-12 (pi*(w*w/4)*5.)            PASS
+T5 the two associations differ by <= 2 ulp                 PASS
+     max |c_longdouble - c| / err over 4000 sampled seeds: 7.093e-13
+T6 every sampled seed's c lies inside its err ball         PASS
+
+ALL PASSED: 0 failure(s)
+PASS  unit_tests
+== 5. high precision + recorded artefacts
+dump: out/mine.dump  sha256 7fb12e3b75f64d97b528f922d81c23686ec7707754c356b913f7b585d125a0f5
+recorded stdout (../../../.scratch/gh/covrun.log) starts: 'xs22829 build19.30| t0/22829 cells42 centers5| t'
+T7 xs count == 22829 (published stdout)                            PASS
+T7 the cached published stdout says xs22829                        PASS
+T7 n == 112                                                        PASS
+T7 w == 1/112 exactly                                              PASS
+T7 pi == the correctly rounded binary64 pi                         PASS
+     tab: 7/112 entries are the correctly rounded double of cos/sin; worst 3.00 x 2^-53 at i=61
+T8 every tab entry is within 8 x 2^-53 of the 60-digit value       PASS
+T9 centers.txt is 7339546 bytes                                    PASS
+T9 centers.txt sha256 matches the record                           PASS
+T9 header is '112 249878'                                          PASS
+T9 249878 centre lines                                             PASS
+T9 every line ends with one space before the newline               PASS
+     centres reference 13557 distinct (b,s) pairs; 0 not among the dump's seeds
+T9 every centre's (b[0..4],s) is a seed of the dump                PASS
+T9 the centres use no seed the dump lacks                          PASS
+     seed err = pi*(w*w/4)*5 = 3.13057303650130804538e-04 ; exact real value = 0.000313057303650130863208 ; delta = -0.00 x 2^-53
+T10 the seed err constant is within 1 x 2^-53 of pi*w^2*5/4        PASS
+
+ALL PASSED
+PASS  check_highprec on mine.dump
+
+ALL PASSED
+
+ALL CHECKS PASSED
+log: out/verify.log

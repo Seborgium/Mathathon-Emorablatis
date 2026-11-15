@@ -1,0 +1,262 @@
+% notation.tex -- T1 catalogue, gate G0.
+% One table for the paper's three naming systems, one name per object, units everywhere.
+% Compiles standalone (latexmk -pdf notation.tex) and is safe to \input into the paper body.
+\documentclass[11pt]{article}
+\usepackage[margin=2.2cm]{geometry}
+\usepackage{longtable,array,amsmath,amssymb}
+\usepackage[T1]{fontenc}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\begin{document}
+
+\section*{Notation: one name per object}
+
+These are binding rules for the final file (T8) and for the checker's record format (T2).
+
+\begin{enumerate}
+\item \textbf{One name per object.} Where the paper uses one letter for two things, this file picks
+  one meaning and renames the other. Table~2 lists the actual collisions.
+\item \textbf{Units are part of the statement.} Every numerical constant carries its unit:
+  \emph{cycles} (phase divided by $2\pi$, the unit in which radii such as $0.032$, $0.125$, $.016$,
+  $.011$, $.0038$ and $.042$ are stated) or \emph{radians} (the unit in which $\theta$, $h=\pi/N_u$,
+  $s$ as a seed displacement, $d_j$ as an angular displacement and arc are stated), or
+  \emph{dimensionless}. The conversions $R_s = 2\pi r_s$ and the $/(2\pi)$ and $/\pi$ in
+  Lemma~4.10 are the only places where the two mix, and both must be written with their factor.
+\item \textbf{The seven Root constants are always written in Definition~4.1 form.}
+  Sections 5 and 6 rename them; those renamings are translation tables, not notation.
+\end{enumerate}
+
+\subsection*{Table 1: the seven Root constants, three naming systems}
+
+Definition~4.1 introduces them as $C,n_0,\mathrm{id},\mathrm{ort},\mathrm{hor},\mathrm{mnorm},\mathrm{froot}$;
+\S5.1 renames five of them; \S6.1 renames four of them again; \S7.1 stores the first set in every record.
+
+\begin{longtable}{@{}L{1.05cm}L{1.15cm}L{1.2cm}L{4.9cm}L{1.9cm}L{0.9cm}@{}}
+\hline
+Def.~4.1 & \S5.1 & \S6.1 & what it is, in words & type / unit & first \\
+\hline
+\endhead
+$C$ & $\gamma_P$ & $\Gamma$ &
+Coefficient of $s^2$ in the normal polynomial $n_P(s)$: how fast the bound on the
+normal (off-tangent) part of a displacement grows quadratically with its total size. Certified as
+$\pi$ times a remainder constant $b$ (Lemma~4.3, 4.4). &
+nonneg.\ real, dim.\ free & \S4.1 \\
+$n_0$ & $n_0$ & $n_0$ &
+Constant term of $n_P$: the normal-displacement bound in the limit of a zero-size displacement.
+Certificate requires $n_0 \ge \mathrm{mnorm}\cdot\mathrm{froot}$ (4.15); \S6.1 admits $n_0<10^{-6}$. &
+nonneg.\ real, cycles & \S4.1 \\
+$\mathrm{id}$ & $\alpha_P$ & $\iota$ &
+Coefficient of $s$ in $n_P$: the linear growth rate of the normal bound. Comes from the certified
+deviation identity (4.15); \S6.1 admits $\mathrm{id}<10^{-4}$. &
+nonneg.\ real, dim.\ free & \S4.1 \\
+$\mathrm{ort}$ & $o_P$ & $\omega$ &
+Orthogonality defect of the stored tangent frame: $\|T^*T-I\|$. Bounds the loss when a displacement is
+reconstructed from its tangent coordinates. \S6.1 admits $0\le\omega<10^{-5}$, a site of \S6.1's
+unclosed hypothesis (see report item I3). &
+nonneg.\ real, dim.\ free & \S4.1 \\
+$\mathrm{hor}$ & $\mathrm{hor}_P$ & --- &
+Horizontality defect of the frame: $\|(I-\Pi)T\|$. Not renamed in \S5.1, unused in \S6.1.
+The only Root constant that keeps one name throughout. &
+nonneg.\ real, dim.\ free & \S4.1 \\
+$\mathrm{mnorm}$ & $\mu_P$ & --- &
+Operator norm bound for the auxiliary matrix $M$ in (4.15): $\|M\|\le\mathrm{mnorm}$, used with
+$\mathrm{mnorm}\cdot\mathrm{froot}\le n_0$. &
+nonneg.\ real, dim.\ free & \S4.1 \\
+$\mathrm{froot}$ & $\varepsilon_P$ & $f_0$ &
+Bound on the residual at the stored centre: $\|F(P)\|\le\mathrm{froot}$. This is the
+``distance of the centre from the Hadamard locus''; \S6.1 admits $f_0<10^{-6}$. &
+nonneg.\ real, dim.\ free & \S4.1 \\
+\hline
+\end{longtable}
+
+\noindent\emph{Rule.} After this table the paper writes these seven always as
+$C,n_0,\mathrm{id},\mathrm{ort},\mathrm{hor},\mathrm{mnorm},\mathrm{froot}$, with the centre as a
+subscript when two Roots are in play: $C_P$, $n_{0,P}$, $\mathrm{id}_P$, $\mathrm{ort}_P$,
+$\mathrm{hor}_P$, $\mathrm{mnorm}_P$, $\mathrm{froot}_P$. The second Root in \S5 is $Q$, with its
+tangent matrix $S$ (not $T$).
+
+\subsection*{Table 2: letters that carry two or three objects in the paper}
+
+\begin{longtable}{@{}L{1.1cm}L{3.4cm}L{5.6cm}L{2.2cm}@{}}
+\hline
+letter & the paper's uses & the fix & where \\
+\hline
+\endhead
+$D$ &
+(i) the $4\times4$ comparison block $D=D_{\mathrm{span}}+D_{\mathrm{ker}}$ of \S3.4;
+(ii) a scalar distance upper bound in Prop.~5.2 ($D\ge R+\|d_q\|$);
+(iii) $\hat D(t)$, the computed Stage-B function of \S5.2. &
+Write $D^{\mathrm{cmp}}$ for (i) (\emph{comparison block}), $D^{\mathrm{ub}}$ for (ii), and keep
+$\hat D(t)$ for (iii) with its argument always displayed. The comparison block is not the lower-right
+block of a Hadamard matrix at the centre; say so once. &
+\S3.4, \S5.1, \S5.2 \\
+$n_P$ &
+(i) the normal polynomial $n_P(s)=n_0+\mathrm{id}\,s+Cs^2$;
+(ii) the normal displacement bound $n=n_0+\iota r+\Gamma r^2$ of (6.2). &
+$n_P$ is the function, $n_P(s)$ its value. In \S6 write $n_P(r)$, never a bare $n$. The word
+\emph{normal} always means ``the part of $\delta$ orthogonal to the stored tangent frame'', so
+$n_P$ is a \emph{bound}, not a coordinate. &
+\S4.1, \S6.1 \\
+$m$ &
+(i) the pair of lower singular bounds $m_B=\sigma_{\min}(B_0)$, $m_C=\sigma_{\min}(C_0)$ and the
+shorthand $m=\min(m_B,m_C)>0$;
+(ii) $m_j=|D_j|$, the moduli of the sixteen comparison-block entries (Lemma~4.8);
+(iii) $m\in\mathbb{Z}^6$, the integer lift vector in Stage-C clustering (Lemma~6.4). &
+Keep $m_B,m_C,m$ for (i) but always with the subscript or the defining display;
+write $\dot m_j := |D_j|$ (or spell it) for (ii); write $\mathbf{m}\in\mathbb{Z}^6$ for (iii). &
+\S3.1, \S4.4, \S6.3 \\
+$\varepsilon$ &
+(i) $\varepsilon$, the stored-centre correction in cycles, $\|\varepsilon\|\le2\cdot10^{-6}$ (4.20);
+(ii) $\varepsilon_P=\mathrm{froot}_P$ (\S5.1);
+(iii) $\varepsilon_{\exp}=6\cdot10^{-14}$, the unit-exponential error (A.10). &
+Keep $\varepsilon$ for (i) only (it is a vector in $\R^{36}$); write $\mathrm{froot}_P$ for (ii);
+write $\varepsilon_{\exp}$ with the subscript for (iii). &
+\S4.4, \S5.1, \S A.2 \\
+$N$ &
+(i) the seed grid resolution $N=112$, $w=1/N$;
+(ii) an integer $6\times6$ lift matrix in (4.17), Lemma~4.15. &
+Write $N_{\mathrm{grid}}$ (or just $112$) for (i); write $N^{\mathrm{lift}}$ or $\mathbf{N}$ for (ii),
+and always display the integrality hypothesis next to it. &
+\S2.2, \S4.3 \\
+$k$ &
+(i) the number of stored tangent columns, $0\le k\le10$;
+(ii) $k=N(u-u')\in\mathbb{Z}^9$, the integer grid difference in Lemma~2.9. &
+$k$ stays (i); write $\kappa$ for (ii). &
+\S4.1, \S2.4 \\
+$s$ &
+(i) the nine-component seed displacement $s\in\R^9$ (\S3.1) and its norm $s=\|\delta\|$ in Def.~4.1;
+(ii) the radius $s$ of a Stage-C vector ball $B_{\mathrm{vec}}(v,s)$. &
+In Definition~4.1 use $s=\|\delta\|$ exactly as printed, but in \S3 write $s$ only for the vector
+(it is the symbol the code stores); in \S6.3 write $s$ for a ball radius and nothing else. Never
+let a bare $s$ denote both a vector and a scalar in one paragraph. &
+\S3.1, \S4.1, \S6.3 \\
+$d$ &
+(i) $d_q=\Pi(D_0(Q)-D_0(P)-N)$, a displacement vector;
+(ii) $d_j$, the sixteen angular displacements in radians (Lemma~4.8);
+(iii) the scalar $d=\|\delta-d_q\|$ of Prop.~5.2 and $\hat D$. &
+$d_q$ keeps its subscript; $d_j$ stays; write $d$ only for the scalar, and state
+$d=\|\delta-d_q\|$ each time. &
+\S4.3--\S5.2 \\
+$z$, $\zeta$ &
+$z=\|Z\|_F$ (comparison residual bound, \S3.4); $z=x_u-x_v$ (edge vector, \S6.4);
+$\zeta=T^*x$ (Lemma~5.1). &
+$z$ stays a nonnegative scalar bound in \S3--\S4; in \S6.4 write $z_e$ for the edge vector;
+$\zeta$ is a vector and is always defined where used. &
+\S3.4, \S5.1, \S6.4 \\
+$S$ &
+$S$ is the Q-Root tangent matrix (\S5.1), the block $S$ of a vector sum (\S6.2), and the $30\times216$
+tensor map of Lemma~4.4. &
+Write $T_Q$ for the Q-Root tangent matrix (and then $T$ is $T_P$), $S_i=\sum_j q_{ji}$ for the
+five-vector sums, and $S^{\mathrm{ten}}$ for the tensor map of Lemma~4.4. &
+\S4.2, \S5.1, \S6.2 \\
+$r$ &
+radii (cycles) and the scalar remainder $r(t)=(e(t)-1-2\pi it)/(2\pi i)$ of Lemma~4.3. &
+$r$ for radii only; $r_{\mathrm{rem}}(t)$ for the scalar remainder. Radii: $R$ for a seed radius in
+radians, $r_s=R/(2\pi)$ for the same radius in cycles, $r$ for a Record radius in cycles. &
+\S2.4, \S4.1, \S4.3 \\
+\hline
+\end{longtable}
+
+\subsection*{Table 3: the words}
+
+The paper uses six geometric words and two capitalised data words. Fix them once.
+
+\begin{longtable}{@{}L{1.9cm}L{9.6cm}L{2.0cm}@{}}
+\hline
+word & fixed meaning & first \\
+\hline
+\endhead
+\textbf{bin} & a closed axis-aligned box in phase coordinates, of width $1/N$ in \S2 ($N=112$) or
+  $1/M$ in \S6; several coordinates at once form a \emph{bin tuple}. Bins are the objects the
+  enumeration visits. & \S2.2, \S6.2 \\
+\textbf{cell} & a closed axis-aligned box in the four angle coordinates $(\alpha,t,\beta,\gamma)$ of
+  $U(2)$ (\S3.3), of width $1/N_u$ per coordinate, with midpoint $U$. Cells are what Stage A
+  subdivides and either excludes or covers. Use \emph{cell} only for this; never for a phase box. & \S3.3 \\
+\textbf{box} & a closed axis-aligned box in the $k$ tangent coordinates (\S5.2), with centre $u$ and
+  halfwidth $h$; also called a \emph{tangent box}. A box is marked only if the whole box passes the
+  test (Lemma~5.5); a successful subbox does not license marking its base box. & \S5.2 \\
+\textbf{ball} & a closed Euclidean ball, in one of two spaces: a \emph{phase ball} is
+  $\{\delta\in V:\|\delta\|\le r\}$ around a phase centre (radius in cycles), a \emph{vector ball}
+  $B_{\mathrm{vec}}(v,s)$ is a set of phase vectors up to global phase (radius in cycles). Say which. & \S2.4, \S4.7, \S6.3 \\
+\textbf{sphere} & the word is used in the paper, and in the source, for exactly the closed phase ball
+  of a Record. It is not a topological sphere and it includes its boundary. \emph{Replace every
+  occurrence by ``ball''}; do not use ``sphere'' at all. & \S4.7, Def.~4.14 \\
+\textbf{Root} & the eight-tuple $(P,T,(C,n_0,\mathrm{id},\mathrm{ort},\mathrm{hor},\mathrm{mnorm},\mathrm{froot}))$
+  of Definition~4.1: a centre plus a tangent frame plus seven bounds. A Root carries no radius. & \S4.1 \\
+\textbf{Record} & a certified Root together with a radius $r$, i.e.\ a ball with a certificate. A
+  Record is what the atlas stores and what Stage~C judges. & \S4.7, Def.~4.14 \\
+\textbf{atlas} & the finite set of Records accumulated by Stage~A and refined by Stage~B. & \S4.7 \\
+\hline
+\end{longtable}
+
+\subsection*{Table 4: other symbols used throughout}
+
+\begin{longtable}{@{}L{1.6cm}L{5.6cm}L{2.4cm}L{1.0cm}@{}}
+\hline
+symbol & what it is, in words & type / unit & first \\
+\hline
+\endhead
+$\Pi$ & double centring: the orthogonal projection onto matrices with zero row and column sums (the
+  \emph{horizontal} subspace $V$). & lin.\ map $\R^{36}\to V$ & \S2.1 \\
+$F(P)$ & the residual: $F_{ij}(P)=\frac{1}{2\pi i}\sum_g e(P_{ig}-P_{jg})$ for $i>j$, a 30-vector.
+  $F(P)=0$ iff $e(P)$ is Hadamard. & $\R^{36}\to\R^{30}$ & \S4.2 \\
+$D_0(P)$ & dephasing: $D_0(P)_{ij}=P_{ij}-P_{i0}-P_{0j}+P_{00}$, first row and column zero. & $\R^{36}\to\R^{36}$ & \S2.1 \\
+$L_P$ & first variation of $F$ at $P$. & lin.\ map & \S4.2 \\
+$R_P(x)$ & quadratic remainder, $F(P+x)=F(P)+L_Px+R_P(x)$, $|R_P(x)_{ij}|\le\pi a_{ij}(x)$. & $\R^{30}$ & \S4.2 \\
+$T$ & stored tangent frame of a Root, $36\times k$, $0\le k\le10$; columns are numerical directions
+  only, neither exactly horizontal nor exactly orthogonal. & matrix & \S4.1 \\
+$\eta,\nu$ & tangent and normal parts of a displacement: $\eta=T^*\delta$, $\nu=\delta-T\eta$
+  (orthogonal decomposition by $TT^*$). & vectors & \S6.1 \\
+$r_s$, $R_s$ & the seed radius in cycles ($r_s=0.0320001$) and in radians ($R_s=2\pi r_s$). & scalar & \S2.4, \S3.1 \\
+$r_H$ & inflated tangent radius $\sqrt{1+\omega}\,r$ (6.2). & cycles & \S6.1 \\
+$X_M,L_M,I_M$ & Stage-C bin displacement bounds: $\sqrt{29/6}\,a$, $5a$, $\tfrac32 a$ with $a=1/(2M)$. & cycles & \S6.2 \\
+$a$ & half bin width $1/(2M)$ at resolution $M$. & cycles & \S6.2 \\
+$K$ & operator bound for $e(P)/\sqrt6$: $K=1.00001$ suffices when $\mathrm{froot}<10^{-6}$. & scalar & \S6.1 \\
+$q_d$ & normalised slack $\ge \mathrm{slack}/m_i$, required $<3.8$ (Lemma~4.8). & scalar & \S4.4 \\
+arc, weighted & angular-displacement bounds of Lemma~4.8. & radians & \S4.4 \\
+$E_r$ & linearisation remainder bound, $\|Z-J(s,\theta)\|_F\le E_r$ (3.24). & scalar & \S3.5 \\
+$e_{\mathrm{off}}$ & the seed-product part of $E_r$ (3.25). & scalar & \S3.5 \\
+$z$ & $\|Z\|_F$ bound (3.19). & scalar & \S3.4 \\
+$\mathcal{O},\mathcal{U}$ & the orthogonality and unbiasedness graphs on retained ball labels; an edge
+  is retained when the test cannot rule the relation out. & graphs & \S6.6 \\
+$A,B$ (sets) & the two disjoint six-cliques of configuration (6.24); distinct from the $2\times4$
+  seed blocks $A$--$D$. & sets of labels & \S6.6 \\
+$E_{\mathcal{O}},E_{\mathcal{U}}$ & edge sets of the two graphs. & sets & \S6.6 \\
+\hline
+\end{longtable}
+
+\subsection*{Macros}
+
+\begin{verbatim}
+% units
+\newcommand{\cyc}{\,\text{cycles}}
+\newcommand{\rad}{\,\text{rad}}
+% the seven Root constants, Definition 4.1 names only
+\newcommand{\rtC}{C}\newcommand{\rtnz}{n_0}\newcommand{\rtid}{\mathrm{id}}
+\newcommand{\rtort}{\mathrm{ort}}\newcommand{\rthor}{\mathrm{hor}}
+\newcommand{\rtmn}{\mathrm{mnorm}}\newcommand{\rtfr}{\mathrm{froot}}
+% the renamings, for the translation table and nowhere else
+\newcommand{\gP}{\gamma_P}\newcommand{\aP}{\alpha_P}\newcommand{\oP}{o_P}
+\newcommand{\mP}{\mu_P}\newcommand{\eP}{\varepsilon_P}
+\newcommand{\Gam}{\Gamma}\newcommand{\iot}{\iota}\newcommand{\omg}{\omega}
+% resolved collisions
+\newcommand{\Dcmp}{D^{\mathrm{cmp}}}     % comparison block
+\newcommand{\Dub}{D^{\mathrm{ub}}}       % scalar distance bound, Prop 5.2
+\newcommand{\Dhat}{\hat D}               % computed Stage-B function
+\newcommand{\nP}{n_P}                    % normal polynomial
+\newcommand{\mB}{m_B}\newcommand{\mC}{m_C}
+\newcommand{\mj}{\dot m_j}               % |D_j|
+\newcommand{\mlift}{\mathbf{m}}          % integer lift in Z^6
+\newcommand{\Ngrid}{N_{\mathrm{grid}}}   % 112
+\newcommand{\Nlift}{\mathbf{N}}          % integer lift matrix
+\newcommand{\kappa}{\kappa}              % N(u-u') in Z^9
+\newcommand{\eps}{\varepsilon}           % centre correction, cycles
+\newcommand{\eexp}{\varepsilon_{\exp}}   % 6e-14
+\newcommand{\TQ}{T_Q}                    % Q-Root tangent matrix
+\newcommand{\rrem}{r_{\mathrm{rem}}}     % scalar remainder of Lemma 4.3
+\newcommand{\zv}{z_e}                    % edge vector in 6.4
+\newcommand{\ball}{\mathcal{B}}\newcommand{\vball}{B_{\mathrm{vec}}}
+\end{verbatim}
+
+\end{document}
